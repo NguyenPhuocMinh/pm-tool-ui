@@ -53,4 +53,4 @@ workflows:
   deploy-workflow:
     jobs:
       - continuation/continue:
-          configuration_path: templates/jobs/ci-cd.yml
+          configuration_path: .circleci/templates/jobs/ci-cd.yml
