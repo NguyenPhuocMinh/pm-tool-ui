@@ -2,53 +2,55 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+orbs:
+  continuation: circleci/continuation@0.3.1
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  deploy:
-    docker:
-      - image: cimg/node:14.18.0
-    steps:
-      - checkout
+# jobs:
+#   deploy:
+#     docker:
+#       - image: cimg/node:14.18.0
+#     steps:
+#       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            # Find a cache corresponding to this specific package.json checksum
-            # when this file is changed, this key will fail
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            # Find the most recently generated cache used from any branch
-            - v1-dependencies-
+#       # Download and cache dependencies
+#       - restore_cache:
+#           keys:
+#             # Find a cache corresponding to this specific package.json checksum
+#             # when this file is changed, this key will fail
+#             - v1-dependencies-{{ checksum "package-lock.json" }}
+#             # Find the most recently generated cache used from any branch
+#             - v1-dependencies-
 
-      - run:
-          name: Install Dependencies
-          command: npm install
+#       - run:
+#           name: Install Dependencies
+#           command: npm install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+#       - save_cache:
+#           paths:
+#             - node_modules
+#           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
-      - run:
-          name: Run Tests
-          command: npm run test
+#       - run:
+#           name: Run Tests
+#           command: npm run test
 
-      - run:
-          name: Run Build
-          command: npm run build
+#       - run:
+#           name: Run Build
+#           command: npm run build
 
-      - run:
-          name: Deploy at Netlify
-          command: ./node_modules/.bin/netlify deploy --site $APP_NETLIFY_SITE_ID --auth $APP_NETLIFY_ACCESS_TOKEN --prod --dir=build
+#       - run:
+#           name: Deploy at Netlify
+#           command: ./node_modules/.bin/netlify deploy --site $APP_NETLIFY_SITE_ID --auth $APP_NETLIFY_ACCESS_TOKEN --prod --dir=build
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   deploy-workflow:
     jobs:
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
-                - develop
+      - continuation/continue:
+          configuration_path: templates/jobs/ci-cd.yml
