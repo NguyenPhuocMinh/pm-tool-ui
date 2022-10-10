@@ -27,6 +27,7 @@ jobs:
       - continuation/continue:
           configuration_path: .circleci/templates/steps/process.yml
           when: on_success
+      - continuation/finish
       - run:
           name: "Run CI"
           command: "echo Run ci.yml"
