@@ -32,11 +32,6 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
-
       - run:
           name: Run Tests
           command: npm run test
@@ -44,6 +39,12 @@ jobs:
       - run:
           name: Run Build
           command: npm run build
+
+      - save_cache:
+          paths:
+            - node_modules
+            - ./build
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       # - run:
       #     name: Deploy at Netlify
