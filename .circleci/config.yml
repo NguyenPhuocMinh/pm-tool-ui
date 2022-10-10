@@ -29,7 +29,7 @@ workflows:
   deploy-workflow:
     triggers:
       - schedule:
-          cron: "0 */15 * ? * *" # run job at 4:30pm every day 
+          cron: "0 */15 * * *" # run job at 4:30pm every day 
           filters:
            branches:
              only:
