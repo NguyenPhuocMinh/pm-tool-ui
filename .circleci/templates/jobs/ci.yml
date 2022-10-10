@@ -2,12 +2,6 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# this allows you to use CircleCI's dynamic configuration feature
-setup: true
-
-orbs:
-  continuation: circleci/continuation@0.3.1
-
 parameters:
   nodeVersion:
     type: string
@@ -25,7 +19,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - continuation/continue:
-          configuration_path: .circleci/templates/jobs/ci.yml
+          configuration_path: .circleci/templates/steps/process.yml
           when: on_success
       - checkout
       - run:
