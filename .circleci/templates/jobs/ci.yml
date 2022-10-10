@@ -46,6 +46,6 @@ jobs:
             - ./build
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
-      # - run:
-      #     name: Deploy at Netlify
-      #     command: ./node_modules/.bin/netlify deploy --site $APP_NETLIFY_SITE_ID --auth $APP_NETLIFY_ACCESS_TOKEN --prod --dir=build
+      - run:
+          name: Deploy at Netlify
+          command: ./node_modules/.bin/netlify deploy --site $APP_NETLIFY_SITE_ID --auth $APP_NETLIFY_ACCESS_TOKEN --prod --dir=build
