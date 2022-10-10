@@ -28,10 +28,11 @@ jobs:
 workflows:
   ci-cd-workflow:
     jobs:
+      - ci
       - ci-cd:
+          requires:
+            - ci
           filters:
             branches:
               only:
                 - master
-      - ci
-      
