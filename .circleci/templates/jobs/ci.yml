@@ -5,7 +5,7 @@ version: 2.1
 parameters:
   nodeVersion:
     type: string
-    default: "14.18.0"
+    default: '14.18.0'
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -40,3 +40,7 @@ jobs:
       - run:
           name: Run Tests
           command: npm run test
+
+      - run:
+          name: Run Build
+          command: npm run build
