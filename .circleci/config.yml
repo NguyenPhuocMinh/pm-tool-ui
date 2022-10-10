@@ -19,7 +19,7 @@ jobs:
       - run:
           name: "Setup CI-CD"
           command: |
-            yq eval-all '. as $item ireduce ({}; . * $item )' .circleci/templates/jobs/ci-cd.yml .circleci/ci.yml > .circleci/deployment.yml
+            yq eval-all '. as $item ireduce ({}; . * $item )' .circleci/templates/jobs/ci-cd.yml .circleci/templates/jobs/ci.yml > .circleci/deployment.yml
       - continuation/continue:
           configuration_path: .circleci/deployment.yml
 #     steps:
