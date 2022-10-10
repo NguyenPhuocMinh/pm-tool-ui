@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello Netlify
+          Hello Circle
         </a>
       </header>
     </div>
