@@ -19,8 +19,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Run CI-CD"
-          command: "echo Run ci-cd.yml"
+          name: Run Build
+          command: npm run build
+
+      - run:
+          name: Deploy at Netlify
+          command: ./node_modules/.bin/netlify deploy --site $APP_NETLIFY_SITE_ID --auth $APP_NETLIFY_ACCESS_TOKEN --prod --dir=build
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
