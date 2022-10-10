@@ -26,7 +26,6 @@ jobs:
       - continuation/continue:
           configuration_path: .circleci/templates/jobs/ci.yml
           when: on_success
-      - checkout
       - run:
           name: "Run CI-CD"
           command: "echo Run ci-cd.yml"
