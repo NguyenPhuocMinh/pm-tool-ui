@@ -10,10 +10,18 @@ orbs:
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-# jobs:
-#   deploy:
-#     docker:
-#       - image: cimg/node:14.18.0
+jobs:
+  ci-cd:
+    docker:
+      - image: cimg/node:14.18.0
+    steps:
+      - checkout
+      - run:
+          name: "Setup CI-CD"
+          command: |
+            yq eval-all '. as $item ireduce ({}; . * $item )' .circleci/templates/jobs/ci-cd.yml .circleci/ci.yml > .circleci/deployment.yml
+      - continuation/continue:
+          configuration_path: .circleci/deployment.yml
 #     steps:
 #       - checkout
 
@@ -50,7 +58,6 @@ orbs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  deploy-workflow:
+  ci-cd-workflow:
     jobs:
-      - continuation/continue:
-          configuration_path: .circleci/templates/jobs/ci-cd.yml
+      - ci-cd

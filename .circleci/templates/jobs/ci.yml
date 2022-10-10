@@ -2,12 +2,6 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# this allows you to use CircleCI's dynamic configuration feature
-setup: true
-
-orbs:
-  continuation: circleci/continuation@0.3.1
-
 parameters:
   nodeVersion:
     type: string
@@ -16,25 +10,15 @@ parameters:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+  ci:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:<< pipeline.parameters.nodeVersion >>
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - continuation/continue:
-          configuration_path: .circleci/templates/steps/process.yml
-          when: on_success
-      - continuation/finish
+      - checkout
       - run:
           name: "Run CI"
           command: "echo Run ci.yml"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
