@@ -58,7 +58,7 @@ jobs:
   cd:
     executor: docker/docker
     environment:
-      APP_DOCKER_TAG: v1.0.1
+      APP_DOCKER_TAG: latest
     steps:
       ## Build and push image to docker hub
       - setup_remote_docker
