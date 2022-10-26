@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@providers": ["src/providers/index"],
+      "@context": ["src/context/index"],
+      "@container": ["src/container/index"],
+      "@components": ["src/components/index"],
+      "@services": ["src/services/index"],
+      "@constants": ["src/constants/index"],
+      "@utils": ["src/utils/index"],
+      "@reduxStore/*": ["src/reduxStore/*"],
+      "@i18nStore": ["src/i18nStore/index"],
+      "@themes": ["src/themes/index"],
+      "@hooks": ["src/hooks/index"],
+      "@resources": ["src/resources/index"],
+      "@routes": ["src/routes/index"],
+      "@configs": ["src/configs/index"],
+      "@validators": ["src/validators/index"],
+    }
+  },
+  "exclude": ["node_modules"]
+}

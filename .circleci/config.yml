@@ -2,30 +2,111 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# this allows you to use CircleCI's dynamic configuration feature
-setup: true
-
 orbs:
-  continuation: circleci/continuation@0.3.1
+  gh: circleci/github-cli@2.0
+  docker: circleci/docker@2.1.4
+
+parameters:
+  nodeVersion:
+    description: Version node
+    type: string
+    default: "14.18.0"
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  deploy:
+  ci:
     docker:
-      - image: cimg/node:14.18.0
+      - image: cimg/node:<< pipeline.parameters.nodeVersion >>
     steps:
-      - checkout
+      # Clone repo on github
+      - gh/setup:
+          token: APP_GITHUB_TOKEN # get from context env
+
+      - gh/clone:
+          repo: $APP_REPO_URL
+
       - run:
-          name: "Setup CI-CD"
+          name: Install Dependencies
+          command: npm install
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # Find a cache corresponding to this specific package.json checksum
+            # when this file is changed, this key will fail
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            # Find the most recently generated cache used from any branch
+            - v1-dependencies-
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Run build
+          command: npm run build
+
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results:
+          path: /tmp/test-results
+
+  cd:
+    executor: docker/docker
+    environment:
+      APP_DOCKER_TAG: v1.0.0
+    steps:
+      ## Build and push image to docker hub
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: APP_DOCKER_USERNAME # get from context env
+          docker-password: APP_DOCKER_PASSWORD # get from context env
+
+      - docker/build:
+          image: $APP_DOCKER_IMAGE
+          tag: $APP_DOCKER_TAG
+
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $APP_DOCKER_IMAGE
+          tag: $APP_DOCKER_TAG
+
+      - run:
           command: |
-            yq eval-all '. as $item ireduce ({}; . * $item )' .circleci/templates/jobs/ci.yml .circleci/templates/jobs/ci-cd.yml > .circleci/deployment.yml
-      - continuation/continue:
-          configuration_path: .circleci/deployment.yml
+            echo "Digest is: $(</tmp/digest.txt)"
+
+  deploy:
+    executor: docker/docker
+    environment:
+      APP_DOCKER_TAG: latest
+    steps:
+      - setup_remote_docker
+      - checkout
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  deploy-workflow:
+  pipelines:
     jobs:
-      - deploy
+      - ci:
+          context: pm-tool-ui-context
+      - cd:
+          context: pm-tool-ui-context
+          requires:
+            - ci
+          filters:
+            branches:
+              only:
+                - dev
+      # - deploy:
+      #     requires:
+      #       - cd
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
