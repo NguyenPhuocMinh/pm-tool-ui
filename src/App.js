@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider as ReduxProvider } from 'react-redux';
+import reduxStore, { persistedStore } from '@reduxStore/index';
+import { PersistGate } from 'redux-persist/integration/react';
 
-function App() {
+import { AuthProvider } from '@providers';
+
+import { I18nextProvider } from 'react-i18next';
+import i18nStore from '@i18nStore';
+
+import { BrowserRouter } from 'react-router-dom';
+
+import { Container } from '@container';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hello Demo
-        </a>
-      </header>
-    </div>
+    <ReduxProvider store={reduxStore}>
+      <PersistGate loading={null} persistor={persistedStore}>
+        <AuthProvider>
+          <I18nextProvider i18n={i18nStore}>
+            <BrowserRouter>
+              <Container />
+            </BrowserRouter>
+          </I18nextProvider>
+        </AuthProvider>
+      </PersistGate>
+    </ReduxProvider>
   );
-}
+};
 
 export default App;

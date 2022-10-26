@@ -1,0 +1,9 @@
+build/
+coverage/
+public/
+node_modules/**
+package.json
+package-lock.json
+src/core/**
+src/reportWebVitals.js
+src/setupTests.js
