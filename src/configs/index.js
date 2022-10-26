@@ -1,4 +1,4 @@
-const basePath = process.env.REACT_APP_REST_API_PROVIDER;
+const basePathRestApi = process.env.REACT_APP_REST_API_PROVIDER;
 
 const headers = {
   'Content-type': 'application/json',
@@ -7,7 +7,7 @@ const headers = {
 };
 
 const configs = {
-  basePath,
+  basePathRestApi,
   headers
 };
 
