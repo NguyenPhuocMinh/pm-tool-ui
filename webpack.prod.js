@@ -51,7 +51,8 @@ module.exports = {
       }
     }),
     new Dotenv({
-      path: './env/PRO.env'
+      path: './env/PRO.env',
+      safe: true
     }),
     new InterpolateHtmlPlugin({
       PUBLIC_URL: 'public' // can modify `static` to another name or get it from `process`
