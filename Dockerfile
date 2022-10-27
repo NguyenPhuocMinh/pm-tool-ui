@@ -7,8 +7,6 @@ COPY package*.json ./
 # Run install dependencies
 RUN npm install
 
-ENV REACT_APP_REST_API_PROVIDER=http://localhost:8080
-
 COPY . .
 
 RUN npm run build
