@@ -38,13 +38,13 @@ module.exports = {
   projects: [
     {
       displayName: 'tests',
-      testMatch: ['<rootDir>/src/test/**/*.js']
+      testMatch: ['<rootDir>/src/tests/**/*.js']
     },
     {
       runner: 'jest-runner-eslint',
       displayName: 'lint',
       testPathIgnorePatterns: ['/node_modules/'],
-      testMatch: ['<rootDir>/src/test/*.js', '<rootDir>/src/test/**/*.js']
+      testMatch: ['<rootDir>/src/tests/*.js', '<rootDir>/src/tests/**/*.js']
     }
   ]
 };

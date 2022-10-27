@@ -21,7 +21,7 @@
           ["@resources", "./src/resources"],
           ["@routes", "./src/routes"],
           ["@configs", "./src/configs"],
-          ["@validators", "./src/validators"],
+          ["@validators", "./src/validators"]
         ]
       }
     }
