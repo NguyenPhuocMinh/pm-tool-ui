@@ -3,6 +3,7 @@ import constants from '@constants';
 import { formatErrorCommonMsg } from '@utils';
 import { loginService, logoutService } from '@services';
 import { showNotification } from '@reduxStore/actions';
+import decodeJWT from 'jwt-decode';
 
 import {
   LOGIN_REQUEST,
@@ -25,12 +26,16 @@ export const loginAction = (navigate, params) => async (dispatch) => {
       type: LOGIN_REQUEST
     });
     const result = await loginService(email, password);
-    if (!isEmpty(result)) {
+    const { token } = result;
+    const decodeToken = decodeJWT(token);
+
+    if (!isEmpty(decodeToken.name)) {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: {
-          isAuthenticated: true,
-          token: result.token
+          token: result.token,
+          name: decodeToken.name,
+          email: decodeToken.email
         }
       });
       dispatch({

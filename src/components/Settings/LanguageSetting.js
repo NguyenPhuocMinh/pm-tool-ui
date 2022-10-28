@@ -97,7 +97,7 @@ const LanguageSetting = (props) => {
             />
           </ListItemIcon>
           <Typography variant="caption">
-            {translate(`appBar.toolbar.language.${item.name}`)}
+            {translate(`toolbar.language.${item.name}`)}
           </Typography>
         </MenuItem>
       ))}

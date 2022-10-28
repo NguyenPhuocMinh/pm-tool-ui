@@ -1,5 +1,5 @@
 const translationLogin = {
-  title: 'Login Account',
+  title: 'Login Account Pm Tool',
   fields: {
     email: 'Email address',
     password: 'Password'
@@ -7,7 +7,7 @@ const translationLogin = {
   notifications: {
     errors: {},
     success: {
-      login: 'Login Account Success'
+      login: 'Login Success'
     }
   }
 };

@@ -1,13 +1,13 @@
 const translationValidator = {
-  required: 'Required',
-  minLength: 'Must be {{min}} characters at least',
-  maxLength: 'Must be {{max}} characters or less',
-  minValue: 'Must be at least {{min}}',
-  maxValue: 'Must be {{max}} or less',
+  required: 'Bắt buộc',
+  minLength: 'Ít nhất phải có {{min}} ký tự',
+  maxLength: 'Phải có {{max}} ký tự trở xuống',
+  minValue: 'Ít nhất phải là {{min}}',
+  maxValue: 'Phải từ {{max}} trở xuống',
   password:
-    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-  password_confirm: 'Password confirm does not match password',
-  email: 'Email does not match format'
+    'Phải chứa 8 ký tự, một chữ hoa, một chữ thường, một số và một ký tự chữ hoa đặc biệt',
+  passwordConfirm: 'Mật khẩu xác nhận không khớp với mật khẩu',
+  email: 'Email không khớp với định dạng'
 };
 
 export default translationValidator;

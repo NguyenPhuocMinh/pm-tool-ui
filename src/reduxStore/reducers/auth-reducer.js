@@ -7,9 +7,15 @@ import {
   LOGOUT_END
 } from '../types';
 
+const auth = {
+  token: null,
+  name: '',
+  email: ''
+};
+
 const initialState = {
   loading: false,
-  auth: {}
+  auth
 };
 
 const authReducer = (state = initialState, action) => {

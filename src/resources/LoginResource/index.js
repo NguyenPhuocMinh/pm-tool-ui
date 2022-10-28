@@ -8,7 +8,9 @@ import {
   Button,
   CircularProgress,
   InputAdornment,
-  IconButton
+  IconButton,
+  Typography,
+  Avatar
 } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -101,19 +103,33 @@ const LoginResource = () => {
             <Box
               component="div"
               sx={{
-                marginTop: '1em',
+                margin: '1em',
                 display: 'flex',
                 justifyContent: 'center'
               }}
             >
-              {translate('resources.logins.title')}
+              <Avatar alt="" src="https://source.unsplash.com/random" />
+            </Box>
+            <Box
+              component="div"
+              sx={{
+                margin: '1em',
+                display: 'flex',
+                justifyContent: 'center',
+                color: 'primary.main'
+              }}
+            >
+              <Typography sx={{ fontFamily: 'Josefin Sans' }}>
+                {translate('resources.logins.title')}
+              </Typography>
             </Box>
             <CardContent>
               <Box
                 sx={{
                   marginTop: '1em',
                   display: 'flex',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  color: 'primary.main'
                 }}
               >
                 <TextInput

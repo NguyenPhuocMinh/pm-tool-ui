@@ -14,7 +14,7 @@ import {
   NotifyCommon,
   ErrorCommon
 } from '@components';
-import { LoginResource, DashboardResource } from '@resources';
+import { LoginResource, LayoutResource } from '@resources';
 import { lightTheme, darkTheme } from '@themes';
 
 import { get } from 'lodash';
@@ -30,16 +30,18 @@ const Container = () => {
         <ErrorBoundary FallbackComponent={ErrorCommon}>
           <CssBaseline />
           <Routes>
+            {/* Routes public */}
             <Route path="/login" element={<LoginResource />} />
             <Route
               index
-              path="/dashboard/*"
+              path="/*"
               element={
                 <AuthCommon>
-                  <DashboardResource />
+                  <LayoutResource />
                 </AuthCommon>
               }
             />
+            {/* Routes not found */}
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
           <NotifyCommon />

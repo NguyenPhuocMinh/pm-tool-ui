@@ -1,13 +1,13 @@
 const translationLogin = {
-  title: 'Login Account',
+  title: 'Đăng nhập tài khoản Pm Tool',
   fields: {
-    email: 'Email address',
-    password: 'Password'
+    email: 'Địa chỉ email',
+    password: 'Mật khẩu'
   },
   notifications: {
     errors: {},
     success: {
-      login: 'Login Account Success'
+      login: 'Đăng nhập thành công'
     }
   }
 };
