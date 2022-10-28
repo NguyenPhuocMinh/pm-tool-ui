@@ -1,5 +1,5 @@
 import LanguageSetting from './LanguageSetting';
-import ThemeSetting from './ThemeSetting';
 import CommonSetting from './CommonSetting';
+import ProfileSetting from './ProfileSetting';
 
-export { CommonSetting, LanguageSetting, ThemeSetting };
+export { CommonSetting, LanguageSetting, ProfileSetting };

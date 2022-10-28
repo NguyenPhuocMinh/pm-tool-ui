@@ -1,7 +1,8 @@
 const translationCommon = {
   button: {
     login: 'Login',
-    logout: 'Logout'
+    logout: 'Logout',
+    back: 'Back'
   }
 };
 
