@@ -5,17 +5,11 @@ import LoginResource from './LoginResource';
 import LogoutResource from './LogoutResource';
 
 import LayoutResource from './LayoutResource';
-import HomeResource from './HomeResource';
 import DashboardResource from './DashboardResource';
-import OrganizationResource from './OrganizationResource';
-import ProjectResource from './ProjectResource';
 
-export {
-  LoginResource,
-  LogoutResource,
-  LayoutResource,
-  HomeResource,
-  DashboardResource,
-  OrganizationResource,
-  ProjectResource
-};
+export { LoginResource, LogoutResource, LayoutResource, DashboardResource };
+
+export * from './OrganizationResource';
+export * from './ProjectResource';
+export * from './RoleResource';
+export * from './UserResource';

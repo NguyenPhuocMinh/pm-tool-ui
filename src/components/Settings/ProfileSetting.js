@@ -82,7 +82,7 @@ const ProfileSetting = (props) => {
                 }}
               >
                 <ListItemIcon>{menu.icon}</ListItemIcon>
-                <Typography variant="caption" sx={{}}>
+                <Typography variant="caption">
                   {translate(menu.title)}
                 </Typography>
               </MenuItem>

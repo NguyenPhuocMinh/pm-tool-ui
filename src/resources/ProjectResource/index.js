@@ -1,5 +1,4 @@
-const ProjectResource = () => {
-  return <h1>ProjectResource</h1>;
-};
+import ProjectList from './ProjectList';
+import ProjectCreate from './ProjectCreate';
 
-export default ProjectResource;
+export { ProjectList, ProjectCreate };

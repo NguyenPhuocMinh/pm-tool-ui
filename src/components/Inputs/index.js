@@ -1,3 +1,4 @@
 import TextInput from './TextInput';
+import SearchInput from './SearchInput';
 
-export { TextInput };
+export { TextInput, SearchInput };
