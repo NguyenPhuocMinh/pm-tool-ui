@@ -15,3 +15,6 @@ export * from './Sections';
 
 // inputs
 export * from './Inputs';
+
+// buttons
+export * from './Buttons';

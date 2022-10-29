@@ -4,7 +4,9 @@ import {
   CHANGE_THEME,
   CHANGE_LANGUAGE,
   SHOW_NOTIFICATION,
-  HIDE_NOTIFICATION
+  HIDE_NOTIFICATION,
+  SHOW_POPUP,
+  HIDE_POPUP
 } from '../types';
 
 const initialState = {
@@ -13,7 +15,8 @@ const initialState = {
   language:
     localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.LANGUAGE) ||
     'vn',
-  notify: {}
+  notify: {},
+  popup: {}
 };
 
 const commonReducer = (state = initialState, action) => {
@@ -39,6 +42,16 @@ const commonReducer = (state = initialState, action) => {
       return {
         ...state,
         notify: {}
+      };
+    case SHOW_POPUP:
+      return {
+        ...state,
+        popup: payload
+      };
+    case HIDE_POPUP:
+      return {
+        ...state,
+        popup: {}
       };
     default:
       return state;

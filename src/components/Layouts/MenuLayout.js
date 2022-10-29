@@ -1,0 +1,30 @@
+import { Fragment } from 'react';
+import { MenuCommon } from '@components';
+import { Divider } from '@mui/material';
+import { homeMenus, managementMenus, authenticateMenus } from '@routes';
+
+const MenuLayout = ({ open }) => {
+  return (
+    <Fragment>
+      <MenuCommon
+        open={open}
+        menus={homeMenus}
+        titleSubHeader="menu.home.title"
+      />
+      <Divider />
+      <MenuCommon
+        open={open}
+        menus={managementMenus}
+        titleSubHeader="menu.management.title"
+      />
+      <Divider />
+      <MenuCommon
+        open={open}
+        menus={authenticateMenus}
+        titleSubHeader="menu.authenticate.title"
+      />
+    </Fragment>
+  );
+};
+
+export default MenuLayout;

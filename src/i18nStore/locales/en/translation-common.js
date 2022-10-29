@@ -2,7 +2,11 @@ const translationCommon = {
   button: {
     login: 'Login',
     logout: 'Logout',
-    back: 'Back'
+    back: 'Back',
+    create: 'Create',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    viewAllNotify: 'View all notify'
   }
 };
 

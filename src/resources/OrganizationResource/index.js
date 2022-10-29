@@ -1,5 +1,4 @@
-const OrganizationResource = () => {
-  return <h1>OrganizationResource</h1>;
-};
+import OrganizationList from './OrganizationList';
+import OrganizationCreate from './OrganizationCreate';
 
-export default OrganizationResource;
+export { OrganizationList, OrganizationCreate };

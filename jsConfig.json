@@ -10,7 +10,7 @@
       "@constants": ["src/constants/index"],
       "@utils": ["src/utils/index"],
       "@reduxStore/*": ["src/reduxStore/*"],
-      "@i18nStore": ["src/i18nStore/index"],
+      "@i18nStore": ["src/i18nStore/*"],
       "@themes": ["src/themes/index"],
       "@hooks": ["src/hooks/index"],
       "@resources": ["src/resources/index"],
