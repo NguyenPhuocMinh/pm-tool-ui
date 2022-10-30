@@ -96,7 +96,13 @@ const LanguageSetting = (props) => {
               }}
             />
           </ListItemIcon>
-          <Typography variant="caption">
+          <Typography
+            variant="caption"
+            sx={{
+              fontFamily: 'Josefin Sans',
+              fontWeight: 'bold'
+            }}
+          >
             {translate(`toolbar.language.${item.name}`)}
           </Typography>
         </MenuItem>

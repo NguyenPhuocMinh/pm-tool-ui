@@ -31,7 +31,8 @@ const LanguageSection = () => {
           sx={{
             ':hover': {
               background: 'none'
-            }
+            },
+            p: '10px'
           }}
         >
           <TranslateIcon fontSize="small" />

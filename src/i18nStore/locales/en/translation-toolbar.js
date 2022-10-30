@@ -16,7 +16,8 @@ const translationToolbar = {
     themes: {
       light: 'Light',
       dark: 'Dark'
-    }
+    },
+    color: 'Color picker'
   },
   profile: {
     show_profile: 'My Profile',

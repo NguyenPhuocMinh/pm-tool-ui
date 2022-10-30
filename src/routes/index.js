@@ -6,6 +6,8 @@ import {
   ProjectCreate,
   RoleList,
   RoleCreate,
+  PermissionList,
+  PermissionCreate,
   UserList,
   UserCreate
 } from '@resources';
@@ -69,7 +71,7 @@ const roleRoutes = [
 const userRoutes = [
   {
     name: 'users',
-    path: '/roles',
+    path: '/users',
     element: () => <UserList />
   },
   {
@@ -79,12 +81,26 @@ const userRoutes = [
   }
 ];
 
+const permissionRoutes = [
+  {
+    name: 'permissions',
+    path: '/permissions',
+    element: () => <PermissionList />
+  },
+  {
+    name: 'permissions-create',
+    path: '/permissions/create',
+    element: () => <PermissionCreate />
+  }
+];
+
 const routes = [
   ...dashboardRoutes,
   ...organizationRoutes,
   ...projectRoutes,
   ...roleRoutes,
-  ...userRoutes
+  ...userRoutes,
+  ...permissionRoutes
 ];
 
 /**
@@ -121,6 +137,12 @@ const authenticateMenus = [
     title: 'menu.authenticate.role.title',
     path: '/roles',
     icon: <LanIcon />
+  },
+  {
+    name: 'permissions',
+    title: 'menu.authenticate.permission.title',
+    path: '/permissions',
+    icon: <SupervisorAccountIcon />
   },
   {
     name: 'users',

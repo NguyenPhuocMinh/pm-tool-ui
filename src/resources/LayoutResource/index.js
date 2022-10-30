@@ -1,5 +1,6 @@
 import { useState, useEffect, createElement } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import {
   AppBarLayout,
@@ -10,7 +11,7 @@ import {
 } from '@components';
 import { routes } from '@routes';
 import { useTranslate } from '@hooks';
-import constants from '@constants';
+// import constants from '@constants';
 // material
 import {
   Box,
@@ -23,16 +24,23 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PixIcon from '@mui/icons-material/Pix';
+import { get } from 'lodash';
 
 const LayoutResource = () => {
   // states
   const [open, setOpen] = useState(false);
 
   // hooks
-  const { translate, i18n } = useTranslate();
-  const [_, setLanguage] = useState(constants.LOCALES.EN);
+  const { translate } = useTranslate();
+  // const [_, setLanguage] = useState(constants.LOCALES.EN);
   const theme = useTheme();
   const isSmMatch = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const { color } = useSelector((state) => {
+    return {
+      color: get(state, 'common.color', {})
+    };
+  });
 
   const handleDrawerOpen = () => {
     setOpen(!open);
@@ -44,19 +52,19 @@ const LayoutResource = () => {
     }
   }, [isSmMatch]);
 
-  useEffect(() => {
-    if (i18n.language === 'vn') {
-      setLanguage(constants.LOCALES.VN);
-    } else {
-      setLanguage(constants.LOCALES.EN);
-    }
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   if (i18n.language === 'vn') {
+  //     setLanguage(constants.LOCALES.VN);
+  //   } else {
+  //     setLanguage(constants.LOCALES.EN);
+  //   }
+  // }, [i18n.language]);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBarLayout position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar sx={{ backgroundColor: color?.hex }}>
           <IconButton
             color="inherit"
             onClick={handleDrawerOpen}
@@ -76,7 +84,12 @@ const LayoutResource = () => {
       </AppBarLayout>
       <DrawerLayout variant="permanent" open={open}>
         <DrawerHeaderLayout>
-          <PixIcon sx={{ marginRight: '1rem', color: 'primary.main' }} />
+          <PixIcon
+            sx={{
+              marginRight: '1rem',
+              color: color ? color.hex : 'primary.main'
+            }}
+          />
           <Typography
             sx={{
               fontFamily: 'Monospace',
@@ -86,7 +99,7 @@ const LayoutResource = () => {
             noWrap
             component="a"
             href="/"
-            color="primary.main"
+            color={color ? color.hex : 'primary.main'}
           >
             {translate('toolbar.title')}
           </Typography>

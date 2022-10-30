@@ -46,10 +46,14 @@ const ProfileSection = () => {
     <Box width="auto" minWidth={50}>
       <Tooltip title={translate('toolbar.tooltip.change_profile')}>
         <IconButton
+          size="large"
+          edge="end"
           sx={{
             ':hover': {
               background: 'none'
-            }
+            },
+            p: '10px',
+            marginTop: '-5px'
           }}
           color="inherit"
           onClick={handleClickChangeProfile}

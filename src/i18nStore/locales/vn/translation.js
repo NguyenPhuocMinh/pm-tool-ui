@@ -6,9 +6,11 @@ import translationValidator from './translation-validator';
 
 // resources
 import translationLogin from './translation-login';
+import translationDashboard from './translation-dashboard';
 import translationOrganization from './translation-organization';
 import translationRole from './translation-role';
 import translationUser from './translation-user';
+import translationPermission from './translation-permission';
 
 const TRANSLATIONS_VN = {
   common: translationCommon,
@@ -18,9 +20,11 @@ const TRANSLATIONS_VN = {
   validator: translationValidator,
   resources: {
     logins: translationLogin,
+    dashboards: translationDashboard,
     organizations: translationOrganization,
     roles: translationRole,
-    users: translationUser
+    users: translationUser,
+    permissions: translationPermission
   }
 };
 

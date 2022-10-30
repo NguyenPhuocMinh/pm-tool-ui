@@ -19,6 +19,9 @@ const translationMenu = {
     role: {
       title: 'Role'
     },
+    permission: {
+      title: 'Permission'
+    },
     user: {
       title: 'User'
     }

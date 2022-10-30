@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
 import {
+  SearchSection,
   SettingSection,
   LanguageSection,
   ProfileSection,
@@ -13,6 +14,7 @@ const ToolbarLayout = () => {
   return (
     <Fragment>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <SearchSection />
         <SettingSection />
         <LanguageSection />
         <NotifySection />

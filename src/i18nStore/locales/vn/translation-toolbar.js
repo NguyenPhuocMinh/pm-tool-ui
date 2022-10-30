@@ -1,25 +1,27 @@
 const translationToolbar = {
   title: 'Pm Tool',
   tooltip: {
-    change_language: 'Change language',
-    change_setting: 'Change setting',
-    change_profile: 'Change profile'
+    change_language: 'Thay đổi ngôn ngữ',
+    change_setting: 'Thay đổi cài đặt',
+    change_profile: 'Thay đổi hồ sơ',
+    notification: 'Thông báo'
   },
   language: {
     en: 'English',
     vn: 'VietNam'
   },
   setting: {
-    title: 'Settings',
-    mode: 'Mode',
+    title: 'Cài đặt',
+    mode: 'Chế độ',
     themes: {
-      light: 'Light',
-      dark: 'Dark'
-    }
+      light: 'Sáng',
+      dark: 'Tối'
+    },
+    color: 'Bộ chọn màu'
   },
   profile: {
-    show_profile: 'My Profile',
-    logout: 'Logout'
+    show_profile: 'Hồ sơ của tôi',
+    logout: 'Đăng xuất'
   }
 };
 

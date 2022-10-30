@@ -27,7 +27,8 @@ const NotifySection = () => {
           sx={{
             ':hover': {
               background: 'none'
-            }
+            },
+            p: '10px'
           }}
           color="inherit"
           onClick={handleClickChangeNotify}
