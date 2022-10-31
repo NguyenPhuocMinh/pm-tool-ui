@@ -8,7 +8,7 @@ import { hideNotification } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 // hooks
 import { useTranslate } from '@hooks';
-import { SlideTransition, Alert } from '../Utils';
+import { SlideTransition, Alert } from '@components/utils';
 
 const NotificationCommon = () => {
   const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ const NotificationCommon = () => {
         onExited: handleExited
       }}
     >
-      <Alert onClose={handleRequestClose} severity={notify?.level}>
+      <Alert onClose={handleRequestClose} severity={notify.level}>
         {translate(notify?.message)}
       </Alert>
     </Snackbar>

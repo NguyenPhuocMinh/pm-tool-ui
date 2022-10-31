@@ -2,6 +2,7 @@ import {
   DashboardResource,
   OrganizationList,
   OrganizationCreate,
+  OrganizationEdit,
   ProjectList,
   ProjectCreate,
   RoleList,
@@ -11,6 +12,7 @@ import {
   UserList,
   UserCreate
 } from '@resources';
+import { NotFoundCommon } from '@components/commons';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StoreIcon from '@mui/icons-material/Store';
@@ -29,6 +31,14 @@ const dashboardRoutes = [
   }
 ];
 
+const notfoundRoutes = [
+  {
+    name: 'notfound',
+    path: '/not-found',
+    element: () => <NotFoundCommon />
+  }
+];
+
 const organizationRoutes = [
   {
     name: 'organizations',
@@ -39,6 +49,11 @@ const organizationRoutes = [
     name: 'organizations-create',
     path: '/organizations/create',
     element: () => <OrganizationCreate />
+  },
+  {
+    name: 'organizations-edit',
+    path: '/organizations/edit/:id',
+    element: () => <OrganizationEdit />
   }
 ];
 
@@ -96,6 +111,7 @@ const permissionRoutes = [
 
 const routes = [
   ...dashboardRoutes,
+  ...notfoundRoutes,
   ...organizationRoutes,
   ...projectRoutes,
   ...roleRoutes,

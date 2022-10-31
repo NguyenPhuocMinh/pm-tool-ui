@@ -24,7 +24,7 @@ const closedMixin = (theme) => ({
   }
 });
 
-const DrawerLayout = styled(Drawer, {
+const DrawerCustom = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== 'open'
 })(({ theme, open }) => ({
   width: drawerWidth,
@@ -41,4 +41,4 @@ const DrawerLayout = styled(Drawer, {
   })
 }));
 
-export default DrawerLayout;
+export default DrawerCustom;

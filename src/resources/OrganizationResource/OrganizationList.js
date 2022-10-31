@@ -1,17 +1,18 @@
-import { useState, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { showPopup } from '@reduxStore/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  showPopup,
+  getAllOrganizationAction,
+  deleteOrganizationByIdAction
+} from '@reduxStore/actions';
 import moment from 'moment';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
-import {
-  NoRowsCommon,
-  PopupCommon,
-  ButtonCreate,
-  SearchInput
-} from '@components';
+import { NoRowsCommon, PopupCommon } from '@components/commons';
+import { SearchInput } from '@components/inputs';
+import { ButtonCreate } from '@components/buttons';
 import constants from '@constants';
 import {
   GRID_EN_LOCALE_TEXT,
@@ -94,31 +95,35 @@ const OrganizationList = () => {
     [page, pageSize, sort, order, formProps.values.search]
   );
 
+  useEffect(() => {
+    dispatch(getAllOrganizationAction(queryOptions));
+  }, [dispatch, queryOptions]);
+
   const { data, total, loading } = useSelector((state) => {
     return {
-      data: get(state, 'realm.data', []),
-      total: get(state, 'realm.total', 0),
-      loading: get(state, 'realm.loading', false)
+      data: get(state, 'organization.data', []),
+      total: get(state, 'organization.total', 0),
+      loading: get(state, 'organization.loading', false)
     };
   });
 
   const handleEdit = useCallback(
     (id) => () => {
-      navigate(`/realm-edit/${id}`);
+      navigate(`/organizations/edit/${id}`);
     },
     [navigate]
   );
 
   const handleShowPopupDelete = useCallback(
-    (name) => () => {
+    (id, name, query) => () => {
       dispatch(
         showPopup({
           open: true,
-          title: 'resources.configures.realms.popup.title',
-          content: 'resources.configures.realms.popup.content',
-          // onSubmit: () => dispatch(deleteRealmByIdAction(id, query)),
+          title: 'resources.organizations.popup.title',
+          content: 'resources.organizations.popup.content',
+          onSubmit: () => dispatch(deleteOrganizationByIdAction(id, query)),
           options: {
-            realmName: name
+            organizationName: name
           }
         })
       );
@@ -130,14 +135,14 @@ const OrganizationList = () => {
     return [
       {
         field: 'name',
-        headerName: translate('resources.configures.realms.fields.name'),
+        headerName: translate('resources.organizations.fields.name'),
         flex: 0.5,
         resizable: false,
         filterable: false
       },
       {
-        field: 'titleName',
-        headerName: translate('resources.configures.realms.fields.titleName'),
+        field: 'activated',
+        headerName: translate('resources.organizations.fields.activated'),
         flex: 1,
         resizable: false,
         filterable: false,
@@ -145,18 +150,8 @@ const OrganizationList = () => {
         valueFormatter: ({ value }) => (!isEmpty(value) ? value : '-')
       },
       {
-        field: 'activated',
-        headerName: translate('resources.configures.realms.fields.activated'),
-        type: 'boolean',
-        flex: 0.5,
-        sortable: false,
-        resizable: false,
-        filterable: false,
-        hideMenu: false
-      },
-      {
         field: 'createdAt',
-        headerName: translate('resources.configures.realms.fields.createdAt'),
+        headerName: translate('resources.organizations.fields.createdAt'),
         type: 'dateTime',
         flex: 0.5,
         resizable: false,
@@ -167,7 +162,7 @@ const OrganizationList = () => {
       },
       {
         field: 'actions',
-        headerName: translate('actions.title'),
+        headerName: translate('common.actions.title'),
         type: 'actions',
         flex: 0.3,
         getActions: (params) => {
@@ -215,7 +210,7 @@ const OrganizationList = () => {
           id="search"
           source="search"
           size="small"
-          placeholder="resources.configures.realms.search"
+          placeholder="resources.organizations.search"
           className={classes.search}
           {...formProps}
         />

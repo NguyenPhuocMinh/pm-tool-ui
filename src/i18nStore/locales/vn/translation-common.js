@@ -7,7 +7,12 @@ const translationCommon = {
     cancel: 'Hủy',
     confirm: 'Xác nhận',
     viewAllNotify: 'Xem tất cả thông báo'
-  }
+  },
+  actions: {
+    title: 'Hành động'
+  },
+  search: 'Tìm kiếm',
+  noRows: 'Không có hàng'
 };
 
 export default translationCommon;

@@ -11,6 +11,7 @@
           ["@context", "./src/context"],
           ["@container", "./src/container"],
           ["@components", "./src/components"],
+          ["@layout", "./src/layout"],
           ["@services", "./src/services"],
           ["@constants", "./src/constants"],
           ["@utils", "./src/utils"],

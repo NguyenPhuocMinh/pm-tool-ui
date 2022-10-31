@@ -3,7 +3,7 @@ import { Box, Drawer, Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 // hooks
 import { useTranslate } from '@hooks';
-import { ButtonGroupMain, ColorPickerMain } from '@components';
+import { ButtonGroupMain, ColorPickerMain } from '@components/mains';
 
 const CommonSetting = ({ open, anchor, toggleDrawer }) => {
   // hooks

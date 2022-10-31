@@ -6,6 +6,7 @@ import TitleCommon from './TitleCommon';
 import MenuCommon from './MenuCommon';
 import NoRowsCommon from './NoRowsCommon';
 import PopupCommon from './PopupCommon';
+import NotFoundCommon from './NotFoundCommon';
 
 export {
   AuthCommon,
@@ -15,5 +16,6 @@ export {
   TitleCommon,
   MenuCommon,
   NoRowsCommon,
-  PopupCommon
+  PopupCommon,
+  NotFoundCommon
 };

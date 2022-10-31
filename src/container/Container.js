@@ -13,8 +13,9 @@ import {
   LoadingCommon,
   NotifyCommon,
   ErrorCommon
-} from '@components';
-import { LoginResource, LayoutResource } from '@resources';
+} from '@components/commons';
+import { Layout } from '@layout';
+import { LoginResource } from '@resources';
 import { lightTheme, darkTheme } from '@themes';
 
 import { get } from 'lodash';
@@ -37,7 +38,7 @@ const Container = () => {
               path="/*"
               element={
                 <AuthCommon>
-                  <LayoutResource />
+                  <Layout />
                 </AuthCommon>
               }
             />

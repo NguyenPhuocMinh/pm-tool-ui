@@ -6,11 +6,11 @@ import {
   LanguageSection,
   ProfileSection,
   NotifySection
-} from '@components';
+} from '@components/sections';
 import { Box, IconButton } from '@mui/material';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
-const ToolbarLayout = () => {
+const TopToolbar = () => {
   return (
     <Fragment>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -34,4 +34,4 @@ const ToolbarLayout = () => {
   );
 };
 
-export default ToolbarLayout;
+export default TopToolbar;

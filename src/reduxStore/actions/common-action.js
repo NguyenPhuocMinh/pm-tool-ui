@@ -27,7 +27,7 @@ export const changeColor = (color) => ({
 });
 
 export const showNotification =
-  (level, message = '') =>
+  (level = 'info', message = '') =>
   (dispatch) => {
     dispatch({
       type: SHOW_NOTIFICATION,

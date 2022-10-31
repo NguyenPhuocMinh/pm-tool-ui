@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 
-const DrawerHeaderLayout = styled('div')(({ theme }) => ({
+const DrawerHeaderCustom = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -9,4 +9,4 @@ const DrawerHeaderLayout = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar
 }));
 
-export default DrawerHeaderLayout;
+export default DrawerHeaderCustom;

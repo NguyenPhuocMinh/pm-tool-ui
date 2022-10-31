@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
 
   const authProvider = useMemo(() => {
     return {
-      token: auth.token
+      token: 'token'
     };
   }, [auth]);
 

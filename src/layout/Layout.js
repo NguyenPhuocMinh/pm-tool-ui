@@ -1,18 +1,16 @@
 import { useState, useEffect, createElement } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useTheme } from '@mui/material/styles';
-import {
-  AppBarLayout,
-  DrawerLayout,
-  DrawerHeaderLayout,
-  ToolbarLayout,
-  MenuLayout
-} from '@components';
+import { get } from 'lodash';
 import { routes } from '@routes';
 import { useTranslate } from '@hooks';
-// import constants from '@constants';
+import {
+  AppBarCustom,
+  DrawerCustom,
+  DrawerHeaderCustom
+} from '@components/customs';
 // material
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Toolbar,
@@ -24,9 +22,10 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PixIcon from '@mui/icons-material/Pix';
-import { get } from 'lodash';
+import Menu from './Menu';
+import TopToolbar from './TopToolbar';
 
-const LayoutResource = () => {
+const Layout = () => {
   // states
   const [open, setOpen] = useState(false);
 
@@ -63,7 +62,7 @@ const LayoutResource = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBarLayout position="fixed" open={open}>
+      <AppBarCustom position="fixed" open={open}>
         <Toolbar sx={{ backgroundColor: color?.hex }}>
           <IconButton
             color="inherit"
@@ -79,11 +78,11 @@ const LayoutResource = () => {
             <MenuIcon />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <ToolbarLayout />
+          <TopToolbar />
         </Toolbar>
-      </AppBarLayout>
-      <DrawerLayout variant="permanent" open={open}>
-        <DrawerHeaderLayout>
+      </AppBarCustom>
+      <DrawerCustom variant="permanent" open={open}>
+        <DrawerHeaderCustom>
           <PixIcon
             sx={{
               marginRight: '1rem',
@@ -103,10 +102,10 @@ const LayoutResource = () => {
           >
             {translate('toolbar.title')}
           </Typography>
-        </DrawerHeaderLayout>
+        </DrawerHeaderCustom>
         <Divider />
-        <MenuLayout open={open} />
-      </DrawerLayout>
+        <Menu open={open} />
+      </DrawerCustom>
       <Routes>
         {routes.map((item) => {
           return (
@@ -115,16 +114,17 @@ const LayoutResource = () => {
               path={item.path}
               element={
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                  <DrawerHeaderLayout />
+                  <DrawerHeaderCustom />
                   {createElement(item.element)}
                 </Box>
               }
             />
           );
         })}
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
     </Box>
   );
 };
 
-export default LayoutResource;
+export default Layout;

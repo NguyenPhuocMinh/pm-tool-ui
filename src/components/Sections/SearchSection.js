@@ -1,4 +1,4 @@
-import { SearchSetting } from '@components';
+import { SearchSetting } from '@components/settings';
 import { useSelector } from 'react-redux';
 import { Box, Paper, IconButton, InputBase, Divider } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';

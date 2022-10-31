@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { CommonSetting } from '@components';
+import { CommonSetting } from '@components/settings';
 import { Box, Tooltip, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 

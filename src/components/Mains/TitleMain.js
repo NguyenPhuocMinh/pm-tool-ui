@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import { useTranslate } from '@hooks';
 import { warning } from '@components/utils';
 
-const TitleCommon = ({ className, defaultTitle, record, title, ...rest }) => {
+const TitleMain = ({ className, defaultTitle, record, title, ...rest }) => {
   const { translate } = useTranslate();
   const container =
     typeof document !== 'undefined'
@@ -35,4 +35,4 @@ export const TitlePropType = PropTypes.oneOfType([
   PropTypes.element
 ]);
 
-export default TitleCommon;
+export default TitleMain;
