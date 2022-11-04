@@ -49,7 +49,33 @@ module.exports = {
       '@providers': path.resolve(__dirname, './src/providers'),
       '@context': path.resolve(__dirname, './src/context'),
       '@container': path.resolve(__dirname, './src/container'),
-      '@components': path.resolve(__dirname, './src/components'),
+      '@components/buttons': path.resolve(
+        __dirname,
+        './src/components/buttons'
+      ),
+      '@components/commons': path.resolve(
+        __dirname,
+        './src/components/commons'
+      ),
+      '@components/customs': path.resolve(
+        __dirname,
+        './src/components/customs'
+      ),
+      '@components/inputs': path.resolve(__dirname, './src/components/inputs'),
+      '@components/mains': path.resolve(__dirname, './src/components/mains'),
+      '@components/regulars': path.resolve(
+        __dirname,
+        './src/components/regulars'
+      ),
+      '@components/sections': path.resolve(
+        __dirname,
+        './src/components/sections'
+      ),
+      '@components/settings': path.resolve(
+        __dirname,
+        './src/components/settings'
+      ),
+      '@components/utils': path.resolve(__dirname, './src/components/utils'),
       '@layout': path.resolve(__dirname, './src/layout'),
       '@services': path.resolve(__dirname, './src/services'),
       '@constants': path.resolve(__dirname, './src/constants'),
@@ -61,7 +87,7 @@ module.exports = {
       '@resources': path.resolve(__dirname, './src/resources'),
       '@routes': path.resolve(__dirname, './src/routes'),
       '@configs': path.resolve(__dirname, './src/configs'),
-      '@validators': path.resolve(__dirname, './src/validators'),
+      '@validators': path.resolve(__dirname, './src/validators')
     },
     modules: [
       'node_modules',
