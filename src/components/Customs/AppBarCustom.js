@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
-const AppBarLayout = styled(MuiAppBar, {
+const AppBarCustom = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open'
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -21,4 +21,4 @@ const AppBarLayout = styled(MuiAppBar, {
   })
 }));
 
-export default AppBarLayout;
+export default AppBarCustom;

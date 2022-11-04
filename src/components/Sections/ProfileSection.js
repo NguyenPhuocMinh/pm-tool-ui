@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslate } from '@hooks';
-import { ProfileSetting } from '@components';
+import { ProfileSetting } from '@components/settings';
 import {
   Box,
   Tooltip,
@@ -46,10 +46,14 @@ const ProfileSection = () => {
     <Box width="auto" minWidth={50}>
       <Tooltip title={translate('toolbar.tooltip.change_profile')}>
         <IconButton
+          size="large"
+          edge="end"
           sx={{
             ':hover': {
               background: 'none'
-            }
+            },
+            p: '10px',
+            marginTop: '-5px'
           }}
           color="inherit"
           onClick={handleClickChangeProfile}

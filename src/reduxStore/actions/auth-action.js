@@ -2,7 +2,7 @@ import { isEmpty } from 'lodash';
 import constants from '@constants';
 import { formatErrorCommonMsg } from '@utils';
 import { loginService, logoutService } from '@services';
-import { showNotification } from '@reduxStore/actions';
+import { showNotification, removeLogin } from '@reduxStore/actions';
 import decodeJWT from 'jwt-decode';
 
 import {
@@ -65,6 +65,7 @@ export const logoutAction = (navigate) => async (dispatch) => {
     dispatch({
       type: LOGOUT_REQUEST
     });
+    removeLogin(dispatch);
     const result = await logoutService();
     if (!isEmpty(result)) {
       dispatch({

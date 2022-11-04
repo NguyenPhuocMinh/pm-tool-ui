@@ -1,5 +1,7 @@
+import Welcome from './Welcome';
+
 const DashboardResource = () => {
-  return <h1>DashboardResource</h1>;
+  return <Welcome />;
 };
 
 export default DashboardResource;

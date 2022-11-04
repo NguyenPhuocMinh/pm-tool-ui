@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { LanguageSetting } from '@components';
+import { LanguageSetting } from '@components/settings';
 import { Box, Tooltip, IconButton } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 
@@ -31,7 +31,8 @@ const LanguageSection = () => {
           sx={{
             ':hover': {
               background: 'none'
-            }
+            },
+            p: '10px'
           }}
         >
           <TranslateIcon fontSize="small" />

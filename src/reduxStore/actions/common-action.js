@@ -1,13 +1,12 @@
-import constants from '@constants';
-import { localForage } from '@utils';
-
 import {
   CHANGE_THEME,
   CHANGE_LANGUAGE,
+  CHANGE_COLOR,
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,
   SHOW_POPUP,
-  HIDE_POPUP
+  HIDE_POPUP,
+  RESET
 } from '../types';
 
 export const changeTheme = (theme) => (dispatch) => {
@@ -22,8 +21,13 @@ export const changeLanguage = (lng) => ({
   payload: lng
 });
 
+export const changeColor = (color) => ({
+  type: CHANGE_COLOR,
+  payload: color
+});
+
 export const showNotification =
-  (level, message = '') =>
+  (level = 'info', message = '') =>
   (dispatch) => {
     dispatch({
       type: SHOW_NOTIFICATION,
@@ -38,17 +42,28 @@ export const hideNotification = () => ({
   type: HIDE_NOTIFICATION
 });
 
-export const removeLogin = (_) => {
-  localForage.removeItem(constants.LOCAL_FORAGE_KEYS.EMAIL);
-  localForage.removeItem(constants.LOCAL_FORAGE_KEYS.AUTHENTICATED, false);
+export const removeLogin = (dispatch) => {
+  dispatch({
+    type: RESET
+  });
 };
 
-export const showPopup = ({ open, title, content, onSubmit, options }) => ({
+export const showPopup = ({
+  open,
+  title,
+  content,
+  verifyName,
+  validator,
+  onSubmit,
+  options
+}) => ({
   type: SHOW_POPUP,
   payload: {
     open,
     title,
     content,
+    verifyName,
+    validator,
     onSubmit,
     options
   }

@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import { MenuCommon } from '@components';
+import { MenuCommon } from '@components/commons';
 import { Divider } from '@mui/material';
 import { homeMenus, managementMenus, authenticateMenus } from '@routes';
 
-const MenuLayout = ({ open }) => {
+const Menu = ({ open }) => {
   return (
     <Fragment>
       <MenuCommon
@@ -27,4 +27,4 @@ const MenuLayout = ({ open }) => {
   );
 };
 
-export default MenuLayout;
+export default Menu;

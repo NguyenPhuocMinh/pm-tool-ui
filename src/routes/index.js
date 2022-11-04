@@ -2,19 +2,26 @@ import {
   DashboardResource,
   OrganizationList,
   OrganizationCreate,
+  OrganizationEdit,
   ProjectList,
   ProjectCreate,
   RoleList,
   RoleCreate,
+  RoleEdit,
+  PermissionList,
+  PermissionCreate,
+  PermissionEdit,
   UserList,
   UserCreate
 } from '@resources';
+import { NotFoundCommon } from '@components/commons';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StoreIcon from '@mui/icons-material/Store';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LanIcon from '@mui/icons-material/Lan';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 /**
  * @description ROUTES
@@ -24,6 +31,14 @@ const dashboardRoutes = [
     name: 'dashboard',
     path: '/',
     element: () => <DashboardResource />
+  }
+];
+
+const notfoundRoutes = [
+  {
+    name: 'notfound',
+    path: '/not-found',
+    element: () => <NotFoundCommon />
   }
 ];
 
@@ -37,6 +52,11 @@ const organizationRoutes = [
     name: 'organizations-create',
     path: '/organizations/create',
     element: () => <OrganizationCreate />
+  },
+  {
+    name: 'organizations-edit',
+    path: '/organizations/edit/:id',
+    element: () => <OrganizationEdit />
   }
 ];
 
@@ -63,13 +83,18 @@ const roleRoutes = [
     name: 'roles-create',
     path: '/roles/create',
     element: () => <RoleCreate />
+  },
+  {
+    name: 'roles-edit',
+    path: '/roles/edit/:id',
+    element: () => <RoleEdit />
   }
 ];
 
 const userRoutes = [
   {
     name: 'users',
-    path: '/roles',
+    path: '/users',
     element: () => <UserList />
   },
   {
@@ -79,12 +104,32 @@ const userRoutes = [
   }
 ];
 
+const permissionRoutes = [
+  {
+    name: 'permissions',
+    path: '/permissions',
+    element: () => <PermissionList />
+  },
+  {
+    name: 'permissions-create',
+    path: '/permissions/create',
+    element: () => <PermissionCreate />
+  },
+  {
+    name: 'permissions-edit',
+    path: '/permissions/edit/:id',
+    element: () => <PermissionEdit />
+  }
+];
+
 const routes = [
   ...dashboardRoutes,
+  ...notfoundRoutes,
   ...organizationRoutes,
   ...projectRoutes,
   ...roleRoutes,
-  ...userRoutes
+  ...userRoutes,
+  ...permissionRoutes
 ];
 
 /**
@@ -121,6 +166,12 @@ const authenticateMenus = [
     title: 'menu.authenticate.role.title',
     path: '/roles',
     icon: <LanIcon />
+  },
+  {
+    name: 'permissions',
+    title: 'menu.authenticate.permission.title',
+    path: '/permissions',
+    icon: <LockPersonIcon />
   },
   {
     name: 'users',

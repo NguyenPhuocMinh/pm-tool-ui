@@ -1,17 +1,16 @@
 import { useState, useEffect, createElement } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
-import {
-  AppBarLayout,
-  DrawerLayout,
-  DrawerHeaderLayout,
-  ToolbarLayout,
-  MenuLayout
-} from '@components';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { get } from 'lodash';
 import { routes } from '@routes';
 import { useTranslate } from '@hooks';
-import constants from '@constants';
+import {
+  AppBarCustom,
+  DrawerCustom,
+  DrawerHeaderCustom
+} from '@components/customs';
 // material
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Toolbar,
@@ -23,16 +22,24 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import PixIcon from '@mui/icons-material/Pix';
+import Menu from './Menu';
+import TopToolbar from './TopToolbar';
 
-const LayoutResource = () => {
+const Layout = () => {
   // states
   const [open, setOpen] = useState(false);
 
   // hooks
-  const { translate, i18n } = useTranslate();
-  const [_, setLanguage] = useState(constants.LOCALES.EN);
+  const { translate } = useTranslate();
+  // const [_, setLanguage] = useState(constants.LOCALES.EN);
   const theme = useTheme();
   const isSmMatch = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const { color } = useSelector((state) => {
+    return {
+      color: get(state, 'common.color', {})
+    };
+  });
 
   const handleDrawerOpen = () => {
     setOpen(!open);
@@ -44,19 +51,19 @@ const LayoutResource = () => {
     }
   }, [isSmMatch]);
 
-  useEffect(() => {
-    if (i18n.language === 'vn') {
-      setLanguage(constants.LOCALES.VN);
-    } else {
-      setLanguage(constants.LOCALES.EN);
-    }
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   if (i18n.language === 'vn') {
+  //     setLanguage(constants.LOCALES.VN);
+  //   } else {
+  //     setLanguage(constants.LOCALES.EN);
+  //   }
+  // }, [i18n.language]);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBarLayout position="fixed" open={open}>
-        <Toolbar>
+      <AppBarCustom position="fixed" open={open}>
+        <Toolbar sx={{ backgroundColor: color?.hex }}>
           <IconButton
             color="inherit"
             onClick={handleDrawerOpen}
@@ -71,12 +78,17 @@ const LayoutResource = () => {
             <MenuIcon />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <ToolbarLayout />
+          <TopToolbar />
         </Toolbar>
-      </AppBarLayout>
-      <DrawerLayout variant="permanent" open={open}>
-        <DrawerHeaderLayout>
-          <PixIcon sx={{ marginRight: '1rem', color: 'primary.main' }} />
+      </AppBarCustom>
+      <DrawerCustom variant="permanent" open={open}>
+        <DrawerHeaderCustom>
+          <PixIcon
+            sx={{
+              marginRight: '1rem',
+              color: color ? color.hex : 'primary.main'
+            }}
+          />
           <Typography
             sx={{
               fontFamily: 'Monospace',
@@ -86,14 +98,14 @@ const LayoutResource = () => {
             noWrap
             component="a"
             href="/"
-            color="primary.main"
+            color={color ? color.hex : 'primary.main'}
           >
             {translate('toolbar.title')}
           </Typography>
-        </DrawerHeaderLayout>
+        </DrawerHeaderCustom>
         <Divider />
-        <MenuLayout open={open} />
-      </DrawerLayout>
+        <Menu open={open} />
+      </DrawerCustom>
       <Routes>
         {routes.map((item) => {
           return (
@@ -102,16 +114,17 @@ const LayoutResource = () => {
               path={item.path}
               element={
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                  <DrawerHeaderLayout />
+                  <DrawerHeaderCustom />
                   {createElement(item.element)}
                 </Box>
               }
             />
           );
         })}
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
     </Box>
   );
 };
 
-export default LayoutResource;
+export default Layout;

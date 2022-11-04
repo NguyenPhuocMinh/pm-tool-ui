@@ -1,22 +1,28 @@
 import { useEffect, useState } from 'react';
-// hooks
-import { useTranslate } from '@hooks';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeTheme } from '@reduxStore/actions';
 // material ui
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 // styles
 import { makeStyles } from '@mui/styles';
+import { TypoCommon } from '@components/commons';
 import constants from '@constants';
 import { localForage } from '@utils';
+import { get } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   selected: {
-    color: `${theme.palette.text.primary} !important`,
-    borderColor: `${theme.palette.text.primary} !important`
+    color: (props) =>
+      props.color
+        ? `${props.color.hex} !important`
+        : `${theme.palette.text.primary} !important`,
+    borderColor: (props) =>
+      props.color
+        ? `${props.color.hex} !important`
+        : `${theme.palette.text.primary} !important`
   },
   rootIcon: {
     marginRight: '8px'
@@ -29,7 +35,6 @@ const ButtonGroupMain = () => {
   );
   // hooks
   const dispatch = useDispatch();
-  const { translate } = useTranslate();
   const [theme, setTheme] = useState(themeLocalForage);
   // func
   const handleChange = (event, newTheme) => {
@@ -43,7 +48,13 @@ const ButtonGroupMain = () => {
     dispatch(changeTheme(theme));
   }, [theme, dispatch, changeTheme]);
 
-  const classes = useStyles({ theme });
+  const { color } = useSelector((state) => {
+    return {
+      color: get(state, 'common.color', {})
+    };
+  });
+
+  const classes = useStyles({ theme, color });
 
   return (
     <ToggleButtonGroup
@@ -66,9 +77,7 @@ const ButtonGroupMain = () => {
         value="light"
       >
         <WbSunnyIcon className={classes.rootIcon} />
-        <Typography variant="inherit">
-          {translate('toolbar.setting.themes.light')}
-        </Typography>
+        <TypoCommon label="toolbar.setting.themes.light" />
       </ToggleButton>
       <ToggleButton
         sx={{
@@ -83,9 +92,7 @@ const ButtonGroupMain = () => {
         }}
       >
         <NightsStayIcon className={classes.rootIcon} />
-        <Typography variant="inherit">
-          {translate('toolbar.setting.themes.dark')}
-        </Typography>
+        <TypoCommon label="toolbar.setting.themes.dark" />
       </ToggleButton>
     </ToggleButtonGroup>
   );

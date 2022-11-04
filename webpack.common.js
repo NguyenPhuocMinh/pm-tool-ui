@@ -50,6 +50,7 @@ module.exports = {
       '@context': path.resolve(__dirname, './src/context'),
       '@container': path.resolve(__dirname, './src/container'),
       '@components': path.resolve(__dirname, './src/components'),
+      '@layout': path.resolve(__dirname, './src/layout'),
       '@services': path.resolve(__dirname, './src/services'),
       '@constants': path.resolve(__dirname, './src/constants'),
       '@utils': path.resolve(__dirname, './src/utils'),
@@ -60,7 +61,7 @@ module.exports = {
       '@resources': path.resolve(__dirname, './src/resources'),
       '@routes': path.resolve(__dirname, './src/routes'),
       '@configs': path.resolve(__dirname, './src/configs'),
-      '@validators': path.resolve(__dirname, './src/validators'),
+      '@validators': path.resolve(__dirname, './src/validators')
     },
     modules: [
       'node_modules',
@@ -138,7 +139,7 @@ module.exports = {
     historyApiFallback: true,
     // With a backend on localhost:8080, you can use this to enable proxying:
     proxy: {
-      '/rest/api': 'http://localhost:8080'
+      '/rest/api': 'http://localhost:7979'
     },
     static: {
       directory: path.join(__dirname, 'public')

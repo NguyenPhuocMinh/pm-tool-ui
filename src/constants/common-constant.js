@@ -25,7 +25,11 @@ const commonConstants = {
     FORBIDDEN: '403',
     NOT_FOUND: '404',
     ERROR_SERVER: '500'
-  }
+  },
+  VERTICAL: 'top',
+  HORIZONTAL: 'center',
+  SORT_DEFAULT: 'createdAt',
+  SORT_ORDER: 'desc'
 };
 
 export default commonConstants;

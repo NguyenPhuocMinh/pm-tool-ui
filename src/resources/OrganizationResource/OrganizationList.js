@@ -1,27 +1,28 @@
-import { useState, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { showPopup } from '@reduxStore/actions';
-import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  showPopup,
+  getAllOrganizationAction,
+  deleteOrganizationByIdAction
+} from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
-import {
-  NoRowsCommon,
-  PopupCommon,
-  ButtonCreate,
-  SearchInput
-} from '@components';
+import { NoRowsCommon, PopupCommon } from '@components/commons';
+import { SearchInput } from '@components/inputs';
+import { ButtonCreate } from '@components/buttons';
 import constants from '@constants';
 import {
   GRID_EN_LOCALE_TEXT,
   GRID_VN_LOCALE_TEXT
 } from '@i18nStore/localeTexts';
-import { other } from '@utils';
+import { other, dateTimeFormat } from '@utils';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -29,7 +30,10 @@ const useStyles = makeStyles((_) => ({
   },
   dataGridRoot: {
     '& .MuiIconButton-root': {
-      border: 'none !important'
+      border: 'none !important',
+      '&:hover': {
+        background: 'none !important'
+      }
     }
   },
   search: {
@@ -94,31 +98,36 @@ const OrganizationList = () => {
     [page, pageSize, sort, order, formProps.values.search]
   );
 
+  useEffect(() => {
+    dispatch(getAllOrganizationAction(queryOptions));
+  }, [dispatch, queryOptions]);
+
   const { data, total, loading } = useSelector((state) => {
     return {
-      data: get(state, 'realm.data', []),
-      total: get(state, 'realm.total', 0),
-      loading: get(state, 'realm.loading', false)
+      data: get(state, 'organization.data', []),
+      total: get(state, 'organization.total', 0),
+      loading: get(state, 'organization.loading', false)
     };
   });
 
   const handleEdit = useCallback(
     (id) => () => {
-      navigate(`/realm-edit/${id}`);
+      navigate(`/organizations/edit/${id}`);
     },
     [navigate]
   );
 
   const handleShowPopupDelete = useCallback(
-    (name) => () => {
+    (id, name, query) => () => {
       dispatch(
         showPopup({
           open: true,
-          title: 'resources.configures.realms.popup.title',
-          content: 'resources.configures.realms.popup.content',
-          // onSubmit: () => dispatch(deleteRealmByIdAction(id, query)),
+          title: 'resources.organizations.popup.title',
+          content: 'resources.organizations.popup.content',
+          verifyName: 'resources.organizations.popup.verifyName',
+          onSubmit: () => dispatch(deleteOrganizationByIdAction(id, query)),
           options: {
-            realmName: name
+            organizationName: name
           }
         })
       );
@@ -130,23 +139,14 @@ const OrganizationList = () => {
     return [
       {
         field: 'name',
-        headerName: translate('resources.configures.realms.fields.name'),
+        headerName: translate('resources.organizations.fields.name'),
         flex: 0.5,
         resizable: false,
         filterable: false
       },
       {
-        field: 'titleName',
-        headerName: translate('resources.configures.realms.fields.titleName'),
-        flex: 1,
-        resizable: false,
-        filterable: false,
-        hideMenu: false,
-        valueFormatter: ({ value }) => (!isEmpty(value) ? value : '-')
-      },
-      {
         field: 'activated',
-        headerName: translate('resources.configures.realms.fields.activated'),
+        headerName: translate('resources.organizations.fields.activated'),
         type: 'boolean',
         flex: 0.5,
         sortable: false,
@@ -156,18 +156,27 @@ const OrganizationList = () => {
       },
       {
         field: 'createdAt',
-        headerName: translate('resources.configures.realms.fields.createdAt'),
+        headerName: translate('resources.organizations.fields.createdAt'),
         type: 'dateTime',
         flex: 0.5,
         resizable: false,
         filterable: false,
         hideMenu: false,
-        valueGetter: ({ value }) =>
-          value && moment(new Date(value)).format('DD-MM-YYYY h:mm:ss A')
+        valueGetter: ({ value }) => value && dateTimeFormat(value)
+      },
+      {
+        field: 'updatedAt',
+        headerName: translate('resources.organizations.fields.updatedAt'),
+        type: 'dateTime',
+        flex: 0.5,
+        resizable: false,
+        filterable: false,
+        hideMenu: false,
+        valueGetter: ({ value }) => value && dateTimeFormat(value)
       },
       {
         field: 'actions',
-        headerName: translate('actions.title'),
+        headerName: translate('common.actions.title'),
         type: 'actions',
         flex: 0.3,
         getActions: (params) => {
@@ -179,13 +188,13 @@ const OrganizationList = () => {
                 params.row.name,
                 queryOptions
               )}
-              label="Delete"
+              label="common.label.delete"
               key={params.id}
             />,
             <GridActionsCellItem
-              icon={<DeleteIcon />}
+              icon={<BorderColorIcon />}
               onClick={handleEdit(params.id)}
-              label="Edit"
+              label="common.label.edit"
               key={params.id}
             />
           ];
@@ -215,7 +224,7 @@ const OrganizationList = () => {
           id="search"
           source="search"
           size="small"
-          placeholder="resources.configures.realms.search"
+          placeholder="resources.organizations.search"
           className={classes.search}
           {...formProps}
         />
@@ -238,7 +247,9 @@ const OrganizationList = () => {
         <Box style={{ height: 400, width: '100%' }}>
           <DataGrid
             localeText={
-              i18n.language === 'en' ? GRID_EN_LOCALE_TEXT : GRID_VN_LOCALE_TEXT
+              i18n.language === constants.LANGUAGES.EN
+                ? GRID_EN_LOCALE_TEXT
+                : GRID_VN_LOCALE_TEXT
             }
             loading={loading}
             rows={data}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { NotifySetting } from '@components';
+import { NotifySetting } from '@components/settings';
 import { Box, Tooltip, IconButton, Badge } from '@mui/material';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -27,7 +27,8 @@ const NotifySection = () => {
           sx={{
             ':hover': {
               background: 'none'
-            }
+            },
+            p: '10px'
           }}
           color="inherit"
           onClick={handleClickChangeNotify}

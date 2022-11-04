@@ -1,20 +1,9 @@
-// commons
-export * from './Commons';
-
-// settings
-export * from './Settings';
-
-// mains
-export * from './Mains';
-
-// Layouts
-export * from './Layouts';
-
-// Sections
-export * from './Sections';
-
-// inputs
-export * from './Inputs';
-
-// buttons
-export * from './Buttons';
+export * from './buttons';
+export * from './commons';
+export * from './customs';
+export * from './inputs';
+export * from './mains';
+export * from './regulars';
+export * from './sections';
+export * from './settings';
+export * from './utils';

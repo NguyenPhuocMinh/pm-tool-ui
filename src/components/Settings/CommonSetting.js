@@ -3,7 +3,7 @@ import { Box, Drawer, Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 // hooks
 import { useTranslate } from '@hooks';
-import { ButtonGroupMain } from '@components';
+import { ButtonGroupMain, ColorPickerMain } from '@components/mains';
 
 const CommonSetting = ({ open, anchor, toggleDrawer }) => {
   // hooks
@@ -58,6 +58,21 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
             {translate('toolbar.setting.mode')}
           </Typography>
           <ButtonGroupMain />
+        </Box>
+        <Divider sx={{ padding: 2 }} />
+        <Box sx={{ padding: '0 16px' }}>
+          <Typography
+            sx={{
+              margin: '20px 0px 10px',
+              fontFamily: 'Josefin Sans',
+              fontWeight: 'bold'
+            }}
+            variant="body1"
+            gutterBottom
+          >
+            {translate('toolbar.setting.color')}
+          </Typography>
+          <ColorPickerMain />
         </Box>
       </Drawer>
     </Box>

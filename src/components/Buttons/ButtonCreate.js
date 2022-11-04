@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useTranslate } from '@hooks';
+import { get } from 'lodash';
 
 import { Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -10,6 +12,12 @@ const ButtonCreate = (props) => {
   const { translate } = useTranslate();
   const navigate = useNavigate();
 
+  const { color } = useSelector((state) => {
+    return {
+      color: get(state, 'common.color', {})
+    };
+  });
+
   const handleClick = () => {
     navigate(redirect);
   };
@@ -17,7 +25,11 @@ const ButtonCreate = (props) => {
   return (
     <Button
       sx={{
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        background: color ? color.hex : 'inherit',
+        ':hover': {
+          background: color ? color.hex : 'inherit'
+        }
       }}
       startIcon={<AddCircleIcon />}
       onClick={handleClick}

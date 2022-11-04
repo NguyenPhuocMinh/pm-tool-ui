@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { NavLinkMain } from '@components';
+import { NavLinkMain } from '@components/mains';
 import { useTranslate } from '@hooks';
 import {
   Tooltip,
@@ -47,7 +47,13 @@ const MenuCommon = ({ open, menus = [], titleSubHeader = '' }) => {
           title={translate(item.title)}
           placement="right"
         >
-          <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+          <ListItem
+            key={item.name}
+            disablePadding
+            sx={{
+              display: 'block'
+            }}
+          >
             <ListItemButton
               sx={{
                 minHeight: 48,

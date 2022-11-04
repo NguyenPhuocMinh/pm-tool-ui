@@ -7,8 +7,8 @@ import { isEmpty } from 'lodash';
 
 const SearchInput = (props) => {
   const {
-    label = 'SearchInput',
-    placeholder = '',
+    label,
+    placeholder,
     source,
     values,
     type,

@@ -4,23 +4,32 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import { optionsLogger, optionsPersist } from '@utils';
-import { LOGOUT_SUCCESS } from './types';
+import { RESET } from './types';
 
 // reducers
-import { commonReducer, authReducer } from './reducers';
+import {
+  commonReducer,
+  authReducer,
+  organizationReducer,
+  roleReducer,
+  permissionReducer
+} from './reducers';
 
 // middleware
 const loggerMiddleware = createLogger(optionsLogger);
 
 const appReducer = combineReducers({
   common: commonReducer,
-  auth: authReducer
+  auth: authReducer,
+  organization: organizationReducer,
+  role: roleReducer,
+  permission: permissionReducer
 });
 
 const rootReducer = (state, action) => {
   const { type } = action;
   // reset all state
-  if (type === LOGOUT_SUCCESS) {
+  if (type === RESET) {
     return appReducer({}, action);
   }
   return appReducer(state, action);

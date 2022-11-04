@@ -3,7 +3,7 @@ import { useTranslate } from '@hooks';
 
 const TextInput = (props) => {
   const {
-    label = 'TextInput',
+    label,
     source,
     values,
     type,
@@ -20,7 +20,7 @@ const TextInput = (props) => {
     className,
     startAdornment,
     endAdornment,
-    size = 'medium',
+    size,
     sx
   } = props;
 
@@ -48,7 +48,10 @@ const TextInput = (props) => {
         startAdornment,
         endAdornment
       }}
-      sx={sx}
+      sx={{
+        fontFamily: 'Josefin Sans',
+        ...sx
+      }}
       size={size}
     />
   );

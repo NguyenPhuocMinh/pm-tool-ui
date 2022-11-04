@@ -3,6 +3,7 @@ import { localForage } from '@utils';
 import {
   CHANGE_THEME,
   CHANGE_LANGUAGE,
+  CHANGE_COLOR,
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,
   SHOW_POPUP,
@@ -15,6 +16,8 @@ const initialState = {
   language:
     localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.LANGUAGE) ||
     'vn',
+  color:
+    localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.COLOR) || {},
   notify: {},
   popup: {}
 };
@@ -32,6 +35,11 @@ const commonReducer = (state = initialState, action) => {
       return {
         ...state,
         language: payload
+      };
+    case CHANGE_COLOR:
+      return {
+        ...state,
+        color: payload
       };
     case SHOW_NOTIFICATION:
       return {
