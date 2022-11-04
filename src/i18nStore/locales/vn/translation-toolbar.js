@@ -4,7 +4,8 @@ const translationToolbar = {
     change_language: 'Thay đổi ngôn ngữ',
     change_setting: 'Thay đổi cài đặt',
     change_profile: 'Thay đổi hồ sơ',
-    notification: 'Thông báo'
+    notification: 'Thông báo',
+    refresh: 'Làm mới'
   },
   language: {
     en: 'English',

@@ -7,8 +7,10 @@ import {
   ProjectCreate,
   RoleList,
   RoleCreate,
+  RoleEdit,
   PermissionList,
   PermissionCreate,
+  PermissionEdit,
   UserList,
   UserCreate
 } from '@resources';
@@ -19,6 +21,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LanIcon from '@mui/icons-material/Lan';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 /**
  * @description ROUTES
@@ -80,6 +83,11 @@ const roleRoutes = [
     name: 'roles-create',
     path: '/roles/create',
     element: () => <RoleCreate />
+  },
+  {
+    name: 'roles-edit',
+    path: '/roles/edit/:id',
+    element: () => <RoleEdit />
   }
 ];
 
@@ -106,6 +114,11 @@ const permissionRoutes = [
     name: 'permissions-create',
     path: '/permissions/create',
     element: () => <PermissionCreate />
+  },
+  {
+    name: 'permissions-edit',
+    path: '/permissions/edit/:id',
+    element: () => <PermissionEdit />
   }
 ];
 
@@ -158,7 +171,7 @@ const authenticateMenus = [
     name: 'permissions',
     title: 'menu.authenticate.permission.title',
     path: '/permissions',
-    icon: <SupervisorAccountIcon />
+    icon: <LockPersonIcon />
   },
   {
     name: 'users',

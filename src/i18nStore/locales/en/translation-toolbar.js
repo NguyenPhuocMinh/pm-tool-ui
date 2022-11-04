@@ -4,7 +4,8 @@ const translationToolbar = {
     change_language: 'Change language',
     change_setting: 'Change setting',
     change_profile: 'Change profile',
-    notification: 'Notification'
+    notification: 'Notification',
+    refresh: 'Refresh'
   },
   language: {
     en: 'English',

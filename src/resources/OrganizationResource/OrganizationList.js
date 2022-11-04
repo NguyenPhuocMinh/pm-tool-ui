@@ -6,7 +6,6 @@ import {
   getAllOrganizationAction,
   deleteOrganizationByIdAction
 } from '@reduxStore/actions';
-import moment from 'moment';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
@@ -18,11 +17,12 @@ import {
   GRID_EN_LOCALE_TEXT,
   GRID_VN_LOCALE_TEXT
 } from '@i18nStore/localeTexts';
-import { other } from '@utils';
+import { other, dateTimeFormat } from '@utils';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -30,7 +30,10 @@ const useStyles = makeStyles((_) => ({
   },
   dataGridRoot: {
     '& .MuiIconButton-root': {
-      border: 'none !important'
+      border: 'none !important',
+      '&:hover': {
+        background: 'none !important'
+      }
     }
   },
   search: {
@@ -121,6 +124,7 @@ const OrganizationList = () => {
           open: true,
           title: 'resources.organizations.popup.title',
           content: 'resources.organizations.popup.content',
+          verifyName: 'resources.organizations.popup.verifyName',
           onSubmit: () => dispatch(deleteOrganizationByIdAction(id, query)),
           options: {
             organizationName: name
@@ -143,11 +147,12 @@ const OrganizationList = () => {
       {
         field: 'activated',
         headerName: translate('resources.organizations.fields.activated'),
-        flex: 1,
+        type: 'boolean',
+        flex: 0.5,
+        sortable: false,
         resizable: false,
         filterable: false,
-        hideMenu: false,
-        valueFormatter: ({ value }) => (!isEmpty(value) ? value : '-')
+        hideMenu: false
       },
       {
         field: 'createdAt',
@@ -157,8 +162,17 @@ const OrganizationList = () => {
         resizable: false,
         filterable: false,
         hideMenu: false,
-        valueGetter: ({ value }) =>
-          value && moment(new Date(value)).format('DD-MM-YYYY h:mm:ss A')
+        valueGetter: ({ value }) => value && dateTimeFormat(value)
+      },
+      {
+        field: 'updatedAt',
+        headerName: translate('resources.organizations.fields.updatedAt'),
+        type: 'dateTime',
+        flex: 0.5,
+        resizable: false,
+        filterable: false,
+        hideMenu: false,
+        valueGetter: ({ value }) => value && dateTimeFormat(value)
       },
       {
         field: 'actions',
@@ -174,13 +188,13 @@ const OrganizationList = () => {
                 params.row.name,
                 queryOptions
               )}
-              label="Delete"
+              label="common.label.delete"
               key={params.id}
             />,
             <GridActionsCellItem
-              icon={<DeleteIcon />}
+              icon={<BorderColorIcon />}
               onClick={handleEdit(params.id)}
-              label="Edit"
+              label="common.label.edit"
               key={params.id}
             />
           ];
@@ -233,7 +247,9 @@ const OrganizationList = () => {
         <Box style={{ height: 400, width: '100%' }}>
           <DataGrid
             localeText={
-              i18n.language === 'en' ? GRID_EN_LOCALE_TEXT : GRID_VN_LOCALE_TEXT
+              i18n.language === constants.LANGUAGES.EN
+                ? GRID_EN_LOCALE_TEXT
+                : GRID_VN_LOCALE_TEXT
             }
             loading={loading}
             rows={data}

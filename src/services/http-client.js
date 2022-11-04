@@ -1,11 +1,13 @@
 import axios from 'axios';
 import configs from '@configs';
 
-console.info('🚀 ~ file: http-client.js ~ line 3 ~ configs', configs);
+console.info('🚀 ~ configs ~', configs);
 
 const httpClientRestProvider = axios.create({
   baseURL: configs.basePathRestApi,
-  headers: configs.headers
+  headers: configs.headers,
+  timeout: 10000,
+  withCredentials: true
 });
 
 export { httpClientRestProvider };

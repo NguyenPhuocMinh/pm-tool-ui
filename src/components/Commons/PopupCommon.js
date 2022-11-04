@@ -9,11 +9,15 @@ import {
   DialogContentText,
   DialogTitle,
   Slide,
-  IconButton
+  IconButton,
+  Box,
+  Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
+import { TextInput } from '@components/inputs';
 import { hidePopup } from '@reduxStore/actions';
+import { useFormik } from 'formik';
 import { isEmpty, get } from 'lodash';
 
 const Transition = forwardRef((props, ref) => {
@@ -56,19 +60,37 @@ BootstrapDialogTitle.propTypes = {
 
 const PopupCommon = () => {
   const { translate } = useTranslate();
+  const dispatch = useDispatch();
 
-  const { popup } = useSelector((state) => {
+  const { popup, color } = useSelector((state) => {
     return {
-      popup: get(state, 'common.popup', {})
+      popup: get(state, 'common.popup', {}),
+      color: get(state, 'common.color', {})
     };
   });
 
-  const { open = false, title, content, onSubmit, options } = popup;
+  const {
+    open = false,
+    title,
+    content,
+    verifyName,
+    validator,
+    onSubmit,
+    options
+  } = popup;
 
-  const dispatch = useDispatch();
+  const initialValues = {
+    verify: ''
+  };
+
+  const { isValid, dirty, setFieldTouched, ...formProps } = useFormik({
+    initialValues,
+    validationSchema: validator
+  });
 
   const handleClose = () => {
     dispatch(hidePopup());
+    setFieldTouched('verify', false);
   };
 
   return (
@@ -81,7 +103,8 @@ const PopupCommon = () => {
     >
       <BootstrapDialogTitle
         sx={{
-          background: (theme) => theme.palette.primary.main
+          fontFamily: 'Josefin Sans',
+          background: (theme) => color?.hex ?? theme.palette.primary.main
         }}
         onClose={handleClose}
       >
@@ -94,9 +117,26 @@ const PopupCommon = () => {
           minHeight: '150px'
         }}
       >
-        <DialogContentText>
+        <DialogContentText sx={{ fontFamily: 'Josefin Sans' }}>
           {!isEmpty(options) ? translate(content, options) : translate(content)}
         </DialogContentText>
+        <Box sx={{ margin: '1rem' }}>
+          <Typography variant="subtitle1" sx={{ fontFamily: 'Josefin Sans' }}>
+            {!isEmpty(options)
+              ? translate(verifyName, options)
+              : translate(verifyName)}
+          </Typography>
+          <TextInput
+            label=""
+            required
+            id="verify"
+            source="verify"
+            sx={{
+              width: 350
+            }}
+            {...formProps}
+          />
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button
@@ -107,7 +147,9 @@ const PopupCommon = () => {
             textTransform: 'capitalize',
             ':hover': {
               background: 'none'
-            }
+            },
+            color: (theme) => color?.hex ?? theme.palette.primary.main,
+            borderColor: (theme) => color?.hex ?? theme.palette.primary.main
           }}
           variant="outlined"
           onClick={handleClose}
@@ -122,8 +164,10 @@ const PopupCommon = () => {
             textTransform: 'capitalize',
             ':hover': {
               background: 'none'
-            }
+            },
+            background: (theme) => color?.hex ?? theme.palette.primary.main
           }}
+          disabled={!isValid || !dirty}
           variant="contained"
           onClick={onSubmit}
         >

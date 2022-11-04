@@ -27,9 +27,7 @@ export const getAllOrganizationService = async (query = {}) => {
  */
 export const createOrganizationService = async (records) => {
   try {
-    const { data } = await httpClientRestProvider.post(basePath, {
-      records
-    });
+    const { data } = await httpClientRestProvider.post(basePath, records);
 
     return data;
   } catch (error) {

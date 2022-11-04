@@ -7,7 +7,13 @@ import { optionsLogger, optionsPersist } from '@utils';
 import { RESET } from './types';
 
 // reducers
-import { commonReducer, authReducer, organizationReducer } from './reducers';
+import {
+  commonReducer,
+  authReducer,
+  organizationReducer,
+  roleReducer,
+  permissionReducer
+} from './reducers';
 
 // middleware
 const loggerMiddleware = createLogger(optionsLogger);
@@ -15,7 +21,9 @@ const loggerMiddleware = createLogger(optionsLogger);
 const appReducer = combineReducers({
   common: commonReducer,
   auth: authReducer,
-  organization: organizationReducer
+  organization: organizationReducer,
+  role: roleReducer,
+  permission: permissionReducer
 });
 
 const rootReducer = (state, action) => {

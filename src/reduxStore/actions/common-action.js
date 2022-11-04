@@ -48,12 +48,22 @@ export const removeLogin = (dispatch) => {
   });
 };
 
-export const showPopup = ({ open, title, content, onSubmit, options }) => ({
+export const showPopup = ({
+  open,
+  title,
+  content,
+  verifyName,
+  validator,
+  onSubmit,
+  options
+}) => ({
   type: SHOW_POPUP,
   payload: {
     open,
     title,
     content,
+    verifyName,
+    validator,
     onSubmit,
     options
   }

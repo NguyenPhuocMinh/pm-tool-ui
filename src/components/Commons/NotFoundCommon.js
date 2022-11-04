@@ -1,4 +1,7 @@
 import classnames from 'classnames';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { get } from 'lodash';
 // core
 import { useTranslate } from '@hooks';
 // material ui
@@ -38,11 +41,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NotFoundCommon = (props) => {
-  const { className, title, navigate } = props;
+  const { className, title } = props;
 
   // hooks
   const classes = useStyles(props);
   const { translate } = useTranslate();
+  const navigate = useNavigate();
+
+  const { color } = useSelector((state) => {
+    return {
+      color: get(state, 'common.color', {})
+    };
+  });
 
   return (
     <div className={classnames(classes.container, className)}>
@@ -54,6 +64,12 @@ const NotFoundCommon = (props) => {
       </div>
       <div className={classes.toolbar}>
         <Button
+          sx={{
+            background: (theme) => color?.hex ?? theme.palette.primary.main,
+            ':hover': {
+              background: (theme) => color?.hex ?? theme.palette.primary.main
+            }
+          }}
           variant="contained"
           startIcon={<History />}
           onClick={() => navigate('/')}

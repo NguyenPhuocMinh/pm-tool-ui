@@ -139,7 +139,7 @@ module.exports = {
     historyApiFallback: true,
     // With a backend on localhost:8080, you can use this to enable proxying:
     proxy: {
-      '/rest/api': 'http://localhost:8080'
+      '/rest/api': 'http://localhost:7979'
     },
     static: {
       directory: path.join(__dirname, 'public')

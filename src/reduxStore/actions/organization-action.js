@@ -17,7 +17,7 @@ import {
   CREATE_ORGANIZATION,
   GET_ID_ORGANIZATION,
   EDIT_ORGANIZATION
-} from '../types';
+} from '@reduxStore/types';
 
 /**
  * @description GET ALL ORGANIZATION ACTION
@@ -37,7 +37,7 @@ export const getAllOrganizationAction =
         dispatch({
           type: GET_ALL_ORGANIZATION,
           payload: {
-            data: result.response,
+            data: result.data,
             total: result.total
           }
         });

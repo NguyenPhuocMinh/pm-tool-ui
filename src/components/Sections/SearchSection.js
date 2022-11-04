@@ -1,4 +1,5 @@
 import { SearchSetting } from '@components/settings';
+import { useTranslate } from '@hooks';
 import { useSelector } from 'react-redux';
 import { Box, Paper, IconButton, InputBase, Divider } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,6 +8,8 @@ import { usePopupState, bindToggle } from 'material-ui-popup-state/hooks';
 import { get } from 'lodash';
 
 const SearchSection = () => {
+  const { translate } = useTranslate();
+
   const popupState = usePopupState({
     variant: 'dialog',
     popupId: 'demo-popup-dialog'
@@ -24,13 +27,16 @@ const SearchSection = () => {
         {...bindToggle(popupState)}
         sx={{ p: '0px 4px', display: 'flex', alignItems: 'center', width: 256 }}
       >
-        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+        <IconButton
+          type="button"
+          sx={{ p: '10px', ':hover': { background: 'none' } }}
+          aria-label="search"
+        >
           <SearchIcon fontSize="small" />
         </IconButton>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Search..."
-          inputProps={{ 'aria-label': 'search google maps' }}
+          placeholder={translate('common.search')}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
         <IconButton
