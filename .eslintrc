@@ -10,6 +10,7 @@
           ["@providers", "./src/providers"],
           ["@context", "./src/context"],
           ["@container", "./src/container"],
+          ["@components", "./src/components"],
           ["@components/buttons", "./src/components/buttons"],
           ["@components/commons", "./src/components/commons"],
           ["@components/customs", "./src/components/customs"],

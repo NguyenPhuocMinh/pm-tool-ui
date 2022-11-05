@@ -49,6 +49,7 @@ module.exports = {
       '@providers': path.resolve(__dirname, './src/providers'),
       '@context': path.resolve(__dirname, './src/context'),
       '@container': path.resolve(__dirname, './src/container'),
+      '@components': path.resolve(__dirname, './src/components'),
       '@components/buttons': path.resolve(__dirname, './src/components/buttons'),
       '@components/commons': path.resolve(__dirname, './src/components/commons'),
       '@components/customs': path.resolve(__dirname, './src/components/customs'),
