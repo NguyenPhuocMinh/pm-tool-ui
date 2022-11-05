@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
 import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Card, CardContent, CardActions, Button } from '@mui/material';
+import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { dateTimeFormat } from '@utils';
-import { LoadingRegular } from '@components/regulars';
 import { TextInput, SwitchInput } from '@components/inputs';
+import { ButtonSubmit, ButtonCancel } from '@components/buttons';
 import { updatePermissionByIdAction } from '@reduxStore/actions';
 import { validatePermission } from '@validators';
 
@@ -120,42 +120,14 @@ const DetailTab = () => {
           </Box>
         </CardContent>
         <CardActions>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              background: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="contained"
-            type="submit"
+          <ButtonSubmit
+            color={color}
             onClick={handleSubmit}
-            disabled={!isValid || !dirty || loading}
-          >
-            {loading && <LoadingRegular />}
-            {translate('common.button.save')}
-          </Button>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              color: (theme) => color?.hex ?? theme.palette.primary.main,
-              borderColor: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="outlined"
-            onClick={handleCancel}
-          >
-            {translate('common.button.cancel')}
-          </Button>
+            loading={loading}
+            isValid={isValid}
+            dirty={dirty}
+          />
+          <ButtonCancel color={color} onClick={handleCancel} />
         </CardActions>
       </Card>
     </Box>

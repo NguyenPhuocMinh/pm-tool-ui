@@ -1,26 +1,16 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { useTranslate } from '@hooks';
 import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Box,
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Button
-} from '@mui/material';
+import { Box, Card, CardHeader, CardContent, CardActions } from '@mui/material';
 import { addRolesToPermissionAction } from '@reduxStore/actions';
 import { TransferListCommon, TypoCommon } from '@components/commons';
-import { LoadingRegular } from '@components/regulars';
+import { ButtonSubmit, ButtonCancel } from '@components/buttons';
 
 const SetRolesToPerTab = () => {
   // hooks
-  const { translate } = useTranslate();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const { records, loading, color } = useSelector((state) => {
@@ -60,7 +50,11 @@ const SetRolesToPerTab = () => {
         <CardHeader
           subheader={
             <Box display="flex" alignItems="center">
-              <TypoCommon label="resources.permissions.title.tabs.roles" />
+              <TypoCommon
+                variant="body2"
+                fontWeight={600}
+                label="resources.permissions.title.tabs.roles"
+              />
             </Box>
           }
         />
@@ -84,41 +78,14 @@ const SetRolesToPerTab = () => {
           </Box>
         </CardContent>
         <CardActions>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              background: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="contained"
-            type="submit"
+          <ButtonSubmit
+            color={color}
             onClick={handleSubmit}
-            disabled={!isValid || !dirty || loading}
-          >
-            {loading && <LoadingRegular />}
-            {translate('common.button.save')}
-          </Button>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              borderColor: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="outlined"
-            onClick={handleCancel}
-          >
-            {translate('common.button.cancel')}
-          </Button>
+            loading={loading}
+            isValid={isValid}
+            dirty={dirty}
+          />
+          <ButtonCancel color={color} onClick={handleCancel} />
         </CardActions>
       </Card>
     </Box>

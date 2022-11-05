@@ -1,10 +1,8 @@
-import { Box, Card, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useTranslate } from '@hooks';
+import { Box, Card } from '@mui/material';
+import { TypoCommon } from '@components/commons';
 
 const Welcome = () => {
-  const { translate } = useTranslate();
-
   const _ = useSelector((state) => state);
 
   return (
@@ -19,18 +17,19 @@ const Welcome = () => {
     >
       <Box display="flex">
         <Box flex="1">
-          <Typography variant="h5" color="inherit" component="h2" gutterBottom>
-            {translate('resources.dashboards.welcome.title')}
-          </Typography>
+          <TypoCommon
+            variant="h5"
+            component="h2"
+            label="resources.dashboards.welcome.title"
+            gutterBottom={true}
+          />
           <Box maxWidth="40em">
-            <Typography
+            <TypoCommon
               variant="body1"
-              color="inherit"
               component="p"
-              gutterBottom
-            >
-              {translate('resources.dashboards.welcome.subtitle')}
-            </Typography>
+              label="resources.dashboards.welcome.subtitle"
+              gutterBottom={true}
+            />
           </Box>
         </Box>
       </Box>

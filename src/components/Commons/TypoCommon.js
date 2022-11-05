@@ -1,12 +1,22 @@
 import { useTranslate } from '@hooks';
 import { Typography } from '@mui/material';
 
-const TypoCommon = ({ label, sx }) => {
+const TypoCommon = ({
+  sx,
+  label,
+  variant,
+  component,
+  fontWeight,
+  gutterBottom
+}) => {
   const { translate } = useTranslate();
+
   return (
     <Typography
-      variant="body2"
-      fontWeight={600}
+      variant={variant}
+      component={component}
+      fontWeight={fontWeight}
+      gutterBottom={gutterBottom}
       sx={{ fontFamily: 'Josefin Sans', ...sx }}
     >
       {translate(label)}
