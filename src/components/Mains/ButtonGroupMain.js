@@ -77,7 +77,11 @@ const ButtonGroupMain = () => {
         value="light"
       >
         <WbSunnyIcon className={classes.rootIcon} />
-        <TypoCommon label="toolbar.setting.themes.light" />
+        <TypoCommon
+          fontWeight={600}
+          variant="body2"
+          label="toolbar.setting.themes.light"
+        />
       </ToggleButton>
       <ToggleButton
         sx={{
@@ -92,7 +96,11 @@ const ButtonGroupMain = () => {
         }}
       >
         <NightsStayIcon className={classes.rootIcon} />
-        <TypoCommon label="toolbar.setting.themes.dark" />
+        <TypoCommon
+          fontWeight={600}
+          variant="body2"
+          label="toolbar.setting.themes.dark"
+        />
       </ToggleButton>
     </ToggleButtonGroup>
   );
