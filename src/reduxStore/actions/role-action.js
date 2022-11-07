@@ -8,12 +8,13 @@ import {
   updateRoleByIdService,
   deleteRoleByIdService,
   getUsersInRoleByRoleNameService,
-  getPermissionsInRoleByRoleNameService
+  getPermissionsInRoleByRoleIDService
 } from '@services';
-import { showNotification } from '@reduxStore/actions';
+import { showNotification, hidePopup } from '@reduxStore/actions';
 import {
   CALL_REQUEST_ROLE,
   END_REQUEST_ROLE,
+  RESET_RECORDS_ROLE,
   GET_ALL_ROLE,
   CREATE_ROLE,
   GET_ID_ROLE,
@@ -21,6 +22,10 @@ import {
   GET_ALL_USER_IN_ROLE,
   GET_ALL_PERMISSION_IN_ROLE
 } from '@reduxStore/types';
+
+export const resetRecordsRole = () => ({
+  type: RESET_RECORDS_ROLE
+});
 
 /**
  * @description GET ALL ROLE ACTION
@@ -40,10 +45,14 @@ export const getAllRoleAction =
         dispatch({
           type: GET_ALL_ROLE,
           payload: {
-            data: result.response,
+            data: result.data,
             total: result.total
           }
         });
+        dispatch({
+          type: END_REQUEST_ROLE
+        });
+      } else {
         dispatch({
           type: END_REQUEST_ROLE
         });
@@ -71,21 +80,23 @@ export const createRoleAction =
         type: CALL_REQUEST_ROLE
       });
 
-      const { result } = await createRoleService(values);
+      const { result, message } = await createRoleService(values);
 
       if (!isEmpty(result)) {
-        const roleID = get(result, 'response.id');
+        const roleID = get(result, 'data.id');
         dispatch({
           type: CREATE_ROLE,
-          payload: result
+          payload: result.data
         });
-        dispatch(
-          showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
-        );
+        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
         dispatch({
           type: END_REQUEST_ROLE
         });
         navigate(`/roles/edit/${roleID}`);
+      } else {
+        dispatch({
+          type: END_REQUEST_ROLE
+        });
       }
     } catch (err) {
       dispatch({
@@ -106,15 +117,17 @@ export const getRoleByIdAction = (roleID) => async (dispatch) => {
       type: CALL_REQUEST_ROLE
     });
 
-    const data = await getRoleByIdService(roleID);
+    const { result } = await getRoleByIdService(roleID);
 
-    if (!isEmpty(data)) {
+    if (!isEmpty(result)) {
       dispatch({
         type: GET_ID_ROLE,
-        payload: {
-          record: data
-        }
+        payload: result.data
       });
+      dispatch({
+        type: END_REQUEST_ROLE
+      });
+    } else {
       dispatch({
         type: END_REQUEST_ROLE
       });
@@ -146,12 +159,16 @@ export const updateRoleByIdAction =
       if (!isEmpty(result)) {
         dispatch({
           type: EDIT_ROLE,
-          payload: result.response
+          payload: result.data
         });
         dispatch({
           type: END_REQUEST_ROLE
         });
         dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+      } else {
+        dispatch({
+          type: END_REQUEST_ROLE
+        });
       }
     } catch (err) {
       dispatch({
@@ -179,6 +196,7 @@ export const deleteRoleByIdAction = (roleID, query) => async (dispatch) => {
         showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
       );
       dispatch(getAllRoleAction(query));
+      dispatch(hidePopup());
     } else {
       dispatch({
         type: END_REQUEST_ROLE
@@ -211,10 +229,14 @@ export const getUsersByRoleNameAction =
         dispatch({
           type: GET_ALL_USER_IN_ROLE,
           payload: {
-            data: result.response,
+            data: result.data,
             total: result.total
           }
         });
+        dispatch({
+          type: END_REQUEST_ROLE
+        });
+      } else {
         dispatch({
           type: END_REQUEST_ROLE
         });
@@ -230,18 +252,18 @@ export const getUsersByRoleNameAction =
 
 /**
  * @description GET ALL PERMISSION BY ROLE NAME ACTION
- * @param {*} roleName
+ * @param {*} roleID
  * @param {*} query
  */
 export const getPermissionsByRoleNameAction =
-  (roleName, query) => async (dispatch) => {
+  (roleID, query) => async (dispatch) => {
     try {
       dispatch({
         type: CALL_REQUEST_ROLE
       });
 
-      const { result } = await getPermissionsInRoleByRoleNameService(
-        roleName,
+      const { result } = await getPermissionsInRoleByRoleIDService(
+        roleID,
         query
       );
 
@@ -249,10 +271,14 @@ export const getPermissionsByRoleNameAction =
         dispatch({
           type: GET_ALL_PERMISSION_IN_ROLE,
           payload: {
-            data: result.response,
+            data: result.data,
             total: result.total
           }
         });
+        dispatch({
+          type: END_REQUEST_ROLE
+        });
+      } else {
         dispatch({
           type: END_REQUEST_ROLE
         });

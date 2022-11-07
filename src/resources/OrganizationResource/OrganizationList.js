@@ -13,14 +13,10 @@ import { NoRowsCommon, PopupCommon } from '@components/commons';
 import { SearchInput } from '@components/inputs';
 import { ButtonCreate } from '@components/buttons';
 import constants from '@constants';
-import {
-  GRID_EN_LOCALE_TEXT,
-  GRID_VN_LOCALE_TEXT
-} from '@i18nStore/localeTexts';
 import { other, dateTimeFormat } from '@utils';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
@@ -248,8 +244,8 @@ const OrganizationList = () => {
           <DataGrid
             localeText={
               i18n.language === constants.LANGUAGES.EN
-                ? GRID_EN_LOCALE_TEXT
-                : GRID_VN_LOCALE_TEXT
+                ? enUS.components.MuiDataGrid.defaultProps.localeText
+                : viVN.components.MuiDataGrid.defaultProps.localeText
             }
             loading={loading}
             rows={data}

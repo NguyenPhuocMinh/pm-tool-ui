@@ -13,11 +13,19 @@ import { showNotification, hidePopup } from '@reduxStore/actions';
 import {
   CALL_REQUEST_PERMISSION,
   END_REQUEST_PERMISSION,
+  RESET_RECORDS_PERMISSION,
   GET_ALL_PERMISSION,
   CREATE_PERMISSION,
   GET_ID_PERMISSION,
   EDIT_PERMISSION
 } from '@reduxStore/types';
+
+/**
+ * @description RESET RECORDS PERMISSION
+ */
+export const resetRecordsPermission = () => ({
+  type: RESET_RECORDS_PERMISSION
+});
 
 /**
  * @description GET ALL PERMISSION
@@ -212,7 +220,7 @@ export const addRolesToPermissionAction =
         type: CALL_REQUEST_PERMISSION
       });
 
-      const { result } = await addRolesToPermissionService(
+      const { result, message } = await addRolesToPermissionService(
         permissionID,
         records
       );
@@ -225,9 +233,7 @@ export const addRolesToPermissionAction =
         dispatch({
           type: END_REQUEST_PERMISSION
         });
-        dispatch(
-          showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
-        );
+        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
       } else {
         dispatch({
           type: END_REQUEST_PERMISSION

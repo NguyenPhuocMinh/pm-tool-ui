@@ -1,4 +1,3 @@
-import { isEmpty, get } from 'lodash';
 import { httpClientRestProvider } from './http-client';
 
 const basePath = '/roles';
@@ -41,7 +40,7 @@ export const getRoleByIdService = async (roleID) => {
   try {
     const { data } = await httpClientRestProvider.get(`${basePath}/${roleID}`);
 
-    return !isEmpty(data) ? get(data, 'result.response') : {};
+    return data;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -50,13 +49,13 @@ export const getRoleByIdService = async (roleID) => {
 /**
  * @description UPDATE ROLE BY ID SERVICE
  * @param {*} roleID
- * @param {*} values
+ * @param {*} records
  */
-export const updateRoleByIdService = async (roleID, values) => {
+export const updateRoleByIdService = async (roleID, records) => {
   try {
-    const { data } = await httpClientRestProvider.put(
+    const { data } = await httpClientRestProvider.patch(
       `${basePath}/${roleID}`,
-      values
+      records
     );
 
     return data;
@@ -103,16 +102,13 @@ export const getUsersInRoleByRoleNameService = async (roleName, query) => {
 
 /**
  * @description GET ALL PERMISSION IN ROLE BY ROLE NAME SERVICE
- * @param {*} roleName
+ * @param {*} roleID
  * @param {*} query
  */
-export const getPermissionsInRoleByRoleNameService = async (
-  roleName,
-  query
-) => {
+export const getPermissionsInRoleByRoleIDService = async (roleID, query) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      `${basePath}/${roleName}/permissions`,
+      `${basePath}/${roleID}/permissions`,
       {
         params: query
       }

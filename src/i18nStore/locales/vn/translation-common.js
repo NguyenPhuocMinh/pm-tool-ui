@@ -22,6 +22,12 @@ const translationCommon = {
     titleLeft: 'Tiêu đề trái',
     titleRight: 'Tiêu đề phải',
     subHeader: '{{numberItem}} đã chọn'
+  },
+  notifications: {
+    errors: {
+      orchestratorHandlerNotFound: 'Không tìm thấy trình xử lý dàn nhạc!',
+      schemaNotFound: 'Không tìm thấy lược đồ!'
+    }
   }
 };
 

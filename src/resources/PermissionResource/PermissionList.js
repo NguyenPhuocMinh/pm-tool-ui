@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
 import { get, isEmpty } from 'lodash';
 import {
+  resetRecordsPermission,
   getAllPermissionAction,
   deletePermissionByIdAction,
   showPopup
@@ -19,7 +20,7 @@ import { ButtonCreate } from '@components/buttons';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import constants from '@constants';
 import { other, dateTimeFormat } from '@utils';
-import { validateVerifyPermissionToDelete } from '@validators';
+import { validatorVerifyToDelete } from '@validators';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -77,6 +78,10 @@ const PermissionList = () => {
     dispatch(getAllPermissionAction(queryOptions));
   }, [dispatch, queryOptions]);
 
+  useEffect(() => {
+    dispatch(resetRecordsPermission());
+  }, []);
+
   const { data, total, loading } = useSelector((state) => {
     return {
       data: get(state, 'permission.data', []),
@@ -100,8 +105,9 @@ const PermissionList = () => {
           title: 'resources.permissions.popup.title',
           content: 'resources.permissions.popup.content',
           verifyName: 'resources.permissions.popup.verifyName',
-          validator: () => validateVerifyPermissionToDelete(translate, name),
+          validator: () => validatorVerifyToDelete(translate, name),
           onSubmit: () => dispatch(deletePermissionByIdAction(id, query)),
+          isLoading: loading,
           options: {
             permissionName: name
           }
@@ -206,15 +212,17 @@ const PermissionList = () => {
           justifyContent: 'space-between'
         }}
       >
-        <SearchInput
-          label="common.search"
-          id="search"
-          source="search"
-          size="small"
-          placeholder="resources.permissions.search"
-          className={classes.search}
-          {...formProps}
-        />
+        <Paper elevation={1}>
+          <SearchInput
+            label="common.search"
+            id="search"
+            source="search"
+            size="small"
+            placeholder="resources.permissions.search"
+            className={classes.search}
+            {...formProps}
+          />
+        </Paper>
         <Box
           sx={{
             display: {

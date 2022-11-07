@@ -5,24 +5,22 @@ import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
 import {
+  resetRecordsRole,
   getAllRoleAction,
   deleteRoleByIdAction,
   showPopup
 } from '@reduxStore/actions';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { NoRowsCommon, PopupCommon } from '@components/commons';
+import { NoRowsCommon, LoadingCommon, PopupCommon } from '@components/commons';
 import { ButtonCreate } from '@components/buttons';
 import { SearchInput } from '@components/inputs';
 import constants from '@constants';
-import {
-  GRID_EN_LOCALE_TEXT,
-  GRID_VN_LOCALE_TEXT
-} from '@i18nStore/localeTexts';
-import { other } from '@utils';
+import { other, dateTimeFormat } from '@utils';
+import { validatorVerifyToDelete } from '@validators';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -34,7 +32,7 @@ const useStyles = makeStyles((_) => ({
     }
   },
   search: {
-    width: 300
+    width: 256
   }
 }));
 
@@ -77,6 +75,10 @@ const RoleList = () => {
     dispatch(getAllRoleAction(queryOptions));
   }, [dispatch, queryOptions]);
 
+  useEffect(() => {
+    dispatch(resetRecordsRole());
+  }, []);
+
   const { data, total, loading } = useSelector((state) => {
     return {
       data: get(state, 'role.data', []),
@@ -100,7 +102,9 @@ const RoleList = () => {
           title: 'resources.roles.popup.title',
           content: 'resources.roles.popup.content',
           verifyName: 'resources.roles.popup.verifyName',
+          validator: () => validatorVerifyToDelete(translate, name),
           onSubmit: () => dispatch(deleteRoleByIdAction(id, query)),
+          isLoading: loading,
           options: {
             roleName: name
           }
@@ -129,6 +133,26 @@ const RoleList = () => {
         filterable: false,
         sortable: false,
         valueFormatter: ({ value }) => (!isEmpty(value) ? value : '-')
+      },
+      {
+        field: 'createdAt',
+        headerName: translate('resources.permissions.fields.createdAt'),
+        type: 'dateTime',
+        flex: 0.5,
+        resizable: false,
+        filterable: false,
+        hideMenu: false,
+        valueGetter: ({ value }) => value && dateTimeFormat(value)
+      },
+      {
+        field: 'updatedAt',
+        headerName: translate('resources.permissions.fields.updatedAt'),
+        type: 'dateTime',
+        flex: 0.5,
+        resizable: false,
+        filterable: false,
+        hideMenu: false,
+        valueGetter: ({ value }) => value && dateTimeFormat(value)
       },
       {
         field: 'actions',
@@ -175,15 +199,17 @@ const RoleList = () => {
           justifyContent: 'space-between'
         }}
       >
-        <SearchInput
-          label="common.search"
-          id="search"
-          source="search"
-          size="small"
-          placeholder="resources.roles.search"
-          className={classes.search}
-          {...formProps}
-        />
+        <Paper elevation={1}>
+          <SearchInput
+            label="common.search"
+            id="search"
+            source="search"
+            size="small"
+            placeholder="resources.roles.search"
+            className={classes.search}
+            {...formProps}
+          />
+        </Paper>
         <Box
           sx={{
             display: {
@@ -207,8 +233,8 @@ const RoleList = () => {
           <DataGrid
             localeText={
               i18n.language === constants.LANGUAGES.EN
-                ? GRID_EN_LOCALE_TEXT
-                : GRID_VN_LOCALE_TEXT
+                ? enUS.components.MuiDataGrid.defaultProps.localeText
+                : viVN.components.MuiDataGrid.defaultProps.localeText
             }
             loading={loading}
             rows={data}
@@ -223,7 +249,8 @@ const RoleList = () => {
             paginationMode="server"
             disableColumnMenu
             components={{
-              NoRowsOverlay: NoRowsCommon
+              NoRowsOverlay: NoRowsCommon,
+              LoadingOverlay: LoadingCommon
             }}
             classes={{
               root: classes.dataGridRoot

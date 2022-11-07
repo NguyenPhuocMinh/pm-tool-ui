@@ -2,7 +2,6 @@ import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslate } from '@hooks';
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -16,6 +15,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextInput } from '@components/inputs';
+import { ButtonConfirm, ButtonCancel } from '@components/buttons';
 import { hidePopup } from '@reduxStore/actions';
 import { useFormik } from 'formik';
 import { isEmpty, get } from 'lodash';
@@ -76,6 +76,7 @@ const PopupCommon = () => {
     verifyName,
     validator,
     onSubmit,
+    isLoading,
     options
   } = popup;
 
@@ -83,13 +84,21 @@ const PopupCommon = () => {
     verify: ''
   };
 
-  const { isValid, dirty, setFieldTouched, ...formProps } = useFormik({
+  const {
+    isValid,
+    dirty,
+    setFieldTouched,
+    setFieldValue,
+    handleReset,
+    ...formProps
+  } = useFormik({
     initialValues,
     validationSchema: validator
   });
 
   const handleClose = () => {
     dispatch(hidePopup());
+    setFieldValue('verify', '');
     setFieldTouched('verify', false);
   };
 
@@ -139,40 +148,15 @@ const PopupCommon = () => {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button
-          sx={{
-            width: 'auto',
-            minWidth: 150,
-            borderRadius: 12,
-            textTransform: 'capitalize',
-            ':hover': {
-              background: 'none'
-            },
-            color: (theme) => color?.hex ?? theme.palette.primary.main,
-            borderColor: (theme) => color?.hex ?? theme.palette.primary.main
-          }}
-          variant="outlined"
-          onClick={handleClose}
-        >
-          {translate('common.button.cancel')}
-        </Button>
-        <Button
-          sx={{
-            width: 'auto',
-            minWidth: 150,
-            borderRadius: 12,
-            textTransform: 'capitalize',
-            ':hover': {
-              background: 'none'
-            },
-            background: (theme) => color?.hex ?? theme.palette.primary.main
-          }}
-          disabled={!isValid || !dirty}
-          variant="contained"
+        <ButtonCancel color={color} onClick={handleClose} />
+        <ButtonConfirm
+          color={color}
           onClick={onSubmit}
-        >
-          {translate('common.button.confirm')}
-        </Button>
+          onReset={handleReset}
+          loading={isLoading}
+          isValid={isValid}
+          dirty={dirty}
+        />
       </DialogActions>
     </Dialog>
   );

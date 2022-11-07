@@ -10,7 +10,7 @@ import { dateTimeFormat } from '@utils';
 import { TextInput, SwitchInput } from '@components/inputs';
 import { ButtonSubmit, ButtonCancel } from '@components/buttons';
 import { updatePermissionByIdAction } from '@reduxStore/actions';
-import { validatePermission } from '@validators';
+import { validatorPermission } from '@validators';
 
 const useStyles = makeStyles({
   input: {
@@ -59,7 +59,7 @@ const DetailTab = () => {
   const { handleSubmit, isValid, dirty, ...formProps } = useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema: validatePermission(translate),
+    validationSchema: validatorPermission(translate),
     onSubmit: (values) => handleUpdate(records.id, values)
   });
 
