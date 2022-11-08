@@ -23,7 +23,7 @@ const translationPermission = {
     title: 'Delete Permission',
     content:
       'Are you sure you want to permanently delete the permission {{permissionName}}?',
-    verifyName: 'Please input permission {{permissionName}} to confirm'
+    verifyName: 'Please input permission {{permissionName}}'
   },
   transferList: {
     roles: {
@@ -40,7 +40,8 @@ const translationPermission = {
     success: {
       create: 'Create permission successfully!',
       edit: 'Edit permission successfully!',
-      delete: 'Delete permission successfully!'
+      delete: 'Delete permission successfully!',
+      addRoles: 'Add role to permission successfully!'
     }
   }
 };

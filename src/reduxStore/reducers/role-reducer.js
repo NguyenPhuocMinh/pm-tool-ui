@@ -1,6 +1,7 @@
 import {
   CALL_REQUEST_ROLE,
   END_REQUEST_ROLE,
+  RESET_RECORDS_ROLE,
   GET_ALL_ROLE,
   CREATE_ROLE,
   GET_ID_ROLE,
@@ -16,10 +17,8 @@ const initialState = {
   loading: false,
   dataUsersInRole: [],
   totalUsersInRole: 0,
-  loadingUsersInRole: false,
   dataPermissionsInRole: [],
-  totalPermissionsInRole: 0,
-  loadingPermissionsInRole: false
+  totalPermissionsInRole: 0
 };
 
 const roleReducer = (state = initialState, action) => {
@@ -36,6 +35,8 @@ const roleReducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
+    case RESET_RECORDS_ROLE:
+      return initialState;
     case GET_ALL_ROLE:
       return {
         ...state,
@@ -52,7 +53,7 @@ const roleReducer = (state = initialState, action) => {
     case GET_ID_ROLE:
       return {
         ...state,
-        records: payload.record,
+        records: payload,
         loading: false
       };
     case EDIT_ROLE:
@@ -66,14 +67,14 @@ const roleReducer = (state = initialState, action) => {
         ...state,
         dataUsersInRole: payload.data,
         totalUsersInRole: payload.total,
-        loadingUsersInRole: false
+        loading: false
       };
     case GET_ALL_PERMISSION_IN_ROLE:
       return {
         ...state,
         dataPermissionsInRole: payload.data,
         totalPermissionsInRole: payload.total,
-        loadingPermissionsInRole: false
+        loading: false
       };
     default:
       return state;

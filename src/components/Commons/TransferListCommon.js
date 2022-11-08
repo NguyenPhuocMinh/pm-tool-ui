@@ -96,7 +96,7 @@ const TransferListCommon = ({
     return (
       <Card>
         <CardHeader
-          sx={{ px: 2, py: 1 }}
+          sx={{ px: 2, py: 1, fontFamily: 'Josefin Sans' }}
           avatar={
             <Checkbox
               onClick={handleToggleAll(items)}
@@ -138,6 +138,9 @@ const TransferListCommon = ({
                 role="listitem"
                 button
                 onClick={handleToggle(value)}
+                sx={{
+                  fontFamily: 'Josefin Sans'
+                }}
               >
                 <ListItemIcon>
                   <Checkbox
@@ -149,7 +152,13 @@ const TransferListCommon = ({
                     }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={value.name} />
+                <ListItemText
+                  sx={{
+                    fontFamily: 'Josefin Sans'
+                  }}
+                  id={labelId}
+                  primary={value.name}
+                />
               </ListItem>
             );
           })}

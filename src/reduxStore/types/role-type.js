@@ -1,5 +1,6 @@
 export const CALL_REQUEST_ROLE = 'CALL_REQUEST_ROLE';
 export const END_REQUEST_ROLE = 'END_REQUEST_ROLE';
+export const RESET_RECORDS_ROLE = 'RESET_RECORDS_ROLE';
 
 export const GET_ALL_ROLE = 'GET_ALL_ROLE';
 export const CREATE_ROLE = 'CREATE_ROLE';

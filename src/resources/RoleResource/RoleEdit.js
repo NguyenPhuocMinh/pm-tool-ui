@@ -2,18 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRoleByIdAction } from '@reduxStore/actions';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  Box,
-  Tab,
-  Tabs,
-  Divider,
-  Typography
-} from '@mui/material';
-import { useTranslate } from '@hooks';
-import { TabPanelCommon } from '@components/commons';
+import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
+import { TabsCommon, TabPanelCommon, TypoCommon } from '@components/commons';
 import { get } from 'lodash';
 import { tabs } from './Utils';
 // tabs
@@ -23,7 +13,6 @@ import PerInRoleTab from './RoleTabs/PerInRoleTab';
 
 const RoleEdit = () => {
   const params = useParams();
-  const { translate } = useTranslate();
   const dispatch = useDispatch();
 
   const [tabName, setTabName] = useState(tabs[0].label);
@@ -54,39 +43,34 @@ const RoleEdit = () => {
           }}
           subheader={
             <Box display="flex" alignItems="center">
-              <Typography variant="body2" fontWeight={600}>
-                {translate('resources.roles.title.edit')}
-              </Typography>
+              <TypoCommon
+                variant="body2"
+                fontWeight={600}
+                label="resources.roles.title.edit"
+              />
             </Box>
           }
         />
         <Divider sx={{ width: '100%' }} />
         <CardContent>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={tabName} onChange={handleChange}>
-              {tabs.map((tab) => {
-                return (
-                  <Tab
-                    sx={{
-                      textTransform: 'capitalize'
-                    }}
-                    label={translate(`resources.roles.tabs.${tab.label}`)}
-                    value={tab.label}
-                    key={tab.id}
-                  />
-                );
-              })}
-            </Tabs>
+            <TabsCommon
+              tabs={tabs}
+              tabName={tabName}
+              onChange={handleChange}
+              resourceLabel="resources.roles.tabs"
+              color={color}
+            />
           </Box>
           {tabs.map((tab) => {
             return (
               <TabPanelCommon value={tabName} index={tab.label} key={tab.id}>
                 {tabName === tabs[0].label ? <DetailTab /> : null}
                 {tabName === tabs[1].label ? (
-                  <UserInRoleTab roleName={records?.name} />
+                  <UserInRoleTab roleID={records?.id} />
                 ) : null}
-                {tabName === tabs[1].label ? (
-                  <PerInRoleTab roleName={records?.name} />
+                {tabName === tabs[2].label ? (
+                  <PerInRoleTab roleID={records?.id} />
                 ) : null}
               </TabPanelCommon>
             );

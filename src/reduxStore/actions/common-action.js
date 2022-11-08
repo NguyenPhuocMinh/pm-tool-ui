@@ -55,6 +55,7 @@ export const showPopup = ({
   verifyName,
   validator,
   onSubmit,
+  isLoading,
   options
 }) => ({
   type: SHOW_POPUP,
@@ -65,6 +66,7 @@ export const showPopup = ({
     verifyName,
     validator,
     onSubmit,
+    isLoading,
     options
   }
 });

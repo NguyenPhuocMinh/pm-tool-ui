@@ -1,7 +1,10 @@
 const translationRole = {
   title: {
     create: 'Create Role',
-    edit: 'Edit Role'
+    edit: 'Edit Role',
+    tabs: {
+      roles: 'Set Roles'
+    }
   },
   fields: {
     name: 'Role Name',
@@ -9,6 +12,11 @@ const translationRole = {
     activated: 'Activated',
     createdAt: 'CreatedAt',
     updatedAt: 'UpdatedAt'
+  },
+  tabs: {
+    details: 'Details',
+    usersInRole: 'Users In Role',
+    permissionsInRole: 'Permissions In Role'
   },
   search: 'Search by name',
   popup: {
@@ -24,7 +32,9 @@ const translationRole = {
       requiredName: 'Role name is required'
     },
     success: {
-      create: 'Create role successfully!'
+      create: 'Create role successfully!',
+      edit: 'Edit role successfully!',
+      delete: 'Delete role successfully!'
     }
   }
 };

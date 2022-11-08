@@ -7,12 +7,8 @@ import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { getUsersByRoleNameAction } from '@reduxStore/actions';
 import { NoRowsCommon } from '@components/commons';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {
-  GRID_EN_LOCALE_TEXT,
-  GRID_VN_LOCALE_TEXT
-} from '@i18nStore/localeTexts';
 import { other } from '@utils';
 import constants from '@constants';
 
@@ -82,7 +78,7 @@ const UserInRoleTab = (props) => {
     return [
       {
         field: 'userName',
-        headerName: translate('resources.roles.fields.users.userName'),
+        headerName: translate('resources.users.fields.userName'),
         flex: 0.5,
         resizable: false,
         filterable: false,
@@ -91,7 +87,7 @@ const UserInRoleTab = (props) => {
       },
       {
         field: 'lastName',
-        headerName: translate('resources.roles.fields.users.lastName'),
+        headerName: translate('resources.users.fields.lastName'),
         flex: 1,
         resizable: false,
         filterable: false,
@@ -100,7 +96,7 @@ const UserInRoleTab = (props) => {
       },
       {
         field: 'firstName',
-        headerName: translate('resources.roles.fields.users.firstName'),
+        headerName: translate('resources.users.fields.firstName'),
         flex: 1,
         resizable: false,
         filterable: false,
@@ -109,7 +105,7 @@ const UserInRoleTab = (props) => {
       },
       {
         field: 'email',
-        headerName: translate('resources.roles.fields.users.email'),
+        headerName: translate('resources.users.fields.email'),
         flex: 1,
         resizable: false,
         filterable: false,
@@ -119,7 +115,7 @@ const UserInRoleTab = (props) => {
       {
         field: 'actions',
         type: 'actions',
-        headerName: translate('actions.title'),
+        headerName: translate('common.actions.title'),
         flex: 0.5,
         getActions: (params) => {
           return [
@@ -142,8 +138,8 @@ const UserInRoleTab = (props) => {
           <DataGrid
             localeText={
               i18n.language === constants.LANGUAGES.EN
-                ? GRID_EN_LOCALE_TEXT
-                : GRID_VN_LOCALE_TEXT
+                ? enUS.components.MuiDataGrid.defaultProps.localeText
+                : viVN.components.MuiDataGrid.defaultProps.localeText
             }
             loading={loading}
             rows={data}

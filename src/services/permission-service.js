@@ -90,7 +90,7 @@ export const deletePermissionByIdService = async (perID) => {
 export const addRolesToPermissionService = async (perID, records) => {
   try {
     const { data } = await httpClientRestProvider.patch(
-      `${bastPath}/${perID}/assign-roles`,
+      `${bastPath}/${perID}/add-roles`,
       records
     );
 

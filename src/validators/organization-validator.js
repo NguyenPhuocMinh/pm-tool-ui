@@ -11,15 +11,3 @@ export const validatorOrganizationUpdate = (translate) => {
     name: string().required(translate('validator.required'))
   });
 };
-
-export const validatorOrganizationDelete = (translate) => {
-  return object().shape({
-    verify: string().required(translate('validator.required'))
-  });
-};
-
-export const validatorOrganizationProject = (translate) => {
-  return object().shape({
-    verify: string().required(translate('validator.required'))
-  });
-};

@@ -23,7 +23,7 @@ const translationPermission = {
     title: 'Xóa quyền',
     content:
       'Bạn có chắc chắn muốn xóa vĩnh viễn quyền {{permissionName}} này không?',
-    verifyName: 'Vui lòng nhập {{permissionName}} để xác nhận'
+    verifyName: 'Vui lòng nhập {{permissionName}}'
   },
   transferList: {
     roles: {
@@ -40,7 +40,8 @@ const translationPermission = {
     success: {
       create: 'Tạo quyền thành công!',
       edit: 'Chỉnh sửa quyền thành công!',
-      delete: 'Xoá quyền thành công!'
+      delete: 'Xoá quyền thành công!',
+      addRoles: 'Thêm vai trò vào quyền thành công!'
     }
   }
 };

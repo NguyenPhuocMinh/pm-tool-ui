@@ -10,6 +10,11 @@ const translationRole = {
     createdAt: 'Ngày tạo',
     updatedAt: 'Ngày Cập nhật'
   },
+  tabs: {
+    details: 'Chi tiết',
+    usersInRole: 'Người dùng có vai trò',
+    permissionsInRole: 'Quyền trong vai trò'
+  },
   search: 'Tìm kiếm theo tên',
   popup: {
     title: 'Xóa vai trò',
@@ -23,7 +28,9 @@ const translationRole = {
       requiredName: 'Tên vai trò bắt buộc'
     },
     success: {
-      create: 'Tạo vai trò thành công!'
+      create: 'Tạo vai trò thành công!',
+      edit: 'Chỉnh sửa vai trò thành công!',
+      delete: 'Xoá vai trò thành công!'
     }
   }
 };

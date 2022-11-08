@@ -6,14 +6,10 @@ import { get, isEmpty } from 'lodash';
 import { useTranslate } from '@hooks';
 import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { NoRowsCommon } from '@components/commons';
 import constants from '@constants';
-import {
-  GRID_EN_LOCALE_TEXT,
-  GRID_VN_LOCALE_TEXT
-} from '@i18nStore/localeTexts';
 import { other } from '@utils';
 
 const useStyles = makeStyles({
@@ -31,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 const PerInRoleTab = (props) => {
-  const { roleName } = props;
+  const { roleID } = props;
   // hooks
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
@@ -59,20 +55,20 @@ const PerInRoleTab = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getPermissionsByRoleNameAction(roleName, queryOptions));
-  }, [dispatch, roleName, queryOptions]);
+    dispatch(getPermissionsByRoleNameAction(roleID, queryOptions));
+  }, [dispatch, roleID, queryOptions]);
 
   const { data, total, loading } = useSelector((state) => {
     return {
       data: get(state, 'role.dataPermissionsInRole', []),
       total: get(state, 'role.totalPermissionsInRole', 0),
-      loading: get(state, 'role.loadingPermissionsInRole', false)
+      loading: get(state, 'role.loading', false)
     };
   });
 
   const handleEdit = useCallback(
     (id) => () => {
-      navigate(`/permission-edit/${id}`);
+      navigate(`/permissions/edit/${id}`);
     },
     [navigate]
   );
@@ -81,7 +77,7 @@ const PerInRoleTab = (props) => {
     return [
       {
         field: 'name',
-        headerName: translate('resources.roles.fields.permissions.name'),
+        headerName: translate('resources.permissions.fields.name'),
         flex: 0.5,
         resizable: false,
         filterable: false,
@@ -90,7 +86,7 @@ const PerInRoleTab = (props) => {
       },
       {
         field: 'description',
-        headerName: translate('resources.roles.fields.permissions.description'),
+        headerName: translate('resources.permissions.fields.description'),
         flex: 1,
         resizable: false,
         filterable: false,
@@ -123,8 +119,8 @@ const PerInRoleTab = (props) => {
           <DataGrid
             localeText={
               i18n.language === constants.LANGUAGES.EN
-                ? GRID_EN_LOCALE_TEXT
-                : GRID_VN_LOCALE_TEXT
+                ? enUS.components.MuiDataGrid.defaultProps.localeText
+                : viVN.components.MuiDataGrid.defaultProps.localeText
             }
             loading={loading}
             rows={data}

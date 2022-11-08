@@ -1,6 +1,7 @@
 import {
   CALL_REQUEST_PERMISSION,
   END_REQUEST_PERMISSION,
+  RESET_RECORDS_PERMISSION,
   GET_ALL_PERMISSION,
   CREATE_PERMISSION,
   GET_ID_PERMISSION,
@@ -28,6 +29,8 @@ const permissionReducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
+    case RESET_RECORDS_PERMISSION:
+      return initialState;
     case GET_ALL_PERMISSION:
       return {
         ...state,

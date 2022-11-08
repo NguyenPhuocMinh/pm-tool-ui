@@ -11,13 +11,12 @@ import {
   CardHeader,
   CardContent,
   CardActions,
-  Divider,
-  Button,
-  Typography
+  Divider
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { TypoCommon } from '@components/commons';
 import { TextInput, SwitchInput } from '@components/inputs';
-import { LoadingRegular } from '@components/regulars';
+import { ButtonSubmit, ButtonCancel } from '@components/buttons';
 import { validatorRole } from '@validators';
 
 const useStyles = makeStyles({
@@ -73,9 +72,11 @@ const RoleCreate = () => {
           }}
           subheader={
             <Box display="flex" alignItems="center">
-              <Typography variant="body2" fontWeight={600}>
-                {translate('resources.roles.title.create')}
-              </Typography>
+              <TypoCommon
+                variant="body2"
+                fontWeight={600}
+                label="resources.roles.title.create"
+              />
             </Box>
           }
         />
@@ -127,41 +128,14 @@ const RoleCreate = () => {
           </Box>
         </CardContent>
         <CardActions>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              background: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="contained"
-            type="submit"
+          <ButtonSubmit
+            color={color}
             onClick={handleSubmit}
-            disabled={!isValid || !dirty || loading}
-          >
-            {loading && <LoadingRegular />}
-            {translate('common.button.save')}
-          </Button>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              borderColor: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="outlined"
-            onClick={handleCancel}
-          >
-            {translate('common.button.cancel')}
-          </Button>
+            loading={loading}
+            isValid={isValid}
+            dirty={dirty}
+          />
+          <ButtonCancel color={color} onClick={handleCancel} />
         </CardActions>
       </Card>
     </Box>

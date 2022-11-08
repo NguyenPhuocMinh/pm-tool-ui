@@ -22,6 +22,12 @@ const translationCommon = {
     titleLeft: 'Title Left',
     titleRight: 'Title Right',
     subHeader: '{{numberItem}} selected'
+  },
+  notifications: {
+    errors: {
+      orchestratorHandlerNotFound: 'Orchestrator Handler Not Found!',
+      schemaNotFound: 'Schema Not Found!'
+    }
   }
 };
 

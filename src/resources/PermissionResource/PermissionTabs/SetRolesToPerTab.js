@@ -31,7 +31,12 @@ const SetRolesToPerTab = () => {
   }, [records]);
 
   const handleUpdate = (perID, values) => {
-    dispatch(addRolesToPermissionAction(perID, values));
+    dispatch(
+      addRolesToPermissionAction(perID, {
+        availableRoles: dataLeft,
+        ...values
+      })
+    );
   };
 
   const handleCancel = () => {
@@ -44,7 +49,7 @@ const SetRolesToPerTab = () => {
     onSubmit: (values) => handleUpdate(records.id, values)
   });
 
-  return (
+  return records?.activated ? (
     <Box sx={{ minWidth: 400 }}>
       <Card>
         <CardHeader
@@ -87,6 +92,18 @@ const SetRolesToPerTab = () => {
           />
           <ButtonCancel color={color} onClick={handleCancel} />
         </CardActions>
+      </Card>
+    </Box>
+  ) : (
+    <Box sx={{ minWidth: 400 }}>
+      <Card>
+        <CardContent>
+          <TypoCommon
+            variant="subtitle2"
+            fontWeight={600}
+            label="Please activated permission to set roles"
+          />
+        </CardContent>
       </Card>
     </Box>
   );
