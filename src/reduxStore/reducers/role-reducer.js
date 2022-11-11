@@ -1,7 +1,7 @@
 import {
+  RESET_RECORDS_ROLE,
   CALL_REQUEST_ROLE,
   END_REQUEST_ROLE,
-  RESET_RECORDS_ROLE,
   GET_ALL_ROLE,
   CREATE_ROLE,
   GET_ID_ROLE,
@@ -25,6 +25,8 @@ const roleReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case RESET_RECORDS_ROLE:
+      return initialState;
     case CALL_REQUEST_ROLE:
       return {
         ...state,
@@ -35,8 +37,6 @@ const roleReducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
-    case RESET_RECORDS_ROLE:
-      return initialState;
     case GET_ALL_ROLE:
       return {
         ...state,

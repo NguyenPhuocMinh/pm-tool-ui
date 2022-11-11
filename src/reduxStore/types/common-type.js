@@ -9,6 +9,7 @@ export const SHOW_POPUP = 'SHOW_POPUP';
 export const HIDE_POPUP = 'HIDE_POPUP';
 
 export const RESET = 'RESET';
+export const REFRESH = 'REFRESH';
 
 export const CALL_REQUEST = 'CALL_REQUEST';
 export const END_REQUEST = 'END_REQUEST';

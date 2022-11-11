@@ -6,7 +6,8 @@ import {
   HIDE_NOTIFICATION,
   SHOW_POPUP,
   HIDE_POPUP,
-  RESET
+  RESET,
+  REFRESH
 } from '../types';
 
 export const changeTheme = (theme) => (dispatch) => {
@@ -73,4 +74,9 @@ export const showPopup = ({
 
 export const hidePopup = () => ({
   type: HIDE_POPUP
+});
+
+export const refreshPage = (version) => ({
+  type: REFRESH,
+  payload: version + 1
 });

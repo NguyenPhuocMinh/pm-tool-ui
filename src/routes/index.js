@@ -12,7 +12,8 @@ import {
   PermissionCreate,
   PermissionEdit,
   UserList,
-  UserCreate
+  UserCreate,
+  UserEdit
 } from '@resources';
 import { NotFoundCommon } from '@components/commons';
 
@@ -101,6 +102,11 @@ const userRoutes = [
     name: 'users-create',
     path: '/users/create',
     element: () => <UserCreate />
+  },
+  {
+    name: 'users-edit',
+    path: '/users/edit/:id',
+    element: () => <UserEdit />
   }
 ];
 
@@ -135,7 +141,6 @@ const routes = [
 /**
  * @description MENUS
  */
-
 const homeMenus = [
   {
     name: 'dashboard',

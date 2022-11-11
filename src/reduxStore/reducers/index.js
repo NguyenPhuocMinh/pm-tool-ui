@@ -4,11 +4,13 @@ import authReducer from './auth-reducer';
 import organizationReducer from './organization-reducer';
 import roleReducer from './role-reducer';
 import permissionReducer from './permission-reducer';
+import userReducer from './user-reducer';
 
 export {
   commonReducer,
   authReducer,
   organizationReducer,
   roleReducer,
-  permissionReducer
+  permissionReducer,
+  userReducer
 };

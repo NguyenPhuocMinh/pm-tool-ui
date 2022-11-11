@@ -4,7 +4,7 @@ const basePath = '/roles';
 
 /**
  * @description GET ALL ROLE SERVICE
- * @param {Object} query { _start: 0, _end: 100 }
+ * @param {Object} query
  */
 export const getAllRoleService = async (query = {}) => {
   try {

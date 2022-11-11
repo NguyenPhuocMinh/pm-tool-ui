@@ -12,7 +12,8 @@ import {
   authReducer,
   organizationReducer,
   roleReducer,
-  permissionReducer
+  permissionReducer,
+  userReducer
 } from './reducers';
 
 // middleware
@@ -23,7 +24,8 @@ const appReducer = combineReducers({
   auth: authReducer,
   organization: organizationReducer,
   role: roleReducer,
-  permission: permissionReducer
+  permission: permissionReducer,
+  user: userReducer
 });
 
 const rootReducer = (state, action) => {

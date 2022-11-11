@@ -4,8 +4,7 @@ const bastPath = '/permissions';
 
 /**
  * @description GET ALL PERMISSION SERVICE
- * @param {*} perID
- * @param {*} values
+ * @param {*} query
  */
 export const getAllPermissionService = async (query = {}) => {
   try {
@@ -21,7 +20,6 @@ export const getAllPermissionService = async (query = {}) => {
 
 /**
  * @description CREATE PERMISSION SERVICE
- * @param {*} perID
  * @param {*} records
  */
 export const createPermissionService = async (records = {}) => {

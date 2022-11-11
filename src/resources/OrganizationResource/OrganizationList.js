@@ -33,7 +33,7 @@ const useStyles = makeStyles((_) => ({
     }
   },
   search: {
-    width: 300
+    width: 256
   }
 }));
 
