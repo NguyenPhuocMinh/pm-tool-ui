@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslate } from '@hooks';
-import { ProfileSetting } from '@components/settings';
+import { ProfileSetting } from '@components';
 import {
   Box,
   Tooltip,
@@ -12,7 +12,6 @@ import {
   CircularProgress
 } from '@mui/material';
 import { get } from 'lodash';
-
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 const ProfileSection = () => {

@@ -16,9 +16,9 @@ import { makeStyles } from '@mui/styles';
 import { useTranslate } from '@hooks';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { setPasswordByUserIdAction } from '@reduxStore/actions';
-import { TypoCommon } from '@components/commons';
-import { ButtonSubmit, ButtonCancel } from '@components/buttons';
-import { TextInput } from '@components/inputs';
+import { TypoCommon } from '@components';
+import { ButtonSubmit, ButtonCancel } from '@components';
+import { TextInput } from '@components';
 import { validatorUserSetPassword } from '@validators';
 
 const useStyles = makeStyles({

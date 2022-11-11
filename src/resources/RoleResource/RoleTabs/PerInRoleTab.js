@@ -8,7 +8,7 @@ import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { NoRowsCommon } from '@components/commons';
+import { NoRowsCommon } from '@components';
 import constants from '@constants';
 import { other } from '@utils';
 

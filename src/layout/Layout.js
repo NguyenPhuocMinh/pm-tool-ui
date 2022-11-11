@@ -4,11 +4,7 @@ import { useSelector } from 'react-redux';
 import { get } from 'lodash';
 import { routes } from '@routes';
 import { useTranslate } from '@hooks';
-import {
-  AppBarCustom,
-  DrawerCustom,
-  DrawerHeaderCustom
-} from '@components/customs';
+import { AppBarCustom, DrawerCustom, DrawerHeaderCustom } from '@components';
 // material
 import { useTheme } from '@mui/material/styles';
 import {

@@ -3,7 +3,7 @@ import { cloneElement } from 'react';
 import { createPortal } from 'react-dom';
 // hooks
 import { useTranslate } from '@hooks';
-import { warning } from '@components/utils';
+import { warning } from '@components';
 
 const TitleMain = ({ className, defaultTitle, record, title, ...rest }) => {
   const { translate } = useTranslate();
