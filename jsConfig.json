@@ -5,7 +5,7 @@
       "@providers": ["src/providers/index"],
       "@context": ["src/context/index"],
       "@container": ["src/container/index"],
-      "@components": ["src/components/index"],
+      "@components/*": ["src/components/*"],
       "@layout": ["src/layout/index"],
       "@services": ["src/services/index"],
       "@constants": ["src/constants/index"],
