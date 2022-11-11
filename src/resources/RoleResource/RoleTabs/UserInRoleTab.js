@@ -6,7 +6,7 @@ import { get, isEmpty } from 'lodash';
 import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { getUsersByRoleNameAction } from '@reduxStore/actions';
-import { NoRowsCommon } from '@components';
+import { NoRowsCommon } from '@components/index';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { other } from '@utils';

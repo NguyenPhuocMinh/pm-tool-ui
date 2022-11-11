@@ -14,8 +14,7 @@ import {
   Typography
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TextInput, SwitchInput } from '@components';
-import { LoadingRegular } from '@components';
+import { TextInput, SwitchInput, LoadingRegular } from '@components/index';
 import { useFormik } from 'formik';
 import { validatorOrganizationCreate } from '@validators';
 import { get } from 'lodash';

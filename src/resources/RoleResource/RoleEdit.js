@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRoleByIdAction } from '@reduxStore/actions';
 import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
-import { TabsCommon, TabPanelCommon, TypoCommon } from '@components';
+import { TabsCommon, TabPanelCommon, TypoCommon } from '@components/index';
 import { get } from 'lodash';
 import { tabs } from './Utils';
 // tabs

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { MenuCommon } from '@components';
+import { MenuCommon } from '@components/index';
 import { Divider } from '@mui/material';
 import { homeMenus, managementMenus, authenticateMenus } from '@routes';
 

@@ -5,8 +5,12 @@ import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Card, CardHeader, CardContent, CardActions } from '@mui/material';
 import { addRolesToUserAction } from '@reduxStore/actions';
-import { TransferListCommon, TypoCommon } from '@components';
-import { ButtonSubmit, ButtonCancel } from '@components';
+import {
+  TransferListCommon,
+  TypoCommon,
+  ButtonSubmit,
+  ButtonCancel
+} from '@components/index';
 
 const SetRolesToUserTab = () => {
   // hooks

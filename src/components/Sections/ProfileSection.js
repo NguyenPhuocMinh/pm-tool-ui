@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslate } from '@hooks';
-import { ProfileSetting } from '@components';
+import { ProfileSetting } from '@components/index';
 import {
   Box,
   Tooltip,

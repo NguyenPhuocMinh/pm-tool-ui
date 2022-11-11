@@ -9,9 +9,12 @@ import {
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
-import { NoRowsCommon, PopupCommon } from '@components';
-import { SearchInput } from '@components';
-import { ButtonCreate } from '@components';
+import {
+  NoRowsCommon,
+  PopupCommon,
+  SearchInput,
+  ButtonCreate
+} from '@components/index';
 import constants from '@constants';
 import { other, dateTimeFormat } from '@utils';
 import { Paper, Box } from '@mui/material';

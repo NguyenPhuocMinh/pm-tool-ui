@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Box, Card } from '@mui/material';
-import { TypoCommon } from '@components';
+import { TypoCommon } from '@components/index';
 
 const Welcome = () => {
   const _ = useSelector((state) => state);

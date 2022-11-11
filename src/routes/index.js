@@ -15,7 +15,7 @@ import {
   UserCreate,
   UserEdit
 } from '@resources';
-import { NotFoundCommon } from '@components';
+import { NotFoundCommon } from '@components/index';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StoreIcon from '@mui/icons-material/Store';
