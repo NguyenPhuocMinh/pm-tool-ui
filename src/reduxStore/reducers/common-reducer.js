@@ -7,7 +7,8 @@ import {
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,
   SHOW_POPUP,
-  HIDE_POPUP
+  HIDE_POPUP,
+  REFRESH
 } from '../types';
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
   color:
     localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.COLOR) || {},
   notify: {},
-  popup: {}
+  popup: {},
+  refresh: 0
 };
 
 const commonReducer = (state = initialState, action) => {
@@ -60,6 +62,11 @@ const commonReducer = (state = initialState, action) => {
       return {
         ...state,
         popup: {}
+      };
+    case REFRESH:
+      return {
+        ...state,
+        refresh: payload
       };
     default:
       return state;

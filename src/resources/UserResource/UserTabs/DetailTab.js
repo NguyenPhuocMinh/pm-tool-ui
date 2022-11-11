@@ -1,23 +1,15 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { createUserAction } from '@reduxStore/actions';
-import { get } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
-import {
-  Box,
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Divider
-} from '@mui/material';
+import { get } from 'lodash';
+import { useSelector, useDispatch } from 'react-redux';
+import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TypoCommon } from '@components/commons';
 import { TextInput } from '@components/inputs';
 import { ButtonSubmit, ButtonCancel } from '@components/buttons';
-import { validatorUserCreate } from '@validators';
+import { updateUserByIdAction } from '@reduxStore/actions';
+import { validatorUserEdit } from '@validators';
 
 const useStyles = makeStyles({
   input: {
@@ -25,71 +17,60 @@ const useStyles = makeStyles({
   }
 });
 
-const UserCreate = () => {
+const DetailTab = () => {
   // hooks
   const classes = useStyles();
   const { translate } = useTranslate();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // initialValue
-  const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
-
-  const { loading, color } = useSelector((state) => {
+  const { records, loading, color } = useSelector((state) => {
     return {
+      records: get(state, 'user.records', {}),
       loading: get(state, 'user.loading', false),
       color: get(state, 'common.color', {})
     };
   });
 
-  const handleCreate = useCallback(
-    async (records) => {
-      dispatch(createUserAction({ navigate }, records));
-    },
-    [dispatch, navigate]
-  );
+  const initialValues = useMemo(() => {
+    return {
+      firstName: records?.firstName ?? '-',
+      lastName: records?.lastName ?? '-',
+      email: records?.email ?? '-'
+    };
+  }, [records]);
+
+  const handleUpdate = (userID, values) => {
+    dispatch(
+      updateUserByIdAction(userID, {
+        firstName: values.firstName,
+        lastName: values.lastName
+      })
+    );
+  };
 
   const handleCancel = () => {
     navigate('/users');
   };
 
   const { handleSubmit, isValid, dirty, ...formProps } = useFormik({
+    enableReinitialize: true,
     initialValues,
-    validationSchema: validatorUserCreate(translate),
-    onSubmit: (values) => handleCreate(values)
+    validationSchema: validatorUserEdit(translate),
+    onSubmit: (values) => handleUpdate(records.id, values)
   });
 
   return (
     <Box sx={{ minWidth: 400 }}>
       <Card>
-        <CardHeader
-          sx={{
-            background: (theme) => color?.hex ?? theme.palette.primary.main
-          }}
-          subheader={
-            <Box display="flex" alignItems="center">
-              <TypoCommon
-                variant="body2"
-                fontWeight={600}
-                label="resources.users.title.create"
-              />
-            </Box>
-          }
-        />
-        <Divider sx={{ width: '100%' }} />
         <CardContent>
           <Box
             sx={{
-              marginTop: '1em',
               display: 'flex',
               flexWrap: 'wrap'
             }}
           >
-            <Box sx={{ marginRight: '32px' }}>
+            <Box sx={{ marginRight: '2em', marginBottom: '2em' }}>
               <TextInput
                 label="resources.users.fields.firstName"
                 required
@@ -99,7 +80,7 @@ const UserCreate = () => {
                 {...formProps}
               />
             </Box>
-            <Box>
+            <Box sx={{ marginRight: '2em', marginBottom: '2em' }}>
               <TextInput
                 label="resources.users.fields.lastName"
                 required
@@ -110,12 +91,7 @@ const UserCreate = () => {
               />
             </Box>
           </Box>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          <Box sx={{ marginRight: '2em', marginBottom: '2em' }}>
             <TextInput
               label="resources.users.fields.email"
               required
@@ -141,4 +117,4 @@ const UserCreate = () => {
   );
 };
 
-export default UserCreate;
+export default DetailTab;

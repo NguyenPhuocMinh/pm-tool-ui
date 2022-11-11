@@ -71,9 +71,15 @@ const RoleList = () => {
     [page, pageSize, formProps.values.search]
   );
 
+  const { refresh } = useSelector((state) => {
+    return {
+      refresh: get(state, 'common.refresh')
+    };
+  });
+
   useEffect(() => {
     dispatch(getAllRoleAction(queryOptions));
-  }, [dispatch, queryOptions]);
+  }, [dispatch, queryOptions, refresh]);
 
   useEffect(() => {
     dispatch(resetRecordsRole());

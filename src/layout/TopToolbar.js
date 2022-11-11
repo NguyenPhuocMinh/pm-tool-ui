@@ -5,7 +5,8 @@ import {
   SettingSection,
   LanguageSection,
   ProfileSection,
-  NotifySection
+  NotifySection,
+  RefreshSection
 } from '@components/sections';
 import { Box, IconButton } from '@mui/material';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -15,6 +16,7 @@ const TopToolbar = () => {
     <Fragment>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
         <SearchSection />
+        <RefreshSection />
         <SettingSection />
         <LanguageSection />
         <NotifySection />
