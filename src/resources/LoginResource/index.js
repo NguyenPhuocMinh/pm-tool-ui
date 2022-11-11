@@ -31,7 +31,7 @@ import { useTranslate } from '@hooks';
 // themes
 import { lightTheme } from '@themes';
 // component
-import { TextInput } from '@components/inputs';
+import { TextInput } from '@components/index';
 
 const useStyles = makeStyles({
   input: {

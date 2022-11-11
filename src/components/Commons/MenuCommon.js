@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { NavLinkMain } from '@components/mains';
+import { NavLinkMain } from '@components/index';
 import { useTranslate } from '@hooks';
 import {
   Tooltip,

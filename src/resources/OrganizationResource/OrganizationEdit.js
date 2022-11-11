@@ -11,7 +11,7 @@ import {
   Divider,
   Typography
 } from '@mui/material';
-import { TabPanelCommon } from '@components/commons';
+import { TabPanelCommon } from '@components/index';
 import { useTranslate } from '@hooks';
 import { getOrganizationByIdAction } from '@reduxStore/actions';
 import { get } from 'lodash';

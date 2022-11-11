@@ -8,7 +8,7 @@ import {
   AppBarCustom,
   DrawerCustom,
   DrawerHeaderCustom
-} from '@components/customs';
+} from '@components/index';
 // material
 import { useTheme } from '@mui/material/styles';
 import {

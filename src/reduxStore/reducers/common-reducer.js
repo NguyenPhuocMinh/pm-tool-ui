@@ -13,7 +13,8 @@ import {
 
 const initialState = {
   theme:
-    localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.THEME) || 'dark',
+    localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.THEME) ||
+    'light',
   language:
     localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.LANGUAGE) ||
     'vn',

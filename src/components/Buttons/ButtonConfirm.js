@@ -1,6 +1,6 @@
 import { useTranslate } from '@hooks';
 import { Button } from '@mui/material';
-import { LoadingRegular } from '@components/regulars';
+import { LoadingRegular } from '@components/index';
 
 const ButtonConfirm = ({
   sx,

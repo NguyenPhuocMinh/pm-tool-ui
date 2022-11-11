@@ -13,7 +13,7 @@ import {
   LoadingCommon,
   NotifyCommon,
   ErrorCommon
-} from '@components/commons';
+} from '@components/index';
 import { Layout } from '@layout';
 import { LoginResource } from '@resources';
 import { lightTheme, darkTheme } from '@themes';
