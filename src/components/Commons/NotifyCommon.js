@@ -8,7 +8,7 @@ import { hideNotification } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 // hooks
 import { useTranslate } from '@hooks';
-import { SlideTransition, Alert } from '@components/utils';
+import { SlideTransition, Alert } from '@components';
 
 const NotificationCommon = () => {
   const [open, setOpen] = useState(false);

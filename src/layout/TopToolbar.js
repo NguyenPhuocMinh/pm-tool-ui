@@ -7,7 +7,7 @@ import {
   ProfileSection,
   NotifySection,
   RefreshSection
-} from '@components/sections';
+} from '@components';
 import { Box, IconButton } from '@mui/material';
 import MoreIcon from '@mui/icons-material/MoreVert';
 

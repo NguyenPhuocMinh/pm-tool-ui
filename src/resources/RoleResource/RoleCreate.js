@@ -14,9 +14,13 @@ import {
   Divider
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TypoCommon } from '@components/commons';
-import { TextInput, SwitchInput } from '@components/inputs';
-import { ButtonSubmit, ButtonCancel } from '@components/buttons';
+import {
+  TypoCommon,
+  ButtonSubmit,
+  ButtonCancel,
+  TextInput,
+  SwitchInput
+} from '@components';
 import { validatorRole } from '@validators';
 
 const useStyles = makeStyles({
