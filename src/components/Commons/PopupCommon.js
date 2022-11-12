@@ -14,7 +14,8 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextInput, ButtonConfirm, ButtonCancel } from '@components/index';
+import { TextInput } from '@components/inputs';
+import { ButtonConfirm, ButtonCancel } from '@components/buttons';
 import { hidePopup } from '@reduxStore/actions';
 import { useFormik } from 'formik';
 import { isEmpty, get } from 'lodash';

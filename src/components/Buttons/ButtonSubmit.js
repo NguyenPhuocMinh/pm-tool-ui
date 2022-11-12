@@ -1,6 +1,6 @@
 import { useTranslate } from '@hooks';
 import { Button } from '@mui/material';
-import { LoadingRegular } from '@components/index';
+import { LoadingRegular } from '@components/regulars';
 
 const ButtonSubmit = ({ sx, onClick, color, isValid, dirty, loading }) => {
   const { translate } = useTranslate();
