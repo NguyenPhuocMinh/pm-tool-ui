@@ -14,12 +14,9 @@ import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {
-  PopupCommon,
-  NoRowsCommon,
-  SearchInput,
-  ButtonCreate
-} from '@components/index';
+import { PopupCommon, NoRowsCommon } from '@components/commons';
+import { SearchInput } from '@components/inputs';
+import { ButtonCreate } from '@components/buttons';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import constants from '@constants';
 import { other, dateTimeFormat } from '@utils';

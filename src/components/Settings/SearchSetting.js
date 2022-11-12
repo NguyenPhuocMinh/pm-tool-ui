@@ -1,4 +1,4 @@
-import { DialogCustom, DialogTitleCustom } from '@components/index';
+import { DialogCustom, DialogTitleCustom } from '@components/customs';
 import {
   DialogContent,
   DialogActions,
