@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { NotifySetting } from '@components/settings';
+import { NotifySetting } from '@components';
 import { Box, Tooltip, IconButton, Badge } from '@mui/material';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
