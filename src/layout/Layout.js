@@ -94,7 +94,7 @@ const Layout = () => {
             noWrap
             component="a"
             href="/"
-            color={color ? color.hex : 'primary.main'}
+            color={color ? color.hex : '#B8E986'}
           >
             {translate('toolbar.title')}
           </Typography>

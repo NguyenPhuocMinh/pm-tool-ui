@@ -31,7 +31,7 @@ import NavLinkMain from './mains/NavLinkMain';
 import ButtonGroupMain from './mains/ButtonGroupMain';
 import ColorPickerMain from './mains/ColorPickerMain';
 
-import LoadingRegular from './regulars/LoadingRegular';
+// import LoadingRegular from './regulars/LoadingRegular';
 
 import LanguageSection from './sections/LanguageSection';
 import ProfileSection from './sections/ProfileSection';
@@ -75,7 +75,7 @@ export {
   NavLinkMain,
   ButtonGroupMain,
   ColorPickerMain,
-  LoadingRegular,
+  // LoadingRegular,
   ProfileSection,
   LanguageSection,
   SettingSection,
