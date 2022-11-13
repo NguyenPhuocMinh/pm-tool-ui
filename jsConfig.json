@@ -17,7 +17,8 @@
       "@resources": ["src/resources/index"],
       "@routes": ["src/routes/index"],
       "@configs": ["src/configs/index"],
-      "@validators": ["src/validators/index"]
+      "@validators": ["src/validators/index"],
+      "@utilities": ["src/utilities/index"], 
     }
   },
   "exclude": ["node_modules"]
