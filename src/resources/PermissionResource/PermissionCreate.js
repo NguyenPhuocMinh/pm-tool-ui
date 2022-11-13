@@ -20,7 +20,7 @@ import {
   SwitchInput,
   ButtonSubmit,
   ButtonCancel
-} from '@components';
+} from '@utilities';
 import { validatorPermission } from '@validators';
 
 const useStyles = makeStyles({

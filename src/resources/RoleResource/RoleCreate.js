@@ -20,7 +20,7 @@ import {
   ButtonCancel,
   TextInput,
   SwitchInput
-} from '@components';
+} from '@utilities';
 import { validatorRole } from '@validators';
 
 const useStyles = makeStyles({

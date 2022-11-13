@@ -10,7 +10,7 @@ import {
   TypoCommon,
   ButtonSubmit,
   ButtonCancel
-} from '@components';
+} from '@utilities';
 
 const SetRolesToPerTab = () => {
   // hooks

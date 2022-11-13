@@ -8,7 +8,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 // styles
 import { makeStyles } from '@mui/styles';
-import { TypoCommon } from '@components';
+import { TypoCommon } from '@utilities';
 import constants from '@constants';
 import { localForage } from '@utils';
 import { get } from 'lodash';

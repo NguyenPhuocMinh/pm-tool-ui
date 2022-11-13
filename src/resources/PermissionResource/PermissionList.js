@@ -19,7 +19,7 @@ import {
   NoRowsCommon,
   SearchInput,
   ButtonCreate
-} from '@components';
+} from '@utilities';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import constants from '@constants';
 import { other, dateTimeFormat } from '@utils';

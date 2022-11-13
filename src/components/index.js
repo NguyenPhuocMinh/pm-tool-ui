@@ -1,12 +1,3 @@
-import MenuCommon from './commons/MenuCommon';
-import NoRowsCommon from './commons/NoRowsCommon';
-import PopupCommon from './commons/PopupCommon';
-import NotFoundCommon from './commons/NotFoundCommon';
-import TabsCommon from './commons/TabsCommon';
-import TabPanelCommon from './commons/TabPanelCommon';
-import TransferListCommon from './commons/TransferListCommon';
-import TypoCommon from './commons/TypoCommon';
-
 import ButtonCreate from './buttons/ButtonCreate';
 import ButtonSubmit from './buttons/ButtonSubmit';
 import ButtonCancel from './buttons/ButtonCancel';
@@ -40,14 +31,6 @@ import NotifySetting from './settings/NotifySetting';
 import SearchSetting from './settings/SearchSetting';
 
 export {
-  MenuCommon,
-  NoRowsCommon,
-  PopupCommon,
-  NotFoundCommon,
-  TabsCommon,
-  TabPanelCommon,
-  TransferListCommon,
-  TypoCommon,
   ButtonCreate,
   ButtonSubmit,
   ButtonCancel,

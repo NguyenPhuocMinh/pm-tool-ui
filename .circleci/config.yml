@@ -30,11 +30,6 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
-      
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -43,6 +38,11 @@ jobs:
             - v1-dependencies-{{ checksum "package-lock.json" }}
             # Find the most recently generated cache used from any branch
             - v1-dependencies-
+      
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - run:
           name: Run build

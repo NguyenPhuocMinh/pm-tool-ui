@@ -17,11 +17,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
   NoRowsCommon,
+  LoadingCommon,
   PopupCommon,
   ButtonCreate,
   SearchInput
-} from '@components';
-import { LoadingCommon } from '@utilities';
+} from '@utilities';
 import constants from '@constants';
 import { other, dateTimeFormat } from '@utils';
 import { validatorVerifyToDelete } from '@validators';

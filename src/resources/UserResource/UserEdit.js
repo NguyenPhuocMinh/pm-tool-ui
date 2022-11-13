@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
 import { get } from 'lodash';
 import { getUserByIdAction } from '@reduxStore/actions';
-import { TabsCommon, TabPanelCommon, TypoCommon } from '@components';
+import { TabsCommon, TabPanelCommon, TypoCommon } from '@utilities';
 import { tabs } from './Utils';
 
 // tabs
