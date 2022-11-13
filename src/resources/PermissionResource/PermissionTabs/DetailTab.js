@@ -7,12 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { dateTimeFormat } from '@utils';
-import {
-  TextInput,
-  SwitchInput,
-  ButtonSubmit,
-  ButtonCancel
-} from '@components';
+import { TextInput, SwitchInput, ButtonSubmit, ButtonCancel } from '@utilities';
 import { updatePermissionByIdAction } from '@reduxStore/actions';
 import { validatorPermission } from '@validators';
 

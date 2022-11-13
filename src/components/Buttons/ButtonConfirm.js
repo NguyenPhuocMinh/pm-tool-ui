@@ -1,6 +1,6 @@
 import { useTranslate } from '@hooks';
 import { Button } from '@mui/material';
-// import { LoadingRegular } from '@components';
+import { CircularCommon } from '@utilities';
 
 const ButtonConfirm = ({
   sx,
@@ -38,7 +38,7 @@ const ButtonConfirm = ({
       onClick={handleSubmit}
       disabled={!isValid || !dirty || loading}
     >
-      {/* {loading && <LoadingRegular />} */}
+      {loading && <CircularCommon />}
       {translate('common.button.confirm')}
     </Button>
   );

@@ -6,12 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateRoleByIdAction } from '@reduxStore/actions';
 import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import {
-  TextInput,
-  SwitchInput,
-  ButtonSubmit,
-  ButtonCancel
-} from '@components';
+import { TextInput, SwitchInput, ButtonSubmit, ButtonCancel } from '@utilities';
 import { dateTimeFormat } from '@utils';
 
 const useStyles = makeStyles({

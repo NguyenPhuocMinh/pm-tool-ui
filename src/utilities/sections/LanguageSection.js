@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { LanguageSetting } from '@components';
+import { LanguageSetting } from '@utilities';
 import { Box, Tooltip, IconButton } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 
