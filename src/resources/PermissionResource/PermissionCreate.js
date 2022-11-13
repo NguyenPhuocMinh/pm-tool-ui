@@ -21,7 +21,6 @@ import {
   ButtonSubmit,
   ButtonCancel
 } from '@components';
-import {} from '@components';
 import { validatorPermission } from '@validators';
 
 const useStyles = makeStyles({

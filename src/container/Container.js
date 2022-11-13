@@ -9,12 +9,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import {
-  // AuthCommon,
+  AuthCommon,
   LoadingCommon,
   NotifyCommon,
   ErrorCommon
-} from '@components';
-import { AuthCommon } from '@utilities';
+} from '@utilities';
 import { Layout } from '@layout';
 import { LoginResource } from '@resources';
 import { lightTheme, darkTheme } from '@themes';

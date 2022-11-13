@@ -23,7 +23,8 @@
           ["@routes", "./src/routes"],
           ["@configs", "./src/configs"],
           ["@validators", "./src/validators"],
-          ["@utilities", "./src/utilities"]
+          ["@utilities", "./src/utilities"],
+          ["@regulars", "./src/regulars"]
         ]
       }
     }

@@ -62,7 +62,8 @@ module.exports = {
       '@routes': path.resolve(__dirname, './src/routes'),
       '@configs': path.resolve(__dirname, './src/configs'),
       '@validators': path.resolve(__dirname, './src/validators'),
-      '@utilities': path.resolve(__dirname, './src/utilities')
+      '@utilities': path.resolve(__dirname, './src/utilities'),
+      '@regulars': path.resolve(__dirname, './src/regulars')
     },
     modules: [
       'node_modules',
