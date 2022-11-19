@@ -3,12 +3,6 @@ const translationLogin = {
   fields: {
     email: 'Email address',
     password: 'Password'
-  },
-  notifications: {
-    errors: {},
-    success: {
-      login: 'Login Success'
-    }
   }
 };
 

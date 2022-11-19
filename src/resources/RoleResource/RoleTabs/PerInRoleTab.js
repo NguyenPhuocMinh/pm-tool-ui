@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPermissionsByRoleNameAction } from '@reduxStore/actions';
+import { getPermissionsByRoleIDAction } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { useTranslate } from '@hooks';
 import { Box, Paper } from '@mui/material';
@@ -55,7 +55,7 @@ const PerInRoleTab = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getPermissionsByRoleNameAction(roleID, queryOptions));
+    dispatch(getPermissionsByRoleIDAction(roleID, queryOptions));
   }, [dispatch, roleID, queryOptions]);
 
   const { data, total, loading } = useSelector((state) => {

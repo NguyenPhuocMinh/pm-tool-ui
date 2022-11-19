@@ -6,9 +6,9 @@ const AuthCommon = ({ children }) => {
   const auth = useAuth();
   const location = useLocation();
 
-  const { token } = auth;
+  const { token, payload } = auth;
 
-  if (isEmpty(token)) {
+  if (isEmpty(token) && isEmpty(payload)) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

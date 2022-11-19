@@ -10,6 +10,10 @@ const translationPage = {
   not_found: {
     name: 'Not found',
     message: 'Either you typed a wrong URL, or you followed a bad link.'
+  },
+  access_denied: {
+    name: 'Access Denied',
+    message: 'You do not have permission to access this link.'
   }
 };
 

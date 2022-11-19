@@ -120,13 +120,18 @@ const DetailTab = () => {
         </CardContent>
         <CardActions>
           <ButtonSubmit
+            id="pm-tool-button-permission-edit-submit"
             color={color}
             onClick={handleSubmit}
             loading={loading}
             isValid={isValid}
             dirty={dirty}
           />
-          <ButtonCancel color={color} onClick={handleCancel} />
+          <ButtonCancel
+            id="pm-tool-button-permission-edit-cancel"
+            color={color}
+            onClick={handleCancel}
+          />
         </CardActions>
       </Card>
     </Box>

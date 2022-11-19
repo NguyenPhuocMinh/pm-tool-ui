@@ -10,9 +10,12 @@ const AuthProvider = ({ children }) => {
     };
   });
 
+  const { data } = auth;
+
   const authProvider = useMemo(() => {
     return {
-      token: auth.token
+      token: data?.token ?? null,
+      payload: data?.payload ?? null
     };
   }, [auth]);
 

@@ -2,11 +2,12 @@ import { useTranslate } from '@hooks';
 import { Button } from '@mui/material';
 import { CircularCommon } from '@utilities';
 
-const ButtonSubmit = ({ sx, onClick, color, isValid, dirty, loading }) => {
+const ButtonSubmit = ({ id, sx, onClick, color, isValid, dirty, loading }) => {
   const { translate } = useTranslate();
 
   return (
     <Button
+      id={id}
       sx={{
         width: 'auto',
         minWidth: 150,

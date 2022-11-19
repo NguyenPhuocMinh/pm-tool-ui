@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 import { get, isEmpty } from 'lodash';
 import {
   resetRecordsPermission,
@@ -22,8 +22,9 @@ import {
 } from '@utilities';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import constants from '@constants';
-import { other, dateTimeFormat } from '@utils';
+import { other, dateTimeFormat, authAllowed } from '@utils';
 import { validatorVerifyToDelete } from '@validators';
+import { menuPermissions } from '@permissions';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -51,6 +52,7 @@ const PermissionList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
+  const { payload } = useAuth();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -182,24 +184,32 @@ const PermissionList = () => {
         headerName: translate('common.actions.title'),
         flex: 0.5,
         getActions: (params) => {
-          return [
-            <GridActionsCellItem
-              icon={<DeleteIcon />}
-              onClick={handleShowPopupDelete(
-                params.id,
-                params.row.name,
-                queryOptions
-              )}
-              label="common.label.delete"
-              key={params.id}
-            />,
-            <GridActionsCellItem
-              icon={<BorderColorIcon />}
-              onClick={handleEdit(params.id)}
-              label="common.label.edit"
-              key={params.id}
-            />
-          ];
+          if (
+            authAllowed({
+              payload,
+              permission: menuPermissions.permissions.GET_ID
+            })
+          ) {
+            return [
+              <GridActionsCellItem
+                icon={<DeleteIcon />}
+                onClick={handleShowPopupDelete(
+                  params.id,
+                  params.row.name,
+                  queryOptions
+                )}
+                label="common.label.delete"
+                key={params.id}
+              />,
+              <GridActionsCellItem
+                icon={<BorderColorIcon />}
+                onClick={handleEdit(params.id)}
+                label="common.label.edit"
+                key={params.id}
+              />
+            ];
+          }
+          return [];
         }
       }
     ];
@@ -232,23 +242,28 @@ const PermissionList = () => {
             {...formProps}
           />
         </Paper>
-        <Box
-          sx={{
-            display: {
-              xs: 'none',
-              md: 'flex'
-            },
-            flexWrap: 'wrap',
-            justifyItems: 'center'
-          }}
-        >
-          <Box width="auto" minWidth={50}>
-            <ButtonCreate
-              label="common.button.create"
-              redirect="/permissions/create"
-            />
+        {authAllowed({
+          payload,
+          permission: menuPermissions.permissions.CREATE
+        }) && (
+          <Box
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'flex'
+              },
+              flexWrap: 'wrap',
+              justifyItems: 'center'
+            }}
+          >
+            <Box width="auto" minWidth={50}>
+              <ButtonCreate
+                label="common.button.create"
+                redirect="/permissions/create"
+              />
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
       <Paper elevation={3}>
         <Box style={{ height: 400, width: '100%' }}>

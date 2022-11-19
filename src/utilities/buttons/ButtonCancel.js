@@ -1,11 +1,12 @@
 import { useTranslate } from '@hooks';
 import { Button } from '@mui/material';
 
-const ButtonCancel = ({ sx, onClick, color }) => {
+const ButtonCancel = ({ id, sx, onClick, color }) => {
   const { translate } = useTranslate();
 
   return (
     <Button
+      id={id}
       sx={{
         width: 'auto',
         minWidth: 150,

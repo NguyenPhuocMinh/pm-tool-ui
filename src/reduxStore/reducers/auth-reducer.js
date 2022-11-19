@@ -4,18 +4,15 @@ import {
   LOGIN_END,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_END
-} from '../types';
-
-const auth = {
-  token: null,
-  name: '',
-  email: ''
-};
+  LOGOUT_END,
+  REFRESH_REQUEST,
+  REFRESH_SUCCESS,
+  REFRESH_END
+} from '@reduxStore/types';
 
 const initialState = {
   loading: false,
-  auth
+  data: {}
 };
 
 const authReducer = (state = initialState, action) => {
@@ -30,7 +27,7 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        auth: payload
+        data: payload
       };
     case LOGIN_END:
       return {
@@ -45,9 +42,24 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        auth: payload
+        data: payload
       };
     case LOGOUT_END:
+      return {
+        ...state,
+        loading: false
+      };
+    case REFRESH_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case REFRESH_SUCCESS:
+      return {
+        ...state,
+        data: payload
+      };
+    case REFRESH_END:
       return {
         ...state,
         loading: false

@@ -9,7 +9,7 @@ import {
   SHOW_POPUP,
   HIDE_POPUP,
   REFRESH
-} from '../types';
+} from '@reduxStore/types';
 
 const initialState = {
   theme:
@@ -17,7 +17,7 @@ const initialState = {
     'light',
   language:
     localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.LANGUAGE) ||
-    'vn',
+    'en',
   color:
     localForage.getItemLocalForage(constants.LOCAL_FORAGE_KEYS.COLOR) || {},
   notify: {},

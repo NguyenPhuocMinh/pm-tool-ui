@@ -13,6 +13,10 @@ import TabPanelCommon from './TabPanelCommon';
 import TransferListCommon from './TransferListCommon';
 import TypoCommon from './TypoCommon';
 import CircularCommon from './CircularCommon';
+import ForbiddenCommon from './ForbiddenCommon';
+import PrivateRouteCommon from './PrivateRouteCommon';
+import PrivateMenuCommon from './PrivateMenuCommon';
+import PrivateSubMenuCommon from './PrivateSubMenuCommon';
 
 export * from './mains';
 export * from './inputs';
@@ -35,5 +39,9 @@ export {
   TabPanelCommon,
   TransferListCommon,
   TypoCommon,
-  CircularCommon
+  CircularCommon,
+  ForbiddenCommon,
+  PrivateRouteCommon,
+  PrivateMenuCommon,
+  PrivateSubMenuCommon
 };

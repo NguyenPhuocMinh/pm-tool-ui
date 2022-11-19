@@ -22,7 +22,11 @@ import { get } from 'lodash';
 import constants from '@constants';
 
 const Container = () => {
-  const themeStore = useSelector((state) => get(state, 'common.theme'));
+  const { themeStore } = useSelector((state) => {
+    return {
+      themeStore: get(state, 'common.theme', 'light')
+    };
+  });
   const theme = themeStore === constants.THEMES.LIGHT ? lightTheme : darkTheme;
 
   return (

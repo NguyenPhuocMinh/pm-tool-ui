@@ -3,12 +3,6 @@ const translationLogin = {
   fields: {
     email: 'Địa chỉ email',
     password: 'Mật khẩu'
-  },
-  notifications: {
-    errors: {},
-    success: {
-      login: 'Đăng nhập thành công'
-    }
   }
 };
 

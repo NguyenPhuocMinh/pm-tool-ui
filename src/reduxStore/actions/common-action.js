@@ -8,14 +8,12 @@ import {
   HIDE_POPUP,
   RESET,
   REFRESH
-} from '../types';
+} from '@reduxStore/types';
 
-export const changeTheme = (theme) => (dispatch) => {
-  dispatch({
-    type: CHANGE_THEME,
-    payload: theme
-  });
-};
+export const changeTheme = (theme) => ({
+  type: CHANGE_THEME,
+  payload: theme
+});
 
 export const changeLanguage = (lng) => ({
   type: CHANGE_LANGUAGE,
@@ -43,11 +41,9 @@ export const hideNotification = () => ({
   type: HIDE_NOTIFICATION
 });
 
-export const removeLogin = (dispatch) => {
-  dispatch({
-    type: RESET
-  });
-};
+export const removeLogin = () => ({
+  type: RESET
+});
 
 export const showPopup = ({
   open,

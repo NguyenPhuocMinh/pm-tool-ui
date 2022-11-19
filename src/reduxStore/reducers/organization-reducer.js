@@ -5,7 +5,7 @@ import {
   CREATE_ORGANIZATION,
   GET_ID_ORGANIZATION,
   EDIT_ORGANIZATION
-} from '../types';
+} from '@reduxStore/types';
 
 const initialState = {
   loading: false,

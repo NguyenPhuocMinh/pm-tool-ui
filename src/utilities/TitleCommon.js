@@ -1,18 +1,12 @@
 import PropTypes from 'prop-types';
 import { cloneElement } from 'react';
-import { createPortal } from 'react-dom';
+import { Box } from '@mui/material';
 // hooks
 import { useTranslate } from '@hooks';
 import { warning } from '@utils';
 
 const TitleCommon = ({ className, defaultTitle, record, title, ...rest }) => {
   const { translate } = useTranslate();
-  const container =
-    typeof document !== 'undefined'
-      ? document.getElementById('demo-react-title')
-      : null;
-
-  if (!container) return null;
 
   warning(!defaultTitle && !title, 'Missing title prop in <Title> element');
 
@@ -27,7 +21,9 @@ const TitleCommon = ({ className, defaultTitle, record, title, ...rest }) => {
   ) : (
     cloneElement(title, { className, record, ...rest })
   );
-  return createPortal(titleElement, container);
+  return (
+    <Box sx={{ textAlign: 'center', marginTop: '2em' }}>{titleElement}</Box>
+  );
 };
 
 export const TitlePropType = PropTypes.oneOfType([

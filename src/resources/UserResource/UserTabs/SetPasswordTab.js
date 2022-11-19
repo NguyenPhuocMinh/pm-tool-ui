@@ -38,8 +38,8 @@ const SetPasswordTab = () => {
 
   const { records, loading, color } = useSelector((state) => {
     return {
-      records: get(state, 'permission.records', {}),
-      loading: get(state, 'permission.loading', false),
+      records: get(state, 'user.records', {}),
+      loading: get(state, 'user.loading', false),
       color: get(state, 'common.color', {})
     };
   });

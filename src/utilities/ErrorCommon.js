@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useTranslate } from '@hooks';
-import TitleCommon from './TitleCommon';
+import { TitleCommon } from '@utilities';
 // hooks
 
 const useStyles = makeStyles((theme) => ({

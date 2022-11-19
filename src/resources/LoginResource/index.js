@@ -193,6 +193,7 @@ const LoginResource = () => {
               }}
             >
               <Button
+                id="pm-tool-button-login"
                 sx={{
                   width: 'auto',
                   minWidth: 256,

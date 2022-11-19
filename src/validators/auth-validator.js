@@ -7,7 +7,7 @@ export const validatorLogin = (translate) => {
       .email(translate('validator.email')),
     password: string()
       .required(translate('validator.required'))
-      .min(6, translate('validator.minLength', { min: 6 }))
+      .min(1, translate('validator.minLength', { min: 6 }))
     // .matches(
     //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
     //   translate('validation.password')

@@ -9,7 +9,7 @@ import History from '@mui/icons-material/History';
 import HotTub from '@mui/icons-material/HotTub';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
-import TitleCommon from './TitleCommon';
+import { TitleCommon } from '@utilities';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NotFoundCommon = (props) => {
+const ForbiddenCommon = (props) => {
   const { className, title } = props;
 
   // hooks
@@ -59,8 +59,8 @@ const NotFoundCommon = (props) => {
       <TitleCommon defaultTitle={title} />
       <div className={classes.message}>
         <HotTub className={classes.icon} />
-        <h1>{translate('page.not_found.name')}</h1>
-        <div>{translate('page.not_found.message')}</div>
+        <h1>{translate('page.access_denied.name')}</h1>
+        <div>{translate('page.access_denied.message')}</div>
       </div>
       <div className={classes.toolbar}>
         <Button
@@ -81,4 +81,4 @@ const NotFoundCommon = (props) => {
   );
 };
 
-export default NotFoundCommon;
+export default ForbiddenCommon;

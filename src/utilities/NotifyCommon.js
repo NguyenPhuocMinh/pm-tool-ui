@@ -39,7 +39,7 @@ const NotifyCommon = () => {
 
   return (
     <Snackbar
-      autoHideDuration={3000}
+      autoHideDuration={2000}
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={open}
       onClose={handleRequestClose}

@@ -5,7 +5,7 @@ import { useTranslate } from '@hooks';
 import { get, isEmpty } from 'lodash';
 import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { getUsersByRoleNameAction } from '@reduxStore/actions';
+import { getUsersByRoleIDAction } from '@reduxStore/actions';
 import { NoRowsCommon } from '@utilities';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 const UserInRoleTab = (props) => {
-  const { roleName } = props;
+  const { roleID } = props;
   // hooks
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
@@ -56,8 +56,8 @@ const UserInRoleTab = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getUsersByRoleNameAction(roleName));
-  }, [dispatch, roleName, queryOptions]);
+    dispatch(getUsersByRoleIDAction(roleID, queryOptions));
+  }, [dispatch, roleID, queryOptions]);
 
   const { data, total, loading } = useSelector((state) => {
     return {
@@ -77,13 +77,14 @@ const UserInRoleTab = (props) => {
   const columns = useMemo(() => {
     return [
       {
-        field: 'userName',
-        headerName: translate('resources.users.fields.userName'),
+        field: 'fullName',
+        headerName: translate('resources.users.fields.fullName'),
         flex: 0.5,
         resizable: false,
         filterable: false,
         sortable: false,
-        valueFormatter: ({ value }) => (!isEmpty(value) ? value : '-')
+        valueGetter: (params) =>
+          `${params.row.firstName || ''} ${params.row.lastName || ''}`
       },
       {
         field: 'lastName',

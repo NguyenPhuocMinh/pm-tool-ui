@@ -18,7 +18,8 @@
       "@configs": ["src/configs/index"],
       "@validators": ["src/validators/index"],
       "@utilities": ["src/utilities/index"],
-      "@regulars": ["src/regulars/index"]
+      "@regulars": ["src/regulars/index"],
+      "@permissions": ["src/permissions/index"],
     }
   },
   "exclude": ["node_modules"]

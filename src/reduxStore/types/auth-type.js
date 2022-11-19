@@ -5,3 +5,7 @@ export const LOGIN_END = 'LOGIN_END';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_END = 'LOGOUT_END';
+
+export const REFRESH_REQUEST = 'REFRESH_REQUEST';
+export const REFRESH_SUCCESS = 'REFRESH_SUCCESS';
+export const REFRESH_END = 'REFRESH_END';

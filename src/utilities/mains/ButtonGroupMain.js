@@ -35,7 +35,7 @@ const ButtonGroupMain = () => {
   );
   // hooks
   const dispatch = useDispatch();
-  const [theme, setTheme] = useState(themeLocalForage);
+  const [theme, setTheme] = useState(themeLocalForage || 'light');
   // func
   const handleChange = (event, newTheme) => {
     if (newTheme !== null) {

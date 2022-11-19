@@ -1,5 +1,4 @@
 import { get, isEmpty } from 'lodash';
-import { formatErrorCommonMsg } from '@utils';
 import constants from '@constants';
 import {
   getAllUserService,
@@ -62,8 +61,6 @@ export const getAllUserAction =
       dispatch({
         type: END_REQUEST_USER
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -100,8 +97,6 @@ export const createUserAction =
       dispatch({
         type: END_REQUEST_USER
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -128,8 +123,9 @@ export const getUserByIdAction = (userID) => async (dispatch) => {
       });
     }
   } catch (err) {
-    const errorMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
+    dispatch({
+      type: END_REQUEST_USER
+    });
   }
 };
 
@@ -166,8 +162,6 @@ export const updateUserByIdAction =
       dispatch({
         type: END_REQUEST_USER
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -198,8 +192,6 @@ export const deleteUserByIdAction = (userID, query) => async (dispatch) => {
     dispatch({
       type: END_REQUEST_USER
     });
-    const errorMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
   }
 };
 
@@ -236,8 +228,6 @@ export const addRolesToUserAction =
       dispatch({
         type: END_REQUEST_USER
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -274,7 +264,5 @@ export const setPasswordByUserIdAction =
       dispatch({
         type: END_REQUEST_USER
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };

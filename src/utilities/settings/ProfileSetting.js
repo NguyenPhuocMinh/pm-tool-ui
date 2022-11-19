@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 // hooks
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 // redux
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '@reduxStore/actions';
@@ -30,9 +30,10 @@ const ProfileSetting = (props) => {
   const { translate } = useTranslate();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { payload } = useAuth();
 
   const handleLogout = () => {
-    dispatch(logoutAction(navigate));
+    dispatch(logoutAction(navigate, { email: payload.email }));
   };
 
   return (

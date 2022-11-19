@@ -1,5 +1,4 @@
 import { get, isEmpty } from 'lodash';
-import { formatErrorCommonMsg } from '@utils';
 import constants from '@constants';
 import {
   getAllPermissionService,
@@ -61,8 +60,6 @@ export const getAllPermissionAction =
       dispatch({
         type: END_REQUEST_PERMISSION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -99,8 +96,6 @@ export const createPermissionAction =
       dispatch({
         type: END_REQUEST_PERMISSION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -128,8 +123,9 @@ export const getPermissionByIdAction = (permissionID) => async (dispatch) => {
       });
     }
   } catch (err) {
-    const errorMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
+    dispatch({
+      type: END_REQUEST_PERMISSION
+    });
   }
 };
 
@@ -169,8 +165,6 @@ export const updatePermissionByIdAction =
       dispatch({
         type: END_REQUEST_PERMISSION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -202,8 +196,6 @@ export const deletePermissionByIdAction =
       dispatch({
         type: END_REQUEST_PERMISSION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -243,7 +235,5 @@ export const addRolesToPermissionAction =
       dispatch({
         type: END_REQUEST_PERMISSION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };

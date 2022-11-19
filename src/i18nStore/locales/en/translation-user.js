@@ -59,7 +59,7 @@ const translationUser = {
       delete: 'Delete user successfully!',
       changePass: 'Change password successfully!',
       addRoles: 'Add role to user successfully!',
-      setPass: 'Set temporary password successfully!'
+      setPassword: 'Set temporary password successfully!'
     }
   }
 };

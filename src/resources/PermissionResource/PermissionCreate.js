@@ -132,13 +132,18 @@ const PermissionCreate = () => {
         </CardContent>
         <CardActions>
           <ButtonSubmit
+            id="pm-tool-button-permission-create-submit"
             color={color}
             onClick={handleSubmit}
             loading={loading}
             isValid={isValid}
             dirty={dirty}
           />
-          <ButtonCancel color={color} onClick={handleCancel} />
+          <ButtonCancel
+            id="pm-tool-button-permission-create-cancel"
+            color={color}
+            onClick={handleCancel}
+          />
         </CardActions>
       </Card>
     </Box>

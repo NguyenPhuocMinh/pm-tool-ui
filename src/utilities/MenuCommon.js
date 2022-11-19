@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { NavLinkMain } from '@utilities';
+import { NavLinkMain, PrivateMenuCommon } from '@utilities';
 import { useTranslate } from '@hooks';
 import {
   Tooltip,
@@ -41,55 +41,63 @@ const MenuCommon = ({ open, menus = [], titleSubHeader = '' }) => {
         </ListSubheader>
       }
     >
-      {menus.map((item) => (
-        <Tooltip
-          key={item.name}
-          title={translate(item.title)}
-          placement="right"
-        >
-          <ListItem
+      {menus.map((item) => {
+        return (
+          <PrivateMenuCommon
             key={item.name}
-            disablePadding
-            sx={{
-              display: 'block'
-            }}
+            enable={item.enable}
+            menuPermission={item.permission}
           >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5
-              }}
-              component={NavLinkMain}
-              to={item.path}
-              selected={location.pathname === item.path}
+            <Tooltip
+              key={item.name}
+              title={translate(item.title)}
+              placement="right"
             >
-              <ListItemIcon
+              <ListItem
+                key={item.name}
+                disablePadding
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center'
+                  display: 'block'
                 }}
               >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={translate(item.title)}
-                sx={{
-                  opacity: open ? 1 : 0,
-                  '& .MuiTypography-root': {
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis'
-                  }
-                }}
-                classes={{
-                  primary: classes.fontStyle
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        </Tooltip>
-      ))}
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5
+                  }}
+                  component={NavLinkMain}
+                  to={item.path}
+                  selected={location.pathname === item.path}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={translate(item.title)}
+                    sx={{
+                      opacity: open ? 1 : 0,
+                      '& .MuiTypography-root': {
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }
+                    }}
+                    classes={{
+                      primary: classes.fontStyle
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </Tooltip>
+          </PrivateMenuCommon>
+        );
+      })}
     </List>
   );
 };

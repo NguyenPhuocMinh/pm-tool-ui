@@ -74,16 +74,15 @@ $ docker build -t <username>/pm-tool-ui:<version> .
 - **Run build docker images**
 
 ```sh
-$ docker run -d -p 8080:8080 <username>/pm-tool-ui:<version>
+$ docker run -d -p 8080:80 <username>/pm-tool-ui:<version>
 ```
 
 ## Build
 
 - **When merge master so remember**:
   - **Step 1** => go to file config.yml in folder .circleci change APP_DOCKER_TAG and APP_HELM_TAG new version
-  - **Step 2** => go to file values.yaml in folder /helm-charts/pm-tool-api change new version docker tag
-  - **Step 3** => go to file Chart.yaml in folder /helm-charts/pm-tool-api change new version chart
-  - **Step 4** => go to file configs.js change new version
+  - **Step 2** => go to file values.yaml in folder /deploy/pm-tool-ui change new version docker tag
+  - **Step 3** => go to file Chart.yaml in folder /deploy/pm-tool-ui change new version chart
 
 ## Circle CI/CD
 

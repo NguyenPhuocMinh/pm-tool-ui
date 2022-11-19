@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   message: {
     textAlign: 'center',
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Josefin Sans, sans-serif',
     opacity: 0.5,
     margin: '0 1em'
   },
@@ -56,7 +56,7 @@ const NotFoundCommon = (props) => {
 
   return (
     <div className={classnames(classes.container, className)}>
-      <TitleCommon defaultTitle={title} />
+      <TitleCommon defaultTitle={title} title={title} />
       <div className={classes.message}>
         <HotTub className={classes.icon} />
         <h1>{translate('page.not_found.name')}</h1>
