@@ -6,7 +6,7 @@ import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TextInput, ButtonSubmit, ButtonCancel } from '@components';
+import { TextInput, ButtonSubmit, ButtonCancel } from '@utilities';
 import { updateUserByIdAction } from '@reduxStore/actions';
 import { validatorUserEdit } from '@validators';
 

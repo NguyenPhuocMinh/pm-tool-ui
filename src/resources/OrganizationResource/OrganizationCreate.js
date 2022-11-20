@@ -14,8 +14,7 @@ import {
   Typography
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TextInput, SwitchInput } from '@components';
-import { LoadingRegular } from '@components';
+import { TextInput, SwitchInput, CircularCommon } from '@utilities';
 import { useFormik } from 'formik';
 import { validatorOrganizationCreate } from '@validators';
 import { get } from 'lodash';
@@ -127,7 +126,7 @@ const OrganizationCreate = () => {
             onClick={handleSubmit}
             disabled={!isValid || !dirty || loading}
           >
-            {loading && <LoadingRegular />}
+            {loading && <CircularCommon />}
             {translate('common.button.save')}
           </Button>
           <Button

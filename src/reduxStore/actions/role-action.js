@@ -1,5 +1,4 @@
 import { get, isEmpty } from 'lodash';
-import { formatErrorCommonMsg } from '@utils';
 import constants from '@constants';
 import {
   getAllRoleService,
@@ -61,8 +60,6 @@ export const getAllRoleAction =
       dispatch({
         type: END_REQUEST_ROLE
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -102,8 +99,6 @@ export const createRoleAction =
       dispatch({
         type: END_REQUEST_ROLE
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -136,8 +131,6 @@ export const getRoleByIdAction = (roleID) => async (dispatch) => {
     dispatch({
       type: END_REQUEST_ROLE
     });
-    const errorMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
   }
 };
 
@@ -174,8 +167,6 @@ export const updateRoleByIdAction =
       dispatch({
         type: END_REQUEST_ROLE
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -206,56 +197,51 @@ export const deleteRoleByIdAction = (roleID, query) => async (dispatch) => {
     dispatch({
       type: END_REQUEST_ROLE
     });
-    const errorMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
   }
 };
 
 /**
- * @description GET ALL USER BY ROLE NAME ACTION
- * @param {*} roleName
+ * @description GET ALL USER BY ROLE ID ACTION
+ * @param {*} roleID
  * @param {*} query
  */
-export const getUsersByRoleNameAction =
-  (roleName, query) => async (dispatch) => {
-    try {
+export const getUsersByRoleIDAction = (roleID, query) => async (dispatch) => {
+  try {
+    dispatch({
+      type: CALL_REQUEST_ROLE
+    });
+
+    const { result } = await getUsersInRoleByRoleNameService(roleID, query);
+
+    if (!isEmpty(result)) {
       dispatch({
-        type: CALL_REQUEST_ROLE
+        type: GET_ALL_USER_IN_ROLE,
+        payload: {
+          data: result.data,
+          total: result.total
+        }
       });
-
-      const { result } = await getUsersInRoleByRoleNameService(roleName, query);
-
-      if (!isEmpty(result)) {
-        dispatch({
-          type: GET_ALL_USER_IN_ROLE,
-          payload: {
-            data: result.data,
-            total: result.total
-          }
-        });
-        dispatch({
-          type: END_REQUEST_ROLE
-        });
-      } else {
-        dispatch({
-          type: END_REQUEST_ROLE
-        });
-      }
-    } catch (err) {
       dispatch({
         type: END_REQUEST_ROLE
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
+    } else {
+      dispatch({
+        type: END_REQUEST_ROLE
+      });
     }
-  };
+  } catch (err) {
+    dispatch({
+      type: END_REQUEST_ROLE
+    });
+  }
+};
 
 /**
  * @description GET ALL PERMISSION BY ROLE NAME ACTION
  * @param {*} roleID
  * @param {*} query
  */
-export const getPermissionsByRoleNameAction =
+export const getPermissionsByRoleIDAction =
   (roleID, query) => async (dispatch) => {
     try {
       dispatch({
@@ -287,7 +273,5 @@ export const getPermissionsByRoleNameAction =
       dispatch({
         type: END_REQUEST_ROLE
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };

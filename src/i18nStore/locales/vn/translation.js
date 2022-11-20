@@ -1,3 +1,4 @@
+import translationAuth from './translation-auth';
 import translationCommon from './translation-common';
 import translationPage from './translation-page';
 import translationMenu from './translation-menu';
@@ -13,6 +14,7 @@ import translationUser from './translation-user';
 import translationPermission from './translation-permission';
 
 const TRANSLATIONS_VN = {
+  auth: translationAuth,
   common: translationCommon,
   page: translationPage,
   menu: translationMenu,

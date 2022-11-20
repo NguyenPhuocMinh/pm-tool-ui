@@ -106,7 +106,7 @@ export const addRolesToUserService = async (userID, records) => {
 export const setPassUserByIdService = async (userID, records) => {
   try {
     const { data } = await httpClientRestProvider.patch(
-      `${bastPath}/${userID}/set-pass`,
+      `${bastPath}/${userID}/set-password`,
       records
     );
 

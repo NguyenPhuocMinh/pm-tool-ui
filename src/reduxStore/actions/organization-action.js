@@ -1,5 +1,4 @@
 import { isEmpty, get } from 'lodash';
-import { formatErrorCommonMsg } from '@utils';
 import {
   getAllOrganizationService,
   createOrganizationService,
@@ -49,8 +48,6 @@ export const getAllOrganizationAction =
       dispatch({
         type: END_REQUEST_ORGANIZATION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -88,8 +85,6 @@ export const createOrganizationAction =
       dispatch({
         type: END_REQUEST_ORGANIZATION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -121,8 +116,6 @@ export const getOrganizationByIdAction =
       dispatch({
         type: END_REQUEST_ORGANIZATION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -157,8 +150,6 @@ export const updateOrganizationByIdAction =
       dispatch({
         type: END_REQUEST_ORGANIZATION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };
 
@@ -186,7 +177,5 @@ export const deleteOrganizationByIdAction =
       dispatch({
         type: END_REQUEST_ORGANIZATION
       });
-      const errorMsg = formatErrorCommonMsg(err);
-      dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errorMsg));
     }
   };

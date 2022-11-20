@@ -16,7 +16,7 @@ import { makeStyles } from '@mui/styles';
 import { useTranslate } from '@hooks';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { setPasswordByUserIdAction } from '@reduxStore/actions';
-import { TypoCommon, TextInput, ButtonSubmit, ButtonCancel } from '@components';
+import { TypoCommon, TextInput, ButtonSubmit, ButtonCancel } from '@utilities';
 import { validatorUserSetPassword } from '@validators';
 
 const useStyles = makeStyles({
@@ -38,8 +38,8 @@ const SetPasswordTab = () => {
 
   const { records, loading, color } = useSelector((state) => {
     return {
-      records: get(state, 'permission.records', {}),
-      loading: get(state, 'permission.loading', false),
+      records: get(state, 'user.records', {}),
+      loading: get(state, 'user.loading', false),
       color: get(state, 'common.color', {})
     };
   });

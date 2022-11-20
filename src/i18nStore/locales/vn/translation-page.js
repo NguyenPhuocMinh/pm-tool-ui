@@ -10,6 +10,10 @@ const translationPage = {
   not_found: {
     name: 'Không tìm thấy',
     message: 'Bạn đã nhập sai URL hoặc bạn đã theo một liên kết không hợp lệ.'
+  },
+  access_denied: {
+    name: 'Quyền truy cập bị từ chối',
+    message: 'Bạn không có quyền truy cập liên kết này.'
   }
 };
 

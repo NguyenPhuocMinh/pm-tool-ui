@@ -31,7 +31,7 @@ import { useTranslate } from '@hooks';
 // themes
 import { lightTheme } from '@themes';
 // component
-import { TextInput } from '@components';
+import { TextInput } from '@utilities';
 
 const useStyles = makeStyles({
   input: {
@@ -193,6 +193,7 @@ const LoginResource = () => {
               }}
             >
               <Button
+                id="pm-tool-button-login"
                 sx={{
                   width: 'auto',
                   minWidth: 256,

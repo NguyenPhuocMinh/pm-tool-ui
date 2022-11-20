@@ -1,10 +1,19 @@
 import { useState, useEffect, createElement } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { get } from 'lodash';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { refreshTokenAction } from '@reduxStore/actions';
+import { get, isEmpty } from 'lodash';
 import { routes } from '@routes';
-import { useTranslate } from '@hooks';
-import { AppBarCustom, DrawerCustom, DrawerHeaderCustom } from '@components';
+import { useTranslate, useAuth } from '@hooks';
+import {
+  AppBarCustom,
+  DrawerCustom,
+  DrawerHeaderCustom,
+  PrivateRouteCommon
+} from '@utilities';
+import { checkExpiredTime } from '@utils';
+import decoded from 'jwt-decode';
+
 // material
 import { useTheme } from '@mui/material/styles';
 import {
@@ -27,7 +36,9 @@ const Layout = () => {
 
   // hooks
   const { translate } = useTranslate();
-  // const [_, setLanguage] = useState(constants.LOCALES.EN);
+  const { token } = useAuth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const isSmMatch = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -47,18 +58,23 @@ const Layout = () => {
     }
   }, [isSmMatch]);
 
-  // useEffect(() => {
-  //   if (i18n.language === 'vn') {
-  //     setLanguage(constants.LOCALES.VN);
-  //   } else {
-  //     setLanguage(constants.LOCALES.EN);
-  //   }
-  // }, [i18n.language]);
+  useEffect(() => {
+    let interval;
+    if (!isEmpty(token)) {
+      const decodeToken = decoded(token);
+      interval = setInterval(() => {
+        if (checkExpiredTime(decodeToken?.exp)) {
+          dispatch(refreshTokenAction(navigate, decodeToken));
+        }
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [token, dispatch]);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBarCustom position="fixed" open={open}>
+      <AppBarCustom id="layout-appBar" position="fixed" open={open}>
         <Toolbar sx={{ backgroundColor: color?.hex }}>
           <IconButton
             color="inherit"
@@ -86,6 +102,7 @@ const Layout = () => {
             }}
           />
           <Typography
+            id="layout-title"
             sx={{
               fontFamily: 'Monospace',
               textDecoration: 'none'
@@ -94,7 +111,7 @@ const Layout = () => {
             noWrap
             component="a"
             href="/"
-            color={color ? color.hex : 'primary.main'}
+            color={color ? color.hex : '#B8E986'}
           >
             {translate('toolbar.title')}
           </Typography>
@@ -109,10 +126,15 @@ const Layout = () => {
               key={item.name}
               path={item.path}
               element={
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                  <DrawerHeaderCustom />
-                  {createElement(item.element)}
-                </Box>
+                <PrivateRouteCommon
+                  enable={item.enable}
+                  routePermission={item.permission}
+                >
+                  <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                    <DrawerHeaderCustom />
+                    {createElement(item.element)}
+                  </Box>
+                </PrivateRouteCommon>
               }
             />
           );

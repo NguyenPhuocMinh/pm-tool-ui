@@ -8,20 +8,21 @@ import {
 } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 import {
   NoRowsCommon,
   PopupCommon,
   SearchInput,
   ButtonCreate
-} from '@components';
+} from '@utilities';
 import constants from '@constants';
-import { other, dateTimeFormat } from '@utils';
+import { other, dateTimeFormat, authAllowed } from '@utils';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { menuPermissions } from '@permissions';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -57,6 +58,7 @@ const OrganizationList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
+  const { payload } = useAuth();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -179,24 +181,33 @@ const OrganizationList = () => {
         type: 'actions',
         flex: 0.3,
         getActions: (params) => {
-          return [
-            <GridActionsCellItem
-              icon={<DeleteIcon />}
-              onClick={handleShowPopupDelete(
-                params.id,
-                params.row.name,
-                queryOptions
-              )}
-              label="common.label.delete"
-              key={params.id}
-            />,
-            <GridActionsCellItem
-              icon={<BorderColorIcon />}
-              onClick={handleEdit(params.id)}
-              label="common.label.edit"
-              key={params.id}
-            />
-          ];
+          if (
+            authAllowed({
+              payload,
+              permission: menuPermissions.organizations.GET_ID
+            })
+          ) {
+            return [
+              <GridActionsCellItem
+                icon={<DeleteIcon />}
+                onClick={handleShowPopupDelete(
+                  params.id,
+                  params.row.name,
+                  queryOptions
+                )}
+                label="common.label.delete"
+                key={params.id}
+              />,
+
+              <GridActionsCellItem
+                icon={<BorderColorIcon />}
+                onClick={handleEdit(params.id)}
+                label="common.label.edit"
+                key={params.id}
+              />
+            ];
+          }
+          return [];
         }
       }
     ];
@@ -227,20 +238,25 @@ const OrganizationList = () => {
           className={classes.search}
           {...formProps}
         />
-        <Box
-          sx={{
-            display: {
-              xs: 'none',
-              md: 'flex'
-            },
-            flexWrap: 'wrap',
-            justifyItems: 'center'
-          }}
-        >
-          <Box width="auto" minWidth={50}>
-            <ButtonCreate redirect="/organizations/create" />
+        {authAllowed({
+          payload,
+          permission: menuPermissions.organizations.CREATE
+        }) && (
+          <Box
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'flex'
+              },
+              flexWrap: 'wrap',
+              justifyItems: 'center'
+            }}
+          >
+            <Box width="auto" minWidth={50}>
+              <ButtonCreate redirect="/organizations/create" />
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
       <Paper elevation={3}>
         <Box style={{ height: 400, width: '100%' }}>

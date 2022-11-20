@@ -82,13 +82,13 @@ export const deleteRoleByIdService = async (roleID) => {
 
 /**
  * @description GET USERS IN ROLE BY ROLE NAME
- * @param {*} roleName
+ * @param {*} roleID
  * @param {*} query
  */
-export const getUsersInRoleByRoleNameService = async (roleName, query) => {
+export const getUsersInRoleByRoleNameService = async (roleID, query) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      `${basePath}/${roleName}/users`,
+      `${basePath}/${roleID}/users`,
       {
         params: query
       }

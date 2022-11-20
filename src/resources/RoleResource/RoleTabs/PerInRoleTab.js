@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPermissionsByRoleNameAction } from '@reduxStore/actions';
+import { getPermissionsByRoleIDAction } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { useTranslate } from '@hooks';
 import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { NoRowsCommon } from '@components';
+import { NoRowsCommon } from '@utilities';
 import constants from '@constants';
 import { other } from '@utils';
 
@@ -55,7 +55,7 @@ const PerInRoleTab = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getPermissionsByRoleNameAction(roleID, queryOptions));
+    dispatch(getPermissionsByRoleIDAction(roleID, queryOptions));
   }, [dispatch, roleID, queryOptions]);
 
   const { data, total, loading } = useSelector((state) => {

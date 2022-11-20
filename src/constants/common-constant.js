@@ -18,13 +18,13 @@ const commonConstants = {
     WARN: 'warn'
   },
   HTTP_STATUS: {
-    SUCCESS: '200',
-    CREATE: '202',
-    BAD_REQUEST: '400',
-    AUTHORIZATION: '401',
-    FORBIDDEN: '403',
-    NOT_FOUND: '404',
-    ERROR_SERVER: '500'
+    SUCCESS: 200,
+    CREATE: 202,
+    BAD_REQUEST: 400,
+    AUTHORIZATION: 401,
+    FORBIDDEN: 403,
+    NOT_FOUND: 404,
+    ERROR_SERVER: 500
   },
   VERTICAL: 'top',
   HORIZONTAL: 'center',

@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import { optionsLogger, optionsPersist } from '@utils';
-import { RESET } from './types';
+import { RESET } from '@reduxStore/types';
 
 // reducers
 import {
@@ -14,7 +14,7 @@ import {
   roleReducer,
   permissionReducer,
   userReducer
-} from './reducers';
+} from '@reduxStore/reducers';
 
 // middleware
 const loggerMiddleware = createLogger(optionsLogger);

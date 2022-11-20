@@ -1,18 +1,18 @@
 import { isEmpty } from 'lodash';
 import constants from '@constants';
-import { formatErrorCommonMsg } from '@utils';
-import { loginService, logoutService } from '@services';
+import { loginService, logoutService, refreshTokenService } from '@services';
 import { showNotification, removeLogin } from '@reduxStore/actions';
-import decodeJWT from 'jwt-decode';
-
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_END,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_END
-} from '../types';
+  LOGOUT_END,
+  REFRESH_REQUEST,
+  REFRESH_SUCCESS,
+  REFRESH_END
+} from '@reduxStore/types';
 
 /**
  * LOGIN ACTION
@@ -25,33 +25,23 @@ export const loginAction = (navigate, params) => async (dispatch) => {
     dispatch({
       type: LOGIN_REQUEST
     });
-    const result = await loginService(email, password);
-    const { token } = result;
-    const decodeToken = decodeJWT(token);
+    const { result, message } = await loginService(email, password);
 
-    if (!isEmpty(decodeToken.name)) {
+    if (!isEmpty(result)) {
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: {
-          token: result.token,
-          name: decodeToken.name,
-          email: decodeToken.email
-        }
+        payload: result.data
       });
       dispatch({
         type: LOGIN_END
       });
-      dispatch(
-        showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
-      );
-      navigate('/dashboard');
+      dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+      navigate('/');
     }
   } catch (err) {
     dispatch({
       type: LOGIN_END
     });
-    const errMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errMsg));
   }
 };
 
@@ -60,34 +50,64 @@ export const loginAction = (navigate, params) => async (dispatch) => {
  * @param {*} navigate
  * @param {*} params
  */
-export const logoutAction = (navigate) => async (dispatch) => {
+export const logoutAction = (navigate, params) => async (dispatch) => {
   try {
+    const { email } = params;
     dispatch({
       type: LOGOUT_REQUEST
     });
-    removeLogin(dispatch);
-    const result = await logoutService();
+    dispatch(removeLogin());
+
+    const { result, message } = await logoutService(email);
+
     if (!isEmpty(result)) {
       dispatch({
         type: LOGOUT_SUCCESS,
         payload: {
-          isAuthenticated: false,
-          token: null
+          token: null,
+          payload: null
         }
       });
       dispatch({
         type: LOGOUT_END
       });
-      dispatch(
-        showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
-      );
+      dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
       navigate('/login');
     }
   } catch (err) {
     dispatch({
       type: LOGOUT_END
     });
-    const errMsg = formatErrorCommonMsg(err);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errMsg));
+  }
+};
+
+/**
+ * REFRESH TOKEN ACTION
+ * @param {*} navigate
+ * @param {*} params
+ */
+export const refreshTokenAction = (navigate, params) => async (dispatch) => {
+  try {
+    const { email } = params;
+
+    dispatch({
+      type: REFRESH_REQUEST
+    });
+
+    const { result } = await refreshTokenService(email);
+
+    if (!isEmpty(result)) {
+      dispatch({
+        type: REFRESH_SUCCESS,
+        payload: result.data
+      });
+    }
+  } catch (err) {
+    if (err.response.status === constants.HTTP_STATUS.AUTHORIZATION) {
+      navigate('/login');
+    }
+    dispatch({
+      type: REFRESH_END
+    });
   }
 };

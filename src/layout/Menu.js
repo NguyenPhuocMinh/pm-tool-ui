@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
-import { MenuCommon } from '@components';
+import { MenuCommon, PrivateSubMenuCommon } from '@utilities';
 import { Divider } from '@mui/material';
 import { homeMenus, managementMenus, authenticateMenus } from '@routes';
+import { subMenuPermissions } from '@permissions';
 
 const Menu = ({ open }) => {
   return (
@@ -12,17 +13,23 @@ const Menu = ({ open }) => {
         titleSubHeader="menu.home.title"
       />
       <Divider />
-      <MenuCommon
-        open={open}
-        menus={managementMenus}
-        titleSubHeader="menu.management.title"
-      />
+      <PrivateSubMenuCommon subPermissions={subMenuPermissions.managementMenus}>
+        <MenuCommon
+          open={open}
+          menus={managementMenus}
+          titleSubHeader="menu.management.title"
+        />
+      </PrivateSubMenuCommon>
       <Divider />
-      <MenuCommon
-        open={open}
-        menus={authenticateMenus}
-        titleSubHeader="menu.authenticate.title"
-      />
+      <PrivateSubMenuCommon
+        subPermissions={subMenuPermissions.authenticateMenus}
+      >
+        <MenuCommon
+          open={open}
+          menus={authenticateMenus}
+          titleSubHeader="menu.authenticate.title"
+        />
+      </PrivateSubMenuCommon>
     </Fragment>
   );
 };

@@ -15,7 +15,8 @@ import {
   UserCreate,
   UserEdit
 } from '@resources';
-import { NotFoundCommon } from '@components';
+import { NotFoundCommon, ForbiddenCommon } from '@utilities';
+import { menuPermissions } from '@permissions';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import StoreIcon from '@mui/icons-material/Store';
@@ -29,108 +30,150 @@ import LockPersonIcon from '@mui/icons-material/LockPerson';
  */
 const dashboardRoutes = [
   {
+    enable: false,
     name: 'dashboard',
     path: '/',
-    element: () => <DashboardResource />
+    element: () => <DashboardResource />,
+    permission: ''
   }
 ];
 
 const notfoundRoutes = [
   {
+    enable: false,
     name: 'notfound',
     path: '/not-found',
-    element: () => <NotFoundCommon />
+    element: () => <NotFoundCommon />,
+    permission: ''
+  }
+];
+
+const forbiddenRoutes = [
+  {
+    enable: false,
+    name: 'forbidden',
+    path: '/forbidden',
+    element: () => <ForbiddenCommon />,
+    permission: ''
   }
 ];
 
 const organizationRoutes = [
   {
+    enable: true,
     name: 'organizations',
     path: '/organizations',
-    element: () => <OrganizationList />
+    element: () => <OrganizationList />,
+    permission: menuPermissions.organizations.LIST
   },
   {
+    enable: true,
     name: 'organizations-create',
     path: '/organizations/create',
-    element: () => <OrganizationCreate />
+    element: () => <OrganizationCreate />,
+    permission: menuPermissions.organizations.CREATE
   },
   {
+    enable: true,
     name: 'organizations-edit',
     path: '/organizations/edit/:id',
-    element: () => <OrganizationEdit />
+    element: () => <OrganizationEdit />,
+    permission: menuPermissions.organizations.EDIT
   }
 ];
 
 const projectRoutes = [
   {
+    enable: true,
     name: 'project',
     path: '/projects',
-    element: () => <ProjectList />
+    element: () => <ProjectList />,
+    permission: menuPermissions.projects.LIST
   },
   {
+    enable: true,
     name: 'project',
     path: '/projects/create',
-    element: () => <ProjectCreate />
+    element: () => <ProjectCreate />,
+    permission: menuPermissions.projects.CREATE
   }
 ];
 
 const roleRoutes = [
   {
+    enable: true,
     name: 'roles',
     path: '/roles',
-    element: () => <RoleList />
+    element: () => <RoleList />,
+    permission: menuPermissions.roles.LIST
   },
   {
+    enable: true,
     name: 'roles-create',
     path: '/roles/create',
-    element: () => <RoleCreate />
+    element: () => <RoleCreate />,
+    permission: menuPermissions.roles.CREATE
   },
   {
     name: 'roles-edit',
     path: '/roles/edit/:id',
-    element: () => <RoleEdit />
+    element: () => <RoleEdit />,
+    permission: menuPermissions.roles.EDIT
   }
 ];
 
 const userRoutes = [
   {
+    enable: true,
     name: 'users',
     path: '/users',
-    element: () => <UserList />
+    element: () => <UserList />,
+    permission: menuPermissions.users.LIST
   },
   {
+    enable: true,
     name: 'users-create',
     path: '/users/create',
-    element: () => <UserCreate />
+    element: () => <UserCreate />,
+    permission: menuPermissions.users.CREATE
   },
   {
+    enable: true,
     name: 'users-edit',
     path: '/users/edit/:id',
-    element: () => <UserEdit />
+    element: () => <UserEdit />,
+    permission: menuPermissions.users.EDIT
   }
 ];
 
 const permissionRoutes = [
   {
+    enable: true,
     name: 'permissions',
     path: '/permissions',
-    element: () => <PermissionList />
+    element: () => <PermissionList />,
+    permission: menuPermissions.permissions.LIST
   },
   {
+    enable: true,
     name: 'permissions-create',
     path: '/permissions/create',
-    element: () => <PermissionCreate />
+    element: () => <PermissionCreate />,
+    permission: menuPermissions.permissions.CREATE
   },
   {
+    enable: true,
     name: 'permissions-edit',
     path: '/permissions/edit/:id',
-    element: () => <PermissionEdit />
+    element: () => <PermissionEdit />,
+    permission: menuPermissions.permissions.EDIT
   }
 ];
 
 const routes = [
   ...dashboardRoutes,
   ...notfoundRoutes,
+  ...forbiddenRoutes,
   ...organizationRoutes,
   ...projectRoutes,
   ...roleRoutes,
@@ -143,46 +186,58 @@ const routes = [
  */
 const homeMenus = [
   {
+    enable: false,
     name: 'dashboard',
     title: 'menu.home.dashboard.title',
     path: '/',
-    icon: <DashboardIcon />
+    icon: <DashboardIcon />,
+    permission: ''
   }
 ];
 
 const managementMenus = [
   {
+    enable: true,
     name: 'organizations',
     title: 'menu.management.organization.title',
     path: '/organizations',
-    icon: <StoreIcon />
+    icon: <StoreIcon />,
+    permission: menuPermissions.organizations.LIST
   },
   {
+    enable: true,
     name: 'projects',
     title: 'menu.management.project.title',
     path: '/projects',
-    icon: <AccountTreeIcon />
+    icon: <AccountTreeIcon />,
+    permission: menuPermissions.projects.LIST
   }
 ];
 
 const authenticateMenus = [
   {
+    enable: true,
     name: 'roles',
     title: 'menu.authenticate.role.title',
     path: '/roles',
-    icon: <LanIcon />
+    icon: <LanIcon />,
+    permission: menuPermissions.roles.LIST
   },
   {
+    enable: true,
     name: 'permissions',
     title: 'menu.authenticate.permission.title',
     path: '/permissions',
-    icon: <LockPersonIcon />
+    icon: <LockPersonIcon />,
+    permission: menuPermissions.permissions.LIST
   },
   {
+    enable: true,
     name: 'users',
     title: 'menu.authenticate.user.title',
     path: '/users',
-    icon: <SupervisorAccountIcon />
+    icon: <SupervisorAccountIcon />,
+    permission: menuPermissions.users.LIST
   }
 ];
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 import {
   resetRecordsRole,
   getAllRoleAction,
@@ -15,12 +15,17 @@ import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { NoRowsCommon, LoadingCommon, PopupCommon } from '@components';
-import { SearchInput } from '@components';
-import { ButtonCreate } from '@components';
+import {
+  NoRowsCommon,
+  LoadingCommon,
+  PopupCommon,
+  ButtonCreate,
+  SearchInput
+} from '@utilities';
 import constants from '@constants';
-import { other, dateTimeFormat } from '@utils';
+import { other, dateTimeFormat, authAllowed } from '@utils';
 import { validatorVerifyToDelete } from '@validators';
+import { menuPermissions } from '@permissions';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -45,6 +50,7 @@ const RoleList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
+  const { payload } = useAuth();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -166,24 +172,29 @@ const RoleList = () => {
         headerName: translate('common.actions.title'),
         flex: 0.5,
         getActions: (params) => {
-          return [
-            <GridActionsCellItem
-              icon={<DeleteIcon />}
-              onClick={handleShowPopupDelete(
-                params.id,
-                params.row.name,
-                queryOptions
-              )}
-              label="common.label.delete"
-              key={params.id}
-            />,
-            <GridActionsCellItem
-              icon={<BorderColorIcon />}
-              onClick={handleEdit(params.id)}
-              label="common.label.edit"
-              key={params.id}
-            />
-          ];
+          if (
+            authAllowed({ payload, permission: menuPermissions.roles.GET_ID })
+          ) {
+            return [
+              <GridActionsCellItem
+                icon={<DeleteIcon />}
+                onClick={handleShowPopupDelete(
+                  params.id,
+                  params.row.name,
+                  queryOptions
+                )}
+                label="common.label.delete"
+                key={params.id}
+              />,
+              <GridActionsCellItem
+                icon={<BorderColorIcon />}
+                onClick={handleEdit(params.id)}
+                label="common.label.edit"
+                key={params.id}
+              />
+            ];
+          }
+          return [];
         }
       }
     ];
@@ -216,23 +227,28 @@ const RoleList = () => {
             {...formProps}
           />
         </Paper>
-        <Box
-          sx={{
-            display: {
-              xs: 'none',
-              md: 'flex'
-            },
-            flexWrap: 'wrap',
-            justifyItems: 'center'
-          }}
-        >
-          <Box width="auto" minWidth={50}>
-            <ButtonCreate
-              label="common.button.create"
-              redirect="/roles/create"
-            />
+        {authAllowed({
+          payload,
+          permission: menuPermissions.roles.CREATE
+        }) && (
+          <Box
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'flex'
+              },
+              flexWrap: 'wrap',
+              justifyItems: 'center'
+            }}
+          >
+            <Box width="auto" minWidth={50}>
+              <ButtonCreate
+                label="common.button.create"
+                redirect="/roles/create"
+              />
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
       <Paper elevation={3}>
         <Box style={{ height: 400, width: '100%' }}>
