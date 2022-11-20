@@ -13,6 +13,7 @@ const translationToolbar = {
   },
   setting: {
     title: 'Cài đặt',
+    version: 'Phiên bản',
     mode: 'Chế độ',
     themes: {
       light: 'Sáng',

@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 // hooks
 import { useTranslate } from '@hooks';
 import { ButtonGroupMain, ColorPickerMain } from '@utilities';
+import packageJSON from '../../../package.json';
 
 const CommonSetting = ({ open, anchor, toggleDrawer }) => {
   // hooks
@@ -43,6 +44,37 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
           >
             <CloseIcon />
           </IconButton>
+        </Box>
+        <Divider />
+        <Box
+          sx={{
+            padding: '0 16px',
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
+          <Typography
+            sx={{
+              margin: '20px 0px 10px',
+              fontFamily: 'Josefin Sans',
+              fontWeight: 'bold'
+            }}
+            variant="body1"
+            gutterBottom
+          >
+            {translate('toolbar.setting.version')}
+          </Typography>
+          <Typography
+            sx={{
+              margin: '20px 5px 10px',
+              fontFamily: 'Josefin Sans',
+              fontWeight: 'bold'
+            }}
+            variant="body1"
+            gutterBottom
+          >
+            {packageJSON.version}
+          </Typography>
         </Box>
         <Divider />
         <Box sx={{ padding: '0 16px' }}>
