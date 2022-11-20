@@ -13,6 +13,7 @@ const translationToolbar = {
   },
   setting: {
     title: 'Settings',
+    version: 'Version',
     mode: 'Mode',
     themes: {
       light: 'Light',

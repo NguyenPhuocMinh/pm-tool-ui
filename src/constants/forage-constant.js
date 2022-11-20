@@ -2,7 +2,8 @@ const forageConstants = {
   LOCAL_FORAGE_KEYS: {
     THEME: 'THEME',
     LANGUAGE: 'LANGUAGE',
-    COLOR: 'COLOR'
+    COLOR: 'COLOR',
+    TOKEN: 'TOKEN'
   }
 };
 

@@ -1,5 +1,6 @@
 import { isEmpty } from 'lodash';
 import constants from '@constants';
+import { localForage } from '@utils';
 import { loginService, logoutService, refreshTokenService } from '@services';
 import { showNotification, removeLogin } from '@reduxStore/actions';
 import {
@@ -35,6 +36,10 @@ export const loginAction = (navigate, params) => async (dispatch) => {
       dispatch({
         type: LOGIN_END
       });
+      localForage.setItem(
+        constants.LOCAL_FORAGE_KEYS.TOKEN,
+        result?.data?.token
+      );
       dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
       navigate('/');
     }
@@ -71,6 +76,7 @@ export const logoutAction = (navigate, params) => async (dispatch) => {
       dispatch({
         type: LOGOUT_END
       });
+      localForage.removeItem(constants.LOCAL_FORAGE_KEYS.TOKEN);
       dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
       navigate('/login');
     }

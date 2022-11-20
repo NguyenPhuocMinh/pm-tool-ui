@@ -244,6 +244,7 @@
     "prefer-exponentiation-operator": "off",
     "no-underscore-dangle": "off",
     "no-nested-ternary": "off",
-    "no-unsafe-optional-chaining": "off"
+    "no-unsafe-optional-chaining": "off",
+    "no-param-reassign": "off"
   }
 }
