@@ -74,7 +74,10 @@ export const createOrganizationAction =
           payload: result
         });
         dispatch(
-          showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message: result.message
+          })
         );
         dispatch({
           type: END_REQUEST_ORGANIZATION
@@ -144,7 +147,9 @@ export const updateOrganizationByIdAction =
         dispatch({
           type: END_REQUEST_ORGANIZATION
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       }
     } catch (err) {
       dispatch({
@@ -169,7 +174,10 @@ export const deleteOrganizationByIdAction =
 
       if (!isEmpty(result)) {
         dispatch(
-          showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message: result.message
+          })
         );
         dispatch(getAllOrganizationAction(query));
       }

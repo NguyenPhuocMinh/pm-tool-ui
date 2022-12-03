@@ -4,15 +4,14 @@ const basePath = '/auth';
 
 /**
  * LOGIN SERVICE
- * @param {*} email
- * @param {*} password
+ * @param {*} records {email, password}
  */
-export const loginService = async (email, password) => {
+export const loginService = async (records) => {
   try {
-    const { data } = await httpClientRestProvider.post(`${basePath}/logins`, {
-      email,
-      password
-    });
+    const { data } = await httpClientRestProvider.post(
+      `${basePath}/logins`,
+      records
+    );
 
     return data;
   } catch (error) {
@@ -22,12 +21,31 @@ export const loginService = async (email, password) => {
 
 /**
  * LOGOUT SERVICE
+ * @param {*} records {email, sessionID}
  */
-export const logoutService = async (email) => {
+export const logoutService = async (records) => {
   try {
-    const { data } = await httpClientRestProvider.post(`${basePath}/logouts`, {
-      email
-    });
+    const { data } = await httpClientRestProvider.post(
+      `${basePath}/logouts`,
+      records
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * WHOAMI SERVICE
+ * @param {*} records {email}
+ */
+export const whoamiService = async (records) => {
+  try {
+    const { data } = await httpClientRestProvider.post(
+      `${basePath}/whoami`,
+      records
+    );
 
     return data;
   } catch (error) {
@@ -37,15 +55,30 @@ export const logoutService = async (email) => {
 
 /**
  * REFRESH TOKEN SERVICE
- * @param {*} email
+ * @param {*} records {email, sessionID}
  */
-export const refreshTokenService = async (email) => {
+export const refreshTokenService = async (records) => {
   try {
     const { data } = await httpClientRestProvider.post(
       `${basePath}/refresh-tokens`,
-      {
-        email
-      }
+      records
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * REVOKE TOKEN SERVICE
+ * @param {*} records {id, sessionID}
+ */
+export const revokeTokenService = async (records) => {
+  try {
+    const { data } = await httpClientRestProvider.post(
+      `${basePath}/revoke-tokens`,
+      records
     );
 
     return data;

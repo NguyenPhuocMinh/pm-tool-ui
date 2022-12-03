@@ -12,29 +12,23 @@ import {
 } from '@reduxStore/actions';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
+import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
-  NoRowsCommon,
-  LoadingCommon,
   PopupCommon,
   SearchInput,
-  ButtonCreate
+  ButtonCreate,
+  CardListCommon,
+  TableGridCommon
 } from '@utilities';
-import constants from '@constants';
-import { other, dateTimeFormat, authAllowed } from '@utils';
+import { dateTimeFormat, authAllowed } from '@utils';
 import { validatorVerifyToDelete } from '@validators';
 import { menuPermissions } from '@permissions';
 
 const useStyles = makeStyles((_) => ({
   input: {
     width: 256
-  },
-  dataGridRoot: {
-    '& .MuiIconButton-root': {
-      border: 'none !important'
-    }
   },
   search: {
     width: 256
@@ -50,7 +44,7 @@ const UserList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
-  const { payload } = useAuth();
+  const { whoami } = useAuth();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -185,7 +179,7 @@ const UserList = () => {
         getActions: (params) => {
           const fullName = `${params.row.lastName} ${params.row.firstName}`;
           if (
-            authAllowed({ payload, permission: menuPermissions.users.GET_ID })
+            authAllowed({ whoami, permission: menuPermissions.users.GET_ID })
           ) {
             return [
               <GridActionsCellItem
@@ -220,6 +214,7 @@ const UserList = () => {
 
   return (
     <Box display="block">
+      <CardListCommon resource="users" />
       <Box
         sx={{
           marginBottom: '1em',
@@ -228,18 +223,17 @@ const UserList = () => {
           justifyContent: 'space-between'
         }}
       >
-        <Paper elevation={1}>
-          <SearchInput
-            label="common.search"
-            id="search"
-            source="search"
-            size="small"
-            placeholder="resources.users.search"
-            className={classes.search}
-            {...formProps}
-          />
-        </Paper>
-        {authAllowed({ payload, permission: menuPermissions.users.CREATE }) && (
+        <SearchInput
+          label="common.search"
+          id="search"
+          source="search"
+          size="small"
+          variant="standard"
+          placeholder="resources.users.search"
+          className={classes.search}
+          {...formProps}
+        />
+        {authAllowed({ whoami, permission: menuPermissions.users.CREATE }) && (
           <Box
             sx={{
               display: {
@@ -260,35 +254,16 @@ const UserList = () => {
         )}
       </Box>
       <Paper elevation={3}>
-        <Box style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            localeText={
-              i18n.language === constants.LANGUAGES.EN
-                ? enUS.components.MuiDataGrid.defaultProps.localeText
-                : viVN.components.MuiDataGrid.defaultProps.localeText
-            }
-            loading={loading}
-            rows={data}
-            rowCount={total}
-            columns={columns}
-            page={page}
-            pageSize={pageSize}
-            onPageChange={handleOnPageChange}
-            onPageSizeChange={handleOnPageSizeChange}
-            rowsPerPageOptions={[5, 10, 20, 100]}
-            pagination
-            paginationMode="server"
-            disableColumnMenu
-            components={{
-              NoRowsOverlay: NoRowsCommon,
-              LoadingOverlay: LoadingCommon
-            }}
-            classes={{
-              root: classes.dataGridRoot
-            }}
-            {...other}
-          />
-        </Box>
+        <TableGridCommon
+          loading={loading}
+          rows={data}
+          rowCount={total}
+          columns={columns}
+          page={page}
+          pageSize={pageSize}
+          onPageChange={handleOnPageChange}
+          onPageSizeChange={handleOnPageSizeChange}
+        />
       </Paper>
       <PopupCommon />
     </Box>

@@ -48,13 +48,6 @@ const SwitchInput = (props) => {
             '.MuiSwitch-thumb': {
               color: (theme) => color?.hex ?? theme.palette.primary.main
             },
-            '.Mui-checked': {
-              color: (theme) => color?.hex ?? theme.palette.primary.main
-            },
-            '.MuiSwitch-track': {
-              background: (theme) =>
-                `${color?.hex} !important` ?? theme.palette.primary.main
-            },
             ...sx
           }}
         />

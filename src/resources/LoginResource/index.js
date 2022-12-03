@@ -68,7 +68,8 @@ const LoginResource = () => {
   });
 
   const handleSubmitLogin = (values) => {
-    dispatch(loginAction(navigate, values));
+    const toolBox = { navigate };
+    dispatch(loginAction(toolBox, values));
   };
 
   return (
@@ -79,7 +80,7 @@ const LoginResource = () => {
         minHeight: '100vh',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'url(https://source.unsplash.com/random/1600x900)',
+        background: 'url(https://picsum.photos/1600/900)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
       }}
@@ -108,7 +109,7 @@ const LoginResource = () => {
                 justifyContent: 'center'
               }}
             >
-              <Avatar alt="" src="https://source.unsplash.com/random" />
+              <Avatar alt="" src="https://picsum.photos/50/50" />
             </Box>
             <Box
               component="div"

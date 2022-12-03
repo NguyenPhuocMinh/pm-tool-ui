@@ -7,7 +7,8 @@ const translationCommon = {
     cancel: 'Cancel',
     confirm: 'Confirm',
     viewAllNotify: 'View all notify',
-    save: 'Save'
+    save: 'Save',
+    resetPass: 'Reset Password'
   },
   actions: {
     title: 'Actions'
@@ -16,7 +17,9 @@ const translationCommon = {
   noRows: 'No rows',
   label: {
     delete: 'Delete',
-    edit: 'Edit'
+    edit: 'Edit',
+    timeline: 'TimeLine',
+    revoke: 'Revoke'
   },
   transferList: {
     titleLeft: 'Title Left',
@@ -25,6 +28,8 @@ const translationCommon = {
   },
   notifications: {
     errors: {
+      internalServer: 'Internal Server Error',
+      routerNotFound: 'Router Not Found Error',
       orchestratorHandlerNotFound: 'Orchestrator Handler Not Found!',
       schemaNotFound: 'Schema Not Found!'
     }

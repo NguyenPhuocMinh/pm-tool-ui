@@ -40,7 +40,10 @@ const NotifyCommon = () => {
   return (
     <Snackbar
       autoHideDuration={2000}
-      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      anchorOrigin={{
+        vertical: notify?.vertical ?? 'top',
+        horizontal: notify?.horizontal ?? 'center'
+      }}
       open={open}
       onClose={handleRequestClose}
       TransitionComponent={SlideTransition}
@@ -49,7 +52,9 @@ const NotifyCommon = () => {
       }}
     >
       <Alert onClose={handleRequestClose} severity={notify.level}>
-        {translate(notify?.message)}
+        {notify.options
+          ? translate(notify?.message, notify.options)
+          : translate(notify?.message)}
       </Alert>
     </Snackbar>
   );

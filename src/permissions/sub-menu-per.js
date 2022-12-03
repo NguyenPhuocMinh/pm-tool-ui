@@ -8,6 +8,7 @@ export const subMenuPermissions = {
   authenticateMenus: [
     menuPermissions.roles.LIST,
     menuPermissions.permissions.LIST,
-    menuPermissions.users.LIST
+    menuPermissions.users.LIST,
+    menuPermissions.userOnline.LIST
   ]
 };

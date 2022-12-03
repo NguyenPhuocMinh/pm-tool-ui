@@ -24,7 +24,9 @@
           ["@validators", "./src/validators"],
           ["@utilities", "./src/utilities"],
           ["@regulars", "./src/regulars"],
-          ["@permissions", "./src/permissions"]
+          ["@permissions", "./src/permissions"],
+          ["@socketStore", "./src/socketStore"],
+          ["@helpers", "./src/helpers"]
         ]
       }
     }

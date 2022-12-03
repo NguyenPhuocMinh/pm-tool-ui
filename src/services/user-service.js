@@ -99,7 +99,7 @@ export const addRolesToUserService = async (userID, records) => {
 };
 
 /**
- * @description SET ROLES TO USER SERVICES
+ * @description SET PASS USER BY ID SERVICES
  * @param {*} userID
  * @param {*} records
  */
@@ -107,6 +107,24 @@ export const setPassUserByIdService = async (userID, records) => {
   try {
     const { data } = await httpClientRestProvider.patch(
       `${bastPath}/${userID}/set-password`,
+      records
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description RESET PASSWORD USER BY ID SERVICES
+ * @param {*} userID
+ * @param {*} records
+ */
+export const resetPassUserByIdService = async (userID, records) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(
+      `${bastPath}/${userID}/reset-password`,
       records
     );
 

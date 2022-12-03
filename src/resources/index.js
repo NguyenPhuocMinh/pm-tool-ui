@@ -13,3 +13,5 @@ export * from './ProjectResource';
 export * from './RoleResource';
 export * from './PermissionResource';
 export * from './UserResource';
+export * from './UserOnlineResource';
+export * from './UserSessionResource';

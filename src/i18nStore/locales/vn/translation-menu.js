@@ -24,6 +24,9 @@ const translationMenu = {
     },
     user: {
       title: 'Người dùng'
+    },
+    userOnline: {
+      title: 'Người dùng đang hoạt động'
     }
   }
 };

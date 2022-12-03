@@ -4,16 +4,21 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import { optionsLogger, optionsPersist } from '@utils';
+import configs from '@configs';
 import { RESET } from '@reduxStore/types';
 
 // reducers
 import {
   commonReducer,
   authReducer,
+  dashboardReducer,
   organizationReducer,
+  projectReducer,
   roleReducer,
   permissionReducer,
-  userReducer
+  userReducer,
+  userOnlineReducer,
+  userSessionReducer
 } from '@reduxStore/reducers';
 
 // middleware
@@ -22,10 +27,14 @@ const loggerMiddleware = createLogger(optionsLogger);
 const appReducer = combineReducers({
   common: commonReducer,
   auth: authReducer,
+  dashboard: dashboardReducer,
   organization: organizationReducer,
+  project: projectReducer,
   role: roleReducer,
   permission: permissionReducer,
-  user: userReducer
+  user: userReducer,
+  userOnline: userOnlineReducer,
+  userSession: userSessionReducer
 });
 
 const rootReducer = (state, action) => {
@@ -42,7 +51,7 @@ const persistedReducer = persistReducer(optionsPersist, rootReducer);
 const reduxStore = configureStore({
   reducer: persistedReducer,
   middleware: [thunkMiddleware, loggerMiddleware],
-  devTools: process.env.NODE_ENV !== 'production'
+  devTools: configs.nodeEnv !== 'production'
 });
 
 export default reduxStore;

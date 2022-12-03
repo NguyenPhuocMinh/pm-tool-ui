@@ -1,7 +1,11 @@
 const translationOrganization = {
   title: {
+    list: 'Danh sách tổ chức',
     create: 'Tạo tổ chức',
     edit: 'Chỉnh sửa tổ chức'
+  },
+  description: {
+    list: 'Trang này đang quản lý tổ chức đã được tạo'
   },
   fields: {
     name: 'Tên tổ chức',
