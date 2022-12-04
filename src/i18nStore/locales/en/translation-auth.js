@@ -1,4 +1,7 @@
 const translationAuth = {
+  toast: {
+    temporaryPassword: 'Please reset your password, it will expire within 1 day'
+  },
   notifications: {
     errors: {
       emailIsRequired: 'Email is required',
@@ -9,11 +12,13 @@ const translationAuth = {
       tokenExpiredError: 'Token Expired. Please login again!',
       refreshTokenExpiredError: 'Token Expired. Please login again!',
       tokenInvalidError: 'Token invalid',
-      tokenForbidden: 'Forbidden'
+      tokenForbidden: 'Forbidden',
+      tokenInBlackListError: 'Token in black list'
     },
     success: {
-      signIn: 'Sign in account successfully!',
-      signOut: 'Sign out account successfully!'
+      signIn: 'Sign in account successfully',
+      signOut: 'Sign out account successfully',
+      revokeToken: 'Revoke token successfully'
     }
   }
 };

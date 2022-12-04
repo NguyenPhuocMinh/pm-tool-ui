@@ -1,8 +1,11 @@
 const translationOrganization = {
-  menuName: 'Organization',
   title: {
+    list: 'Organization List',
     create: 'Create Organization',
     edit: 'Edit Organization'
+  },
+  description: {
+    list: 'This page are manage organization has been create'
   },
   fields: {
     name: 'Organization Name',

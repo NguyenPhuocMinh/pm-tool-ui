@@ -29,7 +29,14 @@ const commonConstants = {
   VERTICAL: 'top',
   HORIZONTAL: 'center',
   SORT_DEFAULT: 'createdAt',
-  SORT_ORDER: 'desc'
+  SORT_ORDER: 'desc',
+  DATE_FORMAT: 'DD-MM-YYYY',
+  DATE_TIME_FORMAT: 'DD-MM-YYYY h:mm:ss A',
+  REASONS: {
+    USER_LOGOUT: 'USER_LOGOUT',
+    USER_TOKEN_EXPIRED: 'USER_TOKEN_EXPIRED',
+    USER_TOKEN_REVOKED: 'USER_TOKEN_REVOKED'
+  }
 };
 
 export default commonConstants;

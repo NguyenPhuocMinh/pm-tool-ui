@@ -86,7 +86,9 @@ export const createPermissionAction =
           type: CREATE_PERMISSION,
           payload: result.data
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
         dispatch({
           type: END_REQUEST_PERMISSION
         });
@@ -155,7 +157,9 @@ export const updatePermissionByIdAction =
         dispatch({
           type: END_REQUEST_PERMISSION
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       } else {
         dispatch({
           type: END_REQUEST_PERMISSION
@@ -225,7 +229,9 @@ export const addRolesToPermissionAction =
         dispatch({
           type: END_REQUEST_PERMISSION
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       } else {
         dispatch({
           type: END_REQUEST_PERMISSION

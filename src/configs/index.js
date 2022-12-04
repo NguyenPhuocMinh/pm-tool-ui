@@ -1,3 +1,4 @@
+const nodeEnv = process.env.NODE_ENV;
 const basePathRestApi = process.env.REACT_APP_REST_API_PROVIDER;
 
 const headers = {
@@ -7,6 +8,7 @@ const headers = {
 };
 
 const configs = {
+  nodeEnv,
   basePathRestApi,
   headers
 };

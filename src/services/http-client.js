@@ -3,7 +3,7 @@ import configs from '@configs';
 import constants from '@constants';
 import { formatErrorCommonMsg, localForage } from '@utils';
 import reduxStore from '@reduxStore/index';
-import { showNotification } from '@reduxStore/actions';
+import { showNotification, removeLogin } from '@reduxStore/actions';
 
 const { dispatch } = reduxStore;
 
@@ -23,7 +23,9 @@ httpClientRestProvider.interceptors.request.use(
   },
   (error) => {
     const errMsg = formatErrorCommonMsg(error);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errMsg));
+    dispatch(
+      showNotification({ level: constants.NOTIFY_LEVEL.ERROR, message: errMsg })
+    );
     return Promise.reject(error);
   }
 );
@@ -33,8 +35,13 @@ httpClientRestProvider.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response.status === constants.HTTP_STATUS.AUTHORIZATION) {
+      dispatch(removeLogin());
+    }
     const errMsg = formatErrorCommonMsg(error);
-    dispatch(showNotification(constants.NOTIFY_LEVEL.ERROR, errMsg));
+    dispatch(
+      showNotification({ level: constants.NOTIFY_LEVEL.ERROR, message: errMsg })
+    );
     return Promise.reject(error);
   }
 );

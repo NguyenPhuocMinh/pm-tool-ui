@@ -1,10 +1,10 @@
 import { useState, useEffect, createElement } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { refreshTokenAction } from '@reduxStore/actions';
+import { refreshTokenAction, getOnlineUsersAction } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { routes } from '@routes';
-import { useTranslate, useAuth } from '@hooks';
+import { useTranslate, useAuth, useSocket } from '@hooks';
 import {
   AppBarCustom,
   DrawerCustom,
@@ -12,8 +12,8 @@ import {
   PrivateRouteCommon
 } from '@utilities';
 import { checkExpiredTime } from '@utils';
+import constants from '@constants';
 import decoded from 'jwt-decode';
-
 // material
 import { useTheme } from '@mui/material/styles';
 import {
@@ -26,7 +26,6 @@ import {
   useMediaQuery
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import PixIcon from '@mui/icons-material/Pix';
 import Menu from './Menu';
 import TopToolbar from './TopToolbar';
 
@@ -36,15 +35,17 @@ const Layout = () => {
 
   // hooks
   const { translate } = useTranslate();
-  const { token } = useAuth();
+  const { token, whoami } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
   const isSmMatch = useMediaQuery(theme.breakpoints.down('sm'));
+  const { socket } = useSocket();
 
-  const { color } = useSelector((state) => {
+  const { color, recordsUserSession } = useSelector((state) => {
     return {
-      color: get(state, 'common.color', {})
+      color: get(state, 'common.color'),
+      recordsUserSession: get(state, 'userSession.records', {})
     };
   });
 
@@ -64,12 +65,24 @@ const Layout = () => {
       const decodeToken = decoded(token);
       interval = setInterval(() => {
         if (checkExpiredTime(decodeToken?.exp)) {
-          dispatch(refreshTokenAction(navigate, decodeToken));
+          const toolBox = { navigate, socket };
+          const records = {
+            ...decodeToken,
+            sessionID: recordsUserSession.id
+          };
+          dispatch(refreshTokenAction(toolBox, records));
         }
       }, 1000);
     }
     return () => clearInterval(interval);
   }, [token, dispatch]);
+
+  useEffect(() => {
+    socket.emit(constants.SOCKET_USER_LOGIN, whoami);
+    socket.on(constants.SOCKET_USER_ONLINE, (data) => {
+      dispatch(getOnlineUsersAction(data));
+    });
+  }, [whoami]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -95,23 +108,17 @@ const Layout = () => {
       </AppBarCustom>
       <DrawerCustom variant="permanent" open={open}>
         <DrawerHeaderCustom>
-          <PixIcon
-            sx={{
-              marginRight: '1rem',
-              color: color ? color.hex : 'primary.main'
-            }}
-          />
           <Typography
             id="layout-title"
             sx={{
-              fontFamily: 'Monospace',
+              fontFamily: 'Josefin Sans',
               textDecoration: 'none'
             }}
             variant="h6"
             noWrap
             component="a"
             href="/"
-            color={color ? color.hex : '#B8E986'}
+            color={!isEmpty(color) ? color.hex : 'primary.main'}
           >
             {translate('toolbar.title')}
           </Typography>

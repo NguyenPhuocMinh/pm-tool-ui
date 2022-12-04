@@ -32,8 +32,8 @@ export const checkAuthorization = (userPermissions = [], permission = '') => {
   return includes(userPermissions, permission);
 };
 
-export const authAllowed = ({ payload, permission }) => {
-  const { isAdmin, permissions } = payload;
+export const authAllowed = ({ whoami, permission }) => {
+  const { isAdmin, permissions } = whoami;
 
   return isAdmin || includes(permissions, permission);
 };

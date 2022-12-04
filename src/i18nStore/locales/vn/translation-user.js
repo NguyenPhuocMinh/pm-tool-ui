@@ -1,11 +1,16 @@
 const translationUser = {
   title: {
+    list: 'Danh sách người dùng',
     create: 'Tạo người dùng',
     edit: 'Chỉnh sửa người dùng',
     tabs: {
-      pass: 'đặt mật khẩu tạm thời',
-      roles: 'Đặt vai trò'
+      details: 'Chi tiết người dùng',
+      pass: 'Đặt mật khẩu người dùng',
+      roles: 'Đặt vai trò người dùng'
     }
+  },
+  description: {
+    list: 'Trang này đang quản lý người dùng đã được tạo'
   },
   fields: {
     firstName: 'Tên',
@@ -14,6 +19,7 @@ const translationUser = {
     email: 'Email',
     password: 'Mật khẩu',
     passwordConfirm: 'Xác nhận mật khẩu',
+    isPasswordTemporary: 'Tạm thời',
     isAdmin: 'Là quản trị viên',
     createdAt: 'Được tạo lúc',
     updatedAt: 'Cập nhật lúc'
@@ -57,9 +63,10 @@ const translationUser = {
       create: 'Tạo người dùng thành công!',
       edit: 'Chỉnh sửa người dùng thành công!',
       delete: 'Xóa người dùng thành công!',
-      changePass: 'Thay đổi mật khẩu thành công!',
       addRoles: 'Thêm vai trò cho người dùng thành công!',
-      setPass: 'Đặt mật khẩu tạm thời thành công!'
+      changePassword: 'Thay đổi mật khẩu thành công!',
+      setPassword: 'Đặt mật khẩu tạm thời thành công!',
+      resetPassword: 'Làm mới mật khẩu thành công!'
     }
   }
 };

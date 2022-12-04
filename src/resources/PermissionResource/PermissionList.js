@@ -16,27 +16,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
   PopupCommon,
-  NoRowsCommon,
   SearchInput,
-  ButtonCreate
+  ButtonCreate,
+  CardListCommon,
+  TableGridCommon
 } from '@utilities';
-import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
-import constants from '@constants';
-import { other, dateTimeFormat, authAllowed } from '@utils';
+import { GridActionsCellItem } from '@mui/x-data-grid';
+import { dateTimeFormat, authAllowed } from '@utils';
 import { validatorVerifyToDelete } from '@validators';
 import { menuPermissions } from '@permissions';
 
 const useStyles = makeStyles((_) => ({
   input: {
     width: 256
-  },
-  dataGridRoot: {
-    '& .MuiIconButton-root': {
-      border: 'none !important',
-      '&:hover': {
-        background: 'none !important'
-      }
-    }
   },
   search: {
     width: 256
@@ -52,7 +44,7 @@ const PermissionList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
-  const { payload } = useAuth();
+  const { whoami } = useAuth();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -186,7 +178,7 @@ const PermissionList = () => {
         getActions: (params) => {
           if (
             authAllowed({
-              payload,
+              whoami,
               permission: menuPermissions.permissions.GET_ID
             })
           ) {
@@ -223,6 +215,7 @@ const PermissionList = () => {
 
   return (
     <Box display="block">
+      <CardListCommon resource="permissions" />
       <Box
         sx={{
           marginBottom: '1em',
@@ -231,19 +224,18 @@ const PermissionList = () => {
           justifyContent: 'space-between'
         }}
       >
-        <Paper elevation={1}>
-          <SearchInput
-            label="common.search"
-            id="search"
-            source="search"
-            size="small"
-            placeholder="resources.permissions.search"
-            className={classes.search}
-            {...formProps}
-          />
-        </Paper>
+        <SearchInput
+          label="common.search"
+          id="search"
+          source="search"
+          size="small"
+          variant="standard"
+          placeholder="resources.permissions.search"
+          className={classes.search}
+          {...formProps}
+        />
         {authAllowed({
-          payload,
+          whoami,
           permission: menuPermissions.permissions.CREATE
         }) && (
           <Box
@@ -266,34 +258,16 @@ const PermissionList = () => {
         )}
       </Box>
       <Paper elevation={3}>
-        <Box style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            localeText={
-              i18n.language === constants.LANGUAGES.EN
-                ? enUS.components.MuiDataGrid.defaultProps.localeText
-                : viVN.components.MuiDataGrid.defaultProps.localeText
-            }
-            loading={loading}
-            rows={data}
-            rowCount={total}
-            columns={columns}
-            page={page}
-            pageSize={pageSize}
-            onPageChange={handleOnPageChange}
-            onPageSizeChange={handleOnPageSizeChange}
-            rowsPerPageOptions={[5, 10, 20, 100]}
-            pagination
-            paginationMode="server"
-            disableColumnMenu
-            components={{
-              NoRowsOverlay: NoRowsCommon
-            }}
-            classes={{
-              root: classes.dataGridRoot
-            }}
-            {...other}
-          />
-        </Box>
+        <TableGridCommon
+          loading={loading}
+          rows={data}
+          rowCount={total}
+          columns={columns}
+          page={page}
+          pageSize={pageSize}
+          onPageChange={handleOnPageChange}
+          onPageSizeChange={handleOnPageSizeChange}
+        />
       </Paper>
       <PopupCommon />
     </Box>

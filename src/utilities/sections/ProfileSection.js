@@ -1,16 +1,9 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 import { ProfileSetting } from '@utilities';
-import {
-  Box,
-  Tooltip,
-  IconButton,
-  Avatar,
-  Typography,
-  CircularProgress
-} from '@mui/material';
+import { Box, Tooltip, IconButton, Avatar, Typography } from '@mui/material';
 import { get } from 'lodash';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
@@ -22,6 +15,7 @@ const ProfileSection = () => {
   const { translate } = useTranslate();
   const location = useLocation();
   const navigate = useNavigate();
+  const { whoami } = useAuth();
 
   const handleClickChangeProfile = (event) => {
     setAnchorProfile(event.currentTarget);
@@ -32,10 +26,10 @@ const ProfileSection = () => {
   };
 
   const menus = handleMenus();
-  const fullName = 'admin';
-  const photoURL = '';
+  const fullName = get(whoami, 'fullName');
+  const picture = get(whoami, 'picture', '');
 
-  const { loading } = useSelector((state) => {
+  const _ = useSelector((state) => {
     return {
       loading: get(state, 'auth.loading', false)
     };
@@ -59,7 +53,7 @@ const ProfileSection = () => {
         >
           <Avatar
             alt={fullName}
-            src={photoURL}
+            src={picture}
             sx={{ width: 28, height: 28, marginRight: '10px' }}
           />
           <Typography
@@ -67,17 +61,12 @@ const ProfileSection = () => {
             sx={{
               lineHeight: 1,
               fontFamily: 'Josefin Sans',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              width: 50
             }}
           >
-            {loading && (
-              <CircularProgress
-                sx={{ marginRight: '5px' }}
-                color="primary"
-                size={10}
-                thickness={2}
-              />
-            )}
             {fullName}
           </Typography>
         </IconButton>

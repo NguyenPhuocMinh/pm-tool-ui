@@ -10,16 +10,17 @@ import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate, useAuth } from '@hooks';
 import {
-  NoRowsCommon,
   PopupCommon,
   SearchInput,
-  ButtonCreate
+  ButtonCreate,
+  CardListCommon,
+  TableGridCommon
 } from '@utilities';
 import constants from '@constants';
-import { other, dateTimeFormat, authAllowed } from '@utils';
+import { dateTimeFormat, authAllowed } from '@utils';
 import { Paper, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
+import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { menuPermissions } from '@permissions';
@@ -58,7 +59,7 @@ const OrganizationList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
-  const { payload } = useAuth();
+  const { whoami } = useAuth();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -183,7 +184,7 @@ const OrganizationList = () => {
         getActions: (params) => {
           if (
             authAllowed({
-              payload,
+              whoami,
               permission: menuPermissions.organizations.GET_ID
             })
           ) {
@@ -221,6 +222,7 @@ const OrganizationList = () => {
 
   return (
     <Box display="block">
+      <CardListCommon resource="organizations" />
       <Box
         sx={{
           marginBottom: '1em',
@@ -234,12 +236,13 @@ const OrganizationList = () => {
           id="search"
           source="search"
           size="small"
+          variant="standard"
           placeholder="resources.organizations.search"
           className={classes.search}
           {...formProps}
         />
         {authAllowed({
-          payload,
+          whoami,
           permission: menuPermissions.organizations.CREATE
         }) && (
           <Box
@@ -259,37 +262,18 @@ const OrganizationList = () => {
         )}
       </Box>
       <Paper elevation={3}>
-        <Box style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            localeText={
-              i18n.language === constants.LANGUAGES.EN
-                ? enUS.components.MuiDataGrid.defaultProps.localeText
-                : viVN.components.MuiDataGrid.defaultProps.localeText
-            }
-            loading={loading}
-            rows={data}
-            rowCount={total}
-            columns={columns}
-            page={page}
-            pageSize={pageSize}
-            onPageChange={handleOnPageChange}
-            onPageSizeChange={handleOnPageSizeChange}
-            rowsPerPageOptions={[5, 10, 20, 100]}
-            pagination
-            paginationMode="server"
-            sortModel={sortModel}
-            onSortModelChange={handleOnSortModelChange}
-            sortingMode="server"
-            disableColumnMenu
-            components={{
-              NoRowsOverlay: NoRowsCommon
-            }}
-            classes={{
-              root: classes.dataGridRoot
-            }}
-            {...other}
-          />
-        </Box>
+        <TableGridCommon
+          loading={loading}
+          rows={data}
+          rowCount={total}
+          columns={columns}
+          page={page}
+          pageSize={pageSize}
+          sortModel={sortModel}
+          onPageChange={handleOnPageChange}
+          onPageSizeChange={handleOnPageSizeChange}
+          handleOnSortModelChange={handleOnSortModelChange}
+        />
       </Paper>
       <PopupCommon />
     </Box>

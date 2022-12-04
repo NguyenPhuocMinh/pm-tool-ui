@@ -1,11 +1,20 @@
 const translationUser = {
   title: {
+    list: 'User List',
     create: 'Create User',
     edit: 'Edit User',
     tabs: {
-      pass: 'Set password temporary',
-      roles: 'Set Roles'
-    }
+      details: 'User Details',
+      pass: 'Set User Password',
+      roles: 'Set User Roles'
+    },
+    resetPass: 'Reset Password',
+    isPasswordSet: 'Password has been set'
+  },
+  description: {
+    list: 'This page are manage users has been create',
+    isPasswordSet:
+      'Once the password has been set, the password can only be refreshed'
   },
   fields: {
     firstName: 'First Name',
@@ -14,6 +23,7 @@ const translationUser = {
     email: 'Email',
     password: 'Password',
     passwordConfirm: 'Password Confirm',
+    isPasswordTemporary: 'Temporary',
     isAdmin: 'IsAdmin',
     createdAt: 'CreatedAt',
     updatedAt: 'UpdatedAt'
@@ -57,9 +67,10 @@ const translationUser = {
       create: 'Create user successfully!',
       edit: 'Edit user successfully!',
       delete: 'Delete user successfully!',
-      changePass: 'Change password successfully!',
       addRoles: 'Add role to user successfully!',
-      setPassword: 'Set temporary password successfully!'
+      changePassword: 'Change password successfully!',
+      setPassword: 'Set password successfully!',
+      resetPassword: 'Reset password successfully'
     }
   }
 };

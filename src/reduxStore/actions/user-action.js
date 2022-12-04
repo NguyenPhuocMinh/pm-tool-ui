@@ -7,7 +7,8 @@ import {
   updateUserByIdService,
   deleteUserByIdService,
   addRolesToUserService,
-  setPassUserByIdService
+  setPassUserByIdService,
+  resetPassUserByIdService
 } from '@services';
 import { showNotification, hidePopup } from '@reduxStore/actions';
 import {
@@ -87,7 +88,9 @@ export const createUserAction =
           type: CREATE_USER,
           payload: result.data
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
         dispatch({
           type: END_REQUEST_USER
         });
@@ -152,7 +155,9 @@ export const updateUserByIdAction =
         dispatch({
           type: END_REQUEST_USER
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       } else {
         dispatch({
           type: END_REQUEST_USER
@@ -179,7 +184,10 @@ export const deleteUserByIdAction = (userID, query) => async (dispatch) => {
     const result = await deleteUserByIdService(userID);
     if (!isEmpty(result)) {
       dispatch(
-        showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
+        showNotification({
+          level: constants.NOTIFY_LEVEL.SUCCESS,
+          message: result.message
+        })
       );
       dispatch(getAllUserAction(query));
       dispatch(hidePopup());
@@ -218,7 +226,9 @@ export const addRolesToUserAction =
         dispatch({
           type: END_REQUEST_USER
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       } else {
         dispatch({
           type: END_REQUEST_USER
@@ -254,7 +264,50 @@ export const setPasswordByUserIdAction =
         dispatch({
           type: END_REQUEST_USER
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
+      } else {
+        dispatch({
+          type: END_REQUEST_USER
+        });
+      }
+    } catch (err) {
+      dispatch({
+        type: END_REQUEST_USER
+      });
+    }
+  };
+
+/**
+ * @description RESET PASS USER BY ID ACTION
+ * @param {*} userID
+ * @param {*} records
+ */
+export const resetPasswordByUserIdAction =
+  (userID, records = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: CALL_REQUEST_USER
+      });
+
+      const { result, message } = await resetPassUserByIdService(
+        userID,
+        records
+      );
+
+      if (!isEmpty(result)) {
+        // dispatch({
+        //   type: EDIT_USER,
+        //   payload: result.data
+        // });
+        dispatch({
+          type: END_REQUEST_USER
+        });
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       } else {
         dispatch({
           type: END_REQUEST_USER

@@ -4,9 +4,15 @@ import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
 import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Card, CardContent, CardActions } from '@mui/material';
+import { Box, Card, CardHeader, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TextInput, ButtonSubmit, ButtonCancel } from '@utilities';
+import {
+  TextInput,
+  DateTimeInput,
+  ButtonSubmit,
+  ButtonCancel,
+  TypoCommon
+} from '@utilities';
 import { updateUserByIdAction } from '@reduxStore/actions';
 import { validatorUserEdit } from '@validators';
 
@@ -35,7 +41,9 @@ const DetailTab = () => {
     return {
       firstName: records?.firstName ?? '-',
       lastName: records?.lastName ?? '-',
-      email: records?.email ?? '-'
+      email: records?.email ?? '-',
+      createdAt: records?.createdAt ?? new Date(),
+      updatedAt: records?.updatedAt ?? new Date()
     };
   }, [records]);
 
@@ -62,6 +70,17 @@ const DetailTab = () => {
   return (
     <Box sx={{ minWidth: 400 }}>
       <Card>
+        <CardHeader
+          subheader={
+            <Box display="flex" alignItems="center">
+              <TypoCommon
+                variant="body2"
+                fontWeight={600}
+                label="resources.users.title.tabs.details"
+              />
+            </Box>
+          }
+        />
         <CardContent>
           <Box
             sx={{
@@ -99,6 +118,33 @@ const DetailTab = () => {
               className={classes.input}
               {...formProps}
             />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap'
+            }}
+          >
+            <Box sx={{ marginRight: '2em', marginBottom: '2em' }}>
+              <DateTimeInput
+                label="resources.users.fields.createdAt"
+                disabled
+                id="createdAt"
+                source="createdAt"
+                className={classes.input}
+                {...formProps}
+              />
+            </Box>
+            <Box sx={{ marginRight: '2em', marginBottom: '2em' }}>
+              <DateTimeInput
+                label="resources.users.fields.updatedAt"
+                disabled
+                id="updatedAt"
+                source="updatedAt"
+                className={classes.input}
+                {...formProps}
+              />
+            </Box>
           </Box>
         </CardContent>
         <CardActions>

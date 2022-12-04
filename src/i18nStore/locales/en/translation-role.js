@@ -1,10 +1,14 @@
 const translationRole = {
   title: {
+    list: 'Role List',
     create: 'Create Role',
     edit: 'Edit Role',
     tabs: {
       roles: 'Set Roles'
     }
+  },
+  description: {
+    list: 'This page are manage roles has been create'
   },
   fields: {
     name: 'Role Name',

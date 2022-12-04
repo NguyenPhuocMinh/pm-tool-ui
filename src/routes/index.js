@@ -13,7 +13,9 @@ import {
   PermissionEdit,
   UserList,
   UserCreate,
-  UserEdit
+  UserEdit,
+  UserOnlineList,
+  UserSessionTimeLine
 } from '@resources';
 import { NotFoundCommon, ForbiddenCommon } from '@utilities';
 import { menuPermissions } from '@permissions';
@@ -24,6 +26,7 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LanIcon from '@mui/icons-material/Lan';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
+import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 
 /**
  * @description ROUTES
@@ -122,30 +125,6 @@ const roleRoutes = [
   }
 ];
 
-const userRoutes = [
-  {
-    enable: true,
-    name: 'users',
-    path: '/users',
-    element: () => <UserList />,
-    permission: menuPermissions.users.LIST
-  },
-  {
-    enable: true,
-    name: 'users-create',
-    path: '/users/create',
-    element: () => <UserCreate />,
-    permission: menuPermissions.users.CREATE
-  },
-  {
-    enable: true,
-    name: 'users-edit',
-    path: '/users/edit/:id',
-    element: () => <UserEdit />,
-    permission: menuPermissions.users.EDIT
-  }
-];
-
 const permissionRoutes = [
   {
     enable: true,
@@ -170,6 +149,50 @@ const permissionRoutes = [
   }
 ];
 
+const userRoutes = [
+  {
+    enable: true,
+    name: 'users',
+    path: '/users',
+    element: () => <UserList />,
+    permission: menuPermissions.users.LIST
+  },
+  {
+    enable: true,
+    name: 'users-create',
+    path: '/users/create',
+    element: () => <UserCreate />,
+    permission: menuPermissions.users.CREATE
+  },
+  {
+    enable: true,
+    name: 'users-edit',
+    path: '/users/edit/:id',
+    element: () => <UserEdit />,
+    permission: menuPermissions.users.EDIT
+  }
+];
+
+const userOnlineRoutes = [
+  {
+    enable: true,
+    name: 'users-online',
+    path: '/users/online',
+    element: () => <UserOnlineList />,
+    permission: menuPermissions.userOnline.LIST
+  }
+];
+
+const userSessionRoutes = [
+  {
+    enable: true,
+    name: 'users-timeline-session',
+    path: '/users/sessions/:userID',
+    element: () => <UserSessionTimeLine />,
+    permission: menuPermissions.userSessions.TIME_LINE
+  }
+];
+
 const routes = [
   ...dashboardRoutes,
   ...notfoundRoutes,
@@ -177,8 +200,10 @@ const routes = [
   ...organizationRoutes,
   ...projectRoutes,
   ...roleRoutes,
+  ...permissionRoutes,
   ...userRoutes,
-  ...permissionRoutes
+  ...userOnlineRoutes,
+  ...userSessionRoutes
 ];
 
 /**
@@ -238,6 +263,14 @@ const authenticateMenus = [
     path: '/users',
     icon: <SupervisorAccountIcon />,
     permission: menuPermissions.users.LIST
+  },
+  {
+    enable: true,
+    name: 'users-online',
+    title: 'menu.authenticate.userOnline.title',
+    path: '/users/online',
+    icon: <ContentPasteGoIcon />,
+    permission: menuPermissions.userOnline.LIST
   }
 ];
 

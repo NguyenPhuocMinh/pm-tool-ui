@@ -1,7 +1,11 @@
 const translationRole = {
   title: {
+    list: 'Danh sách vai trò',
     create: 'Tạo vai trò',
     edit: 'Chỉnh sửa vai trò'
+  },
+  description: {
+    list: 'Trang này đang quản lý các vai trò đã được tạo'
   },
   fields: {
     name: 'Tên vai trò',

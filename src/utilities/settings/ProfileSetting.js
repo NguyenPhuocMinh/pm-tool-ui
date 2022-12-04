@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 // hooks
-import { useTranslate, useAuth } from '@hooks';
+import { useTranslate, useAuth, useSocket } from '@hooks';
 // redux
-import { useDispatch } from 'react-redux';
-import { logoutAction } from '@reduxStore/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAction, socketUserLogoutAction } from '@reduxStore/actions';
 // material ui
 import {
   Divider,
@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { PowerSettingsNew as PowerSettingsNewIcon } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
-import { isEmpty } from 'lodash';
+import { isEmpty, get } from 'lodash';
 
 const useStyles = makeStyles((_) => ({
   selected: {
@@ -30,10 +30,25 @@ const ProfileSetting = (props) => {
   const { translate } = useTranslate();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { payload } = useAuth();
+  const { token, whoami } = useAuth();
+  const { socket } = useSocket();
+
+  const { recordsUserSession } = useSelector((state) => {
+    return {
+      recordsUserSession: get(state, 'userSession.records', {})
+    };
+  });
 
   const handleLogout = () => {
-    dispatch(logoutAction(navigate, { email: payload.email }));
+    const toolBox = { navigate, socket };
+    dispatch(socketUserLogoutAction(toolBox, whoami));
+    dispatch(
+      logoutAction(toolBox, {
+        email: whoami.email,
+        token,
+        sessionID: recordsUserSession.id
+      })
+    );
   };
 
   return (

@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const defaultAuthProvider = {
   token: null,
-  payload: null
+  whoami: null
 };
 
 const AuthContext = createContext(defaultAuthProvider);

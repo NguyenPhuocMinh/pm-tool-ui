@@ -1,5 +1,5 @@
 const translationToolbar = {
-  title: 'Pm Tool',
+  title: 'Project Tool',
   tooltip: {
     change_language: 'Thay đổi ngôn ngữ',
     change_setting: 'Thay đổi cài đặt',

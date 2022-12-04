@@ -7,7 +7,8 @@ const translationCommon = {
     cancel: 'Hủy',
     confirm: 'Xác nhận',
     viewAllNotify: 'Xem tất cả thông báo',
-    save: 'Lưu'
+    save: 'Lưu',
+    resetPass: 'Đặt lại mật khẩu'
   },
   actions: {
     title: 'Hành động'
@@ -15,8 +16,10 @@ const translationCommon = {
   search: 'Tìm kiếm...',
   noRows: 'Không có hàng',
   label: {
-    delete: 'Delete',
-    edit: 'Edit'
+    delete: 'Xóa',
+    edit: 'Chỉnh sửa',
+    timeline: 'Dòng thời gian',
+    revoke: 'Thu hồi'
   },
   transferList: {
     titleLeft: 'Tiêu đề trái',

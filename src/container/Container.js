@@ -12,7 +12,8 @@ import {
   AuthCommon,
   LoadingCommon,
   NotifyCommon,
-  ErrorCommon
+  ErrorCommon,
+  ToastCommon
 } from '@utilities';
 import { Layout } from '@layout';
 import { LoginResource } from '@resources';
@@ -50,6 +51,7 @@ const Container = () => {
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
           <NotifyCommon />
+          <ToastCommon theme={themeStore} />
         </ErrorBoundary>
       </ThemeProvider>
     </Suspense>

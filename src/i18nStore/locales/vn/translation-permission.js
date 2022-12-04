@@ -1,10 +1,14 @@
 const translationPermission = {
   title: {
+    list: 'Danh sách quyền',
     create: 'Tạo quyền',
     edit: 'Chỉnh sửa quyền',
     tabs: {
       roles: 'Đặt vai trò'
     }
+  },
+  description: {
+    list: 'Trang này quản lý quyền đã được tạo'
   },
   fields: {
     id: 'Quyền ID',

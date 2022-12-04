@@ -1,68 +1,51 @@
 import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_END,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_END,
-  REFRESH_REQUEST,
-  REFRESH_SUCCESS,
-  REFRESH_END
+  BEGIN_REQUEST_AUTH,
+  END_REQUEST_AUTH,
+  LOGIN_SUCCESS_AUTH,
+  LOGOUT_SUCCESS_AUTH,
+  WHOAMI_SUCCESS_AUTH,
+  REFRESH_SUCCESS_AUTH
 } from '@reduxStore/types';
 
 const initialState = {
   loading: false,
-  data: {}
+  token: null,
+  whoami: null
 };
 
 const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case LOGIN_REQUEST:
+    case BEGIN_REQUEST_AUTH:
       return {
         ...state,
         loading: true
       };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        data: payload
-      };
-    case LOGIN_END:
+    case END_REQUEST_AUTH:
       return {
         ...state,
         loading: false
       };
-    case LOGOUT_REQUEST:
+    case LOGIN_SUCCESS_AUTH:
       return {
         ...state,
-        loading: true
+        token: payload
       };
-    case LOGOUT_SUCCESS:
+    case LOGOUT_SUCCESS_AUTH:
       return {
         ...state,
-        data: payload
+        token: payload
       };
-    case LOGOUT_END:
+    case WHOAMI_SUCCESS_AUTH:
       return {
         ...state,
-        loading: false
+        whoami: payload
       };
-    case REFRESH_REQUEST:
+    case REFRESH_SUCCESS_AUTH:
       return {
         ...state,
-        loading: true
-      };
-    case REFRESH_SUCCESS:
-      return {
-        ...state,
-        data: payload
-      };
-    case REFRESH_END:
-      return {
-        ...state,
-        loading: false
+        token: payload
       };
     default:
       return state;

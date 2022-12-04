@@ -5,10 +5,10 @@ import { checkSubMenuPer } from '@utils';
 const PrivateSubMenuCommon = ({ children, subPermissions }) => {
   const auth = useAuth();
 
-  const { payload } = auth;
+  const { whoami } = auth;
 
-  const userIsAdmin = get(payload, 'isAdmin', false);
-  const userPermissions = get(payload, 'permissions', []);
+  const userIsAdmin = get(whoami, 'isAdmin', false);
+  const userPermissions = get(whoami, 'permissions', []);
 
   if (userIsAdmin) {
     return children;

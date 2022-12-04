@@ -1,10 +1,14 @@
 const translationPermission = {
   title: {
+    list: 'Permission List',
     create: 'Create Permission',
     edit: 'Edit Permission',
     tabs: {
       roles: 'Set Roles'
     }
+  },
+  description: {
+    list: 'This page are manage permission has been create'
   },
   fields: {
     id: 'Permission ID',

@@ -1,11 +1,28 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { homeAction, healthCheckAction } from '@reduxStore/actions';
 import { Box, Card } from '@mui/material';
-import { TypoCommon } from '@utilities';
+import { TypoCommon, LoadingCommon } from '@utilities';
+import { get } from 'lodash';
 
 const Welcome = () => {
-  const _ = useSelector((state) => state);
+  // hooks
+  const dispatch = useDispatch();
 
-  return (
+  useEffect(() => {
+    dispatch(homeAction());
+    dispatch(healthCheckAction());
+  }, []);
+
+  const { loading } = useSelector((state) => {
+    return {
+      loading: get(state, 'dashboard.loading')
+    };
+  });
+
+  return loading ? (
+    <LoadingCommon />
+  ) : (
     <Card
       sx={{
         color: (theme) =>

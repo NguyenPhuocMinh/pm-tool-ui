@@ -85,7 +85,9 @@ export const createRoleAction =
           type: CREATE_ROLE,
           payload: result.data
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
         dispatch({
           type: END_REQUEST_ROLE
         });
@@ -157,7 +159,9 @@ export const updateRoleByIdAction =
         dispatch({
           type: END_REQUEST_ROLE
         });
-        dispatch(showNotification(constants.NOTIFY_LEVEL.SUCCESS, message));
+        dispatch(
+          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+        );
       } else {
         dispatch({
           type: END_REQUEST_ROLE
@@ -184,7 +188,10 @@ export const deleteRoleByIdAction = (roleID, query) => async (dispatch) => {
     const result = await deleteRoleByIdService(roleID);
     if (!isEmpty(result)) {
       dispatch(
-        showNotification(constants.NOTIFY_LEVEL.SUCCESS, result.message)
+        showNotification({
+          level: constants.NOTIFY_LEVEL.SUCCESS,
+          message: result.message
+        })
       );
       dispatch(getAllRoleAction(query));
       dispatch(hidePopup());
