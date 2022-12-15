@@ -37,15 +37,17 @@ const translationPermission = {
   },
   notifications: {
     errors: {
-      idNotFound: 'Không tìm thấy ID',
-      duplicateName: 'Tên quyền bị trùng lặp',
-      requiredName: 'Tên quyền bắt buộc'
+      e001: 'Dữ Liệu Không Hợp Lệ',
+      e002: 'Quyền Bị Trùng Lặp',
+      e003: 'Không Tìm Thấy ID'
     },
     success: {
-      create: 'Tạo quyền thành công!',
-      edit: 'Chỉnh sửa quyền thành công!',
-      delete: 'Xoá quyền thành công!',
-      addRoles: 'Thêm vai trò vào quyền thành công!'
+      s001: 'Lấy Danh Sách Quyền Thành Công',
+      s002: 'Tạo Quyền Thành Công',
+      s003: 'Lấy Quyền Thành Công',
+      s004: 'Cập Nhật Quyền Thành Công',
+      s005: 'Xoá Quyền Thành Công',
+      s006: 'Thêm Vai Trò Vào Quyền Thành Công'
     }
   }
 };

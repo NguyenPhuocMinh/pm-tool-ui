@@ -6,29 +6,40 @@ import {
   ProfileSection,
   NotifySection,
   RefreshSection
-} from '@utilities';
+} from '@sections';
 import { Box, IconButton } from '@mui/material';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AddIcon from '@mui/icons-material/Add';
-import { useDispatch } from 'react-redux';
-import { showToast } from '@reduxStore/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDataNewNotifyUserAction } from '@reduxStore/actions';
 
 const TopToolbar = () => {
   const dispatch = useDispatch();
 
-  const clickToast = () => {
-    dispatch(showToast({ message: 'hello' }));
+  const _ = useSelector((state) => state);
+
+  const handledClick = () => {
+    dispatch(
+      addDataNewNotifyUserAction({
+        topic: 'Hello',
+        description: 'Alo',
+        createdAt: new Date()
+      })
+    );
   };
 
   return (
     <Fragment>
-      <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      <Box
+        id="pm-tool-box-top-toolbar"
+        sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
+      >
         <IconButton
           size="large"
           aria-label="show more"
           aria-haspopup="true"
           color="inherit"
-          onClick={clickToast}
+          onClick={handledClick}
         >
           <AddIcon />
         </IconButton>

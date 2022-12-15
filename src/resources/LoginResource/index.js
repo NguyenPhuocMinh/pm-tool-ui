@@ -6,7 +6,6 @@ import {
   CardContent,
   CardActions,
   Button,
-  CircularProgress,
   InputAdornment,
   IconButton,
   Typography,
@@ -31,7 +30,7 @@ import { useTranslate } from '@hooks';
 // themes
 import { lightTheme } from '@themes';
 // component
-import { TextInput } from '@utilities';
+import { TextInput, CircularCommon } from '@utilities';
 
 const useStyles = makeStyles({
   input: {
@@ -120,9 +119,7 @@ const LoginResource = () => {
                 color: 'primary.main'
               }}
             >
-              <Typography sx={{ fontFamily: 'Josefin Sans' }}>
-                {translate('resources.logins.title')}
-              </Typography>
+              <Typography>{translate('resources.logins.title')}</Typography>
             </Box>
             <CardContent>
               <Box
@@ -207,15 +204,8 @@ const LoginResource = () => {
                 onClick={handleSubmit}
                 disabled={!isValid || !dirty || loading}
               >
-                {loading && (
-                  <CircularProgress
-                    sx={{ marginRight: '5px' }}
-                    color="primary"
-                    size={20}
-                    thickness={2}
-                  />
-                )}
-                {translate('common.button.login')}
+                {loading && <CircularCommon />}
+                {translate('common.label.login')}
               </Button>
             </CardActions>
           </Card>

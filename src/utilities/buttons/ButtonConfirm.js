@@ -29,7 +29,6 @@ const ButtonConfirm = ({
         ':hover': {
           background: (theme) => color?.hex ?? theme.palette.primary.main
         },
-        fontFamily: 'Josefin Sans',
         background: (theme) => color?.hex ?? theme.palette.primary.main,
         ...sx
       }}
@@ -39,7 +38,7 @@ const ButtonConfirm = ({
       disabled={!isValid || !dirty || loading}
     >
       {loading && <CircularCommon />}
-      {translate('common.button.confirm')}
+      {translate('common.label.confirm')}
     </Button>
   );
 };

@@ -16,7 +16,6 @@ const ButtonCancel = ({ id, sx, onClick, color }) => {
           background: 'none',
           borderColor: (theme) => color?.hex ?? theme.palette.primary.main
         },
-        fontFamily: 'Josefin Sans',
         color: (theme) => color?.hex ?? theme.palette.primary.main,
         borderColor: (theme) => color?.hex ?? theme.palette.primary.main,
         ...sx
@@ -24,7 +23,7 @@ const ButtonCancel = ({ id, sx, onClick, color }) => {
       variant="outlined"
       onClick={onClick}
     >
-      {translate('common.button.cancel')}
+      {translate('common.label.cancel')}
     </Button>
   );
 };

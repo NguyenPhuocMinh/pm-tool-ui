@@ -49,7 +49,6 @@ const TextInput = (props) => {
         endAdornment
       }}
       sx={{
-        fontFamily: 'Josefin Sans',
         ...sx
       }}
       size={size}

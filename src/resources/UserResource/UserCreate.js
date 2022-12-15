@@ -14,7 +14,13 @@ import {
   Divider
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TypoCommon, TextInput, ButtonSubmit, ButtonCancel } from '@utilities';
+import {
+  TypoCommon,
+  BoxWrapper,
+  TextInput,
+  ButtonSubmit,
+  ButtonCancel
+} from '@utilities';
 import { validatorUserCreate } from '@validators';
 
 const useStyles = makeStyles({
@@ -80,40 +86,27 @@ const UserCreate = () => {
         />
         <Divider sx={{ width: '100%' }} />
         <CardContent>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex',
-              flexWrap: 'wrap'
-            }}
-          >
-            <Box sx={{ marginRight: '32px' }}>
-              <TextInput
-                label="resources.users.fields.firstName"
-                required
-                id="firstName"
-                source="firstName"
-                className={classes.input}
-                {...formProps}
-              />
-            </Box>
-            <Box>
-              <TextInput
-                label="resources.users.fields.lastName"
-                required
-                id="lastName"
-                source="lastName"
-                className={classes.input}
-                {...formProps}
-              />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          <BoxWrapper>
+            <TextInput
+              label="resources.users.fields.firstName"
+              required
+              id="firstName"
+              source="firstName"
+              className={classes.input}
+              {...formProps}
+            />
+          </BoxWrapper>
+          <BoxWrapper>
+            <TextInput
+              label="resources.users.fields.lastName"
+              required
+              id="lastName"
+              source="lastName"
+              className={classes.input}
+              {...formProps}
+            />
+          </BoxWrapper>
+          <BoxWrapper>
             <TextInput
               label="resources.users.fields.email"
               required
@@ -122,17 +115,22 @@ const UserCreate = () => {
               className={classes.input}
               {...formProps}
             />
-          </Box>
+          </BoxWrapper>
         </CardContent>
         <CardActions>
           <ButtonSubmit
+            id="pm-tool-button-user-create-submit"
             color={color}
             onClick={handleSubmit}
             loading={loading}
             isValid={isValid}
             dirty={dirty}
           />
-          <ButtonCancel color={color} onClick={handleCancel} />
+          <ButtonCancel
+            id="pm-tool-button-user-create-cancel"
+            color={color}
+            onClick={handleCancel}
+          />
         </CardActions>
       </Card>
     </Box>

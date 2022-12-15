@@ -4,20 +4,24 @@ import { Typography } from '@mui/material';
 const TypoCommon = ({
   sx,
   label,
+  color,
   variant,
   component,
   fontWeight,
-  gutterBottom
+  gutterBottom,
+  className
 }) => {
   const { translate } = useTranslate();
 
   return (
     <Typography
+      color={color}
       variant={variant}
       component={component}
       fontWeight={fontWeight}
       gutterBottom={gutterBottom}
-      sx={{ fontFamily: 'Josefin Sans', ...sx }}
+      className={className}
+      sx={{ ...sx }}
     >
       {translate(label)}
     </Typography>

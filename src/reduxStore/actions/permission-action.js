@@ -10,20 +10,20 @@ import {
 } from '@services';
 import { showNotification, hidePopup } from '@reduxStore/actions';
 import {
-  CALL_REQUEST_PERMISSION,
-  END_REQUEST_PERMISSION,
-  RESET_RECORDS_PERMISSION,
-  GET_ALL_PERMISSION,
-  CREATE_PERMISSION,
-  GET_ID_PERMISSION,
-  EDIT_PERMISSION
+  PERMISSION_REQUEST,
+  PERMISSION_FAILURE,
+  PERMISSION_RESET_RECORD,
+  PERMISSION_GET_ALL_SUCCESS,
+  PERMISSION_GET_ID_SUCCESS,
+  PERMISSION_CREATE_SUCCESS,
+  PERMISSION_UPDATE_SUCCESS
 } from '@reduxStore/types';
 
 /**
  * @description RESET RECORDS PERMISSION
  */
 export const resetRecordsPermission = () => ({
-  type: RESET_RECORDS_PERMISSION
+  type: PERMISSION_RESET_RECORD
 });
 
 /**
@@ -35,33 +35,54 @@ export const getAllPermissionAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PERMISSION
+        type: PERMISSION_REQUEST
       });
 
       const { result } = await getAllPermissionService(query);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: GET_ALL_PERMISSION,
+          type: PERMISSION_GET_ALL_SUCCESS,
           payload: {
             data: result.data,
             total: result.total
           }
         });
-        dispatch({
-          type: END_REQUEST_PERMISSION
-        });
-      } else {
-        dispatch({
-          type: END_REQUEST_PERMISSION
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PERMISSION
+        type: PERMISSION_FAILURE,
+        payload: err
       });
     }
   };
+
+/**
+ * @description GET PERMISSION BY ID ACTION
+ * @param {*} permissionID
+ * @param {*} values
+ */
+export const getPermissionByIdAction = (permissionID) => async (dispatch) => {
+  try {
+    dispatch({
+      type: PERMISSION_REQUEST
+    });
+
+    const { result } = await getPermissionByIdService(permissionID);
+
+    if (!isEmpty(result)) {
+      dispatch({
+        type: PERMISSION_GET_ID_SUCCESS,
+        payload: result.data
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: PERMISSION_FAILURE,
+      payload: err
+    });
+  }
+};
 
 /**
  * @description CREATE PERMISSION ACTION
@@ -75,7 +96,7 @@ export const createPermissionAction =
 
     try {
       dispatch({
-        type: CALL_REQUEST_PERMISSION
+        type: PERMISSION_REQUEST
       });
 
       const { result, message } = await createPermissionService(records);
@@ -83,53 +104,21 @@ export const createPermissionAction =
       if (!isEmpty(result)) {
         const permissionID = get(result, 'data.id');
         dispatch({
-          type: CREATE_PERMISSION,
+          type: PERMISSION_CREATE_SUCCESS,
           payload: result.data
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-        dispatch({
-          type: END_REQUEST_PERMISSION
-        });
         navigate(`/permissions/edit/${permissionID}`);
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PERMISSION
+        type: PERMISSION_FAILURE,
+        payload: err
       });
     }
   };
-
-/**
- * @description GET PERMISSION BY ID ACTION
- * @param {*} permissionID
- * @param {*} values
- */
-export const getPermissionByIdAction = (permissionID) => async (dispatch) => {
-  try {
-    dispatch({
-      type: CALL_REQUEST_PERMISSION
-    });
-
-    const { result } = await getPermissionByIdService(permissionID);
-
-    if (!isEmpty(result)) {
-      dispatch({
-        type: GET_ID_PERMISSION,
-        payload: result.data
-      });
-    } else {
-      dispatch({
-        type: END_REQUEST_PERMISSION
-      });
-    }
-  } catch (err) {
-    dispatch({
-      type: END_REQUEST_PERMISSION
-    });
-  }
-};
 
 /**
  * @description UPDATE PERMISSION BY ID ACTION
@@ -141,7 +130,7 @@ export const updatePermissionByIdAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PERMISSION
+        type: PERMISSION_REQUEST
       });
 
       const { result, message } = await updatePermissionByIdService(
@@ -151,23 +140,17 @@ export const updatePermissionByIdAction =
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_PERMISSION,
+          type: PERMISSION_UPDATE_SUCCESS,
           payload: result.data
-        });
-        dispatch({
-          type: END_REQUEST_PERMISSION
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-      } else {
-        dispatch({
-          type: END_REQUEST_PERMISSION
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PERMISSION
+        type: PERMISSION_FAILURE,
+        payload: err
       });
     }
   };
@@ -181,7 +164,7 @@ export const deletePermissionByIdAction =
   (permissionID, query) => async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PERMISSION
+        type: PERMISSION_REQUEST
       });
 
       const result = await deletePermissionByIdService(permissionID);
@@ -191,14 +174,11 @@ export const deletePermissionByIdAction =
         );
         dispatch(getAllPermissionAction(query));
         dispatch(hidePopup());
-      } else {
-        dispatch({
-          type: END_REQUEST_PERMISSION
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PERMISSION
+        type: PERMISSION_FAILURE,
+        payload: err
       });
     }
   };
@@ -213,7 +193,7 @@ export const addRolesToPermissionAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PERMISSION
+        type: PERMISSION_REQUEST
       });
 
       const { result, message } = await addRolesToPermissionService(
@@ -223,23 +203,17 @@ export const addRolesToPermissionAction =
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_PERMISSION,
+          type: PERMISSION_UPDATE_SUCCESS,
           payload: result.data
-        });
-        dispatch({
-          type: END_REQUEST_PERMISSION
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-      } else {
-        dispatch({
-          type: END_REQUEST_PERMISSION
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PERMISSION
+        type: PERMISSION_FAILURE,
+        payload: err
       });
     }
   };

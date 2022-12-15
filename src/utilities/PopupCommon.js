@@ -111,7 +111,6 @@ const PopupCommon = () => {
     >
       <BootstrapDialogTitle
         sx={{
-          fontFamily: 'Josefin Sans',
           background: (theme) => color?.hex ?? theme.palette.primary.main
         }}
         onClose={handleClose}
@@ -125,11 +124,11 @@ const PopupCommon = () => {
           minHeight: '150px'
         }}
       >
-        <DialogContentText sx={{ fontFamily: 'Josefin Sans' }}>
+        <DialogContentText>
           {!isEmpty(options) ? translate(content, options) : translate(content)}
         </DialogContentText>
         <Box sx={{ margin: '1rem' }}>
-          <Typography variant="subtitle1" sx={{ fontFamily: 'Josefin Sans' }}>
+          <Typography variant="subtitle1">
             {!isEmpty(options)
               ? translate(verifyName, options)
               : translate(verifyName)}

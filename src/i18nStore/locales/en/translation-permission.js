@@ -22,7 +22,7 @@ const translationPermission = {
     details: 'Details',
     setRolesToPermission: 'Set Roles To Permission'
   },
-  search: 'Search by name',
+  search: 'Search by name...',
   popup: {
     title: 'Delete Permission',
     content:
@@ -37,15 +37,17 @@ const translationPermission = {
   },
   notifications: {
     errors: {
-      idNotFound: 'Not found ID',
-      duplicateName: 'Permission name has duplicate',
-      requiredName: 'Permission name is required'
+      e001: 'Data Invalid',
+      e002: 'Permission Has Duplicate',
+      e003: 'ID Not Found'
     },
     success: {
-      create: 'Create permission successfully!',
-      edit: 'Edit permission successfully!',
-      delete: 'Delete permission successfully!',
-      addRoles: 'Add role to permission successfully!'
+      s001: 'Get List Permission Success',
+      s002: 'Create Permission Success',
+      s003: 'Get Permission By Id Success',
+      s004: 'Update Permission Success',
+      s005: 'Delete Permission Success',
+      s006: 'Add Roles To Permission Success'
     }
   }
 };

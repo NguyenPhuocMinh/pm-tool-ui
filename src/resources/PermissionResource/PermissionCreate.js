@@ -16,6 +16,7 @@ import {
 import { makeStyles } from '@mui/styles';
 import {
   TypoCommon,
+  BoxWrapper,
   TextInput,
   SwitchInput,
   ButtonSubmit,
@@ -86,12 +87,7 @@ const PermissionCreate = () => {
         />
         <Divider sx={{ width: '100%' }} />
         <CardContent>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          <BoxWrapper>
             <TextInput
               label="resources.permissions.fields.name"
               required
@@ -100,13 +96,8 @@ const PermissionCreate = () => {
               className={classes.input}
               {...formProps}
             />
-          </Box>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          </BoxWrapper>
+          <BoxWrapper>
             <TextInput
               label="resources.permissions.fields.description"
               id="description"
@@ -116,19 +107,15 @@ const PermissionCreate = () => {
               className={classes.input}
               {...formProps}
             />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex'
-            }}
-          >
+          </BoxWrapper>
+          <BoxWrapper>
             <SwitchInput
               id="activated"
               source="activated"
               label="resources.permissions.fields.activated"
               {...formProps}
             />
-          </Box>
+          </BoxWrapper>
         </CardContent>
         <CardActions>
           <ButtonSubmit

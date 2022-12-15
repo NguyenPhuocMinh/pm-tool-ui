@@ -48,29 +48,24 @@ const translationUser = {
   },
   notifications: {
     errors: {
-      fistNameIsRequired: 'First name is required',
-      lastNameIsRequired: 'Last name is required',
-      emailIsRequired: 'Email is required',
-      passwordIsRequired: 'Password is required',
-      passwordConfirmIsRequired: 'Password confirm is required',
-      emailIsNotFormat: 'Email invalid format',
-      passwordIsValidLength: 'Password is invalid length',
-      passwordConfirmIsValidLength: 'Password confirm is invalid length',
-      passwordConfirmIsNotMatches: 'Password confirm is not matches',
-      currentPasswordIsRequired: 'Current password is required',
-      newPasswordConfirmIsRequired: 'New password confirm is required',
-      currentPasswordIsNotMatches: 'Current password is not matches',
-      emailIsDuplicate: 'Email has duplicate',
-      idNotFound: 'Not found ID'
+      e001: 'Data Invalid',
+      e002: 'Email Has Duplicate',
+      e003: 'ID Not Found',
+      e004: 'Data Change Password Invalid',
+      e005: 'Current Password Is Not Matches',
+      e006: 'Data Set Password Invalid',
+      e007: 'Data Reset Password Invalid'
     },
     success: {
-      create: 'Create user successfully!',
-      edit: 'Edit user successfully!',
-      delete: 'Delete user successfully!',
-      addRoles: 'Add role to user successfully!',
-      changePassword: 'Change password successfully!',
-      setPassword: 'Set password successfully!',
-      resetPassword: 'Reset password successfully'
+      s001: 'Get List User Success',
+      s002: 'Create User Success',
+      s003: 'Get User By Id Success',
+      s004: 'Update User Success',
+      s005: 'Delete User Success',
+      s006: 'Change User Password Success',
+      s007: 'Set User Password Success',
+      s008: 'Reset User Password Success',
+      s009: 'Add Role To User Success'
     }
   }
 };

@@ -2,17 +2,23 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { homeAction, healthCheckAction } from '@reduxStore/actions';
 import { Box, Card } from '@mui/material';
-import { TypoCommon, LoadingCommon } from '@utilities';
+import { TypoCommon, BackdropCommon } from '@utilities';
 import { get } from 'lodash';
 
 const Welcome = () => {
   // hooks
   const dispatch = useDispatch();
 
+  const { refresh } = useSelector((state) => {
+    return {
+      refresh: get(state, 'common.refresh')
+    };
+  });
+
   useEffect(() => {
     dispatch(homeAction());
     dispatch(healthCheckAction());
-  }, []);
+  }, [refresh]);
 
   const { loading } = useSelector((state) => {
     return {
@@ -21,7 +27,7 @@ const Welcome = () => {
   });
 
   return loading ? (
-    <LoadingCommon />
+    <BackdropCommon loading={loading} />
   ) : (
     <Card
       sx={{

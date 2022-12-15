@@ -9,7 +9,6 @@ import {
   RESET,
   REFRESH
 } from '@reduxStore/types';
-import { toast } from 'react-toastify';
 
 export const changeTheme = (theme) => ({
   type: CHANGE_THEME,
@@ -80,16 +79,3 @@ export const refreshPage = (version) => ({
   type: REFRESH,
   payload: version + 1
 });
-
-export const showToast =
-  ({
-    level = 'default',
-    message = '',
-    options = { position: 'bottom-right' }
-  }) =>
-  (_) => {
-    toast(message, {
-      type: level,
-      ...options
-    });
-  };

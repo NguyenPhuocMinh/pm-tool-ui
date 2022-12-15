@@ -69,6 +69,7 @@ const commonReducer = (state = initialState, action) => {
         ...state,
         refresh: payload
       };
+
     default:
       return state;
   }

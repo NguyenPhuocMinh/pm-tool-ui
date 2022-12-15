@@ -1,53 +1,62 @@
 import {
-  CALL_REQUEST_ORGANIZATION,
-  END_REQUEST_ORGANIZATION,
-  GET_ALL_ORGANIZATION,
-  CREATE_ORGANIZATION,
-  GET_ID_ORGANIZATION,
-  EDIT_ORGANIZATION
+  ORGANIZATION_REQUEST,
+  ORGANIZATION_FAILURE,
+  ORGANIZATION_RESET_RECORD,
+  ORGANIZATION_GET_ALL_SUCCESS,
+  ORGANIZATION_GET_ID_SUCCESS,
+  ORGANIZATION_CREATE_SUCCESS,
+  ORGANIZATION_UPDATE_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
-  loading: false,
   data: [],
   total: 0,
-  record: {}
+  records: {},
+  loading: false,
+  error: null
 };
 
 const organizationReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CALL_REQUEST_ORGANIZATION:
+    case ORGANIZATION_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case END_REQUEST_ORGANIZATION:
+    case ORGANIZATION_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: payload
       };
-    case GET_ALL_ORGANIZATION:
+    case ORGANIZATION_RESET_RECORD:
+      return initialState;
+    case ORGANIZATION_GET_ALL_SUCCESS:
       return {
         ...state,
         data: payload.data,
-        total: payload.total
+        total: payload.total,
+        loading: false
       };
-    case CREATE_ORGANIZATION:
+    case ORGANIZATION_GET_ID_SUCCESS:
       return {
         ...state,
-        record: payload
+        records: payload,
+        loading: false
       };
-    case GET_ID_ORGANIZATION:
+    case ORGANIZATION_CREATE_SUCCESS:
       return {
         ...state,
-        record: payload
+        records: payload,
+        loading: false
       };
-    case EDIT_ORGANIZATION:
+    case ORGANIZATION_UPDATE_SUCCESS:
       return {
         ...state,
-        record: payload
+        records: payload,
+        loading: false
       };
     default:
       return state;

@@ -99,7 +99,6 @@ const LanguageSetting = (props) => {
           <Typography
             variant="caption"
             sx={{
-              fontFamily: 'Josefin Sans',
               fontWeight: 'bold'
             }}
           >

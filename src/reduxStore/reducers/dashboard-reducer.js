@@ -1,54 +1,45 @@
 import {
-  HOME_REQUEST,
-  HOME_SUCCESS,
-  HOME_END,
-  HEALTH_CHECK_REQUEST,
-  HEALTH_CHECK_SUCCESS,
-  HEALTH_CHECK_END
+  DASH_BOARD_REQUEST,
+  DASH_BOARD_FAILURE,
+  DASH_BOARD_GET_HOME_SUCCESS,
+  DASH_BOARD_GET_HEALTH_CHECK_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
   dataHome: null,
   dataHealth: null,
-  loading: true
+  loading: true,
+  error: null
 };
 
 const dashboardReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case HOME_REQUEST:
+    case DASH_BOARD_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case HOME_SUCCESS:
+    case DASH_BOARD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload
+      };
+    case DASH_BOARD_GET_HOME_SUCCESS:
       return {
         ...state,
         dataHome: payload,
         loading: false
       };
-    case HOME_END:
-      return {
-        ...state,
-        loading: false
-      };
-    case HEALTH_CHECK_REQUEST:
-      return {
-        ...state,
-        loading: true
-      };
-    case HEALTH_CHECK_SUCCESS:
+    case DASH_BOARD_GET_HEALTH_CHECK_SUCCESS:
       return {
         ...state,
         dataHealth: payload,
         loading: false
       };
-    case HEALTH_CHECK_END:
-      return {
-        ...state,
-        loading: false
-      };
+
     default:
       return state;
   }

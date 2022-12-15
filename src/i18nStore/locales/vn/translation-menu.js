@@ -28,6 +28,15 @@ const translationMenu = {
     userOnline: {
       title: 'Người dùng đang hoạt động'
     }
+  },
+  operation: {
+    title: 'Vận hành',
+    notify: {
+      title: 'Thông báo'
+    },
+    notifyTemplate: {
+      title: 'Mẫu thông báo'
+    }
   }
 };
 

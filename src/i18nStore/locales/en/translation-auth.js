@@ -4,21 +4,22 @@ const translationAuth = {
   },
   notifications: {
     errors: {
-      emailIsRequired: 'Email is required',
-      passwordIsRequired: 'Password is required',
-      userNotFound: 'User not found',
-      passwordIsInCorrect: 'Password in correct',
-      tokenNotFound: 'Token not found',
-      tokenExpiredError: 'Token Expired. Please login again!',
-      refreshTokenExpiredError: 'Token Expired. Please login again!',
-      tokenInvalidError: 'Token invalid',
-      tokenForbidden: 'Forbidden',
-      tokenInBlackListError: 'Token in black list'
+      e001: 'Email Is Required',
+      e002: 'Data Invalid',
+      e003: 'User Not Found',
+      e004: 'Password In Correct',
+      e005: 'Token Not Found',
+      e006: 'Token Expired. Please Login Again!',
+      e007: 'Token Invalid',
+      e008: 'Forbidden',
+      e009: 'Token In Black List'
     },
     success: {
-      signIn: 'Sign in account successfully',
-      signOut: 'Sign out account successfully',
-      revokeToken: 'Revoke token successfully'
+      s001: 'Sign In Account Success',
+      s002: 'Sign Out Account Success',
+      s003: 'Get Whoami Success',
+      s004: 'Refresh Token Success',
+      s005: 'Revoke Token Success'
     }
   }
 };

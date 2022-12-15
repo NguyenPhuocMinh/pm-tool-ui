@@ -44,29 +44,24 @@ const translationUser = {
   },
   notifications: {
     errors: {
-      fistNameIsRequired: 'Tên là bắt buộc',
-      lastNameIsRequired: 'Họ là bắt buộc',
-      emailIsRequired: 'Email là bắt buộc',
-      passwordIsRequired: 'Mật khẩu là bắt buộc',
-      passwordConfirmIsRequired: 'Yêu cầu xác nhận mật khẩu',
-      emailIsNotFormat: 'Định dạng email không hợp lệ',
-      passwordIsValidLength: 'Mật khẩu có độ dài không hợp lệ',
-      passwordConfirmIsValidLength: 'Mật khẩu xác nhận là độ dài không hợp lệ',
-      passwordConfirmIsNotMatches: 'Mật khẩu xác nhận không khớp',
-      currentPasswordIsRequired: 'Mật khẩu hiện tại là bắt buộc',
-      newPasswordConfirmIsRequired: 'Yêu cầu xác nhận mật khẩu mới',
-      currentPasswordIsNotMatches: 'Mật khẩu hiện tại không khớp',
-      emailIsDuplicate: 'Email bị trùng lặp',
-      idNotFound: 'Không tìm thấy ID'
+      e001: 'Dữ Liệu Không Hợp Lệ',
+      e002: 'Email Bị Trùng Lặp',
+      e003: 'Không tìm thấy ID',
+      e004: 'Dữ Liệu Thay Đổi Mật Khẩu Không Hợp Lệ',
+      e005: 'Mật Khẩu Hiện Tại Không Khớp',
+      e006: 'Dữ Liệu Đặt Mật Khẩu Không Hợp Lệ',
+      e007: 'Dữ Liệu Làm Mới Mật Khẩu Không Hợp Lệ'
     },
     success: {
-      create: 'Tạo người dùng thành công!',
-      edit: 'Chỉnh sửa người dùng thành công!',
-      delete: 'Xóa người dùng thành công!',
-      addRoles: 'Thêm vai trò cho người dùng thành công!',
-      changePassword: 'Thay đổi mật khẩu thành công!',
-      setPassword: 'Đặt mật khẩu tạm thời thành công!',
-      resetPassword: 'Làm mới mật khẩu thành công!'
+      s001: 'Lấy Danh Sách Người Dùng Thành Công',
+      s002: 'Tạo Người Dùng Thành Công',
+      s003: 'Lấy Người Dùng Theo ID Thành Công',
+      s004: 'Cập Nhật Người Dùng Thành Công',
+      s005: 'Xoá Người Dùng Thành Công',
+      s006: 'Thay Đổi Mật Khẩu Người Dùng Thành Công',
+      s007: 'Đặt Lại Mật Khẩu Người Dùng Thành Công',
+      s008: 'Làm Mới Mật Khẩu Người Dùng Thành Công',
+      s009: 'Thêm Vai Trò Cho Người Dùng THành Công'
     }
   }
 };

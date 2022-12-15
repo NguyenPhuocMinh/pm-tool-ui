@@ -4,14 +4,14 @@ import IconButton from '@mui/material/IconButton';
 // hooks
 import { useTranslate } from '@hooks';
 import { ButtonGroupMain, ColorPickerMain } from '@utilities';
-import packageJSON from '../../../package.json';
+import packageJSON from '../../package.json';
 
 const CommonSetting = ({ open, anchor, toggleDrawer }) => {
   // hooks
   const { translate } = useTranslate();
 
   return (
-    <Box>
+    <Box id="pm-tool-box-common-setting">
       <Drawer
         variant="persistent"
         anchor={anchor}
@@ -27,10 +27,7 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
             padding: 2
           }}
         >
-          <Typography
-            variant="h6"
-            sx={{ fontFamily: 'Josefin Sans', fontWeight: 'bold' }}
-          >
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             {translate('toolbar.setting.title')}
           </Typography>
           <IconButton
@@ -56,7 +53,6 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
           <Typography
             sx={{
               margin: '20px 0px 10px',
-              fontFamily: 'Josefin Sans',
               fontWeight: 'bold'
             }}
             variant="body1"
@@ -67,7 +63,6 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
           <Typography
             sx={{
               margin: '20px 5px 10px',
-              fontFamily: 'Josefin Sans',
               fontWeight: 'bold'
             }}
             variant="body1"
@@ -81,7 +76,6 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
           <Typography
             sx={{
               margin: '20px 0px 10px',
-              fontFamily: 'Josefin Sans',
               fontWeight: 'bold'
             }}
             variant="body1"
@@ -96,7 +90,6 @@ const CommonSetting = ({ open, anchor, toggleDrawer }) => {
           <Typography
             sx={{
               margin: '20px 0px 10px',
-              fontFamily: 'Josefin Sans',
               fontWeight: 'bold'
             }}
             variant="body1"

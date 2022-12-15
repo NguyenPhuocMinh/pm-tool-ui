@@ -46,7 +46,7 @@ const lightTheme = responsiveFontSizes(
       }
     },
     typography: {
-      fontFamily: ['Josefin Sans', 'sans-serif'].join(',')
+      fontFamily: 'Josefin Sans'
     },
     components: {
       MuiAlert: {

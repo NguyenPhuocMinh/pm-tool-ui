@@ -59,6 +59,7 @@ const Layout = () => {
     }
   }, [isSmMatch]);
 
+  // call refresh token
   useEffect(() => {
     let interval;
     if (!isEmpty(token)) {
@@ -111,7 +112,6 @@ const Layout = () => {
           <Typography
             id="layout-title"
             sx={{
-              fontFamily: 'Josefin Sans',
               textDecoration: 'none'
             }}
             variant="h6"

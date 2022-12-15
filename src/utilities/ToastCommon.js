@@ -1,7 +1,38 @@
-import { ToastContainer } from 'react-toastify';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { ToastMsgCustom } from '@utilities';
+import {
+  addDataNewNotifyUserAction,
+  hideToastChangePasswordTemporary
+} from '@reduxStore/actions';
+import { get, isEmpty } from 'lodash';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/ReactToastify.min.css';
 
 const ToastCommon = ({ theme }) => {
+  // hooks
+  const dispatch = useDispatch();
+
+  const { toastInfo } = useSelector((state) => {
+    return {
+      toastInfo: get(state, 'notify.toast', {})
+    };
+  });
+
+  const autoClose = 10000;
+
+  useEffect(() => {
+    if (!isEmpty(toastInfo)) {
+      toast(<ToastMsgCustom toastInfo={toastInfo} />, {
+        toastId: toastInfo?.id
+      });
+      dispatch(addDataNewNotifyUserAction(toastInfo));
+      setTimeout(() => {
+        dispatch(hideToastChangePasswordTemporary());
+      }, autoClose);
+    }
+  }, [toastInfo]);
+
   return (
     <ToastContainer
       newestOnTop
@@ -11,8 +42,8 @@ const ToastCommon = ({ theme }) => {
       pauseOnFocusLoss
       limit={10}
       theme={theme}
-      autoClose={5000}
-      hideProgressBar={false}
+      autoClose={autoClose}
+      position="bottom-right"
     />
   );
 };

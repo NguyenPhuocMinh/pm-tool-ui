@@ -33,7 +33,7 @@ const UserSessionTimeLine = () => {
     <LoadingCommon />
   ) : (
     <Box display="block">
-      <CardListCommon resource="userSession" />
+      <CardListCommon resource="usersSession" />
       {!isEmpty(dataTimeline) ? (
         <Card sx={{ maxHeight: '500px', overflow: 'scroll' }}>
           <TimeLineCommon timelines={dataTimeline} />

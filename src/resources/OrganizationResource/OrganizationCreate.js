@@ -9,12 +9,11 @@ import {
   CardHeader,
   CardContent,
   CardActions,
-  Button,
   Divider,
   Typography
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TextInput, SwitchInput, CircularCommon } from '@utilities';
+import { TextInput, SwitchInput, ButtonSubmit, ButtonCancel } from '@utilities';
 import { useFormik } from 'formik';
 import { validatorOrganizationCreate } from '@validators';
 import { get } from 'lodash';
@@ -110,41 +109,19 @@ const OrganizationCreate = () => {
           </Box>
         </CardContent>
         <CardActions>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              background: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="contained"
-            type="submit"
+          <ButtonSubmit
+            id="pm-tool-button-organization-create-submit"
+            color={color}
             onClick={handleSubmit}
-            disabled={!isValid || !dirty || loading}
-          >
-            {loading && <CircularCommon />}
-            {translate('common.button.save')}
-          </Button>
-          <Button
-            sx={{
-              width: 'auto',
-              minWidth: 150,
-              borderRadius: 12,
-              textTransform: 'capitalize',
-              ':hover': {
-                background: 'none'
-              },
-              borderColor: (theme) => color?.hex ?? theme.palette.primary.main
-            }}
-            variant="outlined"
+            loading={loading}
+            isValid={isValid}
+            dirty={dirty}
+          />
+          <ButtonCancel
+            id="pm-tool-button-organization-create-cancel"
+            color={color}
             onClick={handleCancel}
-          >
-            {translate('common.button.cancel')}
-          </Button>
+          />
         </CardActions>
       </Card>
     </Box>

@@ -5,3 +5,4 @@ export * from './localforage-util';
 export * from './error-util';
 export * from './datagrid-util';
 export * from './format-util';
+export * from './props-util';

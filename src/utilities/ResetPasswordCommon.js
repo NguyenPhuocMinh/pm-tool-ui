@@ -68,13 +68,7 @@ const ResetPasswordCommon = ({
       fullWidth={true}
       maxWidth="md"
     >
-      <DialogTitle
-        sx={{
-          fontFamily: 'Josefin Sans'
-        }}
-      >
-        {translate('resources.users.title.resetPass')}
-      </DialogTitle>
+      <DialogTitle>{translate('resources.users.title.resetPass')}</DialogTitle>
       <DialogContent>
         <Box sx={{ marginTop: '2em', marginRight: '2em', marginBottom: '2em' }}>
           <TextInput

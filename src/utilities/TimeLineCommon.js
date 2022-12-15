@@ -72,16 +72,25 @@ const TimeLineCommon = ({ timelines = [] }) => {
               <Card>
                 <CardHeader title={translate(title)} />
                 <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {translate(content)}
-                  </Typography>
                   <Box sx={{ display: 'flex' }}>
                     <Typography
                       sx={{ marginRight: '5px', fontWeight: 'bold' }}
                       variant="body2"
                       color="text.secondary"
                     >
-                      {translate('resources.userSession.fields.userAgent')}
+                      {translate('resources.usersSession.fields.reason')}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {translate(content)}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', marginTop: '1em' }}>
+                    <Typography
+                      sx={{ marginRight: '5px', fontWeight: 'bold' }}
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      {translate('resources.usersSession.fields.userAgent')}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       {userAgent}
@@ -98,7 +107,7 @@ const TimeLineCommon = ({ timelines = [] }) => {
                         variant="body2"
                         color="text.secondary"
                       >
-                        {translate('resources.userSession.fields.startAccess')}
+                        {translate('resources.usersSession.fields.startAccess')}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {moment(startAccess)
@@ -112,7 +121,7 @@ const TimeLineCommon = ({ timelines = [] }) => {
                         variant="body2"
                         color="text.secondary"
                       >
-                        {translate('resources.userSession.fields.lastAccess')}
+                        {translate('resources.usersSession.fields.lastAccess')}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {moment(lastAccess)

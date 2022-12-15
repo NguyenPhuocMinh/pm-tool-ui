@@ -74,7 +74,7 @@ const ForbiddenCommon = (props) => {
           startIcon={<History />}
           onClick={() => navigate('/')}
         >
-          {translate('common.button.back')}
+          {translate('common.label.back')}
         </Button>
       </div>
     </div>

@@ -133,7 +133,6 @@ const SetPasswordTab = () => {
                       background: (theme) =>
                         color?.hex ?? theme.palette.primary.main
                     },
-                    fontFamily: 'Josefin Sans',
                     background: (theme) =>
                       color?.hex ?? theme.palette.primary.main
                   }}

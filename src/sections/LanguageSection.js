@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { LanguageSetting } from '@utilities';
+import { LanguageSetting } from '@settings';
 import { Box, Tooltip, IconButton } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 
@@ -21,7 +21,7 @@ const LanguageSection = () => {
   };
 
   return (
-    <Box width="auto" minWidth={50}>
+    <Box id="pm-tool-box-language-section" width="auto" minWidth={50}>
       <Tooltip title={translate('toolbar.tooltip.change_language')}>
         <IconButton
           size="large"

@@ -46,7 +46,7 @@ const RefreshSection = () => {
   };
 
   return (
-    <Box width="auto" minWidth={50}>
+    <Box id="pm-tool-box-refresh-section" width="auto" minWidth={50}>
       <Tooltip title={translate('toolbar.tooltip.refresh')}>
         <IconButton
           size="large"

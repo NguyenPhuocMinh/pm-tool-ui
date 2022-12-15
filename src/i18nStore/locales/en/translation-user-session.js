@@ -10,7 +10,8 @@ const translationUserSession = {
     userAgent: 'User agent',
     ipAddress: 'IP address',
     startAccess: 'Start access',
-    lastAccess: 'Last access'
+    lastAccess: 'Last access',
+    reason: 'Reason'
   },
   search: 'Search by user...',
   popup: {
@@ -23,21 +24,25 @@ const translationUserSession = {
     titles: {
       userLogout: 'User logout session',
       userTokenExpired: 'User has expired token',
-      userTokenRevoked: 'User has revoked token'
+      userTokenRevoked: 'User has revoked token',
+      userAreOnline: 'User are online'
     },
     contents: {
       userLogout: 'The user has logged out in session',
       userTokenExpired: 'User was logged out when token expired',
-      userTokenRevoked: 'User was logged out when token revoked'
+      userTokenRevoked: 'User was logged out when token revoked',
+      userAreOnline: 'User are online'
     }
   },
   notifications: {
     errors: {
-      idNotFound: 'Not found ID'
+      e001: 'ID Not Found'
     },
     success: {
-      delete: 'Delete session successfully!',
-      revoke: 'Revoke session successfully'
+      s001: 'Get User Timeline Success',
+      s002: 'Create User Session Success',
+      s003: 'Update User Session Success',
+      s004: 'Delete User Session Success'
     }
   }
 };

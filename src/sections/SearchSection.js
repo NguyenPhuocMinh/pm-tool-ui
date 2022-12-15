@@ -1,6 +1,6 @@
-import { SearchSetting } from '@utilities';
 import { useTranslate } from '@hooks';
 import { useSelector } from 'react-redux';
+import { SearchSetting } from '@settings';
 import { Box, Paper, IconButton, InputBase, Divider } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
@@ -22,7 +22,7 @@ const SearchSection = () => {
   });
 
   return (
-    <Box width="auto" minWidth={50} mr={1}>
+    <Box id="pm-tool-box-search-section" width="auto" minWidth={50} mr={1}>
       <Paper
         {...bindToggle(popupState)}
         sx={{ p: '0px 4px', display: 'flex', alignItems: 'center', width: 256 }}

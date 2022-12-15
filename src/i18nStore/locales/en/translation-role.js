@@ -31,14 +31,18 @@ const translationRole = {
   },
   notifications: {
     errors: {
-      idNotFound: 'Not found ID',
-      duplicateName: 'Role name has duplicate',
-      requiredName: 'Role name is required'
+      e001: 'Data Invalid',
+      e002: 'Role Has Duplicate',
+      e003: 'ID Not Found'
     },
     success: {
-      create: 'Create role successfully!',
-      edit: 'Edit role successfully!',
-      delete: 'Delete role successfully!'
+      s001: 'Get List Role Success',
+      s002: 'Create Role Success',
+      s003: 'Get Role By Id Success',
+      s004: 'Update Role Success',
+      s005: 'Delete Role Success',
+      s006: 'Get Users In Role Success',
+      s007: 'Get Permissions In Role Success'
     }
   }
 };

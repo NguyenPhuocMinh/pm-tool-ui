@@ -4,3 +4,4 @@ export * from './organization-validator';
 export * from './role-validator';
 export * from './permission-validator';
 export * from './user-validator';
+export * from './notify-template-validator';

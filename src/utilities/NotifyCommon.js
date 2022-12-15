@@ -27,6 +27,8 @@ const NotifyCommon = () => {
     if (!isEmpty(notify)) {
       setOpen(true);
     }
+
+    return () => setOpen(false);
   }, [notify]);
 
   const handleRequestClose = useCallback(() => {

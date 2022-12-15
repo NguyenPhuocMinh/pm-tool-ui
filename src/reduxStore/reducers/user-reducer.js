@@ -1,56 +1,58 @@
 import {
-  RESET_RECORDS_USER,
-  CALL_REQUEST_USER,
-  END_REQUEST_USER,
-  GET_ALL_USER,
-  CREATE_USER,
-  GET_ID_USER,
-  EDIT_USER
+  USER_REQUEST,
+  USER_FAILURE,
+  USER_RESET_RECORD,
+  USER_GET_ALL_SUCCESS,
+  USER_GET_ID_SUCCESS,
+  USER_CREATE_SUCCESS,
+  USER_UPDATE_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
   data: [],
   total: 0,
   records: {},
-  loading: false
+  loading: false,
+  error: null
 };
 
 const userReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case RESET_RECORDS_USER:
-      return initialState;
-    case CALL_REQUEST_USER:
+    case USER_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case END_REQUEST_USER:
+    case USER_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: payload
       };
-    case GET_ALL_USER:
+    case USER_RESET_RECORD:
+      return initialState;
+    case USER_GET_ALL_SUCCESS:
       return {
         ...state,
         data: payload.data,
         total: payload.total,
         loading: false
       };
-    case CREATE_USER:
+    case USER_GET_ID_SUCCESS:
       return {
         ...state,
         records: payload,
         loading: false
       };
-    case GET_ID_USER:
+    case USER_CREATE_SUCCESS:
       return {
         ...state,
         records: payload,
         loading: false
       };
-    case EDIT_USER:
+    case USER_UPDATE_SUCCESS:
       return {
         ...state,
         records: payload,
