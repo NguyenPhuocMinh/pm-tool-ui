@@ -13,5 +13,3 @@ export const REFRESH = 'REFRESH';
 
 export const CALL_REQUEST = 'CALL_REQUEST';
 export const END_REQUEST = 'END_REQUEST';
-
-export const SHOW_TOAST = 'SHOW_TOAST';

@@ -246,7 +246,7 @@ const UserList = () => {
           >
             <Box width="auto" minWidth={50}>
               <ButtonCreate
-                label="common.button.create"
+                label="common.label.create"
                 redirect="/users/create"
               />
             </Box>

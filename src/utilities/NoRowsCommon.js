@@ -9,22 +9,21 @@ const NoRowsCommon = () => {
     <Box
       sx={{
         textAlign: 'center',
-        fontFamily: 'Roboto, sans-serif',
         opacity: 0.5,
         margin: '5em 5em'
       }}
     >
       <HotTubIcon
         sx={{
-          width: '9em !important',
-          height: '9em !important'
+          width: '5em !important',
+          height: '5em !important'
         }}
       />
       <Typography
         variant="body2"
         sx={{ marginBottom: '1em !important', fontWeight: 'bold' }}
       >
-        {translate('common.noRows')}
+        {translate('common.label.noRows')}
       </Typography>
     </Box>
   );

@@ -12,20 +12,20 @@ import {
 } from '@services';
 import { showNotification, hidePopup } from '@reduxStore/actions';
 import {
-  CALL_REQUEST_USER,
-  END_REQUEST_USER,
-  RESET_RECORDS_USER,
-  GET_ALL_USER,
-  CREATE_USER,
-  GET_ID_USER,
-  EDIT_USER
+  USER_REQUEST,
+  USER_FAILURE,
+  USER_RESET_RECORD,
+  USER_GET_ALL_SUCCESS,
+  USER_GET_ID_SUCCESS,
+  USER_CREATE_SUCCESS,
+  USER_UPDATE_SUCCESS
 } from '@reduxStore/types';
 
 /**
  * @description RESET RECORDS USER
  */
 export const resetRecordsUser = () => ({
-  type: RESET_RECORDS_USER
+  type: USER_RESET_RECORD
 });
 
 /**
@@ -37,33 +37,53 @@ export const getAllUserAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_USER
+        type: USER_REQUEST
       });
 
       const { result } = await getAllUserService(query);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: GET_ALL_USER,
+          type: USER_GET_ALL_SUCCESS,
           payload: {
             data: result.data,
             total: result.total
           }
         });
-        dispatch({
-          type: END_REQUEST_USER
-        });
-      } else {
-        dispatch({
-          type: END_REQUEST_USER
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_USER
+        type: USER_FAILURE,
+        payload: err
       });
     }
   };
+
+/**
+ * @description GET USER BY ID ACTION
+ * @param {*} userID
+ */
+export const getUserByIdAction = (userID) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_REQUEST
+    });
+
+    const { result } = await getUserByIdService(userID);
+
+    if (!isEmpty(result)) {
+      dispatch({
+        type: USER_GET_ID_SUCCESS,
+        payload: result.data
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: USER_FAILURE,
+      payload: err
+    });
+  }
+};
 
 /**
  * @description CREATE USER ACTION
@@ -77,7 +97,7 @@ export const createUserAction =
 
     try {
       dispatch({
-        type: CALL_REQUEST_USER
+        type: USER_REQUEST
       });
 
       const { result, message } = await createUserService(records);
@@ -85,52 +105,21 @@ export const createUserAction =
       if (!isEmpty(result)) {
         const userID = get(result, 'data.id');
         dispatch({
-          type: CREATE_USER,
+          type: USER_CREATE_SUCCESS,
           payload: result.data
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-        dispatch({
-          type: END_REQUEST_USER
-        });
         navigate(`/users/edit/${userID}`);
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_USER
+        type: USER_FAILURE,
+        payload: err
       });
     }
   };
-
-/**
- * @description GET USER BY ID ACTION
- * @param {*} userID
- */
-export const getUserByIdAction = (userID) => async (dispatch) => {
-  try {
-    dispatch({
-      type: CALL_REQUEST_USER
-    });
-
-    const { result } = await getUserByIdService(userID);
-
-    if (!isEmpty(result)) {
-      dispatch({
-        type: GET_ID_USER,
-        payload: result.data
-      });
-    } else {
-      dispatch({
-        type: END_REQUEST_USER
-      });
-    }
-  } catch (err) {
-    dispatch({
-      type: END_REQUEST_USER
-    });
-  }
-};
 
 /**
  * @description UPDATE USER BY ID ACTION
@@ -142,30 +131,24 @@ export const updateUserByIdAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_USER
+        type: USER_REQUEST
       });
 
       const { result, message } = await updateUserByIdService(userID, records);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_USER,
+          type: USER_UPDATE_SUCCESS,
           payload: result.data
-        });
-        dispatch({
-          type: END_REQUEST_USER
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-      } else {
-        dispatch({
-          type: END_REQUEST_USER
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_USER
+        type: USER_FAILURE,
+        payload: err
       });
     }
   };
@@ -178,7 +161,7 @@ export const updateUserByIdAction =
 export const deleteUserByIdAction = (userID, query) => async (dispatch) => {
   try {
     dispatch({
-      type: CALL_REQUEST_USER
+      type: USER_REQUEST
     });
 
     const result = await deleteUserByIdService(userID);
@@ -191,14 +174,11 @@ export const deleteUserByIdAction = (userID, query) => async (dispatch) => {
       );
       dispatch(getAllUserAction(query));
       dispatch(hidePopup());
-    } else {
-      dispatch({
-        type: END_REQUEST_USER
-      });
     }
   } catch (err) {
     dispatch({
-      type: END_REQUEST_USER
+      type: USER_FAILURE,
+      payload: err
     });
   }
 };
@@ -213,30 +193,24 @@ export const addRolesToUserAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_USER
+        type: USER_REQUEST
       });
 
       const { result, message } = await addRolesToUserService(userID, records);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_USER,
+          type: USER_UPDATE_SUCCESS,
           payload: result.data
-        });
-        dispatch({
-          type: END_REQUEST_USER
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-      } else {
-        dispatch({
-          type: END_REQUEST_USER
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_USER
+        type: USER_FAILURE,
+        payload: err
       });
     }
   };
@@ -251,30 +225,24 @@ export const setPasswordByUserIdAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_USER
+        type: USER_REQUEST
       });
 
       const { result, message } = await setPassUserByIdService(userID, records);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_USER,
+          type: USER_UPDATE_SUCCESS,
           payload: result.data
-        });
-        dispatch({
-          type: END_REQUEST_USER
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-      } else {
-        dispatch({
-          type: END_REQUEST_USER
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_USER
+        type: USER_FAILURE,
+        payload: err
       });
     }
   };
@@ -289,7 +257,7 @@ export const resetPasswordByUserIdAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_USER
+        type: USER_REQUEST
       });
 
       const { result, message } = await resetPassUserByIdService(
@@ -298,24 +266,14 @@ export const resetPasswordByUserIdAction =
       );
 
       if (!isEmpty(result)) {
-        // dispatch({
-        //   type: EDIT_USER,
-        //   payload: result.data
-        // });
-        dispatch({
-          type: END_REQUEST_USER
-        });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
-      } else {
-        dispatch({
-          type: END_REQUEST_USER
-        });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_USER
+        type: USER_FAILURE,
+        payload: err
       });
     }
   };

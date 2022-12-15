@@ -1,56 +1,58 @@
 import {
-  RESET_RECORDS_PERMISSION,
-  CALL_REQUEST_PERMISSION,
-  END_REQUEST_PERMISSION,
-  GET_ALL_PERMISSION,
-  CREATE_PERMISSION,
-  GET_ID_PERMISSION,
-  EDIT_PERMISSION
+  PERMISSION_REQUEST,
+  PERMISSION_FAILURE,
+  PERMISSION_RESET_RECORD,
+  PERMISSION_GET_ALL_SUCCESS,
+  PERMISSION_GET_ID_SUCCESS,
+  PERMISSION_CREATE_SUCCESS,
+  PERMISSION_UPDATE_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
   data: [],
   total: 0,
   records: {},
-  loading: false
+  loading: false,
+  error: null
 };
 
 const permissionReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case RESET_RECORDS_PERMISSION:
-      return initialState;
-    case CALL_REQUEST_PERMISSION:
+    case PERMISSION_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case END_REQUEST_PERMISSION:
+    case PERMISSION_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: payload
       };
-    case GET_ALL_PERMISSION:
+    case PERMISSION_RESET_RECORD:
+      return initialState;
+    case PERMISSION_GET_ALL_SUCCESS:
       return {
         ...state,
         data: payload.data,
         total: payload.total,
         loading: false
       };
-    case CREATE_PERMISSION:
+    case PERMISSION_GET_ID_SUCCESS:
       return {
         ...state,
         records: payload,
         loading: false
       };
-    case GET_ID_PERMISSION:
+    case PERMISSION_CREATE_SUCCESS:
       return {
         ...state,
         records: payload,
         loading: false
       };
-    case EDIT_PERMISSION:
+    case PERMISSION_UPDATE_SUCCESS:
       return {
         ...state,
         records: payload,

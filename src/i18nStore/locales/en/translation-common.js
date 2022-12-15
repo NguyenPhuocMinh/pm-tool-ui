@@ -1,25 +1,38 @@
 const translationCommon = {
-  button: {
-    login: 'Login',
-    logout: 'Logout',
-    back: 'Back',
-    create: 'Create',
-    cancel: 'Cancel',
-    confirm: 'Confirm',
-    viewAllNotify: 'View all notify',
-    save: 'Save',
-    resetPass: 'Reset Password'
-  },
+  search: 'Search...',
   actions: {
     title: 'Actions'
   },
-  search: 'Search...',
-  noRows: 'No rows',
   label: {
-    delete: 'Delete',
+    login: 'Login',
+    logout: 'Logout',
+    create: 'Create',
     edit: 'Edit',
+    delete: 'Delete',
+    save: 'Save',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    back: 'Back',
+    detail: 'Detail',
+    trash: 'Trash',
     timeline: 'TimeLine',
-    revoke: 'Revoke'
+    revoke: 'Revoke',
+    new: 'New',
+    before: 'Before',
+    all: 'All',
+    unread: 'Un read',
+    resetPass: 'Reset Password',
+    notification: 'Notification',
+    viewAll: 'View all',
+    markAllAsRead: 'Mark all as read',
+    noRows: 'No rows',
+    noNotificationNew: 'No notification new',
+    noNotificationBefore: 'No notification before',
+    noNotificationUnread: 'No notification unread'
+  },
+  messages: {
+    loadMsg: 'Loading message...',
+    endMsg: 'You have read it all'
   },
   transferList: {
     titleLeft: 'Title Left',
@@ -28,10 +41,15 @@ const translationCommon = {
   },
   notifications: {
     errors: {
-      internalServer: 'Internal Server Error',
-      routerNotFound: 'Router Not Found Error',
-      orchestratorHandlerNotFound: 'Orchestrator Handler Not Found!',
-      schemaNotFound: 'Schema Not Found!'
+      e001: 'Internal Server Error',
+      e002: 'Router Not Found Error',
+      e003: 'Orchestrator Handler Not Found',
+      e004: 'Schema Not Found'
+    },
+    success: {
+      s001: 'Get Homepage Success',
+      s002: 'Get HealthCheck Success',
+      s003: 'Get Data Json Config Success'
     }
   }
 };

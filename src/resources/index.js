@@ -15,3 +15,6 @@ export * from './PermissionResource';
 export * from './UserResource';
 export * from './UserOnlineResource';
 export * from './UserSessionResource';
+export * from './NotifyResource';
+export * from './NotifyUserResource';
+export * from './NotifyTemplateResource';

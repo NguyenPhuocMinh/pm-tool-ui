@@ -8,15 +8,19 @@ import {
 } from '@services';
 import { showNotification } from '@reduxStore/actions';
 import constants from '@constants';
-
 import {
-  CALL_REQUEST_ORGANIZATION,
-  END_REQUEST_ORGANIZATION,
-  GET_ALL_ORGANIZATION,
-  CREATE_ORGANIZATION,
-  GET_ID_ORGANIZATION,
-  EDIT_ORGANIZATION
+  ORGANIZATION_REQUEST,
+  ORGANIZATION_FAILURE,
+  ORGANIZATION_RESET_RECORD,
+  ORGANIZATION_GET_ALL_SUCCESS,
+  ORGANIZATION_GET_ID_SUCCESS,
+  ORGANIZATION_CREATE_SUCCESS,
+  ORGANIZATION_UPDATE_SUCCESS
 } from '@reduxStore/types';
+
+export const resetRecordsOrganization = () => ({
+  type: ORGANIZATION_RESET_RECORD
+});
 
 /**
  * @description GET ALL ORGANIZATION ACTION
@@ -27,26 +31,56 @@ export const getAllOrganizationAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_ORGANIZATION
+        type: ORGANIZATION_REQUEST
       });
 
       const { result } = await getAllOrganizationService(query);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: GET_ALL_ORGANIZATION,
+          type: ORGANIZATION_GET_ALL_SUCCESS,
           payload: {
             data: result.data,
             total: result.total
           }
         });
+      }
+    } catch (err) {
+      dispatch({
+        type: ORGANIZATION_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description GET ORGANIZATION BY ID ACTION
+ * @param {*} OrganizationID
+ */
+export const getOrganizationByIdAction =
+  (OrganizationID) => async (dispatch) => {
+    try {
+      dispatch({
+        type: ORGANIZATION_REQUEST
+      });
+
+      const data = getByIdOrganizationService(OrganizationID);
+
+      if (!isEmpty(data)) {
         dispatch({
-          type: END_REQUEST_ORGANIZATION
+          type: ORGANIZATION_GET_ID_SUCCESS,
+          payload: {
+            record: data
+          }
+        });
+        dispatch({
+          type: ORGANIZATION_FAILURE
         });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_ORGANIZATION
+        type: ORGANIZATION_FAILURE,
+        payload: err
       });
     }
   };
@@ -62,7 +96,7 @@ export const createOrganizationAction =
     const { navigate } = opts;
     try {
       dispatch({
-        type: CALL_REQUEST_ORGANIZATION
+        type: ORGANIZATION_REQUEST
       });
 
       const { result } = await createOrganizationService(records);
@@ -70,7 +104,7 @@ export const createOrganizationAction =
       if (!isEmpty(result)) {
         const organizationID = get(result, 'response.id');
         dispatch({
-          type: CREATE_ORGANIZATION,
+          type: ORGANIZATION_CREATE_SUCCESS,
           payload: result
         });
         dispatch(
@@ -79,45 +113,12 @@ export const createOrganizationAction =
             message: result.message
           })
         );
-        dispatch({
-          type: END_REQUEST_ORGANIZATION
-        });
         navigate(`/organizations/edit/${organizationID}`);
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_ORGANIZATION
-      });
-    }
-  };
-
-/**
- * @description GET ORGANIZATION BY ID ACTION
- * @param {*} OrganizationID
- */
-export const getOrganizationByIdAction =
-  (OrganizationID) => async (dispatch) => {
-    try {
-      dispatch({
-        type: CALL_REQUEST_ORGANIZATION
-      });
-
-      const data = getByIdOrganizationService(OrganizationID);
-
-      if (!isEmpty(data)) {
-        dispatch({
-          type: GET_ID_ORGANIZATION,
-          payload: {
-            record: data
-          }
-        });
-        dispatch({
-          type: END_REQUEST_ORGANIZATION
-        });
-      }
-    } catch (err) {
-      dispatch({
-        type: END_REQUEST_ORGANIZATION
+        type: ORGANIZATION_FAILURE,
+        payload: err
       });
     }
   };
@@ -132,7 +133,7 @@ export const updateOrganizationByIdAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_ORGANIZATION
+        type: ORGANIZATION_REQUEST
       });
       const { result, message } = await updateByIdOrganizationService(
         organizationID,
@@ -141,11 +142,8 @@ export const updateOrganizationByIdAction =
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_ORGANIZATION,
+          type: ORGANIZATION_UPDATE_SUCCESS,
           payload: result.response
-        });
-        dispatch({
-          type: END_REQUEST_ORGANIZATION
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
@@ -153,7 +151,8 @@ export const updateOrganizationByIdAction =
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_ORGANIZATION
+        type: ORGANIZATION_FAILURE,
+        payload: err
       });
     }
   };
@@ -167,7 +166,7 @@ export const deleteOrganizationByIdAction =
   (organizationID, query) => async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_ORGANIZATION
+        type: ORGANIZATION_REQUEST
       });
 
       const { result } = await deleteOrganizationByIdService(organizationID);
@@ -183,7 +182,8 @@ export const deleteOrganizationByIdAction =
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_ORGANIZATION
+        type: ORGANIZATION_FAILURE,
+        payload: err
       });
     }
   };

@@ -13,15 +13,15 @@ import {
   removeLogin,
   createUserSessionAction,
   socketUserLogoutAction,
-  showToast
+  showToastchangePasswordTemporaryNotifyAction
 } from '@reduxStore/actions';
 import {
-  BEGIN_REQUEST_AUTH,
-  END_REQUEST_AUTH,
-  LOGIN_SUCCESS_AUTH,
-  LOGOUT_SUCCESS_AUTH,
-  WHOAMI_SUCCESS_AUTH,
-  REFRESH_SUCCESS_AUTH
+  AUTH_REQUEST,
+  AUTH_FAILURE,
+  AUTH_LOGIN_SUCCESS,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_WHOAMI_SUCCESS,
+  AUTH_REFRESH_SUCCESS
 } from '@reduxStore/types';
 
 /**
@@ -33,23 +33,20 @@ export const loginAction = (toolBox, records) => async (dispatch) => {
   try {
     const { navigate } = toolBox;
     dispatch({
-      type: BEGIN_REQUEST_AUTH
+      type: AUTH_REQUEST
     });
     const { result, message } = await loginService(records);
 
     if (!isEmpty(result)) {
       const { token } = result;
       dispatch({
-        type: LOGIN_SUCCESS_AUTH,
+        type: AUTH_LOGIN_SUCCESS,
         payload: token
       });
       localForage.setItem(constants.LOCAL_FORAGE_KEYS.TOKEN, token);
-      // wait 3000ms for store token in localStorage
+      // wait 1000ms for store token in localStorage
       setTimeout(() => {
         dispatch(whoamiAction({ email: records.email }));
-        dispatch({
-          type: END_REQUEST_AUTH
-        });
         dispatch(
           showNotification({
             level: constants.NOTIFY_LEVEL.SUCCESS,
@@ -57,11 +54,12 @@ export const loginAction = (toolBox, records) => async (dispatch) => {
           })
         );
         navigate('/');
-      }, 3000);
+      }, 1000);
     }
   } catch (err) {
     dispatch({
-      type: END_REQUEST_AUTH
+      type: AUTH_FAILURE,
+      payload: err
     });
   }
 };
@@ -75,14 +73,14 @@ export const logoutAction = (toolBox, records) => async (dispatch) => {
   const { navigate } = toolBox;
   try {
     dispatch({
-      type: BEGIN_REQUEST_AUTH
+      type: AUTH_REQUEST
     });
 
     const { message } = await logoutService(records);
 
     if (message) {
       dispatch({
-        type: LOGOUT_SUCCESS_AUTH,
+        type: AUTH_LOGOUT_SUCCESS,
         payload: null
       });
       localForage.removeItem(constants.LOCAL_FORAGE_KEYS.TOKEN);
@@ -92,17 +90,13 @@ export const logoutAction = (toolBox, records) => async (dispatch) => {
           message
         })
       );
-      setTimeout(() => {
-        dispatch({
-          type: END_REQUEST_AUTH
-        });
-        dispatch(removeLogin());
-      }, 3000);
+      dispatch(removeLogin());
       navigate('/login');
     }
   } catch (err) {
     dispatch({
-      type: END_REQUEST_AUTH
+      type: AUTH_FAILURE,
+      payload: err
     });
   }
 };
@@ -114,7 +108,7 @@ export const logoutAction = (toolBox, records) => async (dispatch) => {
 export const whoamiAction = (records) => async (dispatch) => {
   try {
     dispatch({
-      type: BEGIN_REQUEST_AUTH
+      type: AUTH_REQUEST
     });
 
     const { result } = await whoamiService(records);
@@ -122,20 +116,19 @@ export const whoamiAction = (records) => async (dispatch) => {
     if (!isEmpty(result)) {
       const { data } = result;
       dispatch({
-        type: WHOAMI_SUCCESS_AUTH,
+        type: AUTH_WHOAMI_SUCCESS,
         payload: data
       });
-      if (!isEmpty(data.isPasswordTemporary)) {
-        dispatch(showToast({ message: 'auth.toast.temporaryPassword' }));
+      if (data.isPasswordTemporary) {
+        // notify for change password temporary user
+        dispatch(showToastchangePasswordTemporaryNotifyAction(data));
       }
       dispatch(createUserSessionAction({ userID: data?.id }));
-      dispatch({
-        type: END_REQUEST_AUTH
-      });
     }
   } catch (err) {
     dispatch({
-      type: END_REQUEST_AUTH
+      type: AUTH_FAILURE,
+      payload: err
     });
   }
 };
@@ -150,7 +143,7 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
 
   try {
     dispatch({
-      type: BEGIN_REQUEST_AUTH
+      type: AUTH_REQUEST
     });
 
     const { result } = await refreshTokenService(records);
@@ -158,11 +151,8 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
     if (!isEmpty(result)) {
       const newToken = result.token;
       dispatch({
-        type: REFRESH_SUCCESS_AUTH,
+        type: AUTH_REFRESH_SUCCESS,
         payload: newToken
-      });
-      dispatch({
-        type: END_REQUEST_AUTH
       });
       localForage.setItem(constants.LOCAL_FORAGE_KEYS.TOKEN, newToken);
     }
@@ -172,11 +162,12 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
       localForage.removeItem(constants.LOCAL_FORAGE_KEYS.TOKEN);
       setTimeout(() => {
         dispatch(removeLogin());
-      }, 3000);
+      }, 2000);
       navigate('/login');
     }
     dispatch({
-      type: END_REQUEST_AUTH
+      type: AUTH_FAILURE,
+      payload: err
     });
   }
 };
@@ -188,7 +179,7 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
 export const revokeTokenAction = (records) => async (dispatch) => {
   try {
     dispatch({
-      type: BEGIN_REQUEST_AUTH
+      type: AUTH_REQUEST
     });
 
     const { message } = await revokeTokenService(records);
@@ -200,13 +191,11 @@ export const revokeTokenAction = (records) => async (dispatch) => {
           message
         })
       );
-      dispatch({
-        type: END_REQUEST_AUTH
-      });
     }
   } catch (err) {
     dispatch({
-      type: END_REQUEST_AUTH
+      type: AUTH_FAILURE,
+      payload: err
     });
   }
 };

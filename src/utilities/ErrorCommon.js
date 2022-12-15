@@ -112,7 +112,7 @@ const ErrorCommon = (props) => {
             startIcon={<History />}
             onClick={resetErrorBoundary}
           >
-            {translate('common.button.back')}
+            {translate('common.label.back')}
           </Button>
         </div>
       </div>

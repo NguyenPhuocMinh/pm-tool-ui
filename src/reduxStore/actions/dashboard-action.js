@@ -1,10 +1,8 @@
 import {
-  HOME_REQUEST,
-  HOME_SUCCESS,
-  HOME_END,
-  HEALTH_CHECK_REQUEST,
-  HEALTH_CHECK_SUCCESS,
-  HEALTH_CHECK_END
+  DASH_BOARD_REQUEST,
+  DASH_BOARD_FAILURE,
+  DASH_BOARD_GET_HOME_SUCCESS,
+  DASH_BOARD_GET_HEALTH_CHECK_SUCCESS
 } from '@reduxStore/types';
 import { isEmpty } from 'lodash';
 
@@ -16,19 +14,20 @@ import { homeService, healthCheckService } from '@services';
 export const homeAction = () => async (dispatch) => {
   try {
     dispatch({
-      type: HOME_REQUEST
+      type: DASH_BOARD_REQUEST
     });
     const { result } = await homeService();
 
     if (!isEmpty(result)) {
       dispatch({
-        type: HOME_SUCCESS,
+        type: DASH_BOARD_GET_HOME_SUCCESS,
         payload: result
       });
     }
   } catch (err) {
     dispatch({
-      type: HOME_END
+      type: DASH_BOARD_FAILURE,
+      payload: err
     });
   }
 };
@@ -39,19 +38,20 @@ export const homeAction = () => async (dispatch) => {
 export const healthCheckAction = () => async (dispatch) => {
   try {
     dispatch({
-      type: HEALTH_CHECK_REQUEST
+      type: DASH_BOARD_REQUEST
     });
     const { result } = await healthCheckService();
 
     if (!isEmpty(result)) {
       dispatch({
-        type: HEALTH_CHECK_SUCCESS,
+        type: DASH_BOARD_GET_HEALTH_CHECK_SUCCESS,
         payload: result
       });
     }
   } catch (err) {
     dispatch({
-      type: HEALTH_CHECK_END
+      type: DASH_BOARD_FAILURE,
+      payload: err
     });
   }
 };

@@ -46,7 +46,7 @@ const darkTheme = responsiveFontSizes(
       }
     },
     typography: {
-      fontFamily: ['Josefin Sans', 'sans-serif'].join(',')
+      fontFamily: 'Josefin Sans'
     }
   })
 );

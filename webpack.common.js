@@ -65,7 +65,9 @@ module.exports = {
       '@regulars': path.resolve(__dirname, './src/regulars'),
       '@permissions': path.resolve(__dirname, './src/permissions'),
       '@socketStore': path.resolve(__dirname, './src/socketStore'),
-      '@helpers': path.resolve(__dirname, './src/helpers')
+      '@helpers': path.resolve(__dirname, './src/helpers'),
+      '@sections': path.resolve(__dirname, './src/sections'),
+      '@settings': path.resolve(__dirname, './src/settings'),
     },
     modules: [
       'node_modules',

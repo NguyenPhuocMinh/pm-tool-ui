@@ -16,7 +16,6 @@ const ButtonSubmit = ({ id, sx, onClick, color, isValid, dirty, loading }) => {
         ':hover': {
           background: (theme) => color?.hex ?? theme.palette.primary.main
         },
-        fontFamily: 'Josefin Sans',
         background: (theme) => color?.hex ?? theme.palette.primary.main,
         ...sx
       }}
@@ -26,7 +25,7 @@ const ButtonSubmit = ({ id, sx, onClick, color, isValid, dirty, loading }) => {
       disabled={!isValid || !dirty || loading}
     >
       {loading && <CircularCommon />}
-      {translate('common.button.save')}
+      {translate('common.label.save')}
     </Button>
   );
 };

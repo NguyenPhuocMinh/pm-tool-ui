@@ -272,7 +272,7 @@ const OrganizationList = () => {
           sortModel={sortModel}
           onPageChange={handleOnPageChange}
           onPageSizeChange={handleOnPageSizeChange}
-          handleOnSortModelChange={handleOnSortModelChange}
+          onSortModelChange={handleOnSortModelChange}
         />
       </Paper>
       <PopupCommon />

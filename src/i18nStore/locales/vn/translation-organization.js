@@ -18,6 +18,20 @@ const translationOrganization = {
     title: 'Xóa tổ chức',
     content:
       'Bạn có chắc chắn muốn xóa vĩnh viễn tổ chức {{organizationName}} này không?'
+  },
+  notifications: {
+    errors: {
+      e001: 'Dữ Liệu Không Hợp Lệ',
+      e002: 'Tổ Chức Bị Trùng Lặp',
+      e003: 'Không Tìm Thấy ID'
+    },
+    success: {
+      s001: 'Lấy Danh Sách Tổ Chức Thành Công',
+      s002: 'Tạo Tổ Chức Thành Công',
+      s003: 'Lấy Tổ Chức Thành Công',
+      s004: 'Cập Tổ Chức Thành Công',
+      s005: 'Xoá Tổ Chức Thành Công'
+    }
   }
 };
 

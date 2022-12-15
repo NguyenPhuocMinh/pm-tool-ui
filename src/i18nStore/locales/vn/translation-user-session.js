@@ -1,15 +1,17 @@
 const translationUserSession = {
   title: {
-    list: 'Sessions'
+    list: 'Phiên'
   },
   description: {
-    list: 'Sessions are sessions of users access within the session'
+    list: 'Phiên là phiên người dùng truy cập trong phiên'
   },
   fields: {
-    user: 'User',
-    userAgent: 'User agent',
-    ipAddress: 'IP address',
-    lastAccess: 'Last access'
+    user: 'Người sử dụng',
+    userAgent: 'Thiết bị người dùng',
+    ipAddress: 'Địa chỉ IP',
+    startAccess: 'Bắt đầu truy cập',
+    lastAccess: 'Truy cập lần cuối',
+    reason: 'Lý do'
   },
   search: 'Search by user...',
   popup: {
@@ -20,11 +22,13 @@ const translationUserSession = {
   },
   notifications: {
     errors: {
-      idNotFound: 'Not found ID'
+      e001: 'ID Not Found'
     },
     success: {
-      delete: 'Delete session successfully!',
-      revoke: 'Revoke session successfully'
+      s001: 'Get User Timeline Success',
+      s002: 'Create User Session Success',
+      s003: 'Update User Session Success',
+      s004: 'Delete User Session Success'
     }
   }
 };

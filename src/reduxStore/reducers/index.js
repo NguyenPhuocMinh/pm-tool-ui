@@ -1,6 +1,7 @@
 import commonReducer from './common-reducer';
 
 import authReducer from './auth-reducer';
+import configReducer from './config-reducer';
 import dashboardReducer from './dashboard-reducer';
 import organizationReducer from './organization-reducer';
 import projectReducer from './project-reducer';
@@ -9,10 +10,14 @@ import permissionReducer from './permission-reducer';
 import userReducer from './user-reducer';
 import userOnlineReducer from './user-online-reducer';
 import userSessionReducer from './user-session-reducer';
+import notifyReducer from './notify-reducer';
+import notifyUserReducer from './notify-user-reducer';
+import notifyTemplateReducer from './notify-template-reducer';
 
 export {
   commonReducer,
   authReducer,
+  configReducer,
   dashboardReducer,
   organizationReducer,
   projectReducer,
@@ -20,5 +25,8 @@ export {
   permissionReducer,
   userReducer,
   userOnlineReducer,
-  userSessionReducer
+  userSessionReducer,
+  notifyReducer,
+  notifyUserReducer,
+  notifyTemplateReducer
 };

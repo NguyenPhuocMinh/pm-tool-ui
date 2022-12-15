@@ -119,7 +119,7 @@ const ProfileSetting = (props) => {
                   />
                 </ListItemIcon>
                 <Typography variant="caption">
-                  {translate('common.button.logout')}
+                  {translate('common.label.logout')}
                 </Typography>
               </MenuItem>
             </Box>

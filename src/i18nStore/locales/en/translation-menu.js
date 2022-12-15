@@ -28,6 +28,15 @@ const translationMenu = {
     userOnline: {
       title: 'UserOnline'
     }
+  },
+  operation: {
+    title: 'Operation',
+    notify: {
+      title: 'Notify'
+    },
+    notifyTemplate: {
+      title: 'Notify Template'
+    }
   }
 };
 

@@ -8,15 +8,19 @@ import {
 } from '@services';
 import { showNotification } from '@reduxStore/actions';
 import constants from '@constants';
-
 import {
-  CALL_REQUEST_PROJECT,
-  END_REQUEST_PROJECT,
-  GET_ALL_PROJECT,
-  CREATE_PROJECT,
-  GET_ID_PROJECT,
-  EDIT_PROJECT
+  PROJECT_REQUEST,
+  PROJECT_FAILURE,
+  PROJECT_RESET_RECORD,
+  PROJECT_GET_ALL_SUCCESS,
+  PROJECT_GET_ID_SUCCESS,
+  PROJECT_CREATE_SUCCESS,
+  PROJECT_UPDATE_SUCCESS
 } from '@reduxStore/types';
+
+export const resetRecordsProject = () => ({
+  type: PROJECT_RESET_RECORD
+});
 
 /**
  * @description GET ALL PROJECT ACTION
@@ -27,29 +31,57 @@ export const getAllProjectAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PROJECT
+        type: PROJECT_REQUEST
       });
 
       const { result } = await getAllProjectService(query);
 
       if (!isEmpty(result)) {
         dispatch({
-          type: GET_ALL_PROJECT,
+          type: PROJECT_GET_ALL_SUCCESS,
           payload: {
             data: result.data,
             total: result.total
           }
         });
         dispatch({
-          type: END_REQUEST_PROJECT
+          type: PROJECT_FAILURE
         });
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PROJECT
+        type: PROJECT_FAILURE
       });
     }
   };
+
+/**
+ * @description GET PROJECT BY ID ACTION
+ * @param {*} ProjectID
+ */
+export const getProjectByIdAction = (ProjectID) => async (dispatch) => {
+  try {
+    dispatch({
+      type: PROJECT_REQUEST
+    });
+
+    const data = getByIdProjectService(ProjectID);
+
+    if (!isEmpty(data)) {
+      dispatch({
+        type: PROJECT_GET_ID_SUCCESS,
+        payload: {
+          record: data
+        }
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: PROJECT_FAILURE,
+      payload: err
+    });
+  }
+};
 
 /**
  * @description CREATE PROJECT ACTION
@@ -62,7 +94,7 @@ export const createProjectAction =
     const { navigate } = opts;
     try {
       dispatch({
-        type: CALL_REQUEST_PROJECT
+        type: PROJECT_REQUEST
       });
 
       const { result } = await createProjectService(records);
@@ -70,7 +102,7 @@ export const createProjectAction =
       if (!isEmpty(result)) {
         const organizationID = get(result, 'response.id');
         dispatch({
-          type: CREATE_PROJECT,
+          type: PROJECT_CREATE_SUCCESS,
           payload: result
         });
         dispatch(
@@ -79,47 +111,15 @@ export const createProjectAction =
             message: result.message
           })
         );
-        dispatch({
-          type: END_REQUEST_PROJECT
-        });
         navigate(`/organizations/edit/${organizationID}`);
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PROJECT
+        type: PROJECT_FAILURE,
+        payload: err
       });
     }
   };
-
-/**
- * @description GET PROJECT BY ID ACTION
- * @param {*} ProjectID
- */
-export const getProjectByIdAction = (ProjectID) => async (dispatch) => {
-  try {
-    dispatch({
-      type: CALL_REQUEST_PROJECT
-    });
-
-    const data = getByIdProjectService(ProjectID);
-
-    if (!isEmpty(data)) {
-      dispatch({
-        type: GET_ID_PROJECT,
-        payload: {
-          record: data
-        }
-      });
-      dispatch({
-        type: END_REQUEST_PROJECT
-      });
-    }
-  } catch (err) {
-    dispatch({
-      type: END_REQUEST_PROJECT
-    });
-  }
-};
 
 /**
  * @description UPDATE PROJECT BY ID ACTION
@@ -131,7 +131,7 @@ export const updateProjectByIdAction =
   async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PROJECT
+        type: PROJECT_REQUEST
       });
       const { result, message } = await updateByIdProjectService(
         organizationID,
@@ -140,11 +140,8 @@ export const updateProjectByIdAction =
 
       if (!isEmpty(result)) {
         dispatch({
-          type: EDIT_PROJECT,
+          type: PROJECT_UPDATE_SUCCESS,
           payload: result.response
-        });
-        dispatch({
-          type: END_REQUEST_PROJECT
         });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
@@ -152,7 +149,8 @@ export const updateProjectByIdAction =
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PROJECT
+        type: PROJECT_FAILURE,
+        payload: err
       });
     }
   };
@@ -166,7 +164,7 @@ export const deleteProjectByIdAction =
   (organizationID, query) => async (dispatch) => {
     try {
       dispatch({
-        type: CALL_REQUEST_PROJECT
+        type: PROJECT_REQUEST
       });
 
       const { result } = await deleteProjectByIdService(organizationID);
@@ -182,7 +180,8 @@ export const deleteProjectByIdAction =
       }
     } catch (err) {
       dispatch({
-        type: END_REQUEST_PROJECT
+        type: PROJECT_FAILURE,
+        payload: err
       });
     }
   };

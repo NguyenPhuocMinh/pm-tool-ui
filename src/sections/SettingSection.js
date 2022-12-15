@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslate } from '@hooks';
-import { CommonSetting } from '@utilities';
+import { CommonSetting } from '@settings';
 import { Box, Tooltip, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -23,7 +23,7 @@ const SettingSection = () => {
   };
 
   return (
-    <Box width="auto" minWidth={50}>
+    <Box id="pm-tool-box-setting-section" width="auto" minWidth={50}>
       <Tooltip title={translate('toolbar.tooltip.change_setting')}>
         <IconButton
           size="large"

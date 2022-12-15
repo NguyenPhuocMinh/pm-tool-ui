@@ -27,14 +27,18 @@ const translationRole = {
   },
   notifications: {
     errors: {
-      idNotFound: 'Không tìm thấy ID',
-      duplicateName: 'Tên vai trò bị trùng lặp',
-      requiredName: 'Tên vai trò bắt buộc'
+      e001: 'Dữ Liệu Không Hợp Lệ',
+      e002: 'Vai Trò Bị Trùng Lặp',
+      e003: 'Không Tìm Thấy ID'
     },
     success: {
-      create: 'Tạo vai trò thành công!',
-      edit: 'Chỉnh sửa vai trò thành công!',
-      delete: 'Xoá vai trò thành công!'
+      s001: 'Lấy Danh Sách Vai Trò Thành Công',
+      s002: 'Tạo Vai Trò Thành Công',
+      s003: 'Lấy Vai Trò Theo ID Thành Công',
+      s004: 'Cập Nhật Vai Trò Thành Công',
+      s005: 'Xoá Vai Trò Thành Công',
+      s006: 'Lấy Người Dùng Trong Vai Trò Thành Công',
+      s007: 'Lấy Quyền Trong Vai Trò Thành Công'
     }
   }
 };

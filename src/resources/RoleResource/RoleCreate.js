@@ -16,6 +16,7 @@ import {
 import { makeStyles } from '@mui/styles';
 import {
   TypoCommon,
+  BoxWrapper,
   ButtonSubmit,
   ButtonCancel,
   TextInput,
@@ -51,14 +52,14 @@ const RoleCreate = () => {
   });
 
   const handleCreate = useCallback(
-    async (records) => {
+    (records) => {
       dispatch(createRoleAction({ navigate }, records));
     },
     [dispatch, navigate]
   );
 
   const handleCancel = () => {
-    navigate('/role-list');
+    navigate('/roles');
   };
 
   const { handleSubmit, isValid, dirty, ...formProps } = useFormik({
@@ -86,12 +87,7 @@ const RoleCreate = () => {
         />
         <Divider sx={{ width: '100%' }} />
         <CardContent>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          <BoxWrapper>
             <TextInput
               label="resources.roles.fields.name"
               required
@@ -100,13 +96,8 @@ const RoleCreate = () => {
               className={classes.input}
               {...formProps}
             />
-          </Box>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          </BoxWrapper>
+          <BoxWrapper>
             <TextInput
               label="resources.roles.fields.description"
               id="description"
@@ -116,30 +107,30 @@ const RoleCreate = () => {
               className={classes.input}
               {...formProps}
             />
-          </Box>
-          <Box
-            sx={{
-              marginTop: '1em',
-              display: 'flex'
-            }}
-          >
+          </BoxWrapper>
+          <BoxWrapper>
             <SwitchInput
               id="activated"
               source="activated"
               label="resources.roles.fields.activated"
               {...formProps}
             />
-          </Box>
+          </BoxWrapper>
         </CardContent>
         <CardActions>
           <ButtonSubmit
+            id="pm-tool-button-role-create-submit"
             color={color}
             onClick={handleSubmit}
             loading={loading}
             isValid={isValid}
             dirty={dirty}
           />
-          <ButtonCancel color={color} onClick={handleCancel} />
+          <ButtonCancel
+            id="pm-tool-button-role-create-cancel"
+            color={color}
+            onClick={handleCancel}
+          />
         </CardActions>
       </Card>
     </Box>

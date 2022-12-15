@@ -22,7 +22,6 @@ const TabsCommon = ({ tabs, tabName, onChange, resourceLabel, color }) => {
         return (
           <Tab
             sx={{
-              fontFamily: 'Josefin Sans',
               textTransform: 'capitalize'
             }}
             label={translate(`${resourceLabel}.${tab.label}`)}

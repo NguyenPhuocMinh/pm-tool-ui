@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslate, useAuth } from '@hooks';
-import { ProfileSetting } from '@utilities';
+import { ProfileSetting } from '@settings';
 import { Box, Tooltip, IconButton, Avatar, Typography } from '@mui/material';
 import { get } from 'lodash';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
@@ -36,7 +36,7 @@ const ProfileSection = () => {
   });
 
   return (
-    <Box width="auto" minWidth={50}>
+    <Box id="pm-tool-box-profile-section" width="auto" minWidth={50}>
       <Tooltip title={translate('toolbar.tooltip.change_profile')}>
         <IconButton
           size="large"
@@ -45,8 +45,7 @@ const ProfileSection = () => {
             ':hover': {
               background: 'none'
             },
-            p: '10px',
-            marginTop: '-5px'
+            p: '10px'
           }}
           color="inherit"
           onClick={handleClickChangeProfile}
@@ -60,7 +59,6 @@ const ProfileSection = () => {
             variant="body2"
             sx={{
               lineHeight: 1,
-              fontFamily: 'Josefin Sans',
               fontWeight: 'bold',
               overflow: 'hidden',
               textOverflow: 'ellipsis',

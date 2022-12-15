@@ -14,7 +14,7 @@ const translationProject = {
     updatedAt: 'UpdatedAt',
     verify: 'Verify'
   },
-  search: 'Search by project',
+  search: 'Search by project...',
   popup: {
     title: 'Delete Project',
     content:

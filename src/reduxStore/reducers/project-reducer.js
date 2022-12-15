@@ -1,53 +1,62 @@
 import {
-  CALL_REQUEST_PROJECT,
-  END_REQUEST_PROJECT,
-  GET_ALL_PROJECT,
-  CREATE_PROJECT,
-  GET_ID_PROJECT,
-  EDIT_PROJECT
+  PROJECT_REQUEST,
+  PROJECT_FAILURE,
+  PROJECT_RESET_RECORD,
+  PROJECT_GET_ALL_SUCCESS,
+  PROJECT_GET_ID_SUCCESS,
+  PROJECT_CREATE_SUCCESS,
+  PROJECT_UPDATE_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
-  loading: false,
   data: [],
   total: 0,
-  record: {}
+  record: {},
+  loading: false,
+  error: null
 };
 
 const projectReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CALL_REQUEST_PROJECT:
+    case PROJECT_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case END_REQUEST_PROJECT:
+    case PROJECT_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: payload
       };
-    case GET_ALL_PROJECT:
+    case PROJECT_RESET_RECORD:
+      return initialState;
+    case PROJECT_GET_ALL_SUCCESS:
       return {
         ...state,
         data: payload.data,
-        total: payload.total
+        total: payload.total,
+        loading: false
       };
-    case CREATE_PROJECT:
+    case PROJECT_GET_ID_SUCCESS:
       return {
         ...state,
-        record: payload
+        record: payload,
+        loading: false
       };
-    case GET_ID_PROJECT:
+    case PROJECT_CREATE_SUCCESS:
       return {
         ...state,
-        record: payload
+        record: payload,
+        loading: false
       };
-    case EDIT_PROJECT:
+    case PROJECT_UPDATE_SUCCESS:
       return {
         ...state,
-        record: payload
+        record: payload,
+        loading: false
       };
     default:
       return state;

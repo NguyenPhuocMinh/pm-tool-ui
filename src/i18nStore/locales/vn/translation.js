@@ -16,6 +16,9 @@ import translationPermission from './translation-permission';
 import translationUser from './translation-user';
 import translationUserOnline from './translation-user-online';
 import translationUserSession from './translation-user-session';
+import translationNotify from './translation-notify';
+import translationNotifyUser from './translation-notify-user';
+import translationNotifyTemplate from './translation-notify-template';
 
 const TRANSLATIONS_VN = {
   auth: translationAuth,
@@ -34,7 +37,10 @@ const TRANSLATIONS_VN = {
     permissions: translationPermission,
     users: translationUser,
     usersOnline: translationUserOnline,
-    userSession: translationUserSession
+    usersSession: translationUserSession,
+    notifies: translationNotify,
+    notifyUsers: translationNotifyUser,
+    notifyTemplates: translationNotifyTemplate
   }
 };
 

@@ -1,22 +1,22 @@
 const translationAuth = {
   notifications: {
     errors: {
-      emailIsRequired: 'Email bắt buộc',
-      passwordIsRequired: 'Mật khẩu bắt buộc',
-      userNotFound: 'Không tìm thấy người dùng',
-      passwordIsInCorrect: 'Mật khẩu Không đúng',
-      tokenNotFound: 'Không tìm thấy mã thông báo',
-      tokenExpiredError: 'Mã thông báo Hết hạn. Xin vui lòng đăng nhập lại!',
-      refreshTokenExpiredError:
-        'Mã thông báo Hết hạn. Xin vui lòng đăng nhập lại!',
-      tokenInvalidError: 'Mã thông báo không hợp lệ',
-      tokenForbidden: 'Bị cấm',
-      tokenInBlackListError: 'Mã thông báo trong danh sách đen'
+      e001: 'Email Bắt Buộc',
+      e002: 'Dữ Liệu Không Hợp Lệ',
+      e003: 'Không Tìm Thấy Người Dùng',
+      e004: 'Mật khẩu Không đúng',
+      e005: 'Không tìm thấy mã thông báo',
+      e006: 'Mã Thông Báo Hết Hạn. Xin Vui Lòng Đăng Nhập Lại',
+      e007: 'Mã Thông Báo Không Hợp Lệ',
+      e008: 'Bị Cấm',
+      e009: 'Mã Thông Báo Trong Danh Sách Đen'
     },
     success: {
-      signIn: 'Đăng nhập tài khoản thành công',
-      signOut: 'Đăng xuất tài khoản thành công',
-      revokeToken: 'Thu hồi mã thông báo thành công'
+      s001: 'Đăng Nhập Tài Khoản Thành Công',
+      s002: 'Đăng xuất tài khoản thành công',
+      s003: 'Lấy Thông Tin Người Dùng Thành Công',
+      s004: 'Làm Mới Mã Thông Báo Thành Công',
+      s005: 'Thu Hồi Mã Thông Báo Thành Công'
     }
   }
 };

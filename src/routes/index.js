@@ -15,7 +15,12 @@ import {
   UserCreate,
   UserEdit,
   UserOnlineList,
-  UserSessionTimeLine
+  UserSessionTimeLine,
+  NotifyList,
+  NotifyUserList,
+  NotifyUserDetail,
+  NotifyTemplateList,
+  NotifyTemplateCreate
 } from '@resources';
 import { NotFoundCommon, ForbiddenCommon } from '@utilities';
 import { menuPermissions } from '@permissions';
@@ -27,6 +32,8 @@ import LanIcon from '@mui/icons-material/Lan';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 /**
  * @description ROUTES
@@ -193,6 +200,50 @@ const userSessionRoutes = [
   }
 ];
 
+const notifyRoutes = [
+  {
+    enable: true,
+    name: 'notifies',
+    path: '/notifies',
+    element: () => <NotifyList />,
+    permission: menuPermissions.notifies.LIST
+  }
+];
+
+const notifyUserRoutes = [
+  {
+    enable: false,
+    name: 'notify-user',
+    path: '/notify/users',
+    element: () => <NotifyUserList />,
+    permission: ''
+  },
+  {
+    enable: false,
+    name: 'notify-user',
+    path: '/notify/users/:id',
+    element: () => <NotifyUserDetail />,
+    permission: ''
+  }
+];
+
+const notifyTemplateRoutes = [
+  {
+    enable: true,
+    name: 'notify-templates',
+    path: '/notify-templates',
+    element: () => <NotifyTemplateList />,
+    permission: menuPermissions.notifyTemplates.LIST
+  },
+  {
+    enable: true,
+    name: 'notify-templates-create',
+    path: '/notify-templates/create',
+    element: () => <NotifyTemplateCreate />,
+    permission: menuPermissions.notifyTemplates.CREATE
+  }
+];
+
 const routes = [
   ...dashboardRoutes,
   ...notfoundRoutes,
@@ -203,7 +254,10 @@ const routes = [
   ...permissionRoutes,
   ...userRoutes,
   ...userOnlineRoutes,
-  ...userSessionRoutes
+  ...userSessionRoutes,
+  ...notifyRoutes,
+  ...notifyUserRoutes,
+  ...notifyTemplateRoutes
 ];
 
 /**
@@ -274,4 +328,29 @@ const authenticateMenus = [
   }
 ];
 
-export { routes, homeMenus, managementMenus, authenticateMenus };
+const operationMenus = [
+  {
+    enable: true,
+    name: 'notifies',
+    title: 'menu.operation.notify.title',
+    path: '/notifies',
+    icon: <NotificationsActiveIcon />,
+    permission: menuPermissions.notifies.LIST
+  },
+  {
+    enable: true,
+    name: 'projects',
+    title: 'menu.operation.notifyTemplate.title',
+    path: '/notify-templates',
+    icon: <ReceiptLongIcon />,
+    permission: menuPermissions.notifyTemplates.LIST
+  }
+];
+
+export {
+  routes,
+  homeMenus,
+  managementMenus,
+  authenticateMenus,
+  operationMenus
+};

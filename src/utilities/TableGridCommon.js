@@ -25,9 +25,9 @@ const TableGridCommon = ({
   page,
   pageSize,
   sortModel,
-  handleOnPageChange,
-  handleOnPageSizeChange,
-  handleOnSortModelChange
+  onPageChange,
+  onPageSizeChange,
+  onSortModelChange
 }) => {
   const classes = useStyles();
   const { i18n } = useTranslate();
@@ -46,10 +46,10 @@ const TableGridCommon = ({
         columns={columns}
         page={page}
         pageSize={pageSize}
-        onPageChange={handleOnPageChange}
-        onPageSizeChange={handleOnPageSizeChange}
+        onPageChange={onPageChange}
+        onPageSizeChange={onPageSizeChange}
         sortModel={sortModel}
-        onSortModelChange={handleOnSortModelChange}
+        onSortModelChange={onSortModelChange}
         rowsPerPageOptions={[5, 10, 20, 100]}
         pagination
         paginationMode="server"

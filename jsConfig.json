@@ -22,6 +22,8 @@
       "@permissions": ["src/permissions/index"],
       "@socketStore/*": ["src/socketStore/*"],
       "@helpers": ["src/helpers/index"],
+      "@sections": ["src/sections/index"],
+      "@settings": ["src/settings/index"]
     }
   },
   "exclude": ["node_modules"]

@@ -35,7 +35,7 @@ const ButtonCreate = (props) => {
       onClick={handleClick}
       variant="contained"
     >
-      {translate('common.button.create')}
+      {translate('common.label.create')}
     </Button>
   );
 };

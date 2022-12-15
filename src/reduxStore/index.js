@@ -11,6 +11,7 @@ import { RESET } from '@reduxStore/types';
 import {
   commonReducer,
   authReducer,
+  configReducer,
   dashboardReducer,
   organizationReducer,
   projectReducer,
@@ -18,7 +19,10 @@ import {
   permissionReducer,
   userReducer,
   userOnlineReducer,
-  userSessionReducer
+  userSessionReducer,
+  notifyReducer,
+  notifyUserReducer,
+  notifyTemplateReducer
 } from '@reduxStore/reducers';
 
 // middleware
@@ -27,6 +31,7 @@ const loggerMiddleware = createLogger(optionsLogger);
 const appReducer = combineReducers({
   common: commonReducer,
   auth: authReducer,
+  config: configReducer,
   dashboard: dashboardReducer,
   organization: organizationReducer,
   project: projectReducer,
@@ -34,7 +39,10 @@ const appReducer = combineReducers({
   permission: permissionReducer,
   user: userReducer,
   userOnline: userOnlineReducer,
-  userSession: userSessionReducer
+  userSession: userSessionReducer,
+  notify: notifyReducer,
+  notifyUser: notifyUserReducer,
+  notifyTemplate: notifyTemplateReducer
 });
 
 const rootReducer = (state, action) => {
