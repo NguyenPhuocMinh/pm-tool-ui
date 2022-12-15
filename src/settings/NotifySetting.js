@@ -21,7 +21,7 @@ import { get } from 'lodash';
 
 // tabs
 import NotifyAllTab from './NotifyTabs/NotifyAllTab';
-import NotifyUnReadTab from './NotifyTabs/NotifyUnreadTab';
+import NotifyUnReadTab from './NotifyTabs/NotifyUnReadTab';
 
 const tabs = [
   {
