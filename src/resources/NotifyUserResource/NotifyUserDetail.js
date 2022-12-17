@@ -27,8 +27,9 @@ import { dateTimeFormat } from '@utils';
 import { convertNotifyType, convertFullName, convertDataMap } from '@helpers';
 
 const useStyles = makeStyles({
-  withTypo: {
-    minWidth: '100px'
+  typoFont: {
+    minWidth: '100px',
+    fontWeight: 'bold !important'
   }
 });
 
@@ -80,67 +81,73 @@ const NotifyUserDetail = () => {
         <CardContent sx={{ padding: '1em' }}>
           <Stack spacing={2}>
             <StackRowCommon id="pm-tool-stack-row-sender">
-              <TypoCommon
-                label="resources.notifyUsers.fields.sender"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
-              <Typography variant="subtitle2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.sender')}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 {convertFullName(sender?.firstName, sender?.lastName)}
               </Typography>
             </StackRowCommon>
             <StackRowCommon id="pm-tool-stack-row-receiver">
-              <TypoCommon
-                label="resources.notifyUsers.fields.receiver"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
-              <Typography variant="subtitle2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.receiver')}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 {convertFullName(receiver?.firstName, receiver?.lastName)}
               </Typography>
             </StackRowCommon>
             <StackRowCommon id="pm-tool-stack-row-sentAt">
-              <TypoCommon
-                label="resources.notifyUsers.fields.sentAt"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
-              <Typography variant="subtitle2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.sentAt')}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 {dateTimeFormat(createdAt)}
               </Typography>
             </StackRowCommon>
             <StackRowCommon id="pm-tool-stack-row-type">
-              <TypoCommon
-                label="resources.notifyUsers.fields.type"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
-              <Typography variant="subtitle2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.type')}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 {notifyType}
               </Typography>
             </StackRowCommon>
             <StackRowCommon id="pm-tool-stack-row-topic">
-              <TypoCommon
-                label="resources.notifyUsers.fields.topic"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
-              <Typography variant="subtitle2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.topic')}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 {topic}
               </Typography>
             </StackRowCommon>
             <StackRowCommon id="pm-tool-stack-row-description">
-              <TypoCommon
-                label="resources.notifyUsers.fields.description"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.description')}
+              </Typography>
               <Typography variant="subtitle2" color="text.secondary">
                 {description}
               </Typography>
@@ -149,12 +156,13 @@ const NotifyUserDetail = () => {
               id="pm-tool-stack-row-content"
               alignItems="flex-start"
             >
-              <TypoCommon
-                label="resources.notifyUsers.fields.content"
-                variant="body1"
-                fontWeight={600}
-                className={classes.withTypo}
-              />
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                className={classes.typoFont}
+              >
+                {translate('resources.notifyUsers.fields.content')}
+              </Typography>
               <MarkdownField value={content} />
             </StackRowCommon>
           </Stack>
