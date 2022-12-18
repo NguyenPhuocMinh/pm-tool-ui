@@ -8,7 +8,9 @@ const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi);
+    const socket = io(configs.basePathRestApi, {
+      withCredentials: true
+    });
 
     socket.on('connect', () => {
       console.info('Socket ID', socket.id);
