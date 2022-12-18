@@ -15,6 +15,7 @@ const translationCommon = {
     back: 'Quay lại',
     detail: 'Chi tiết',
     trash: 'Thùng rác',
+    waiting: 'Vui lòng chờ',
     timeline: 'Dòng thời gian',
     revoke: 'Thu hồi',
     current: 'Mới',

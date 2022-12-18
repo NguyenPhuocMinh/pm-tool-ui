@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import { useTranslate } from '@hooks';
+import { Backdrop, CircularProgress, Typography } from '@mui/material';
 import { get } from 'lodash';
 
 const BackdropCommon = ({ sx, loading }) => {
+  // hooks
+  const { translate } = useTranslate();
   const { color } = useSelector((state) => {
     return {
       color: get(state, 'common.color', {})
@@ -20,6 +22,7 @@ const BackdropCommon = ({ sx, loading }) => {
       open={loading}
     >
       <CircularProgress color="inherit" />
+      <Typography variant="h6">{translate('common.label.waiting')}</Typography>
     </Backdrop>
   );
 };

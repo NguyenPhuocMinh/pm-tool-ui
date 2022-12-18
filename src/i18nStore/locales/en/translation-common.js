@@ -15,6 +15,7 @@ const translationCommon = {
     back: 'Back',
     detail: 'Detail',
     trash: 'Trash',
+    waiting: 'Waiting',
     timeline: 'TimeLine',
     revoke: 'Revoke',
     new: 'New',
