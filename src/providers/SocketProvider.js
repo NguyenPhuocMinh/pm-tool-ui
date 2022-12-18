@@ -10,7 +10,8 @@ const SocketProvider = ({ children }) => {
   const socketProvider = useMemo(() => {
     return {
       socket: io(configs.basePathRestApi, {
-        transports: ['websocket', 'polling', 'flashsocket']
+        transports: ['websocket', 'polling', 'flashsocket'],
+        withCredentials: true
       })
     };
   }, []);
