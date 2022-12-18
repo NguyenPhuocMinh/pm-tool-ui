@@ -16,7 +16,6 @@ const SocketProvider = ({ children }) => {
     socket.on('connect_error', () => {
       setTimeout(() => socket.connect(), 5000);
     });
-    socket.on('disconnect', () => console.info('server disconnected'));
 
     return {
       socket
