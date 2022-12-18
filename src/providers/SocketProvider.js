@@ -10,7 +10,7 @@ const SocketProvider = ({ children }) => {
   const socketProvider = useMemo(() => {
     return {
       socket: io(configs.basePathRestApi, {
-        transports: ['polling']
+        transports: ['polling', 'websocket']
       })
     };
   }, []);
