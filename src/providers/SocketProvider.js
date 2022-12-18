@@ -2,14 +2,16 @@ import { useMemo } from 'react';
 import { SocketContext } from '@context';
 import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
-// import configs from '@configs';
+import configs from '@configs';
 
 const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
     return {
-      socket: io('https://pm-tool-api.vercel.app/')
+      socket: io(configs.basePathRestApi, {
+        transports: ['websocket']
+      })
     };
   }, []);
 
