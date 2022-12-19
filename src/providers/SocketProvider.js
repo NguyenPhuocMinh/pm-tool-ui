@@ -8,9 +8,7 @@ const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi, {
-      transports: ['websocket']
-    });
+    const socket = io(configs.basePathRestApi);
 
     socket.on('connect', () => {
       console.info('Socket ID', socket.id);
