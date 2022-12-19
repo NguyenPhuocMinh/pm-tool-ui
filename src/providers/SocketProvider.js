@@ -12,7 +12,8 @@ const SocketProvider = ({ children }) => {
       withCredentials: true,
       extraHeaders: {
         'my-custom-header': 'abcd'
-      }
+      },
+      transports: ['websocket']
     });
 
     socket.on('connect', () => {
