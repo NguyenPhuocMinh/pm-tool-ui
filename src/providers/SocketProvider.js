@@ -2,13 +2,18 @@ import { useMemo } from 'react';
 import { SocketContext } from '@context';
 import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
-import configs from '@configs';
+// import configs from '@configs';
 
 const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi);
+    const socket = io('https://pm-tool-api.vercel.app/', {
+      withCredentials: true,
+      extraHeaders: {
+        'my-custom-header': 'abcd'
+      }
+    });
 
     socket.on('connect', () => {
       console.info('Socket ID', socket.id);
