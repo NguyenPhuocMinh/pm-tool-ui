@@ -8,12 +8,12 @@ const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io('https://pm-tool-api.vercel.app/', {
+    const socket = io('https://pm-tool-api.vercel.app', {
       withCredentials: true,
       extraHeaders: {
         'my-custom-header': 'abcd'
       },
-      transports: ['websocket']
+      transports: ['polling']
     });
 
     socket.on('connect', () => {
