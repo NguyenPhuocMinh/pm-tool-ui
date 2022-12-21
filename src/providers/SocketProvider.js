@@ -13,6 +13,8 @@ const SocketProvider = ({ children }) => {
     });
 
     socket.on('connect', () => {
+      const { engine } = socket.io;
+      console.info('transports', engine.transport.name);
       console.info('Socket ID', socket.id);
     });
     socket.on('connect_error', () => {
