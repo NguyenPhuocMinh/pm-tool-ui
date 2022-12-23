@@ -178,10 +178,6 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
  */
 export const revokeTokenAction = (records) => async (dispatch) => {
   try {
-    dispatch({
-      type: AUTH_REQUEST
-    });
-
     const { message } = await revokeTokenService(records);
 
     if (message) {
