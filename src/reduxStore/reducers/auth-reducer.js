@@ -32,22 +32,26 @@ const authReducer = (state = initialState, action) => {
     case AUTH_LOGIN_SUCCESS:
       return {
         ...state,
-        token: payload
+        token: payload,
+        loading: false
       };
     case AUTH_LOGOUT_SUCCESS:
       return {
         ...state,
-        token: payload
+        token: payload,
+        loading: false
       };
     case AUTH_WHOAMI_SUCCESS:
       return {
         ...state,
-        whoami: payload
+        whoami: payload,
+        loading: false
       };
     case AUTH_REFRESH_SUCCESS:
       return {
         ...state,
-        token: payload
+        token: payload,
+        loading: false
       };
     default:
       return state;

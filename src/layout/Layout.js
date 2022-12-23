@@ -9,7 +9,8 @@ import {
   AppBarCustom,
   DrawerCustom,
   DrawerHeaderCustom,
-  PrivateRouteCommon
+  PrivateRouteCommon,
+  BackdropCommon
 } from '@utilities';
 import { checkExpiredTime } from '@utils';
 import constants from '@constants';
@@ -42,10 +43,11 @@ const Layout = () => {
   const isSmMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const { socket } = useSocket();
 
-  const { color, recordsUserSession } = useSelector((state) => {
+  const { color, recordsUserSession, authLoading } = useSelector((state) => {
     return {
       color: get(state, 'common.color'),
-      recordsUserSession: get(state, 'userSession.records', {})
+      recordsUserSession: get(state, 'userSession.records', {}),
+      authLoading: get(state, 'auth.loading', false)
     };
   });
 
@@ -88,6 +90,7 @@ const Layout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      <BackdropCommon loading={authLoading} />
       <AppBarCustom id="layout-appBar" position="fixed" open={open}>
         <Toolbar sx={{ backgroundColor: color?.hex }}>
           <IconButton

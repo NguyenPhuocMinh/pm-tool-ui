@@ -9,8 +9,7 @@ const SocketProvider = ({ children }) => {
 
   const socketProvider = useMemo(() => {
     const socket = io(configs.basePathRestApi, {
-      withCredentials: true,
-      transports: ['websocket', 'polling']
+      transports: ['polling']
     });
 
     socket.on('connect', () => {
@@ -26,7 +25,7 @@ const SocketProvider = ({ children }) => {
     return {
       socket
     };
-  }, [io]);
+  }, []);
 
   return (
     <SocketContext.Provider value={socketProvider}>
