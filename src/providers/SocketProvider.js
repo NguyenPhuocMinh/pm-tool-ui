@@ -10,9 +10,8 @@ const SocketProvider = ({ children }) => {
   const socketProvider = useMemo(() => {
     const socket = io(configs.basePathRestApi, {
       path: '/socket.io',
-      transports: ['polling', 'websocket'],
-      withCredentials: true,
-      secure: true
+      transports: ['websocket'],
+      withCredentials: true
     });
 
     socket.on('connect', () => {
@@ -24,9 +23,9 @@ const SocketProvider = ({ children }) => {
       console.info('err', err);
       setTimeout(() => socket.connect(), 5000);
     });
-    socket.on('disconnect', (reason) =>
-      console.info('server disconnected', reason)
-    );
+    socket.on('disconnect', (reason) => {
+      console.info('server disconnected', reason);
+    });
 
     return {
       socket
