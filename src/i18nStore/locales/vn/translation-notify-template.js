@@ -30,6 +30,17 @@ const translationNotifyTemplate = {
     content:
       'Bạn có chắc chắn muốn xóa vĩnh viễn the mẫu thông báo {{topicName}}?',
     verifyName: 'Vui lòng nhập mẫu thông báo {{topicName}}'
+  },
+  notifications: {
+    errors: {
+      e001: 'Dữ Liệu Không Hợp Lệ'
+    },
+    success: {
+      s001: 'Lấy Mẫu Thông Báo Thành Công',
+      s002: 'Tạo Mẫu Thông Báo Thành Công',
+      s003: 'Cập Nhật Mẫu Thông Báo Thành Công',
+      s004: 'Xoá Mẫu Thông Báo Thành Công'
+    }
   }
 };
 

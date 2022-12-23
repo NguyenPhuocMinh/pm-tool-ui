@@ -33,12 +33,13 @@ const translationNotifyTemplate = {
   },
   notifications: {
     errors: {
-      invalidData: 'Invalid Data'
+      e001: 'Invalid Data'
     },
     success: {
-      create: 'Create notify template successfully!',
-      edit: 'Edit notify template successfully!',
-      delete: 'Delete notify template successfully!'
+      s001: 'Get Notify Template Success',
+      s002: 'Create Notify Template Success',
+      s003: 'Edit Notify Template Success',
+      s004: 'Delete Notify Template Success'
     }
   }
 };
