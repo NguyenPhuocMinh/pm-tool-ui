@@ -60,11 +60,6 @@ const NotifyTemplateCreate = () => {
     };
   });
 
-  console.log(
-    '🚀 ~ file: NotifyTemplateCreate.js:56 ~ const{loading,color,config}=useSelector ~ config',
-    config
-  );
-
   // initialValue
   const initialValues = {
     topic: '',

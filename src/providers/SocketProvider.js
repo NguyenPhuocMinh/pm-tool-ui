@@ -20,15 +20,18 @@ const SocketProvider = ({ children }) => {
       console.info('transports', engine.transport.name);
       console.info('Socket ID', socket.id);
     });
-    socket.on('connect_error', () => {
+    socket.on('connect_error', (err) => {
+      console.info('err', err);
       setTimeout(() => socket.connect(), 5000);
     });
-    socket.on('disconnect', () => console.info('server disconnected'));
+    socket.on('disconnect', (reason) =>
+      console.info('server disconnected', reason)
+    );
 
     return {
       socket
     };
-  }, []);
+  }, [io]);
 
   return (
     <SocketContext.Provider value={socketProvider}>
