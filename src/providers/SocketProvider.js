@@ -9,6 +9,7 @@ const SocketProvider = ({ children }) => {
 
   const socketProvider = useMemo(() => {
     const socket = io(configs.basePathRestApi, {
+      withCredentials: true,
       transports: ['polling']
     });
 
