@@ -2,17 +2,20 @@ import { useMemo } from 'react';
 import { SocketContext } from '@context';
 import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
-import configs from '@configs';
+// import configs from '@configs';
 
 const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi, {
-      path: '/socket.io',
-      transports: ['websocket'],
-      withCredentials: true
-    });
+    const socket = io(
+      'https://pm-tool-api-git-master-nguyenphuocminh.vercel.app/',
+      {
+        path: '/socket.io',
+        transports: ['websocket'],
+        withCredentials: true
+      }
+    );
 
     socket.on('connect', () => {
       const { engine } = socket.io;
