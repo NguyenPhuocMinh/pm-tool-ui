@@ -57,7 +57,7 @@ const UserInRoleTab = (props) => {
 
   useEffect(() => {
     dispatch(getUsersByRoleIDAction(roleID, queryOptions));
-  }, []);
+  }, [dispatch, roleID, queryOptions]);
 
   const { data, total, loading } = useSelector((state) => {
     return {
