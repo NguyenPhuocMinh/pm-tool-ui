@@ -8,10 +8,7 @@ const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi, {
-      withCredentials: true,
-      extraHeaders: configs.headers
-    });
+    const socket = io(configs.basePathRestApi);
 
     socket.on('connect', () => {
       const { engine } = socket.io;
