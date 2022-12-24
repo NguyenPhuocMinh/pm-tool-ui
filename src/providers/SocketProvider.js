@@ -12,7 +12,6 @@ const SocketProvider = ({ children }) => {
       'https://pm-tool-api-git-master-nguyenphuocminh.vercel.app/',
       {
         path: '/socket.io',
-        transports: ['websocket'],
         withCredentials: true
       }
     );
