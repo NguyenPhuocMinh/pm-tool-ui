@@ -7,8 +7,10 @@ import configs from '@configs';
 const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
+  const endpoint = configs.basePathRestApi;
+
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi, {
+    const socket = io(endpoint, {
       withCredentials: true,
       transports: ['websocket', 'polling'],
       auth: {
@@ -22,7 +24,6 @@ const SocketProvider = ({ children }) => {
     socket.on('connect_error', (err) => {
       console.info('Err:', err.message);
       socket.io.opts.transports = ['polling', 'websocket'];
-      setTimeout(() => socket.connect(), 5000);
     });
     socket.on('disconnect', (reason) => {
       console.info('Server disconnected ====> reason:', reason);
@@ -31,7 +32,7 @@ const SocketProvider = ({ children }) => {
     return {
       socket
     };
-  }, []);
+  }, [endpoint, io]);
 
   return (
     <SocketContext.Provider value={socketProvider}>
