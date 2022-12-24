@@ -139,7 +139,7 @@ const SetPasswordTab = () => {
                   variant="contained"
                   onClick={handleClickOpenResetPassword}
                 >
-                  {translate('common.button.resetPass')}
+                  {translate('common.label.resetPass')}
                 </Button>
                 <ResetPasswordCommon
                   userID={records.id}

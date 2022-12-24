@@ -11,7 +11,8 @@ import {
   DateTimeInput,
   ButtonSubmit,
   ButtonCancel,
-  TypoCommon
+  TypoCommon,
+  BackdropCommon
 } from '@utilities';
 import { updateUserByIdAction } from '@reduxStore/actions';
 import { validatorUserEdit } from '@validators';
@@ -69,6 +70,7 @@ const DetailTab = () => {
 
   return (
     <Box sx={{ minWidth: 400 }}>
+      {loading && <BackdropCommon loading={loading} />}
       <Card>
         <CardHeader
           subheader={

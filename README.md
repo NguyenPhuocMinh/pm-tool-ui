@@ -10,6 +10,7 @@
 - [Build](#build)
 - [Circle CI/CD](#circle-cicd)
 - [Helm and k8s](#helm-and-k8s)
+- [Server testing netlify](#server-testing-netlify)
 
 ---
 
@@ -200,3 +201,7 @@ $ aws ecr describe-images \
     ```sh
     $ helm install --set username=$USERNAME [chart name] [chart path]
     ```
+
+## Server testing netlify
+
+- [Server test](https://pm-tool-ui.netlify.app)

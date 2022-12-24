@@ -11,22 +11,20 @@ const SocketProvider = ({ children }) => {
     const socket = io(configs.basePathRestApi);
 
     socket.on('connect', () => {
-      const { engine } = socket.io;
-      console.info('transports', engine.transport.name);
       console.info('Socket ID', socket.id);
     });
     socket.on('connect_error', (err) => {
-      console.info('err', err);
+      console.info('Err:', err.message);
       setTimeout(() => socket.connect(), 5000);
     });
     socket.on('disconnect', (reason) => {
-      console.info('server disconnected', reason);
+      console.info('Server disconnected ====> reason:', reason);
     });
 
     return {
       socket
     };
-  }, [io]);
+  }, []);
 
   return (
     <SocketContext.Provider value={socketProvider}>

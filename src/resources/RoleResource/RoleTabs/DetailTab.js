@@ -6,7 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateRoleByIdAction } from '@reduxStore/actions';
 import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { TextInput, SwitchInput, ButtonSubmit, ButtonCancel } from '@utilities';
+import {
+  TextInput,
+  SwitchInput,
+  ButtonSubmit,
+  ButtonCancel,
+  BackdropCommon
+} from '@utilities';
 import { dateTimeFormat } from '@utils';
 
 const useStyles = makeStyles({
@@ -60,6 +66,7 @@ const DetailTab = () => {
 
   return (
     <Box sx={{ minWidth: 400 }}>
+      {loading && <BackdropCommon loading={loading} />}
       <Card>
         <CardContent>
           <Box
