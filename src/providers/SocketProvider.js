@@ -8,13 +8,20 @@ const SocketProvider = ({ children }) => {
   const _ = useSelector((state) => state);
 
   const socketProvider = useMemo(() => {
-    const socket = io(configs.basePathRestApi);
+    const socket = io(configs.basePathRestApi, {
+      withCredentials: true,
+      transports: ['websocket', 'polling'],
+      auth: {
+        token: '123'
+      }
+    });
 
     socket.on('connect', () => {
       console.info('Socket ID', socket.id);
     });
     socket.on('connect_error', (err) => {
       console.info('Err:', err.message);
+      socket.io.opts.transports = ['polling', 'websocket'];
       setTimeout(() => socket.connect(), 5000);
     });
     socket.on('disconnect', (reason) => {
