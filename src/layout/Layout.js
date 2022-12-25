@@ -1,7 +1,7 @@
 import { useState, useEffect, createElement } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { refreshTokenAction, getOnlineUsersAction } from '@reduxStore/actions';
+import { refreshTokenAction } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { routes } from '@routes';
 import { useTranslate, useAuth, useSocket } from '@hooks';
@@ -82,9 +82,6 @@ const Layout = () => {
 
   useEffect(() => {
     socket.emit(constants.SOCKET_USER_LOGIN, whoami);
-    socket.on(constants.SOCKET_USER_ONLINE, (data) => {
-      dispatch(getOnlineUsersAction(data));
-    });
   }, [whoami]);
 
   return (

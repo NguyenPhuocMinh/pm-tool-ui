@@ -9,6 +9,7 @@ export * from './role-service';
 export * from './permission-service';
 export * from './user-service';
 export * from './user-session-service';
+export * from './user-online-service';
 export * from './notify-service';
 export * from './notify-user-service';
 export * from './notify-template-service';

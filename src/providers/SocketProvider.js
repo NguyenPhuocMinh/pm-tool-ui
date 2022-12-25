@@ -12,21 +12,20 @@ const SocketProvider = ({ children }) => {
   const socketProvider = useMemo(() => {
     const socket = io(endpoint, {
       withCredentials: true,
-      transports: ['websocket', 'polling'],
-      auth: {
-        token: '123'
-      }
+      transports: ['websocket', 'polling']
     });
 
     socket.on('connect', () => {
       console.info('Socket ID', socket.id);
     });
+
     socket.on('connect_error', (err) => {
-      console.info('Err:', err.message);
+      console.error('Socket err', err);
       socket.io.opts.transports = ['polling', 'websocket'];
     });
+
     socket.on('disconnect', (reason) => {
-      console.info('Server disconnected ====> reason:', reason);
+      console.info('Socket disconnected', reason);
     });
 
     return {

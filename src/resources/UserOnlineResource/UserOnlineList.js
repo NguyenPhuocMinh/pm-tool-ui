@@ -1,8 +1,13 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { socketUserLogoutAction, revokeTokenAction } from '@reduxStore/actions';
+import {
+  getAllUserOnlineAction,
+  socketUserLogoutAction,
+  revokeTokenAction
+} from '@reduxStore/actions';
 import { get } from 'lodash';
+import { useFormik } from 'formik';
 import { useTranslate, useAuth, useSocket } from '@hooks';
 import { Paper, Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -13,7 +18,8 @@ import {
   NoRowsCommon,
   LoadingCommon,
   PopupCommon,
-  CardListCommon
+  CardListCommon,
+  SearchInput
 } from '@utilities';
 import constants from '@constants';
 import { other, authAllowed } from '@utils';
@@ -54,6 +60,29 @@ const UserOnlineList = () => {
   const handleOnPageSizeChange = (newPageSize) => {
     setPageSize(newPageSize);
   };
+
+  const initialValues = {
+    search: ''
+  };
+
+  const formProps = useFormik({ initialValues });
+
+  const queryOptions = useMemo(
+    () => ({
+      _start: page * pageSize,
+      _end: page * pageSize + pageSize,
+      search: formProps.values.search
+    }),
+    [page, pageSize, formProps.values.search]
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(getAllUserOnlineAction(queryOptions));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dispatch, queryOptions]);
 
   const { data, total, loading, recordsUserSession } = useSelector((state) => {
     return {
@@ -173,6 +202,25 @@ const UserOnlineList = () => {
   return (
     <Box display="block">
       <CardListCommon resource="usersOnline" />
+      <Box
+        sx={{
+          marginBottom: '1em',
+          marginTop: '1em',
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        <SearchInput
+          label="common.search"
+          id="search"
+          source="search"
+          size="small"
+          variant="standard"
+          placeholder="resources.usersOnline.search"
+          className={classes.search}
+          {...formProps}
+        />
+      </Box>
       <Paper elevation={3}>
         <Box style={{ height: 400, width: '100%' }}>
           <DataGrid

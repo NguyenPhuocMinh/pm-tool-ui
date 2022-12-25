@@ -1,18 +1,36 @@
 import { isEmpty } from 'lodash';
-import { GET_ONLINE_USERS } from '@reduxStore/types';
+import { getAllUserOnlineService } from '@services';
+import {
+  USER_ONLINE_REQUEST,
+  USER_ONLINE_FAILURE,
+  USER_ONLINE_GET_ALL_SUCCESS
+} from '@reduxStore/types';
 
 /**
- * @description GET ONLINE USERS ACTION
- * @param {*} data
+ * @description GET ALL ONLINE USERS ACTION
+ * @param {*} query
  */
-export const getOnlineUsersAction = (data) => (dispatch) => {
-  if (!isEmpty(data)) {
+export const getAllUserOnlineAction = (query) => async (dispatch) => {
+  try {
     dispatch({
-      type: GET_ONLINE_USERS,
-      payload: {
-        data,
-        total: data.total
-      }
+      type: USER_ONLINE_REQUEST
+    });
+
+    const { result } = await getAllUserOnlineService(query);
+
+    if (!isEmpty(result)) {
+      dispatch({
+        type: USER_ONLINE_GET_ALL_SUCCESS,
+        payload: {
+          data: result.data,
+          total: result.total
+        }
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: USER_ONLINE_FAILURE,
+      payload: err
     });
   }
 };
