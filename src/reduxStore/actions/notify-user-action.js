@@ -81,11 +81,17 @@ export const getNotifyUserByIdAction = (id) => async (dispatch) => {
  * @param {*} id {id of user}
  * @param {*} query {_start, _end, isNew}
  */
-export const getAllDataNotifyUserAction = (id, query) => async (dispatch) => {
+export const getAllDataNotifyUserAction = (id) => async (dispatch) => {
   try {
     dispatch({
       type: NOTIFY_USER_REQUEST
     });
+
+    const query = {
+      _start: 0,
+      _end: limit
+    };
+
     const { result } = await getAllDataNotifyUserService(id, query);
 
     if (!isEmpty(result)) {
@@ -143,30 +149,35 @@ export const getMoreNotifyUserAction = (id, offset) => async (dispatch) => {
  * @param {*} id {id of user}
  * @param {*} query {_start, _end}
  */
-export const getAllDataUnreadNotifyUserAction =
-  (id, query) => async (dispatch) => {
-    try {
-      dispatch({
-        type: NOTIFY_USER_REQUEST
-      });
-      const { result } = await getAllDataUnreadNotifyUserService(id, query);
+export const getAllDataUnreadNotifyUserAction = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: NOTIFY_USER_REQUEST
+    });
 
-      if (!isEmpty(result)) {
-        dispatch({
-          type: NOTIFY_USER_GET_ALL_DATA_UNREAD_SUCCESS,
-          payload: {
-            data: result.data,
-            total: result.total
-          }
-        });
-      }
-    } catch (err) {
+    const query = {
+      _start: 0,
+      _end: limit
+    };
+
+    const { result } = await getAllDataUnreadNotifyUserService(id, query);
+
+    if (!isEmpty(result)) {
       dispatch({
-        type: NOTIFY_USER_FAILURE,
-        payload: err
+        type: NOTIFY_USER_GET_ALL_DATA_UNREAD_SUCCESS,
+        payload: {
+          data: result.data,
+          total: result.total
+        }
       });
     }
-  };
+  } catch (err) {
+    dispatch({
+      type: NOTIFY_USER_FAILURE,
+      payload: err
+    });
+  }
+};
 
 /**
  * @description GET MORE DATA UNREAD NOTIFY USER ACTION

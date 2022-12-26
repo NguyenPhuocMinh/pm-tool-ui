@@ -8,7 +8,6 @@ import {
   getAllDataUnreadNotifyUserAction
 } from '@reduxStore/actions';
 // another
-import constants from '@constants';
 import { NotifySetting } from '@settings';
 import { get } from 'lodash';
 // mui
@@ -16,8 +15,6 @@ import { Box, Tooltip, IconButton, Badge } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const NotifySection = () => {
-  const limit = constants.LIMIT_DEFAULT;
-
   // states
   const [anchorNotify, setAnchorNotify] = useState(null);
   const openPopupNotify = Boolean(anchorNotify);
@@ -42,23 +39,14 @@ const NotifySection = () => {
     setAnchorNotify(null);
   };
 
-  // call one data notify isNew equal false
+  // call one data notify
   useEffect(() => {
-    const query = {
-      _start: 0,
-      _end: limit,
-      isNew: false
-    };
-    dispatch(getAllDataNotifyUserAction(whoami?.id, query));
+    dispatch(getAllDataNotifyUserAction(whoami?.id));
   }, [whoami]);
 
   // call one data notify isRead equal false
   useEffect(() => {
-    const query = {
-      _start: 0,
-      _end: limit
-    };
-    dispatch(getAllDataUnreadNotifyUserAction(whoami?.id, query));
+    dispatch(getAllDataUnreadNotifyUserAction(whoami?.id));
   }, [whoami]);
 
   const { total } = useSelector((state) => {
