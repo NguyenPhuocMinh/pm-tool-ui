@@ -8,6 +8,7 @@ import {
   getAllDataUnreadNotifyUserAction
 } from '@reduxStore/actions';
 // another
+import { CircularCommon } from '@utilities';
 import { NotifySetting } from '@settings';
 import { get } from 'lodash';
 // mui
@@ -49,8 +50,9 @@ const NotifySection = () => {
     dispatch(getAllDataUnreadNotifyUserAction(whoami?.id));
   }, [whoami]);
 
-  const { total } = useSelector((state) => {
+  const { loading, total } = useSelector((state) => {
     return {
+      loading: get(state, 'notifyUser.loading'),
       total: get(state, 'notifyUser.all.total', 0)
     };
   });
@@ -68,9 +70,13 @@ const NotifySection = () => {
           color="inherit"
           onClick={handleClickChangeNotify}
         >
-          <Badge badgeContent={total} color="error">
-            <NotificationsIcon fontSize="small" />
-          </Badge>
+          {loading ? (
+            <CircularCommon />
+          ) : (
+            <Badge badgeContent={total} color="error">
+              <NotificationsIcon fontSize="small" />
+            </Badge>
+          )}
         </IconButton>
       </Tooltip>
       <NotifySetting
