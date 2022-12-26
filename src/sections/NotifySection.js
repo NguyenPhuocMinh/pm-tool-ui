@@ -70,13 +70,12 @@ const NotifySection = () => {
           color="inherit"
           onClick={handleClickChangeNotify}
         >
-          {loading ? (
-            <CircularCommon />
-          ) : (
-            <Badge badgeContent={total} color="error">
-              <NotificationsIcon fontSize="small" />
-            </Badge>
-          )}
+          <Badge
+            badgeContent={loading ? <CircularCommon size={5} /> : total}
+            color="error"
+          >
+            <NotificationsIcon fontSize="small" />
+          </Badge>
         </IconButton>
       </Tooltip>
       <NotifySetting

@@ -1,11 +1,11 @@
 import { CircularProgress } from '@mui/material';
 
-const CircularCommon = () => {
+const CircularCommon = ({ size = 20 }) => {
   return (
     <CircularProgress
       sx={{ marginRight: '5px' }}
       color="primary"
-      size={20}
+      size={size}
       thickness={2}
     />
   );

@@ -58,6 +58,7 @@ const notifyUserReducer = (state = initialState, action) => {
       if (isEmpty(payload.data)) {
         return {
           ...state,
+          loading: false,
           all: {
             ...state.all,
             offset: 1,
@@ -67,6 +68,7 @@ const notifyUserReducer = (state = initialState, action) => {
       }
       return {
         ...state,
+        loading: false,
         all: {
           ...state.all,
           data: payload.data,
@@ -79,6 +81,7 @@ const notifyUserReducer = (state = initialState, action) => {
       if (!isEmpty(payload)) {
         return {
           ...state,
+          loading: false,
           all: {
             ...state.all,
             data: [...state.all.data, ...payload],
@@ -89,6 +92,7 @@ const notifyUserReducer = (state = initialState, action) => {
       }
       return {
         ...state,
+        loading: false,
         all: {
           ...state.all,
           data: state.all.data,
@@ -99,6 +103,7 @@ const notifyUserReducer = (state = initialState, action) => {
       if (isEmpty(payload.data)) {
         return {
           ...state,
+          loading: false,
           unread: {
             ...state.unread,
             offset: 1,
@@ -108,6 +113,7 @@ const notifyUserReducer = (state = initialState, action) => {
       }
       return {
         ...state,
+        loading: false,
         unread: {
           ...state.unread,
           data: payload.data,
@@ -120,6 +126,7 @@ const notifyUserReducer = (state = initialState, action) => {
       if (!isEmpty(payload)) {
         return {
           ...state,
+          loading: false,
           unread: {
             ...state.unread,
             data: [...state.unread.data, ...payload],
@@ -130,6 +137,7 @@ const notifyUserReducer = (state = initialState, action) => {
       }
       return {
         ...state,
+        loading: false,
         unread: {
           ...state.unread,
           data: state.unread.data,

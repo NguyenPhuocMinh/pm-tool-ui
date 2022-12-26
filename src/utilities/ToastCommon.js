@@ -8,6 +8,7 @@ import {
 import { get, isEmpty } from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/ReactToastify.min.css';
+import constants from '@constants';
 
 const ToastCommon = ({ theme }) => {
   // hooks
@@ -19,7 +20,7 @@ const ToastCommon = ({ theme }) => {
     };
   });
 
-  const autoClose = 10000;
+  const autoClose = constants.AUTO_CLOSE;
 
   useEffect(() => {
     if (!isEmpty(toastInfo)) {
