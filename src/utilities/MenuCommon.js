@@ -10,16 +10,8 @@ import {
   ListItemIcon,
   ListItemText
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
-  fontStyle: {
-    fontFamily: 'Josefin Sans !important'
-  }
-});
 
 const MenuCommon = ({ open, menus = [], titleSubHeader = '' }) => {
-  const classes = useStyles();
   const { translate } = useTranslate();
   const location = useLocation();
 
@@ -87,9 +79,6 @@ const MenuCommon = ({ open, menus = [], titleSubHeader = '' }) => {
                         overflow: 'hidden',
                         textOverflow: 'ellipsis'
                       }
-                    }}
-                    classes={{
-                      primary: classes.fontStyle
                     }}
                   />
                 </ListItemButton>

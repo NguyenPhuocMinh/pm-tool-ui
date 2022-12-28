@@ -28,6 +28,7 @@ const translationCommon = {
     markAllAsRead: 'Mark all as read',
     noRows: 'No rows',
     noNotificationNew: 'No notification new',
+    noNotificationAll: 'No notification all',
     noNotificationBefore: 'No notification before',
     noNotificationUnread: 'No notification unread'
   },

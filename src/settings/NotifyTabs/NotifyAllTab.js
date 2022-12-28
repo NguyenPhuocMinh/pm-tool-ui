@@ -14,17 +14,15 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const NotifyAllTab = (props) => {
   const { handleClose } = props;
   // states
-  const [notificationsNew, setNotificationsNew] = useState([]);
-  const [notificationsBefore, setNotificationsBefore] = useState([]);
+  const [notificationAll, setNotificationAll] = useState([]);
 
   // hooks
   const dispatch = useDispatch();
   const { translate } = useTranslate();
   const { whoami } = useAuth();
 
-  const { dataNew, data, offset, isLoadMore } = useSelector((state) => {
+  const { data, offset, isLoadMore } = useSelector((state) => {
     return {
-      dataNew: get(state, 'notifyUser.dataNew', []),
       data: get(state, 'notifyUser.all.data', []),
       offset: get(state, 'notifyUser.all.offset'),
       isLoadMore: get(state, 'notifyUser.all.isLoadMore')
@@ -32,19 +30,11 @@ const NotifyAllTab = (props) => {
   });
 
   useEffect(() => {
-    if (!isEmpty(dataNew)) {
-      setNotificationsNew(dataNew);
-    }
-
-    return () => setNotificationsNew([]);
-  }, [dataNew]);
-
-  useEffect(() => {
     if (!isEmpty(data)) {
-      setNotificationsBefore(data);
+      setNotificationAll(data);
     }
 
-    return () => setNotificationsBefore([]);
+    return () => setNotificationAll([]);
   }, [data]);
 
   const handleFetchMoreNotify = () => {
@@ -60,31 +50,22 @@ const NotifyAllTab = (props) => {
     >
       <InfiniteScroll
         scrollableTarget="pm-tool-box-infinite-scroll-all-notify"
-        dataLength={notificationsBefore.length}
+        dataLength={notificationAll.length}
         next={handleFetchMoreNotify}
         hasMore={isLoadMore}
         loader={<LoadingCommon />}
         endMessage={<EndMsgCustom />}
       >
         <Box>
-          <Typography
-            sx={{
-              fontWeight: 600,
-              lineHeight: '1.5rem'
-            }}
-            variant="subtitle2"
-          >
-            {translate('common.label.new')}
-          </Typography>
-          {!isEmpty(notificationsNew) ? (
-            notificationsNew.map((newElement) => {
+          {!isEmpty(notificationAll) ? (
+            notificationAll.map((allElement) => {
               return (
                 <Box
-                  id="pm-tool-box-render-list-notify-new"
-                  key={newElement.id}
+                  id="pm-tool-box-render-list-notify-all"
+                  key={allElement.id}
                 >
                   <NotifyListRender
-                    item={newElement}
+                    item={allElement}
                     handleClose={handleClose}
                   />
                   <Divider variant="middle" component="li" />
@@ -99,44 +80,7 @@ const NotifyAllTab = (props) => {
               }}
             >
               <Typography variant="subtitle1">
-                {translate('common.label.noNotificationNew')}
-              </Typography>
-            </Box>
-          )}
-          <Divider sx={{ margin: '1em 0' }} variant="middle" />
-          <Typography
-            sx={{
-              fontWeight: 600,
-              lineHeight: '1.5rem'
-            }}
-            variant="subtitle2"
-          >
-            {translate('common.label.before')}
-          </Typography>
-          {!isEmpty(notificationsBefore) ? (
-            notificationsBefore.map((beforeElement) => {
-              return (
-                <Box
-                  id="pm-tool-box-render-list-notify-before"
-                  key={beforeElement.id}
-                >
-                  <NotifyListRender
-                    item={beforeElement}
-                    handleClose={handleClose}
-                  />
-                  <Divider variant="middle" component="li" />
-                </Box>
-              );
-            })
-          ) : (
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              <Typography variant="subtitle1">
-                {translate('common.label.noNotificationBefore')}
+                {translate('common.label.noNotificationAll')}
               </Typography>
             </Box>
           )}

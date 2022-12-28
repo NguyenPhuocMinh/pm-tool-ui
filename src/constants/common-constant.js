@@ -29,7 +29,7 @@ const commonConstants = {
   VERTICAL: 'top',
   HORIZONTAL: 'center',
   LIMIT_DEFAULT: 10,
-  AUTO_CLOSE: 5000,
+  AUTO_CLOSE: 10000,
   SORT_DEFAULT: 'createdAt',
   SORT_ORDER: 'desc',
   DATE_FORMAT: 'DD-MM-YYYY',

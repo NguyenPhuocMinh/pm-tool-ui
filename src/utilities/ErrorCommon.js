@@ -14,7 +14,6 @@ import {
 import { makeStyles } from '@mui/styles';
 import { useTranslate } from '@hooks';
 import { TitleCommon } from '@utilities';
-// hooks
 
 const useStyles = makeStyles((theme) => ({
   container: {

@@ -1,5 +1,5 @@
 import { isEmpty, get } from 'lodash';
-import { httpClientRestProvider } from './http-client';
+import { httpClientRestProvider } from './http-service';
 
 const basePath = '/projects';
 

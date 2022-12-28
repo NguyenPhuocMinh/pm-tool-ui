@@ -1,4 +1,4 @@
-export * from './http-client';
+export * from './http-service';
 
 export * from './auth-service';
 export * from './config-service';

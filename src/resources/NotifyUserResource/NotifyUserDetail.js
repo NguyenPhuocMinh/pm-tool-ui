@@ -183,7 +183,8 @@ const NotifyUserDetail = () => {
               ':hover': {
                 background: color?.hex
               },
-              background: color?.hex
+              background: color?.hex,
+              color: (theme) => theme.palette.common.white
             }}
             variant="contained"
             label="common.label.trash"

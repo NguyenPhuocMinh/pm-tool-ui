@@ -4,7 +4,9 @@ import {
   getAllNotifyUserService,
   getNotifyUserByIdService,
   getAllDataNotifyUserService,
-  getAllDataUnreadNotifyUserService
+  getAllDataUnreadNotifyUserService,
+  readNotifyUserService,
+  readAllNotifyUserService
 } from '@services';
 import {
   NOTIFY_USER_REQUEST,
@@ -79,7 +81,7 @@ export const getNotifyUserByIdAction = (id) => async (dispatch) => {
 /**
  * @description GET ALL DATA NOTIFY USER ACTION
  * @param {*} id {id of user}
- * @param {*} query {_start, _end, isNew}
+ * @param {*} query {_start, _end}
  */
 export const getAllDataNotifyUserAction = (id) => async (dispatch) => {
   try {
@@ -223,4 +225,53 @@ export const addDataNewNotifyUserAction = (notify) => (dispatch) => {
     type: NOTIFY_USER_ADD_NEW_DATA_SUCCESS,
     payload: notify
   });
+};
+
+/**
+ * @description READ NOTIFY OF USER ACTION
+ * @param {*} id {id of notify}
+ * @param {*} userId {id of user}
+ */
+export const readNotifyUserAction = (id, userId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: NOTIFY_USER_REQUEST
+    });
+
+    const { result } = await readNotifyUserService(id);
+
+    if (!isEmpty(result)) {
+      dispatch(getAllDataNotifyUserAction(userId));
+      dispatch(getAllDataUnreadNotifyUserAction(userId));
+    }
+  } catch (err) {
+    dispatch({
+      type: NOTIFY_USER_FAILURE,
+      payload: err
+    });
+  }
+};
+
+/**
+ * @description READ ALL NOTIFY OF USER ACTION
+ * @param {*} userId {id of user}
+ */
+export const readAllNotifyUserAction = (userId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: NOTIFY_USER_REQUEST
+    });
+
+    const { result } = await readAllNotifyUserService(userId);
+
+    if (!isEmpty(result)) {
+      dispatch(getAllDataNotifyUserAction(userId));
+      dispatch(getAllDataUnreadNotifyUserAction(userId));
+    }
+  } catch (err) {
+    dispatch({
+      type: NOTIFY_USER_FAILURE,
+      payload: err
+    });
+  }
 };

@@ -1,4 +1,4 @@
-import { httpClientRestProvider } from './http-client';
+import { httpClientRestProvider } from './http-service';
 
 const basePath = '/notify/users';
 
@@ -68,6 +68,38 @@ export const getAllDataUnreadNotifyUserService = async (id, query) => {
         id,
         ...query
       }
+    });
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description READ NOTIFY OF USER SERVICE
+ * @param {*} id
+ */
+export const readNotifyUserService = async (id) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(basePath + '-read', {
+      id
+    });
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description READ ALL NOTIFY OF USER SERVICE
+ * @param {*} id
+ */
+export const readAllNotifyUserService = async (id) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(basePath + '-reads', {
+      id
     });
 
     return data;

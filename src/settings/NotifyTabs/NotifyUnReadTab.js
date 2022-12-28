@@ -14,10 +14,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const NotifyUnReadTab = (props) => {
   const { handleClose } = props;
   // states
-  const [notificationsUnReadNew, setNotificationsUnReadNew] = useState([]);
-  const [notificationsUnReadBefore, setNotificationsUnReadBefore] = useState(
-    []
-  );
   const [notificationsUnread, setNotificationsUnRead] = useState([]);
 
   // hooks
@@ -25,9 +21,8 @@ const NotifyUnReadTab = (props) => {
   const { translate } = useTranslate();
   const { whoami } = useAuth();
 
-  const { dataNew, data, offset, isLoadMore } = useSelector((state) => {
+  const { data, offset, isLoadMore } = useSelector((state) => {
     return {
-      dataNew: get(state, 'notifyUser.dataNew', []),
       data: get(state, 'notifyUser.unread.data', []),
       offset: get(state, 'notifyUser.unread.offset'),
       isLoadMore: get(state, 'notifyUser.unread.isLoadMore')
@@ -35,35 +30,12 @@ const NotifyUnReadTab = (props) => {
   });
 
   useEffect(() => {
-    if (!isEmpty(dataNew)) {
-      setNotificationsUnReadNew(dataNew);
-    }
-
-    return () => setNotificationsUnReadNew([]);
-  }, [dataNew]);
-
-  useEffect(() => {
     if (!isEmpty(data)) {
-      setNotificationsUnReadBefore(data);
-    }
-
-    return () => setNotificationsUnReadBefore([]);
-  }, [data]);
-
-  useEffect(() => {
-    if (
-      !isEmpty(notificationsUnReadNew) &&
-      !isEmpty(notificationsUnReadBefore)
-    ) {
-      setNotificationsUnRead((prev) => [
-        ...prev,
-        ...notificationsUnReadNew,
-        ...notificationsUnReadBefore
-      ]);
+      setNotificationsUnRead(data);
     }
 
     return () => setNotificationsUnRead([]);
-  }, [notificationsUnReadNew, notificationsUnReadBefore]);
+  }, [data]);
 
   const handleFetchMoreNotifyUnread = () => {
     setTimeout(() => {
@@ -78,7 +50,7 @@ const NotifyUnReadTab = (props) => {
     >
       <InfiniteScroll
         scrollableTarget="pm-tool-box-infinite-scroll-unread-notify"
-        dataLength={notificationsUnReadBefore.length}
+        dataLength={notificationsUnread.length}
         next={handleFetchMoreNotifyUnread}
         hasMore={isLoadMore}
         loader={<LoadingCommon />}
@@ -96,7 +68,7 @@ const NotifyUnReadTab = (props) => {
                     item={unReadElement}
                     handleClose={handleClose}
                   />
-                  <Divider variant="inset" component="li" />
+                  <Divider variant="middle" component="li" />
                 </Box>
               );
             })

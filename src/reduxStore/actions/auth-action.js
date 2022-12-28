@@ -142,10 +142,6 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
   const { navigate } = toolBox;
 
   try {
-    dispatch({
-      type: AUTH_REQUEST
-    });
-
     const { result } = await refreshTokenService(records);
 
     if (!isEmpty(result)) {

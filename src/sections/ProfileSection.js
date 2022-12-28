@@ -25,7 +25,7 @@ const ProfileSection = () => {
     setAnchorProfile(null);
   };
 
-  const menus = handleMenus();
+  const menus = handleMenus(navigate);
   const fullName = get(whoami, 'fullName');
   const picture = get(whoami, 'picture', '');
 
@@ -81,13 +81,13 @@ const ProfileSection = () => {
   );
 };
 
-const handleMenus = () => {
+const handleMenus = (navigate) => {
   const menus = [
     {
       name: 'profile',
       title: 'toolbar.profile.show_profile',
       icon: <AccountCircleTwoToneIcon />,
-      onClick: () => {}
+      onClick: () => navigate('/profiles')
     }
   ];
 

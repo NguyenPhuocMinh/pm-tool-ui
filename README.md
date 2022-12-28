@@ -10,7 +10,7 @@
 - [Build](#build)
 - [Circle CI/CD](#circle-cicd)
 - [Helm and k8s](#helm-and-k8s)
-- [Server testing netlify](#server-testing-netlify)
+- [Domain testing netlify](#domain-testing-netlify)
 
 ---
 
@@ -28,7 +28,7 @@ $ npm install
 
 ## Ex env/DEV.env
 
-- REACT_APP_REST_API_PROVIDER=http://localhost:8080
+- REACT_APP_REST_API_PROVIDER=http://localhost:7979
 
 ## Structures
 
@@ -202,6 +202,6 @@ $ aws ecr describe-images \
     $ helm install --set username=$USERNAME [chart name] [chart path]
     ```
 
-## Server testing netlify
+## Domain testing netlify
 
-- [Server test](https://pm-tool-ui.netlify.app)
+- [Domain test](https://pm-tool-ui.netlify.app)

@@ -1,4 +1,4 @@
-import { httpClientRestProvider } from './http-client';
+import { httpClientRestProvider } from './http-service';
 
 const basePath = '/roles';
 

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // hooks
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 // redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { readAllNotifyUserAction } from '@reduxStore/actions';
 // material ui
 import {
   Box,
@@ -43,6 +44,8 @@ const NotifySetting = (props) => {
   // hooks
   const { translate } = useTranslate();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { whoami } = useAuth();
 
   const { color } = useSelector((state) => {
     return {
@@ -55,10 +58,16 @@ const NotifySetting = (props) => {
     setTabName(newValue);
   };
 
-  const handleClickMarkAllAsReadReadAll = () => {};
+  const handleClickMarkAllAsReadReadAll = () => {
+    // handle read all notify
+    dispatch(readAllNotifyUserAction(whoami?.id));
+    // handle close popup
+    handleClose();
+  };
 
   const handleClickViewAllNotify = () => {
     navigate('/notify/users');
+    // handle close popup
     handleClose();
   };
 
@@ -166,14 +175,17 @@ const NotifySetting = (props) => {
         })}
         <ListItem>
           <ListItemButton
-            sx={{ height: 28 }}
+            sx={{ height: 28, color: color?.hex }}
             onClick={handleClickViewAllNotify}
           >
             <ListItemText
-              sx={{ display: 'flex', justifyContent: 'center' }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                color: color?.hex
+              }}
               primary={translate('common.label.viewAll')}
               primaryTypographyProps={{
-                color: 'primary',
                 fontWeight: 'medium',
                 variant: 'body2'
               }}

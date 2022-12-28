@@ -106,6 +106,8 @@ const notifyUserReducer = (state = initialState, action) => {
           loading: false,
           unread: {
             ...state.unread,
+            data: payload.data,
+            total: payload.total,
             offset: 1,
             isLoadMore: false
           }

@@ -15,13 +15,19 @@ const BackdropCommon = ({ sx, loading }) => {
   return (
     <Backdrop
       sx={{
-        color: color?.hex,
+        color: (theme) => color?.hex ?? theme.palette.primary.main,
         zIndex: (theme) => theme.zIndex.drawer + 1,
         ...sx
       }}
       open={loading}
     >
-      <CircularProgress color="inherit" sx={{ marginRight: '5px' }} />
+      <CircularProgress
+        color="inherit"
+        sx={{
+          marginRight: '5px',
+          color: (theme) => color?.hex ?? theme.palette.primary.main
+        }}
+      />
       <Typography variant="h6">{translate('common.label.waiting')}</Typography>
     </Backdrop>
   );

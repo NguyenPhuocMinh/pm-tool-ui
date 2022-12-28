@@ -26,6 +26,7 @@ import TooltipCommon from './TooltipCommon';
 import BackdropCommon from './BackdropCommon';
 import StackRowCommon from './StackRowCommon';
 import StackColumnCommon from './StackColumnCommon';
+import BadgeCommon from './BadgeCommon';
 
 export * from './mains';
 export * from './inputs';
@@ -62,5 +63,6 @@ export {
   TooltipCommon,
   BackdropCommon,
   StackRowCommon,
-  StackColumnCommon
+  StackColumnCommon,
+  BadgeCommon
 };

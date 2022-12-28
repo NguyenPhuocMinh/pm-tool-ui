@@ -28,6 +28,7 @@ const translationCommon = {
     markAllAsRead: 'Đánh dấu tất là cả đã đọc',
     noRows: 'Không có hàng',
     noNotificationNew: 'Không có thông báo mới',
+    noNotificationAll: 'Không có thông báo tất cả',
     noNotificationBefore: 'Không có thông báo trước đó',
     noNotificationUnread: 'Không có thông báo chưa đọc'
   },

@@ -20,9 +20,10 @@ const NotifySection = () => {
   const [anchorNotify, setAnchorNotify] = useState(null);
   const openPopupNotify = Boolean(anchorNotify);
 
-  const _ = useSelector((state) => {
+  const { toastInfo, refresh } = useSelector((state) => {
     return {
-      refresh: get(state, 'common.refresh', {})
+      refresh: get(state, 'common.refresh', {}),
+      toastInfo: get(state, 'notify.toast', {})
     };
   });
 
@@ -43,17 +44,13 @@ const NotifySection = () => {
   // call one data notify
   useEffect(() => {
     dispatch(getAllDataNotifyUserAction(whoami?.id));
-  }, [whoami]);
-
-  // call one data notify isRead equal false
-  useEffect(() => {
     dispatch(getAllDataUnreadNotifyUserAction(whoami?.id));
-  }, [whoami]);
+  }, [whoami, toastInfo, refresh]);
 
-  const { loading, total } = useSelector((state) => {
+  const { loading, totalUnread } = useSelector((state) => {
     return {
       loading: get(state, 'notifyUser.loading'),
-      total: get(state, 'notifyUser.all.total', 0)
+      totalUnread: get(state, 'notifyUser.unread.total', 0)
     };
   });
 
@@ -71,7 +68,7 @@ const NotifySection = () => {
           onClick={handleClickChangeNotify}
         >
           <Badge
-            badgeContent={loading ? <CircularCommon size={5} /> : total}
+            badgeContent={loading ? <CircularCommon size={5} /> : totalUnread}
             color="error"
           >
             <NotificationsIcon fontSize="small" />
