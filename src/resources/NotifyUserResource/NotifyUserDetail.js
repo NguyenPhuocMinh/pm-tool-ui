@@ -1,7 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNotifyUserByIdAction } from '@reduxStore/actions';
+import {
+  getNotifyUserByIdAction,
+  trashNotifyUserAction
+} from '@reduxStore/actions';
 // mui
 import {
   Box,
@@ -13,7 +16,7 @@ import {
   Stack
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useTranslate } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 // utilities
 import {
   TypoCommon,
@@ -40,11 +43,13 @@ const NotifyUserDetail = () => {
   const navigate = useNavigate();
   const { translate } = useTranslate();
   const { id } = useParams();
+  const { whoami } = useAuth();
 
-  const { color, records } = useSelector((state) => {
+  const { color, records, loading } = useSelector((state) => {
     return {
       color: get(state, 'common.color'),
-      records: get(state, 'notifyUser.records', {})
+      records: get(state, 'notifyUser.records', {}),
+      loading: get(state, 'notifyUser.loading')
     };
   });
 
@@ -60,6 +65,11 @@ const NotifyUserDetail = () => {
   const handleBackList = () => {
     navigate('/notify/users');
   };
+
+  const handleMoveToTrash = useCallback(() => {
+    dispatch(trashNotifyUserAction(id, whoami?.id, { _start: 0, _end: 5 }));
+    navigate('/notify/users');
+  }, [id, whoami?.id]);
 
   return (
     <Box sx={{ minWidth: 400 }}>
@@ -188,7 +198,8 @@ const NotifyUserDetail = () => {
             }}
             variant="contained"
             label="common.label.trash"
-            onClick={handleBackList}
+            loading={loading}
+            onClick={handleMoveToTrash}
           />
         </CardActions>
       </Card>

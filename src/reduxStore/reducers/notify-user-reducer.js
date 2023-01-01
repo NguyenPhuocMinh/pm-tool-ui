@@ -7,7 +7,12 @@ import {
   NOTIFY_USER_GET_ALL_DATA_UNREAD_SUCCESS,
   NOTIFY_USER_GET_MORE_DATA_UNREAD_SUCCESS,
   NOTIFY_USER_ADD_NEW_DATA_SUCCESS,
-  NOTIFY_USER_GET_ID_SUCCESS
+  NOTIFY_USER_GET_ID_SUCCESS,
+  NOTIFY_USER_TRASH_SUCCESS,
+  NOTIFY_USER_TRASH_ALL_SUCCESS,
+  NOTIFY_USER_GET_ALL_DATA_TRASH_SUCCESS,
+  NOTIFY_USER_ROLLBACK_SUCCESS,
+  NOTIFY_USER_ROLLBACK_ALL_SUCCESS
 } from '@reduxStore/types';
 import { isEmpty } from 'lodash';
 
@@ -27,6 +32,8 @@ const initialState = {
   data: [],
   total: 0,
   dataNew: [],
+  dataTrash: [],
+  totalTrash: 0,
   records: {},
   loading: false,
   error: null
@@ -61,6 +68,8 @@ const notifyUserReducer = (state = initialState, action) => {
           loading: false,
           all: {
             ...state.all,
+            data: payload.data,
+            total: payload.total,
             offset: 1,
             isLoadMore: false
           }
@@ -156,6 +165,21 @@ const notifyUserReducer = (state = initialState, action) => {
       return {
         ...state,
         records: payload,
+        loading: false
+      };
+    case NOTIFY_USER_TRASH_SUCCESS:
+    case NOTIFY_USER_TRASH_ALL_SUCCESS:
+    case NOTIFY_USER_ROLLBACK_SUCCESS:
+    case NOTIFY_USER_ROLLBACK_ALL_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case NOTIFY_USER_GET_ALL_DATA_TRASH_SUCCESS:
+      return {
+        ...state,
+        dataTrash: payload.data,
+        totalTrash: payload.total,
         loading: false
       };
     default:

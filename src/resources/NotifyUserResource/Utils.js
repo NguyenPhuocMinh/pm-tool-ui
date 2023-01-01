@@ -1,35 +1,12 @@
-import { get } from 'lodash';
+const tabs = [
+  {
+    id: '0e2e3826-6951-4dfe-8351-865b5424607f',
+    label: 'notifyUserAll'
+  },
+  {
+    id: '3012c69e-e824-4cb9-b88e-a43ae7b8f64b',
+    label: 'notifyUserTrash'
+  }
+];
 
-export const convertData = (data = []) => {
-  return data.map((e) => {
-    return convertDataMap(e);
-  });
-};
-
-export const convertDataMap = (data) => {
-  const id = get(data, 'id');
-  const sender = get(data, 'sender');
-  const receiver = get(data, 'user');
-  const createdAt = get(data, 'createdAt');
-  const deleted = get(data, 'deleted');
-  const isRead = get(data, 'details.isRead');
-
-  const template = get(data, 'template');
-  const topic = get(template, 'topic');
-  const description = get(template, 'description');
-  const content = get(template, 'content');
-  const type = get(template, 'type');
-
-  return {
-    id,
-    sender,
-    receiver,
-    createdAt,
-    isRead,
-    deleted,
-    topic,
-    description,
-    content,
-    type
-  };
-};
+export { tabs };

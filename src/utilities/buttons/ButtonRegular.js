@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // other
+import { CircularCommon } from '@utilities';
 import { get } from 'lodash';
 
 const StyledButton = styled(Button)(({ hex }) => {
@@ -12,7 +13,7 @@ const StyledButton = styled(Button)(({ hex }) => {
   };
 });
 
-const ButtonRegular = ({ sx, label, variant, onClick }) => {
+const ButtonRegular = ({ sx, label, loading, disabled, variant, onClick }) => {
   const { translate } = useTranslate();
   const color = useSelector((state) => get(state, 'common.color'));
 
@@ -31,7 +32,9 @@ const ButtonRegular = ({ sx, label, variant, onClick }) => {
       hex={color?.hex}
       variant={variant}
       onClick={onClick}
+      disabled={disabled || loading}
     >
+      {loading && <CircularCommon />}
       {translate(label)}
     </StyledButton>
   );
