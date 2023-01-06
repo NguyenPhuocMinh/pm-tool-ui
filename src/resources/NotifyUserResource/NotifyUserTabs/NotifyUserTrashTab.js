@@ -205,9 +205,6 @@ const NotifyUserTrashTab = () => {
           <Box width="auto" minWidth={50} margin="0 10px">
             <ButtonRegular
               sx={{
-                ':hover': {
-                  background: color?.hex
-                },
                 background: color?.hex,
                 color: (theme) => theme.palette.common.white
               }}
@@ -221,9 +218,6 @@ const NotifyUserTrashTab = () => {
           <Box width="auto" minWidth={50} margin="0 10px">
             <ButtonRegular
               sx={{
-                ':hover': {
-                  background: color?.hex
-                },
                 background: color?.hex,
                 color: (theme) => theme.palette.common.white
               }}

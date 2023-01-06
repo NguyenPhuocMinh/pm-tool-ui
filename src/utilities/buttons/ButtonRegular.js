@@ -25,7 +25,7 @@ const ButtonRegular = ({ sx, label, loading, disabled, variant, onClick }) => {
         borderRadius: 12,
         textTransform: 'capitalize',
         '&:hover': {
-          background: 'none'
+          background: color?.hex
         },
         ...sx
       }}
