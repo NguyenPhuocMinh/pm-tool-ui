@@ -5,7 +5,8 @@ import {
   USER_GET_ALL_SUCCESS,
   USER_GET_ID_SUCCESS,
   USER_CREATE_SUCCESS,
-  USER_UPDATE_SUCCESS
+  USER_UPDATE_SUCCESS,
+  USER_RESET_PASSWORD_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
@@ -56,6 +57,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         records: payload,
+        loading: false
+      };
+    case USER_RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
         loading: false
       };
     default:

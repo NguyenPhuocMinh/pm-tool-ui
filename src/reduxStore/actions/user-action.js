@@ -18,7 +18,8 @@ import {
   USER_GET_ALL_SUCCESS,
   USER_GET_ID_SUCCESS,
   USER_CREATE_SUCCESS,
-  USER_UPDATE_SUCCESS
+  USER_UPDATE_SUCCESS,
+  USER_RESET_PASSWORD_SUCCESS
 } from '@reduxStore/types';
 
 /**
@@ -266,6 +267,9 @@ export const resetPasswordByUserIdAction =
       );
 
       if (!isEmpty(result)) {
+        dispatch({
+          type: USER_RESET_PASSWORD_SUCCESS
+        });
         dispatch(
           showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
         );
