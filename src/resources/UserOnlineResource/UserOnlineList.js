@@ -1,14 +1,10 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllUserOnlineAction,
-  socketUserLogoutAction,
-  revokeTokenAction
-} from '@reduxStore/actions';
+import { getAllUserOnlineAction, revokeTokenAction } from '@reduxStore/actions';
 import { get } from 'lodash';
 import { useFormik } from 'formik';
-import { useTranslate, useAuth, useSocket } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 import { Paper, Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
@@ -49,7 +45,6 @@ const UserOnlineList = () => {
   const classes = useStyles();
   const { translate, i18n } = useTranslate();
   const { whoami } = useAuth();
-  const { socket } = useSocket();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -106,12 +101,12 @@ const UserOnlineList = () => {
 
   const handleRevokeSession = useCallback(
     (userID) => () => {
-      const toolBox = { navigate, socket };
+      // const toolBox = { navigate, socket };
       const records = {
         id: userID,
         sessionID: recordsUserSession.id
       };
-      dispatch(socketUserLogoutAction(toolBox, records));
+      // dispatch(socketUserLogoutAction(toolBox, records));
       dispatch(revokeTokenAction(records));
     },
     []

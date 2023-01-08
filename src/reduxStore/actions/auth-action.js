@@ -12,7 +12,6 @@ import {
   showNotification,
   removeLogin,
   createUserSessionAction,
-  socketUserLogoutAction,
   showToastchangePasswordTemporaryNotifyAction
 } from '@reduxStore/actions';
 import {
@@ -154,7 +153,7 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
     }
   } catch (err) {
     if (err.response.status === constants.HTTP_STATUS.AUTHORIZATION) {
-      dispatch(socketUserLogoutAction(toolBox, records));
+      // dispatch(socketUserLogoutAction(toolBox, records));
       localForage.removeItem(constants.LOCAL_FORAGE_KEYS.TOKEN);
       setTimeout(() => {
         dispatch(removeLogin());
