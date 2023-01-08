@@ -77,6 +77,10 @@ const UserOnlineList = () => {
   );
 
   useEffect(() => {
+    dispatch(getAllUserOnlineAction(queryOptions));
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getAllUserOnlineAction(queryOptions));
     }, 5000);

@@ -61,7 +61,8 @@ const TimeLineCommon = ({ timelines = [] }) => {
             <TimelineSeparator>
               <TimelineDot
                 sx={{
-                  background: color?.hex ?? 'inherit'
+                  background: (theme) =>
+                    color?.hex ?? theme.palette.primary.main
                 }}
               >
                 {icon}
