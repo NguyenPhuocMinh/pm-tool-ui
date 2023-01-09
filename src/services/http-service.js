@@ -34,7 +34,7 @@ httpClientRestProvider.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === constants.HTTP_STATUS.AUTHORIZATION) {
+    if (error?.response?.status === constants.HTTP_STATUS.AUTHORIZATION) {
       dispatch(removeLogin());
     }
     const errMsg = formatErrorCommonMsg(error);
