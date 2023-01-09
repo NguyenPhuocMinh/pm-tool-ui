@@ -10,7 +10,7 @@ const { dispatch } = reduxStore;
 const httpClientRestProvider = axios.create({
   baseURL: configs.basePathRestApi,
   headers: configs.headers,
-  timeout: 10000
+  withCredentials: true
 });
 
 httpClientRestProvider.interceptors.request.use(
