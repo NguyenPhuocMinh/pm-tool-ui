@@ -56,9 +56,9 @@ const rootReducer = (state, action) => {
 
 const persistedReducer = persistReducer(optionsPersist, rootReducer);
 
-const middleware = [thunkMiddleware];
+const middleware = [thunkMiddleware, loggerMiddleware];
 
-configs.nodeEnv !== 'production' && middleware.push(loggerMiddleware);
+// configs.nodeEnv !== 'production' && middleware.push(loggerMiddleware);
 
 const reduxStore = configureStore({
   reducer: persistedReducer,
