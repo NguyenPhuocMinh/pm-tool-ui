@@ -1,6 +1,6 @@
 import { httpClientRestProvider } from './http-service';
 
-const basePath = '/notify-templates';
+const basePath = '/notifyTemplates';
 
 /**
  * @description GET ALL NOTIFY TEMPLATE SERVICE
