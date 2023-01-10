@@ -1,6 +1,6 @@
 import { httpClientRestProvider } from './http-service';
 
-const basePath = '/users-online';
+const basePath = '/userOnline';
 
 /**
  * @description GET ALL USER ONLINE SERVICE
