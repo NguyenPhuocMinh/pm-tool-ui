@@ -44,9 +44,9 @@ const ProfileSetting = (props) => {
     // dispatch(socketUserLogoutAction(toolBox, whoami));
     dispatch(
       logoutAction(toolBox, {
-        email: whoami.email,
+        email: whoami?.email,
         token,
-        sessionID: recordsUserSession.id
+        sessionID: recordsUserSession?.id
       })
     );
   };
