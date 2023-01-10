@@ -3,6 +3,7 @@ const basePathRestApi = process.env.REACT_APP_REST_API_PROVIDER;
 
 const headers = {
   'Access-Control-Allow-Origin': 'https://pm-tool-api.vercel.app',
+  'Access-Control-Allow-Credentials': true,
   'Access-Control-Max-Age': 86400
 };
 
