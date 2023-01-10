@@ -100,114 +100,115 @@ const LoginResource = () => {
           }}
         >
           <Card>
-            <Box
-              component="div"
-              sx={{
-                margin: '1em',
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              <Avatar alt="" src="https://picsum.photos/50/50" />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                margin: '1em',
-                display: 'flex',
-                justifyContent: 'center',
-                color: 'primary.main'
-              }}
-            >
-              <Typography>{translate('resources.logins.title')}</Typography>
-            </Box>
-            <CardContent>
+            <form onSubmit={handleSubmit}>
               <Box
+                component="div"
                 sx={{
-                  marginTop: '1em',
+                  margin: '1em',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Avatar alt="" src="https://picsum.photos/50/50" />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  margin: '1em',
                   display: 'flex',
                   justifyContent: 'center',
                   color: 'primary.main'
                 }}
               >
-                <TextInput
-                  label="resources.logins.fields.email"
-                  required
-                  id="email"
-                  source="email"
-                  className={classes.input}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <EmailIcon />
-                    </InputAdornment>
-                  }
-                  {...formProps}
-                />
+                <Typography>{translate('resources.logins.title')}</Typography>
               </Box>
-              <Box
+              <CardContent>
+                <Box
+                  sx={{
+                    marginTop: '1em',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    color: 'primary.main'
+                  }}
+                >
+                  <TextInput
+                    label="resources.logins.fields.email"
+                    required
+                    id="email"
+                    source="email"
+                    className={classes.input}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <EmailIcon />
+                      </InputAdornment>
+                    }
+                    {...formProps}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    marginTop: '1em',
+                    display: 'flex',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <TextInput
+                    label="resources.logins.fields.password"
+                    source="password"
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    className={classes.input}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <LockIcon />
+                      </InputAdornment>
+                    }
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          sx={{
+                            border: 'none !important',
+                            ':hover': {
+                              background: 'none'
+                            },
+                            marginRight: '-8px !important'
+                          }}
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(event) => event.preventDefault()}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    {...formProps}
+                  />
+                </Box>
+              </CardContent>
+              <CardActions
                 sx={{
-                  marginTop: '1em',
-                  display: 'flex',
+                  padding: '0 1em 1em 1em',
                   justifyContent: 'center'
                 }}
               >
-                <TextInput
-                  label="resources.logins.fields.password"
-                  source="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  className={classes.input}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <LockIcon />
-                    </InputAdornment>
-                  }
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        sx={{
-                          border: 'none !important',
-                          ':hover': {
-                            background: 'none'
-                          },
-                          marginRight: '-8px !important'
-                        }}
-                        onClick={() => setShowPassword(!showPassword)}
-                        onMouseDown={(event) => event.preventDefault()}
-                        edge="end"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  {...formProps}
-                />
-              </Box>
-            </CardContent>
-            <CardActions
-              sx={{
-                padding: '0 1em 1em 1em',
-                justifyContent: 'center'
-              }}
-            >
-              <Button
-                id="pm-tool-button-login"
-                sx={{
-                  width: 'auto',
-                  minWidth: 256,
-                  borderRadius: 12,
-                  textTransform: 'capitalize',
-                  color: '#fff'
-                }}
-                variant="contained"
-                type="submit"
-                onClick={handleSubmit}
-                disabled={!isValid || !dirty || loading}
-              >
-                {loading && <CircularCommon />}
-                {translate('common.label.login')}
-              </Button>
-            </CardActions>
+                <Button
+                  id="pm-tool-button-login"
+                  sx={{
+                    width: 'auto',
+                    minWidth: 256,
+                    borderRadius: 12,
+                    textTransform: 'capitalize',
+                    color: '#fff'
+                  }}
+                  variant="contained"
+                  type="submit"
+                  disabled={!isValid || !dirty || loading}
+                >
+                  {loading && <CircularCommon />}
+                  {translate('common.label.login')}
+                </Button>
+              </CardActions>
+            </form>
           </Card>
         </Box>
       </Box>
