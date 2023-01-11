@@ -1,14 +1,10 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllUserOnlineAction,
-  revokeTokenAction,
-  socketGetAllUserOnlineAction
-} from '@reduxStore/actions';
+import { getAllUserOnlineAction, revokeTokenAction } from '@reduxStore/actions';
 import { get } from 'lodash';
 import { useFormik } from 'formik';
-import { useTranslate, useAuth, useSocket } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 import { Paper, Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataGrid, GridActionsCellItem, viVN, enUS } from '@mui/x-data-grid';
@@ -51,7 +47,6 @@ const UserOnlineList = () => {
   const { whoami } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { socket } = useSocket();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -202,12 +197,6 @@ const UserOnlineList = () => {
       }
     ];
   }, [handleRevokeSession, handleTimelineSession, translate, i18n.language]);
-
-  useEffect(() => {
-    socket.on(constants.SOCKET_USER_ONLINE, (users) => {
-      dispatch(socketGetAllUserOnlineAction(users));
-    });
-  }, [socket]);
 
   return (
     <Box display="block">
