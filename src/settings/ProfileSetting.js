@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 // hooks
-import { useTranslate, useAuth, useSocket } from '@hooks';
+import { useTranslate, useAuth } from '@hooks';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction, socketUserLogoutAction } from '@reduxStore/actions';
+import { logoutAction } from '@reduxStore/actions';
 // material ui
 import {
   Divider,
@@ -31,7 +31,6 @@ const ProfileSetting = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token, whoami } = useAuth();
-  const { socket } = useSocket();
 
   const { recordsUserSession } = useSelector((state) => {
     return {
@@ -40,8 +39,8 @@ const ProfileSetting = (props) => {
   });
 
   const handleLogout = () => {
-    const toolBox = { navigate, socket };
-    dispatch(socketUserLogoutAction(toolBox, whoami));
+    const toolBox = { navigate };
+    // dispatch(socketUserLogoutAction(toolBox, whoami));
     dispatch(
       logoutAction(toolBox, {
         email: whoami?.email,

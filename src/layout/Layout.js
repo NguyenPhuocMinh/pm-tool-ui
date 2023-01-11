@@ -13,7 +13,6 @@ import {
   BackdropCommon
 } from '@utilities';
 import { checkExpiredTime } from '@utils';
-import constants from '@constants';
 import decoded from 'jwt-decode';
 // material
 import { useTheme } from '@mui/material/styles';
@@ -36,7 +35,7 @@ const Layout = () => {
 
   // hooks
   const { translate } = useTranslate();
-  const { token, whoami } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -80,9 +79,9 @@ const Layout = () => {
     return () => clearInterval(interval);
   }, [token, dispatch]);
 
-  useEffect(() => {
-    socket.emit(constants.SOCKET_USER_LOGIN, whoami);
-  }, [whoami]);
+  // useEffect(() => {
+  //   socket.emit(constants.SOCKET_USER_LOGIN, whoami);
+  // }, [whoami]);
 
   return (
     <Box sx={{ display: 'flex' }}>

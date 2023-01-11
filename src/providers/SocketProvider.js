@@ -27,10 +27,6 @@ const SocketProvider = ({ children }) => {
     });
 
     socket.on(constants.SOCKET_USER_ONLINE, (users) => {
-      console.info(
-        '🚀 ~ file: SocketProvider.js:30 ~ socket.on ~ users',
-        users
-      );
       dispatch(socketGetAllUserOnlineAction(users));
     });
 
