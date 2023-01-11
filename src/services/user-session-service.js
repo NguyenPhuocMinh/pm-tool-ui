@@ -1,6 +1,6 @@
 import { httpClientRestProvider } from './http-service';
 
-const basePath = '/users-session';
+const basePath = '/userSessions';
 
 /**
  * @description GET TIME LINE USER SESSION SERVICE
