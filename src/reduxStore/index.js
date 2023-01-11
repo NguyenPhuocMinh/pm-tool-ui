@@ -22,7 +22,8 @@ import {
   userSessionReducer,
   notifyReducer,
   notifyUserReducer,
-  notifyTemplateReducer
+  notifyTemplateReducer,
+  socketReducer
 } from '@reduxStore/reducers';
 
 // middleware
@@ -42,7 +43,8 @@ const appReducer = combineReducers({
   userSession: userSessionReducer,
   notify: notifyReducer,
   notifyUser: notifyUserReducer,
-  notifyTemplate: notifyTemplateReducer
+  notifyTemplate: notifyTemplateReducer,
+  sockets: socketReducer
 });
 
 const rootReducer = (state, action) => {

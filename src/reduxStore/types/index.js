@@ -13,3 +13,4 @@ export * from './user-online-type';
 export * from './notify-type';
 export * from './notify-user-type';
 export * from './notify-template-type';
+export * from './socket-type';

@@ -13,6 +13,7 @@ import userOnlineReducer from './user-online-reducer';
 import notifyReducer from './notify-reducer';
 import notifyUserReducer from './notify-user-reducer';
 import notifyTemplateReducer from './notify-template-reducer';
+import socketReducer from './socket-reducer';
 
 export {
   commonReducer,
@@ -28,5 +29,6 @@ export {
   userSessionReducer,
   notifyReducer,
   notifyUserReducer,
-  notifyTemplateReducer
+  notifyTemplateReducer,
+  socketReducer
 };

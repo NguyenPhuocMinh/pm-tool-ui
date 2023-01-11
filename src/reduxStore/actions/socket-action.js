@@ -1,4 +1,17 @@
 import constants from '@constants';
+import { SOCKET_GET_ALL_USER_ONLINE } from '@reduxStore/types';
+
+/**
+ * USER LEAVE ROOM
+ * @param {*} toolBox {socket}
+ * @param {*} records {id, fullName}
+ */
+export const socketGetAllUserOnlineAction = (users) => (dispatch) => {
+  dispatch({
+    type: SOCKET_GET_ALL_USER_ONLINE,
+    payload: users
+  });
+};
 
 /**
  * USER LEAVE ROOM
