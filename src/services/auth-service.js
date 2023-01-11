@@ -60,7 +60,7 @@ export const whoamiService = async (records) => {
 export const refreshTokenService = async (records) => {
   try {
     const { data } = await httpClientRestProvider.post(
-      `${basePath}/refresh-tokens`,
+      `${basePath}/refreshTokens`,
       records
     );
 
@@ -77,7 +77,7 @@ export const refreshTokenService = async (records) => {
 export const revokeTokenService = async (records) => {
   try {
     const { data } = await httpClientRestProvider.post(
-      `${basePath}/revoke-tokens`,
+      `${basePath}/revokeTokens`,
       records
     );
 

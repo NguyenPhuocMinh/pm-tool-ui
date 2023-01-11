@@ -9,7 +9,7 @@ const basePath = '/notifies';
 export const changePasswordTemporaryNotifyService = async (records) => {
   try {
     const { data } = await httpClientRestProvider.post(
-      `${basePath}/change-password-temporary`,
+      `${basePath}/changePasswordTemporary`,
       records
     );
 

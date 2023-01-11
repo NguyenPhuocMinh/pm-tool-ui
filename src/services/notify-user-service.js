@@ -1,6 +1,6 @@
 import { httpClientRestProvider } from './http-service';
 
-const basePath = '/notify/users';
+const basePath = '/notifyUsers';
 
 /**
  * @description GET ALL NOTIFY OF USER SERVICE
@@ -43,7 +43,7 @@ export const getNotifyUserByIdService = async (id) => {
  */
 export const getAllDataNotifyUserService = async (id, query) => {
   try {
-    const { data } = await httpClientRestProvider.get(basePath + '-data', {
+    const { data } = await httpClientRestProvider.get(basePath + 'Data', {
       params: {
         id,
         ...query
@@ -63,7 +63,7 @@ export const getAllDataNotifyUserService = async (id, query) => {
  */
 export const getAllDataUnreadNotifyUserService = async (id, query) => {
   try {
-    const { data } = await httpClientRestProvider.get(basePath + '-unread', {
+    const { data } = await httpClientRestProvider.get(basePath + 'Unread', {
       params: {
         id,
         ...query
@@ -82,7 +82,7 @@ export const getAllDataUnreadNotifyUserService = async (id, query) => {
  */
 export const readNotifyUserService = async (id) => {
   try {
-    const { data } = await httpClientRestProvider.patch(basePath + '-read', {
+    const { data } = await httpClientRestProvider.patch(basePath + 'Read', {
       id
     });
 
@@ -98,7 +98,7 @@ export const readNotifyUserService = async (id) => {
  */
 export const readAllNotifyUserService = async (id) => {
   try {
-    const { data } = await httpClientRestProvider.patch(basePath + '-reads', {
+    const { data } = await httpClientRestProvider.patch(basePath + 'Reads', {
       id
     });
 
@@ -114,7 +114,7 @@ export const readAllNotifyUserService = async (id) => {
  */
 export const trashNotifyUserService = async (id) => {
   try {
-    const { data } = await httpClientRestProvider.patch(basePath + '-trash', {
+    const { data } = await httpClientRestProvider.patch(basePath + 'Trash', {
       id
     });
 
@@ -130,14 +130,11 @@ export const trashNotifyUserService = async (id) => {
  */
 export const trashAllNotifyUserService = async (id) => {
   try {
-    const { data } = await httpClientRestProvider.delete(
-      basePath + '-trashes',
-      {
-        params: {
-          id
-        }
+    const { data } = await httpClientRestProvider.delete(basePath + 'Trashes', {
+      params: {
+        id
       }
-    );
+    });
 
     return data;
   } catch (error) {
@@ -152,7 +149,7 @@ export const trashAllNotifyUserService = async (id) => {
  */
 export const getAllDataTrashNotifyUserService = async (id, query) => {
   try {
-    const { data } = await httpClientRestProvider.get(basePath + '-trashes', {
+    const { data } = await httpClientRestProvider.get(basePath + 'Trashes', {
       params: {
         id,
         ...query
@@ -171,12 +168,9 @@ export const getAllDataTrashNotifyUserService = async (id, query) => {
  */
 export const rollbackNotifyUserService = async (id) => {
   try {
-    const { data } = await httpClientRestProvider.patch(
-      basePath + '-rollback',
-      {
-        id
-      }
-    );
+    const { data } = await httpClientRestProvider.patch(basePath + 'Rollback', {
+      id
+    });
 
     return data;
   } catch (error) {
@@ -191,7 +185,7 @@ export const rollbackNotifyUserService = async (id) => {
 export const rollbackAllNotifyUserService = async (id) => {
   try {
     const { data } = await httpClientRestProvider.patch(
-      basePath + '-rollbacks',
+      basePath + 'Rollbacks',
       {
         id
       }
