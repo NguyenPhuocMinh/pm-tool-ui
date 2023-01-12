@@ -169,7 +169,7 @@ export const refreshTokenAction = (toolBox, records) => async (dispatch) => {
 
 /**
  * REVOKE TOKEN ACTION
- * @param {*} records {id, sessionID}}
+ * @param {*} records {id, sessionID}
  */
 export const revokeTokenAction = (records) => async (dispatch) => {
   try {

@@ -4,7 +4,7 @@ import {
   SHOW_TOAST_CHANGE_PASSWORD_TEMPORARY_NOTIFY,
   HIDE_TOAST_CHANGE_PASSWORD_TEMPORARY_NOTIFY
 } from '@reduxStore/types';
-import { changePasswordTemporaryNotifyService } from '@services';
+import { changePasswordTemporaryNotifyUserService } from '@services';
 import { isEmpty } from 'lodash';
 
 /**
@@ -17,7 +17,9 @@ export const showToastchangePasswordTemporaryNotifyAction =
       dispatch({
         type: NOTIFY_REQUEST
       });
-      const { result } = await changePasswordTemporaryNotifyService(records);
+      const { result } = await changePasswordTemporaryNotifyUserService(
+        records
+      );
 
       if (!isEmpty(result)) {
         dispatch({

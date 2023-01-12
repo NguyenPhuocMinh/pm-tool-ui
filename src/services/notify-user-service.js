@@ -37,6 +37,23 @@ export const getNotifyUserByIdService = async (id) => {
 };
 
 /**
+ * CHANGE PASSWORD TEMPORARY NOTIFY USER SERVICE
+ * @param {*} records {data of user}
+ */
+export const changePasswordTemporaryNotifyUserService = async (records) => {
+  try {
+    const { data } = await httpClientRestProvider.post(
+      basePath + 'ChangePasswordTemporary',
+      records
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
  * @description GET ALL DATA NOTIFY OF USER SERVICE
  * @param {*} id
  * @param {*} query

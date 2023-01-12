@@ -83,12 +83,11 @@ const UserOnlineList = () => {
     return () => clearInterval(interval);
   }, [dispatch, queryOptions]);
 
-  const { data, total, loading, recordsUserSession } = useSelector((state) => {
+  const { data, total, loading } = useSelector((state) => {
     return {
       data: get(state, 'userOnline.data', []),
       total: get(state, 'userOnline.total', 0),
-      loading: get(state, 'userOnline.loading', false),
-      recordsUserSession: get(state, 'userSession.records', {})
+      loading: get(state, 'userOnline.loading', false)
     };
   });
 
@@ -101,12 +100,9 @@ const UserOnlineList = () => {
 
   const handleRevokeSession = useCallback(
     (userID) => () => {
-      // const toolBox = { navigate, socket };
       const records = {
-        id: userID,
-        sessionID: recordsUserSession.id
+        id: userID
       };
-      // dispatch(socketUserLogoutAction(toolBox, records));
       dispatch(revokeTokenAction(records));
     },
     []
