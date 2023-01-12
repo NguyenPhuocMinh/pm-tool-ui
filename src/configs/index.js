@@ -3,8 +3,7 @@ const basePathRestApi = process.env.REACT_APP_REST_API_PROVIDER;
 
 const headers = {
   'Access-Control-Allow-Origin': basePathRestApi,
-  'Access-Control-Allow-Methods':
-    'GET, POST, PUT, PATCH, POST, DELETE, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Access-Control-Max-Age': 86400
 };
