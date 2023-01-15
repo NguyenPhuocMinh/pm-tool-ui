@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
-import { TabPanelCommon, TypoCommon, TabsCommon } from '@utilities';
-import { getOrganizationAction } from '@reduxStore/actions';
 import { get } from 'lodash';
+import { getPermissionByIdAction } from '@reduxStore/actions';
+import { TabsCommon, TabPanelCommon, TypoCommon } from '@utilities';
 import { tabs } from './Utils';
-// tabs
-import DetailTab from './OrganizationTabs/DetailTab';
-import ProjectsInOrganizationTab from './OrganizationTabs/ProjectsInOrganizationTab';
 
-const OrganizationEdit = () => {
+// tabs
+import DetailTab from './ProjectTabs/DetailTab';
+
+const ProjectEdit = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -22,16 +22,15 @@ const OrganizationEdit = () => {
 
   const { id } = params;
 
-  const { refresh, color } = useSelector((state) => {
+  useEffect(() => {
+    dispatch(getPermissionByIdAction(id));
+  }, [dispatch, id]);
+
+  const { color } = useSelector((state) => {
     return {
-      refresh: get(state, 'common.refresh'),
       color: get(state, 'common.color', {})
     };
   });
-
-  useEffect(() => {
-    dispatch(getOrganizationAction(id));
-  }, [dispatch, id, refresh]);
 
   return (
     <Box sx={{ minWidth: 400 }}>
@@ -45,7 +44,7 @@ const OrganizationEdit = () => {
               <TypoCommon
                 variant="body2"
                 fontWeight={600}
-                label="resources.organizations.title.edit"
+                label="resources.permissions.title.edit"
               />
             </Box>
           }
@@ -57,7 +56,7 @@ const OrganizationEdit = () => {
               tabs={tabs}
               tabName={tabName}
               onChange={handleChange}
-              resourceLabel="resources.organizations.tabs"
+              resourceLabel="resources.permissions.tabs"
               color={color}
             />
           </Box>
@@ -65,9 +64,6 @@ const OrganizationEdit = () => {
             return (
               <TabPanelCommon value={tabName} index={tab.label} key={tab.id}>
                 {tabName === tabs[0].label ? <DetailTab /> : null}
-                {tabName === tabs[1].label ? (
-                  <ProjectsInOrganizationTab />
-                ) : null}
               </TabPanelCommon>
             );
           })}
@@ -77,4 +73,4 @@ const OrganizationEdit = () => {
   );
 };
 
-export default OrganizationEdit;
+export default ProjectEdit;

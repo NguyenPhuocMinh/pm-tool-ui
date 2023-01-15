@@ -12,6 +12,9 @@ const translationMenu = {
     },
     project: {
       title: 'Dự án'
+    },
+    team: {
+      title: 'Nhóm'
     }
   },
   authenticate: {

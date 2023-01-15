@@ -5,6 +5,7 @@ export * from './config-type';
 export * from './dashboard-type';
 export * from './organization-type';
 export * from './project-type';
+export * from './team-type';
 export * from './role-type';
 export * from './permission-type';
 export * from './user-type';

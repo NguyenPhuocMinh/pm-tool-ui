@@ -77,5 +77,15 @@ export const menuPermissions = {
     GET_ALL: 'NOTIFY_TEMPLATE_GET_ALL',
     CREATE: 'NOTIFY_TEMPLATE_CREATE',
     GET_ID: 'NOTIFY_TEMPLATE_GET_ID'
+  },
+  /**
+   * NOTIFY TEMPLATE
+   */
+  teams: {
+    GET_ALL: 'TEAM_GET_ALL',
+    CREATE: 'TEAM_CREATE',
+    GET_ID: 'TEAM_GET_ID',
+    UPDATE: 'TEAM_UPDATE',
+    DELETE: 'TEAM_DELETE'
   }
 };

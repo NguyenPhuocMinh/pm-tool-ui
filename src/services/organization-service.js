@@ -1,4 +1,3 @@
-import { isEmpty, get } from 'lodash';
 import { httpClientRestProvider } from './http-service';
 
 const basePath = '/organizations';
@@ -40,13 +39,13 @@ export const createOrganizationService = async (records) => {
  * @param {*} organizationID
  * @returns
  */
-export const getByIdOrganizationService = async (organizationID) => {
+export const getOrganizationService = async (organizationID) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      `${basePath}/${organizationID}`
+      basePath + `/${organizationID}`
     );
 
-    return !isEmpty(data) ? get(data, 'result.response') : {};
+    return data;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -56,13 +55,10 @@ export const getByIdOrganizationService = async (organizationID) => {
  * @description UPDATE ORGANIZATION BY ID SERVICE
  * @param {*} records
  */
-export const updateByIdOrganizationService = async (
-  organizationID,
-  records
-) => {
+export const updateOrganizationService = async (organizationID, records) => {
   try {
     const { data } = await httpClientRestProvider.put(
-      `${basePath}/${organizationID}`,
+      basePath + `/${organizationID}`,
       records
     );
 
@@ -80,7 +76,30 @@ export const updateByIdOrganizationService = async (
 export const deleteOrganizationByIdService = async (organizationID) => {
   try {
     const { data } = await httpClientRestProvider.delete(
-      `${basePath}/${organizationID}`
+      basePath + `/${organizationID}`
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description GET ALL PROJECT IN ORGANIZATION SERVICE
+ * @param {*} organizationID
+ * @param {*} query
+ */
+export const getAllProjectInOrganizationService = async (
+  organizationID,
+  query
+) => {
+  try {
+    const { data } = await httpClientRestProvider.get(
+      basePath + `/${organizationID}/projects`,
+      {
+        params: query
+      }
     );
 
     return data;

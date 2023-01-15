@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProjectAction } from '@reduxStore/actions';
+import { createTeamAction } from '@reduxStore/actions';
 import { get } from 'lodash';
 import { useFormik } from 'formik';
 import { useTranslate } from '@hooks';
@@ -22,7 +22,7 @@ import {
   ButtonSubmit,
   ButtonCancel
 } from '@utilities';
-import { validatorProjectCreate } from '@validators';
+import { validatorTeamCreateOrUpdate } from '@validators';
 
 const useStyles = makeStyles({
   input: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ProjectCreate = () => {
+const TeamCreate = () => {
   // hooks
   const classes = useStyles();
   const { translate } = useTranslate();
@@ -40,31 +40,30 @@ const ProjectCreate = () => {
   // initialValue
   const initialValues = {
     name: '',
-    description: '',
     activated: true
   };
 
   const { loading, color } = useSelector((state) => {
     return {
-      loading: get(state, 'permission.loading', false),
+      loading: get(state, 'team.loading', false),
       color: get(state, 'common.color', {})
     };
   });
 
   const handleCreate = useCallback(
     async (records) => {
-      dispatch(createProjectAction({ navigate }, records));
+      dispatch(createTeamAction({ navigate }, records));
     },
     [dispatch, navigate]
   );
 
   const handleCancel = () => {
-    navigate('/projects');
+    navigate('/teams');
   };
 
   const { handleSubmit, isValid, dirty, ...formProps } = useFormik({
     initialValues,
-    validationSchema: validatorProjectCreate(translate),
+    validationSchema: validatorTeamCreateOrUpdate(translate),
     onSubmit: (values) => handleCreate(values)
   });
 
@@ -80,7 +79,7 @@ const ProjectCreate = () => {
               <TypoCommon
                 variant="body2"
                 fontWeight={600}
-                label="resources.projects.title.create"
+                label="resources.teams.title.create"
               />
             </Box>
           }
@@ -89,7 +88,7 @@ const ProjectCreate = () => {
         <CardContent>
           <BoxWrapper>
             <TextInput
-              label="resources.projects.fields.name"
+              label="resources.teams.fields.name"
               required
               id="name"
               source="name"
@@ -98,28 +97,17 @@ const ProjectCreate = () => {
             />
           </BoxWrapper>
           <BoxWrapper>
-            <TextInput
-              label="resources.projects.fields.description"
-              id="description"
-              multiline
-              rows={4}
-              source="description"
-              className={classes.input}
-              {...formProps}
-            />
-          </BoxWrapper>
-          <BoxWrapper>
             <SwitchInput
               id="activated"
               source="activated"
-              label="resources.projects.fields.activated"
+              label="resources.teams.fields.activated"
               {...formProps}
             />
           </BoxWrapper>
         </CardContent>
         <CardActions>
           <ButtonSubmit
-            id="pm-tool-button-project-create-submit"
+            id="pm-tool-button-team-create-submit"
             color={color}
             onClick={handleSubmit}
             loading={loading}
@@ -127,7 +115,7 @@ const ProjectCreate = () => {
             dirty={dirty}
           />
           <ButtonCancel
-            id="pm-tool-button-project-create-cancel"
+            id="pm-tool-button-team-create-cancel"
             color={color}
             onClick={handleCancel}
           />
@@ -137,4 +125,4 @@ const ProjectCreate = () => {
   );
 };
 
-export default ProjectCreate;
+export default TeamCreate;

@@ -1,4 +1,3 @@
-import { isEmpty, get } from 'lodash';
 import { httpClientRestProvider } from './http-service';
 
 const basePath = '/projects';
@@ -37,16 +36,15 @@ export const createProjectService = async (records) => {
 
 /**
  * @description GET PROJECT BY ID SERVICE
- * @param {*} organizationID
- * @returns
+ * @param {*} projectId
  */
-export const getByIdProjectService = async (organizationID) => {
+export const getProjectByIdService = async (projectId) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      `${basePath}/${organizationID}`
+      basePath + `/${projectId}`
     );
 
-    return !isEmpty(data) ? get(data, 'result.response') : {};
+    return data;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -56,10 +54,10 @@ export const getByIdProjectService = async (organizationID) => {
  * @description UPDATE PROJECT BY ID SERVICE
  * @param {*} records
  */
-export const updateByIdProjectService = async (organizationID, records) => {
+export const updateByIdProjectService = async (projectId, records) => {
   try {
     const { data } = await httpClientRestProvider.put(
-      `${basePath}/${organizationID}`,
+      `${basePath}/${projectId}`,
       records
     );
 
@@ -71,13 +69,13 @@ export const updateByIdProjectService = async (organizationID, records) => {
 
 /**
  * @description DELETE PROJECT BY ID SERVICE
- * @param {*} organizationID
+ * @param {*} projectId
  * @returns
  */
-export const deleteProjectByIdService = async (organizationID) => {
+export const deleteProjectByIdService = async (projectId) => {
   try {
     const { data } = await httpClientRestProvider.delete(
-      `${basePath}/${organizationID}`
+      `${basePath}/${projectId}`
     );
 
     return data;

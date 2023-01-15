@@ -2,9 +2,10 @@ import { isEmpty, get } from 'lodash';
 import {
   getAllOrganizationService,
   createOrganizationService,
-  getByIdOrganizationService,
-  updateByIdOrganizationService,
-  deleteOrganizationByIdService
+  getOrganizationService,
+  updateOrganizationService,
+  deleteOrganizationByIdService,
+  getAllProjectInOrganizationService
 } from '@services';
 import { showNotification } from '@reduxStore/actions';
 import constants from '@constants';
@@ -15,7 +16,8 @@ import {
   ORGANIZATION_GET_ALL_SUCCESS,
   ORGANIZATION_GET_ID_SUCCESS,
   ORGANIZATION_CREATE_SUCCESS,
-  ORGANIZATION_UPDATE_SUCCESS
+  ORGANIZATION_UPDATE_SUCCESS,
+  ORGANIZATION_GET_ALL_PROJECT_SUCCESS
 } from '@reduxStore/types';
 
 export const resetRecordsOrganization = () => ({
@@ -55,35 +57,29 @@ export const getAllOrganizationAction =
 
 /**
  * @description GET ORGANIZATION BY ID ACTION
- * @param {*} OrganizationID
+ * @param {*} organizationId
  */
-export const getOrganizationByIdAction =
-  (OrganizationID) => async (dispatch) => {
-    try {
-      dispatch({
-        type: ORGANIZATION_REQUEST
-      });
+export const getOrganizationAction = (organizationId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ORGANIZATION_REQUEST
+    });
 
-      const data = getByIdOrganizationService(OrganizationID);
+    const { result } = await getOrganizationService(organizationId);
 
-      if (!isEmpty(data)) {
-        dispatch({
-          type: ORGANIZATION_GET_ID_SUCCESS,
-          payload: {
-            record: data
-          }
-        });
-        dispatch({
-          type: ORGANIZATION_FAILURE
-        });
-      }
-    } catch (err) {
+    if (!isEmpty(result)) {
       dispatch({
-        type: ORGANIZATION_FAILURE,
-        payload: err
+        type: ORGANIZATION_GET_ID_SUCCESS,
+        payload: result.data
       });
     }
-  };
+  } catch (err) {
+    dispatch({
+      type: ORGANIZATION_FAILURE,
+      payload: err
+    });
+  }
+};
 
 /**
  * @description CREATE ORGANIZATION ACTION
@@ -128,14 +124,14 @@ export const createOrganizationAction =
  * @param {*} organizationID
  * @param {*} records
  */
-export const updateOrganizationByIdAction =
+export const updateOrganizationAction =
   (organizationID, records = {}) =>
   async (dispatch) => {
     try {
       dispatch({
         type: ORGANIZATION_REQUEST
       });
-      const { result, message } = await updateByIdOrganizationService(
+      const { result, message } = await updateOrganizationService(
         organizationID,
         records
       );
@@ -179,6 +175,40 @@ export const deleteOrganizationByIdAction =
           })
         );
         dispatch(getAllOrganizationAction(query));
+      }
+    } catch (err) {
+      dispatch({
+        type: ORGANIZATION_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description GET ALL PROJECT ORGANIZATION ACTION
+ * @param {*} organizationID
+ * @param {*} query
+ */
+export const getAllProjectInOrganizationAction =
+  (organizationID, query) => async (dispatch) => {
+    try {
+      dispatch({
+        type: ORGANIZATION_REQUEST
+      });
+
+      const { result } = await getAllProjectInOrganizationService(
+        organizationID,
+        query
+      );
+
+      if (!isEmpty(result)) {
+        dispatch({
+          type: ORGANIZATION_GET_ALL_PROJECT_SUCCESS,
+          payload: {
+            data: result.data,
+            total: result.total
+          }
+        });
       }
     } catch (err) {
       dispatch({

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   showPopup,
-  getAllProjectAction,
-  deleteProjectByIdAction
+  getAllTeamAction,
+  deleteTeamByIdAction
 } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
@@ -24,6 +24,7 @@ import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { menuPermissions } from '@permissions';
+import { validatorVerifyToDelete } from '@validators';
 
 const useStyles = makeStyles((_) => ({
   input: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles((_) => ({
   }
 }));
 
-const ProjectList = () => {
+const TeamList = () => {
   // states
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
@@ -100,21 +101,27 @@ const ProjectList = () => {
     [page, pageSize, sort, order, formProps.values.search]
   );
 
+  const { refresh } = useSelector((state) => {
+    return {
+      refresh: get(state, 'common.refresh')
+    };
+  });
+
   useEffect(() => {
-    dispatch(getAllProjectAction(queryOptions));
-  }, [dispatch, queryOptions]);
+    dispatch(getAllTeamAction(queryOptions));
+  }, [dispatch, queryOptions, refresh]);
 
   const { data, total, loading } = useSelector((state) => {
     return {
-      data: get(state, 'project.data', []),
-      total: get(state, 'project.total', 0),
-      loading: get(state, 'project.loading', false)
+      data: get(state, 'team.data', []),
+      total: get(state, 'team.total', 0),
+      loading: get(state, 'team.loading', false)
     };
   });
 
   const handleEdit = useCallback(
     (id) => () => {
-      navigate(`/projects/edit/${id}`);
+      navigate(`/teams/edit/${id}`);
     },
     [navigate]
   );
@@ -124,12 +131,14 @@ const ProjectList = () => {
       dispatch(
         showPopup({
           open: true,
-          title: 'resources.projects.popup.title',
-          content: 'resources.projects.popup.content',
-          verifyName: 'resources.projects.popup.verifyName',
-          onSubmit: () => dispatch(deleteProjectByIdAction(id, query)),
+          title: 'resources.teams.popup.title',
+          content: 'resources.teams.popup.content',
+          verifyName: 'resources.teams.popup.verifyName',
+          validator: () => validatorVerifyToDelete(translate, name),
+          onSubmit: () => dispatch(deleteTeamByIdAction(id, query)),
+          isLoading: loading,
           options: {
-            projectName: name
+            teamName: name
           }
         })
       );
@@ -141,14 +150,14 @@ const ProjectList = () => {
     return [
       {
         field: 'name',
-        headerName: translate('resources.projects.fields.name'),
+        headerName: translate('resources.teams.fields.name'),
         flex: 0.5,
         resizable: false,
         filterable: false
       },
       {
         field: 'activated',
-        headerName: translate('resources.projects.fields.activated'),
+        headerName: translate('resources.teams.fields.activated'),
         type: 'boolean',
         flex: 0.5,
         sortable: false,
@@ -158,7 +167,7 @@ const ProjectList = () => {
       },
       {
         field: 'createdAt',
-        headerName: translate('resources.projects.fields.createdAt'),
+        headerName: translate('resources.teams.fields.createdAt'),
         type: 'dateTime',
         flex: 0.5,
         resizable: false,
@@ -168,7 +177,7 @@ const ProjectList = () => {
       },
       {
         field: 'updatedAt',
-        headerName: translate('resources.projects.fields.updatedAt'),
+        headerName: translate('resources.teams.fields.updatedAt'),
         type: 'dateTime',
         flex: 0.5,
         resizable: false,
@@ -185,7 +194,7 @@ const ProjectList = () => {
           if (
             authAllowed({
               whoami,
-              permission: menuPermissions.projects.GET_ID
+              permission: menuPermissions.teams.GET_ID
             })
           ) {
             return [
@@ -221,7 +230,7 @@ const ProjectList = () => {
 
   return (
     <Box display="block">
-      <CardListCommon resource="projects" />
+      <CardListCommon resource="teams" />
       <Box
         sx={{
           marginBottom: '1em',
@@ -236,13 +245,13 @@ const ProjectList = () => {
           source="search"
           size="small"
           variant="standard"
-          placeholder="resources.projects.search"
+          placeholder="resources.teams.search"
           className={classes.search}
           {...formProps}
         />
         {authAllowed({
           whoami,
-          permission: menuPermissions.projects.CREATE
+          permission: menuPermissions.teams.CREATE
         }) && (
           <Box
             sx={{
@@ -255,7 +264,7 @@ const ProjectList = () => {
             }}
           >
             <Box width="auto" minWidth={50}>
-              <ButtonCreate redirect="/projects/create" />
+              <ButtonCreate redirect="/teams/create" />
             </Box>
           </Box>
         )}
@@ -279,4 +288,4 @@ const ProjectList = () => {
   );
 };
 
-export default ProjectList;
+export default TeamList;

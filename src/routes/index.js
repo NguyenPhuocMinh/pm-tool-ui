@@ -5,6 +5,7 @@ import {
   OrganizationEdit,
   ProjectList,
   ProjectCreate,
+  ProjectEdit,
   RoleList,
   RoleCreate,
   RoleEdit,
@@ -20,7 +21,10 @@ import {
   NotifyUserList,
   NotifyUserDetail,
   NotifyTemplateList,
-  NotifyTemplateCreate
+  NotifyTemplateCreate,
+  TeamList,
+  TeamCreate,
+  TeamEdit
 } from '@resources';
 import { NotFoundCommon, ForbiddenCommon } from '@utilities';
 import { menuPermissions } from '@permissions';
@@ -34,6 +38,7 @@ import LockPersonIcon from '@mui/icons-material/LockPerson';
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 /**
  * @description ROUTES
@@ -106,13 +111,44 @@ const projectRoutes = [
     path: '/projects/create',
     element: () => <ProjectCreate />,
     permission: menuPermissions.projects.CREATE
+  },
+  {
+    enable: true,
+    name: 'projects-edit',
+    path: '/projects/edit/:id',
+    element: () => <ProjectEdit />,
+    permission: menuPermissions.projects.EDIT
+  }
+];
+
+const teamRoutes = [
+  {
+    enable: true,
+    name: 'team-list',
+    path: '/teams',
+    element: () => <TeamList />,
+    permission: menuPermissions.teams.LIST
+  },
+  {
+    enable: true,
+    name: 'team-create',
+    path: '/teams/create',
+    element: () => <TeamCreate />,
+    permission: menuPermissions.teams.CREATE
+  },
+  {
+    enable: true,
+    name: 'teams-edit',
+    path: '/teams/edit/:id',
+    element: () => <TeamEdit />,
+    permission: menuPermissions.teams.EDIT
   }
 ];
 
 const roleRoutes = [
   {
     enable: true,
-    name: 'roles',
+    name: 'role-list',
     path: '/roles',
     element: () => <RoleList />,
     permission: menuPermissions.roles.LIST
@@ -250,6 +286,7 @@ const routes = [
   ...forbiddenRoutes,
   ...organizationRoutes,
   ...projectRoutes,
+  ...teamRoutes,
   ...roleRoutes,
   ...permissionRoutes,
   ...userRoutes,
@@ -290,6 +327,14 @@ const managementMenus = [
     path: '/projects',
     icon: <AccountTreeIcon />,
     permission: menuPermissions.projects.LIST
+  },
+  {
+    enable: true,
+    name: 'teams',
+    title: 'menu.management.team.title',
+    path: '/teams',
+    icon: <GroupsIcon />,
+    permission: menuPermissions.teams.LIST
   }
 ];
 

@@ -6,6 +6,7 @@ export * from './config-action';
 export * from './dashboard-action';
 export * from './organization-action';
 export * from './project-action';
+export * from './team-action';
 export * from './role-action';
 export * from './permission-action';
 export * from './user-action';

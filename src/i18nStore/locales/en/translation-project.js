@@ -9,10 +9,16 @@ const translationProject = {
   },
   fields: {
     name: 'Project Name',
+    description: 'Description',
     activated: 'Activated',
     createdAt: 'CreatedAt',
     updatedAt: 'UpdatedAt',
     verify: 'Verify'
+  },
+  tabs: {
+    details: 'Details',
+    setProjectToOrganization: 'Set Project To Organization',
+    setTeamToProject: 'Set Team To Project'
   },
   search: 'Search by project...',
   popup: {

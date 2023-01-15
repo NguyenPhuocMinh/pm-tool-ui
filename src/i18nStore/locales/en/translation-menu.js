@@ -8,10 +8,13 @@ const translationMenu = {
   management: {
     title: 'Management',
     organization: {
-      title: 'Organizations'
+      title: 'Organization'
     },
     project: {
       title: 'Project'
+    },
+    team: {
+      title: 'Team'
     }
   },
   authenticate: {

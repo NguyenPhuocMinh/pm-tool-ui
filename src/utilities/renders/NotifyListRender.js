@@ -94,7 +94,7 @@ const NotifyListRender = ({ item, handleClose }) => {
               justifyContent: 'flex-end',
               fontWeight: 500,
               lineHeight: '1.5em',
-              color: color?.hex ?? 'blue'
+              color: (theme) => color?.hex ?? theme.palette.primary.main
             }}
             component="span"
             variant="body2"

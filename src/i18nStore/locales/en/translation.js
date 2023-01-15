@@ -11,6 +11,7 @@ import translationLogin from './translation-login';
 import translationDashboard from './translation-dashboard';
 import translationOrganization from './translation-organization';
 import translationProject from './translation-project';
+import translationTeam from './translation-team';
 import translationRole from './translation-role';
 import translationPermission from './translation-permission';
 import translationUser from './translation-user';
@@ -33,6 +34,7 @@ const TRANSLATIONS_EN = {
     dashboards: translationDashboard,
     organizations: translationOrganization,
     projects: translationProject,
+    teams: translationTeam,
     roles: translationRole,
     permissions: translationPermission,
     users: translationUser,

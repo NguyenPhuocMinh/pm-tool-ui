@@ -13,6 +13,11 @@ const translationProject = {
     createdAt: 'Ngày tạo',
     updatedAt: 'Ngày Cập nhật'
   },
+  tabs: {
+    details: 'Thông tin chi tiết',
+    setProjectToOrganization: 'Gán dự án cho tổ chức',
+    setTeamToProject: 'Gán đội cho dự án'
+  },
   search: 'Tìm kiếm theo dự án...',
   popup: {
     title: 'Xóa dự án',

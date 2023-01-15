@@ -18,3 +18,4 @@ export * from './UserSessionResource';
 export * from './NotifyResource';
 export * from './NotifyUserResource';
 export * from './NotifyTemplateResource';
+export * from './TeamResource';

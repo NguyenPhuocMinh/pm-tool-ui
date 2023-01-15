@@ -5,6 +5,7 @@ export * from './config-service';
 export * from './dashboard-service';
 export * from './organization-service';
 export * from './project-service';
+export * from './team-service';
 export * from './role-service';
 export * from './permission-service';
 export * from './user-service';

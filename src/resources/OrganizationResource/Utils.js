@@ -5,11 +5,7 @@ const tabs = [
   },
   {
     id: 'fff2c764-ed91-4e42-9b23-0a0c975e964c',
-    label: 'attributes'
-  },
-  {
-    id: 'e0a42616-19f2-422c-8fdb-58b31344bb53',
-    label: 'setRolesToPermission'
+    label: 'projectsInOrganization'
   }
 ];
 

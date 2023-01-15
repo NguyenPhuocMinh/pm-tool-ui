@@ -5,6 +5,7 @@ import DialogCustom from './DialogCustom';
 import DialogTitleCustom from './DialogTitleCustom';
 import ToastMsgCustom from './ToastMsgCustom';
 import EndMsgCustom from './EndMsgCustom';
+import TableCustom from './TableCustom';
 
 export {
   AppBarCustom,
@@ -13,5 +14,6 @@ export {
   DialogCustom,
   DialogTitleCustom,
   ToastMsgCustom,
-  EndMsgCustom
+  EndMsgCustom,
+  TableCustom
 };

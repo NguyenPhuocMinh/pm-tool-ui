@@ -13,6 +13,10 @@ const translationOrganization = {
     createdAt: 'Ngày tạo',
     updatedAt: 'Ngày Cập nhật'
   },
+  tabs: {
+    details: 'Thông tin chi tiết',
+    projectsInOrganization: 'Dự án Trong tổ chức'
+  },
   search: 'Tìm kiếm theo tổ chức',
   popup: {
     title: 'Xóa tổ chức',

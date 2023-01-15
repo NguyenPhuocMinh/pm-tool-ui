@@ -27,6 +27,7 @@ import BackdropCommon from './BackdropCommon';
 import StackRowCommon from './StackRowCommon';
 import StackColumnCommon from './StackColumnCommon';
 import BadgeCommon from './BadgeCommon';
+import DialogCommon from './DialogCommon';
 
 export * from './mains';
 export * from './inputs';
@@ -64,5 +65,6 @@ export {
   BackdropCommon,
   StackRowCommon,
   StackColumnCommon,
-  BadgeCommon
+  BadgeCommon,
+  DialogCommon
 };

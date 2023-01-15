@@ -5,7 +5,8 @@ import {
   ORGANIZATION_GET_ALL_SUCCESS,
   ORGANIZATION_GET_ID_SUCCESS,
   ORGANIZATION_CREATE_SUCCESS,
-  ORGANIZATION_UPDATE_SUCCESS
+  ORGANIZATION_UPDATE_SUCCESS,
+  ORGANIZATION_GET_ALL_PROJECT_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
@@ -13,7 +14,9 @@ const initialState = {
   total: 0,
   records: {},
   loading: false,
-  error: null
+  error: null,
+  dataProjectsInOrganization: [],
+  totalProjectsInOrganization: 0
 };
 
 const organizationReducer = (state = initialState, action) => {
@@ -56,6 +59,13 @@ const organizationReducer = (state = initialState, action) => {
       return {
         ...state,
         records: payload,
+        loading: false
+      };
+    case ORGANIZATION_GET_ALL_PROJECT_SUCCESS:
+      return {
+        ...state,
+        dataProjectsInOrganization: payload.data,
+        totalProjectsInOrganization: payload.total,
         loading: false
       };
     default:

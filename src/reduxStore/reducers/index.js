@@ -5,6 +5,7 @@ import configReducer from './config-reducer';
 import dashboardReducer from './dashboard-reducer';
 import organizationReducer from './organization-reducer';
 import projectReducer from './project-reducer';
+import teamReducer from './team-reducer';
 import roleReducer from './role-reducer';
 import permissionReducer from './permission-reducer';
 import userReducer from './user-reducer';
@@ -22,6 +23,7 @@ export {
   dashboardReducer,
   organizationReducer,
   projectReducer,
+  teamReducer,
   roleReducer,
   permissionReducer,
   userReducer,

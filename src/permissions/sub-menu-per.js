@@ -3,7 +3,8 @@ import { menuPermissions } from './menu-per';
 export const subMenuPermissions = {
   managementMenus: [
     menuPermissions.organizations.GET_ALL,
-    menuPermissions.projects.GET_ALL
+    menuPermissions.projects.GET_ALL,
+    menuPermissions.teams.GET_ALL
   ],
   authenticateMenus: [
     menuPermissions.roles.GET_ALL,

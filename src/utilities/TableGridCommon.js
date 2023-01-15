@@ -27,7 +27,10 @@ const TableGridCommon = ({
   sortModel,
   onPageChange,
   onPageSizeChange,
-  onSortModelChange
+  onSortModelChange,
+  checkboxSelection,
+  disableColumnMenu = true,
+  onSelectionModelChange
 }) => {
   const classes = useStyles();
   const { i18n } = useTranslate();
@@ -54,7 +57,9 @@ const TableGridCommon = ({
         pagination
         paginationMode="server"
         sortingMode="server"
-        disableColumnMenu
+        checkboxSelection={checkboxSelection}
+        onSelectionModelChange={onSelectionModelChange}
+        disableColumnMenu={disableColumnMenu}
         components={{
           NoRowsOverlay: NoRowsCommon,
           LoadingOverlay: LoadingCommon

@@ -2,7 +2,7 @@ import { isEmpty, get } from 'lodash';
 import {
   getAllProjectService,
   createProjectService,
-  getByIdProjectService,
+  getProjectByIdService,
   updateByIdProjectService,
   deleteProjectByIdService
 } from '@services';
@@ -50,29 +50,28 @@ export const getAllProjectAction =
       }
     } catch (err) {
       dispatch({
-        type: PROJECT_FAILURE
+        type: PROJECT_FAILURE,
+        payload: err
       });
     }
   };
 
 /**
  * @description GET PROJECT BY ID ACTION
- * @param {*} ProjectID
+ * @param {*} projectId
  */
-export const getProjectByIdAction = (ProjectID) => async (dispatch) => {
+export const getProjectByIdAction = (projectId) => async (dispatch) => {
   try {
     dispatch({
       type: PROJECT_REQUEST
     });
 
-    const data = getByIdProjectService(ProjectID);
+    const { result } = await getProjectByIdService(projectId);
 
-    if (!isEmpty(data)) {
+    if (!isEmpty(result)) {
       dispatch({
         type: PROJECT_GET_ID_SUCCESS,
-        payload: {
-          record: data
-        }
+        payload: result.data
       });
     }
   } catch (err) {
@@ -100,7 +99,7 @@ export const createProjectAction =
       const { result } = await createProjectService(records);
 
       if (!isEmpty(result)) {
-        const organizationID = get(result, 'response.id');
+        const projectId = get(result, 'response.id');
         dispatch({
           type: PROJECT_CREATE_SUCCESS,
           payload: result
@@ -111,7 +110,7 @@ export const createProjectAction =
             message: result.message
           })
         );
-        navigate(`/organizations/edit/${organizationID}`);
+        navigate(`/projects/edit/${projectId}`);
       }
     } catch (err) {
       dispatch({

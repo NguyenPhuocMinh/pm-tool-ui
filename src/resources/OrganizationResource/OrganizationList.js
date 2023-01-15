@@ -100,9 +100,15 @@ const OrganizationList = () => {
     [page, pageSize, sort, order, formProps.values.search]
   );
 
+  const { refresh } = useSelector((state) => {
+    return {
+      refresh: get(state, 'common.refresh')
+    };
+  });
+
   useEffect(() => {
     dispatch(getAllOrganizationAction(queryOptions));
-  }, [dispatch, queryOptions]);
+  }, [dispatch, queryOptions, refresh]);
 
   const { data, total, loading } = useSelector((state) => {
     return {
