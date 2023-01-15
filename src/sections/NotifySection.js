@@ -10,7 +10,7 @@ import {
 // another
 import { CircularCommon } from '@utilities';
 import { NotifySetting } from '@settings';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 // mui
 import { Box, Tooltip, IconButton, Badge } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -43,8 +43,10 @@ const NotifySection = () => {
 
   // call one data notify
   useEffect(() => {
-    dispatch(getAllDataNotifyUserAction(whoami?.id));
-    dispatch(getAllDataUnreadNotifyUserAction(whoami?.id));
+    if (!isEmpty(whoami)) {
+      dispatch(getAllDataNotifyUserAction(whoami?.id));
+      dispatch(getAllDataUnreadNotifyUserAction(whoami?.id));
+    }
   }, [whoami, toastInfo, refresh]);
 
   const { loading, totalUnread } = useSelector((state) => {

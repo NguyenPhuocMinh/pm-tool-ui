@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { homeAction, healthCheckAction } from '@reduxStore/actions';
+import { useAuth } from '@hooks';
 import { Box, Card } from '@mui/material';
 import { TypoCommon, BackdropCommon } from '@utilities';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 
 const Welcome = () => {
   // hooks
   const dispatch = useDispatch();
+  const { whoami } = useAuth();
 
   const { refresh } = useSelector((state) => {
     return {
@@ -16,9 +18,11 @@ const Welcome = () => {
   });
 
   useEffect(() => {
-    dispatch(homeAction());
-    dispatch(healthCheckAction());
-  }, [refresh]);
+    if (!isEmpty(whoami)) {
+      dispatch(homeAction());
+      dispatch(healthCheckAction());
+    }
+  }, [dispatch, whoami, refresh]);
 
   const { loading } = useSelector((state) => {
     return {
