@@ -1,14 +1,20 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
+// hooks
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslate, useAuth } from '@hooks';
+import { useFormik } from 'formik';
 import {
   showPopup,
   getAllProjectAction,
   deleteProjectByIdAction
 } from '@reduxStore/actions';
-import { get, isEmpty } from 'lodash';
-import { useFormik } from 'formik';
-import { useTranslate, useAuth } from '@hooks';
+// mui
+import { Paper, Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { GridActionsCellItem } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
   PopupCommon,
   SearchInput,
@@ -16,13 +22,10 @@ import {
   CardListCommon,
   TableGridCommon
 } from '@utilities';
+// other
+import { get, isEmpty } from 'lodash';
 import constants from '@constants';
 import { dateTimeFormat, authAllowed } from '@utils';
-import { Paper, Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { GridActionsCellItem } from '@mui/x-data-grid';
-import DeleteIcon from '@mui/icons-material/Delete';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { menuPermissions } from '@permissions';
 
 const useStyles = makeStyles((_) => ({
@@ -100,9 +103,15 @@ const ProjectList = () => {
     [page, pageSize, sort, order, formProps.values.search]
   );
 
+  const { refresh } = useSelector((state) => {
+    return {
+      refresh: get(state, 'common.refresh')
+    };
+  });
+
   useEffect(() => {
     dispatch(getAllProjectAction(queryOptions));
-  }, [dispatch, queryOptions]);
+  }, [dispatch, queryOptions, refresh]);
 
   const { data, total, loading } = useSelector((state) => {
     return {
@@ -142,6 +151,13 @@ const ProjectList = () => {
       {
         field: 'name',
         headerName: translate('resources.projects.fields.name'),
+        flex: 0.5,
+        resizable: false,
+        filterable: false
+      },
+      {
+        field: 'description',
+        headerName: translate('resources.projects.fields.description'),
         flex: 0.5,
         resizable: false,
         filterable: false

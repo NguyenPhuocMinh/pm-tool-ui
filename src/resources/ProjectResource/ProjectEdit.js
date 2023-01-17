@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
 import { get } from 'lodash';
-import { getPermissionByIdAction } from '@reduxStore/actions';
+import { getProjectByIdAction } from '@reduxStore/actions';
 import { TabsCommon, TabPanelCommon, TypoCommon } from '@utilities';
 import { tabs } from './Utils';
 
 // tabs
 import DetailTab from './ProjectTabs/DetailTab';
+import SetTeamToProjectTab from './ProjectTabs/SetTeamToProjectTab';
+import OrganizationTab from './ProjectTabs/OrganizationTab';
 
 const ProjectEdit = () => {
   const params = useParams();
@@ -22,13 +24,20 @@ const ProjectEdit = () => {
 
   const { id } = params;
 
-  useEffect(() => {
-    dispatch(getPermissionByIdAction(id));
-  }, [dispatch, id]);
-
-  const { color } = useSelector((state) => {
+  const { color, refresh } = useSelector((state) => {
     return {
-      color: get(state, 'common.color', {})
+      color: get(state, 'common.color', {}),
+      refresh: get(state, 'common.refresh', false)
+    };
+  });
+
+  useEffect(() => {
+    dispatch(getProjectByIdAction(id));
+  }, [dispatch, id, refresh]);
+
+  const { records } = useSelector((state) => {
+    return {
+      records: get(state, 'project.records', {})
     };
   });
 
@@ -44,7 +53,7 @@ const ProjectEdit = () => {
               <TypoCommon
                 variant="body2"
                 fontWeight={600}
-                label="resources.permissions.title.edit"
+                label="resources.projects.title.edit"
               />
             </Box>
           }
@@ -56,7 +65,7 @@ const ProjectEdit = () => {
               tabs={tabs}
               tabName={tabName}
               onChange={handleChange}
-              resourceLabel="resources.permissions.tabs"
+              resourceLabel="resources.projects.tabs"
               color={color}
             />
           </Box>
@@ -64,6 +73,12 @@ const ProjectEdit = () => {
             return (
               <TabPanelCommon value={tabName} index={tab.label} key={tab.id}>
                 {tabName === tabs[0].label ? <DetailTab /> : null}
+                {tabName === tabs[1].label ? (
+                  <SetTeamToProjectTab projectId={id} records={records} />
+                ) : null}
+                {tabName === tabs[2].label ? (
+                  <OrganizationTab records={records} />
+                ) : null}
               </TabPanelCommon>
             );
           })}

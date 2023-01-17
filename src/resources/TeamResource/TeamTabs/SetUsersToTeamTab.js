@@ -1,15 +1,17 @@
 import { useState, useEffect, useMemo, useCallback, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+// redux
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getAllMemberInTeamAction,
   getAllMemberNotOnTeamAction,
   addMembersToTeamAction,
-  removeMembersToTeamAction
+  removeMembersFromTeamAction
 } from '@reduxStore/actions';
-import { get, isEmpty } from 'lodash';
-import { useFormik } from 'formik';
+// hooks
 import { useTranslate, useAuth } from '@hooks';
+import { useFormik } from 'formik';
+// mui
 import { Box, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { GridActionsCellItem } from '@mui/x-data-grid';
@@ -18,8 +20,11 @@ import {
   SearchInput,
   ButtonRegular,
   DialogCommon,
-  TableGridCommon
+  TableGridCommon,
+  TypoCommon
 } from '@utilities';
+// other
+import { get, isEmpty } from 'lodash';
 import { authAllowed } from '@utils';
 import { menuPermissions } from '@permissions';
 import { validatorAddMemberToTeam } from '@validators';
@@ -39,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 const SetUsersInTeamTab = (props) => {
-  const { teamId } = props;
+  const { teamId, records } = props;
   // states
   const [openDialog, setOpenDialog] = useState(false);
   // hooks
@@ -198,7 +203,7 @@ const SetUsersInTeamTab = (props) => {
   };
 
   const handleClickRemoveMember = useCallback(() => {
-    dispatch(removeMembersToTeamAction(teamId, valuesRemoveMember));
+    dispatch(removeMembersFromTeamAction(teamId, valuesRemoveMember));
   }, [dispatch, teamId, valuesRemoveMember]);
 
   const columns = useMemo(() => {
@@ -249,7 +254,15 @@ const SetUsersInTeamTab = (props) => {
     ];
   }, [handleEdit, translate, i18n.language]);
 
-  return (
+  return !records.activated ? (
+    <Box>
+      <TypoCommon
+        variant="body2"
+        fontWeight={600}
+        label="resources.teams.labels.activate"
+      />
+    </Box>
+  ) : (
     <Box sx={{ minWidth: 400 }}>
       <Box
         sx={{

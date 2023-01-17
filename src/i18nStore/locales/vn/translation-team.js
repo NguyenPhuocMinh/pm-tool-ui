@@ -1,55 +1,55 @@
 const translationTeam = {
   title: {
-    list: 'Team List',
-    create: 'Create Team',
-    edit: 'Edit Team'
+    list: 'Danh sách nhóm',
+    create: 'Tạo nhóm',
+    edit: 'Chỉnh sửa nhóm'
   },
   description: {
-    list: 'This page are manage team has been create'
+    list: 'Trang này quản lý nhóm đã được tạo'
   },
   fields: {
-    name: 'Team Name',
-    project: 'Project Name',
-    members: 'Members',
-    activated: 'Activated',
-    createdAt: 'CreatedAt',
-    updatedAt: 'UpdatedAt'
+    name: 'Tên nhóm',
+    project: 'Tên dự án',
+    members: 'Thành viên',
+    activated: 'Kích hoạt',
+    createdAt: 'Ngày tạo',
+    updatedAt: 'Ngày Cập nhật'
   },
   tabs: {
-    details: 'Details',
-    setMembersToTeam: 'Set Members To Team'
+    details: 'Chi tiết',
+    setMembersToTeam: 'Đặt thành viên vào nhóm'
   },
   labels: {
-    addMember: 'Add Member',
-    removeMember: 'Remove Member'
+    addMember: 'Thêm thành viên',
+    removeMember: 'Xóa thành viên'
   },
   dialog: {
-    title: 'Add Member',
-    content: 'Add Member To Team'
+    title: 'Thêm thành viên',
+    content: 'Thêm thành viên vào nhóm'
   },
-  search: 'Search by name...',
+  search: 'Tìm kiếm theo tên...',
   popup: {
-    title: 'Delete Team',
-    content:
-      'Are you sure you want to permanently delete the team name {{teamName}}?',
-    verifyName: 'Please input team name {{teamName}}'
+    title: 'Xóa nhóm',
+    content: 'Bạn có chắc chắn muốn xóa vĩnh viễn tên nhóm {{teamName}}?',
+    verifyName: 'Vui lòng nhập tên nhóm {{teamName}}'
   },
   notifications: {
     errors: {
-      e001: 'Data Invalid',
-      e002: 'Team Has Duplicate',
-      e003: 'ID Not Found'
+      e001: 'Dữ liệu không hợp lệ',
+      e002: 'Nhóm đã trùng lặp',
+      e003: 'ID Not Found',
+      e004: 'Vui lòng xoá hết thành viên trong nhóm trước khi xoá nhóm'
     },
     success: {
-      s001: 'Get List Team Success',
-      s002: 'Create Team Success',
-      s003: 'Get Team By Id Success',
-      s004: 'Update Team Success',
-      s005: 'Delete Team Success',
-      s006: 'Get All Member In Team Success',
-      s007: 'Get All Member Not On Team Success',
-      s008: 'Add Members To Team Success',
-      s009: 'Remove Members From Team Success'
+      s001: 'Nhận danh sách nhóm thành công',
+      s002: 'Tạo đội thành công',
+      s003: 'Nhận nhóm theo Id thành công',
+      s004: 'Cập nhật đội thành công',
+      s005: 'Xóa nhóm thành công',
+      s006: 'Nhận tất cả thành viên vào nhóm thành công',
+      s007: 'Nhận tất cả thành viên không thành công trong nhóm',
+      s008: 'Thêm thành viên vào nhóm thành công',
+      s009: 'Xóa thành viên khỏi nhóm thành công'
     }
   }
 };

@@ -144,12 +144,12 @@ export const addMembersToTeamService = async (teamId, records = {}) => {
 };
 
 /**
- * @description REMOVE MEMBERS TO TEAM SERVICE
+ * @description REMOVE MEMBERS FROM TEAM SERVICE
  * @param {*} teamId
  * @param {*} records
  * @returns
  */
-export const removeMembersToTeamService = async (teamId, records = {}) => {
+export const removeMembersFromTeamService = async (teamId, records = {}) => {
   try {
     const { data } = await httpClientRestProvider.patch(
       basePath + `/${teamId}/removeMembersFromTeam`,

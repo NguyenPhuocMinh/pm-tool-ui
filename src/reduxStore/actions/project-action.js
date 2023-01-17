@@ -4,7 +4,11 @@ import {
   createProjectService,
   getProjectByIdService,
   updateByIdProjectService,
-  deleteProjectByIdService
+  deleteProjectByIdService,
+  getAllTeamInProjectService,
+  getAllTeamNotOnProjectService,
+  addTeamsToProjectService,
+  removeTeamsFromProjectService
 } from '@services';
 import { showNotification } from '@reduxStore/actions';
 import constants from '@constants';
@@ -15,7 +19,9 @@ import {
   PROJECT_GET_ALL_SUCCESS,
   PROJECT_GET_ID_SUCCESS,
   PROJECT_CREATE_SUCCESS,
-  PROJECT_UPDATE_SUCCESS
+  PROJECT_UPDATE_SUCCESS,
+  PROJECT_GET_ALL_TEAM_IN_PROJECT_SUCCESS,
+  PROJECT_GET_ALL_TEAM_NOT_ON_PROJECT_SUCCESS
 } from '@reduxStore/types';
 
 export const resetRecordsProject = () => ({
@@ -122,28 +128,32 @@ export const createProjectAction =
 
 /**
  * @description UPDATE PROJECT BY ID ACTION
- * @param {*} organizationID
+ * @param {*} projectId
  * @param {*} records
  */
 export const updateProjectByIdAction =
-  (organizationID, records = {}) =>
+  (projectId, records = {}) =>
   async (dispatch) => {
     try {
       dispatch({
         type: PROJECT_REQUEST
       });
+
       const { result, message } = await updateByIdProjectService(
-        organizationID,
+        projectId,
         records
       );
 
       if (!isEmpty(result)) {
         dispatch({
           type: PROJECT_UPDATE_SUCCESS,
-          payload: result.response
+          payload: result.data
         });
         dispatch(
-          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
         );
       }
     } catch (err) {
@@ -156,17 +166,17 @@ export const updateProjectByIdAction =
 
 /**
  * @description DELETE PROJECT BY ID ACTION
- * @param {*} organizationID
+ * @param {*} projectId
  * @param {*} query
  */
 export const deleteProjectByIdAction =
-  (organizationID, query) => async (dispatch) => {
+  (projectId, query) => async (dispatch) => {
     try {
       dispatch({
         type: PROJECT_REQUEST
       });
 
-      const { result } = await deleteProjectByIdService(organizationID);
+      const { result } = await deleteProjectByIdService(projectId);
 
       if (!isEmpty(result)) {
         dispatch(
@@ -176,6 +186,150 @@ export const deleteProjectByIdAction =
           })
         );
         dispatch(getAllProjectAction(query));
+      }
+    } catch (err) {
+      dispatch({
+        type: PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description GET ALL TEAM IN PROJECT ACTION
+ * @param {*} projectId
+ * @param {*} query
+ */
+export const getAllTeamInProjectAction =
+  (projectId, query = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: PROJECT_REQUEST
+      });
+
+      const { result } = await getAllTeamInProjectService(projectId, query);
+
+      if (!isEmpty(result)) {
+        dispatch({
+          type: PROJECT_GET_ALL_TEAM_IN_PROJECT_SUCCESS,
+          payload: {
+            data: result.data,
+            total: result.total
+          }
+        });
+      }
+    } catch (err) {
+      dispatch({
+        type: PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description GET ALL MEMBER NOT ON TEAM ACTION
+ * @param {*} projectId
+ * @param {*} query
+ */
+export const getAllTeamNotOnProjectAction =
+  (projectId, query = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: PROJECT_REQUEST
+      });
+
+      const { result } = await getAllTeamNotOnProjectService(projectId, query);
+
+      if (!isEmpty(result)) {
+        dispatch({
+          type: PROJECT_GET_ALL_TEAM_NOT_ON_PROJECT_SUCCESS,
+          payload: {
+            data: result.data,
+            total: result.total
+          }
+        });
+      }
+    } catch (err) {
+      dispatch({
+        type: PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description ADD TEAMS TO PROJECT ACTION
+ * @param {*} projectId
+ * @param {*} records
+ */
+export const addTeamsToProjectAction =
+  (projectId, records = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: PROJECT_REQUEST
+      });
+
+      const { result, message } = await addTeamsToProjectService(
+        projectId,
+        records
+      );
+
+      if (!isEmpty(result)) {
+        const query = {
+          _start: 0,
+          _end: 5
+        };
+        dispatch(
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
+        );
+        dispatch(getAllTeamInProjectAction(projectId, query));
+        dispatch(getAllTeamNotOnProjectAction(projectId, query));
+      }
+    } catch (err) {
+      dispatch({
+        type: PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description REMOVE TEAMS FROM PROJECT ACTION
+ * @param {*} projectId
+ * @param {*} records
+ */
+export const removeTeamsFromProjectAction =
+  (projectId, records = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: PROJECT_REQUEST
+      });
+
+      const { result, message } = await removeTeamsFromProjectService(
+        projectId,
+        records
+      );
+
+      if (!isEmpty(result)) {
+        const query = {
+          _start: 0,
+          _end: 5
+        };
+        dispatch(
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
+        );
+        dispatch(getAllTeamInProjectAction(projectId, query));
+        dispatch(getAllTeamNotOnProjectAction(projectId, query));
       }
     } catch (err) {
       dispatch({

@@ -21,11 +21,12 @@ const translationTeam = {
   },
   labels: {
     addMember: 'Add Member',
-    removeMember: 'Remove Member'
+    removeMember: 'Remove Member',
+    activate: 'Please activated team for set members'
   },
   dialog: {
     title: 'Add Member',
-    content: 'Add Member To Team'
+    content: 'Add Members To Team'
   },
   search: 'Search by name...',
   popup: {
@@ -38,7 +39,8 @@ const translationTeam = {
     errors: {
       e001: 'Data Invalid',
       e002: 'Team Has Duplicate',
-      e003: 'ID Not Found'
+      e003: 'ID Not Found',
+      e004: 'Please remove all members of the team before deleting the team'
     },
     success: {
       s001: 'Get List Team Success',

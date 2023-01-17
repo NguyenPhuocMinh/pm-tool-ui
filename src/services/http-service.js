@@ -9,8 +9,7 @@ const { dispatch } = reduxStore;
 
 const httpClientRestProvider = axios.create({
   baseURL: configs.basePathRestApi,
-  headers: configs.headers,
-  withCredentials: true
+  headers: configs.headers
 });
 
 httpClientRestProvider.interceptors.request.use(

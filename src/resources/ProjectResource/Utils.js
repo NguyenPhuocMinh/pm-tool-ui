@@ -5,11 +5,11 @@ const tabs = [
   },
   {
     id: '96d4d472-39fb-4e28-a183-a7fdf2822206',
-    label: 'setProjectToOrganization'
+    label: 'setTeamToProjects'
   },
   {
     id: '67032937-0ec5-4169-a7e6-73e5aefbdcc2',
-    label: 'setTeamToProject'
+    label: 'organizations'
   }
 ];
 

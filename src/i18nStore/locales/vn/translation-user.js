@@ -6,7 +6,8 @@ const translationUser = {
     tabs: {
       details: 'Chi tiết người dùng',
       pass: 'Đặt mật khẩu người dùng',
-      roles: 'Đặt vai trò người dùng'
+      roles: 'Đặt vai trò người dùng',
+      team: 'Người dùng trong nhóm'
     }
   },
   description: {
@@ -17,6 +18,7 @@ const translationUser = {
     lastName: 'Họ',
     fullName: 'Họ và tên',
     email: 'Email',
+    teamName: 'Tên nhóm',
     password: 'Mật khẩu',
     passwordConfirm: 'Xác nhận mật khẩu',
     isPasswordTemporary: 'Tạm thời',
@@ -27,7 +29,8 @@ const translationUser = {
   tabs: {
     details: 'Chi tiết',
     setPassword: 'Đặt lại mật khẩu',
-    setRolesToUser: 'Gán vai trò cho người dùng'
+    setRolesToUser: 'Gán vai trò cho người dùng',
+    team: 'Nhóm'
   },
   search: 'Tìm kiếm theo tên, email...',
   popup: {

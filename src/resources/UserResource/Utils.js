@@ -10,6 +10,10 @@ const tabs = [
   {
     id: '060617c8-58d2-4616-b934-d38f86bbb110',
     label: 'setRolesToUser'
+  },
+  {
+    id: 'efbf68d4-c538-4ddb-95fa-339b09603368',
+    label: 'team'
   }
 ];
 

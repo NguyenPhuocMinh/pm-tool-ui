@@ -16,7 +16,7 @@ export const menuPermissions = {
     GET_ALL: 'PROJECT_GET_ALL',
     GET_ID: 'PROJECT_GET_ID',
     CREATE: 'PROJECT_CREATE',
-    EDIT: 'PROJECT_EDIT',
+    UPDATE: 'PROJECT_UPDATE',
     DELETE: 'PROJECT_DELETE'
   },
   /**

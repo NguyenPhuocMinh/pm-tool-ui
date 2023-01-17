@@ -6,7 +6,8 @@ const translationUser = {
     tabs: {
       details: 'User Details',
       pass: 'Set User Password',
-      roles: 'Set User Roles'
+      roles: 'Set User Roles',
+      team: 'User In Team'
     },
     resetPass: 'Reset Password',
     isPasswordSet: 'Password has been set'
@@ -21,6 +22,7 @@ const translationUser = {
     lastName: 'Last Name',
     fullName: 'Full Name',
     email: 'Email',
+    teamName: 'Team',
     password: 'Password',
     passwordConfirm: 'Password Confirm',
     isPasswordTemporary: 'Temporary',
@@ -31,7 +33,8 @@ const translationUser = {
   tabs: {
     details: 'Details',
     setPassword: 'Set Password',
-    setRolesToUser: 'Set Roles'
+    setRolesToUser: 'Set Roles',
+    team: 'Team'
   },
   search: 'Search by name, email',
   popup: {

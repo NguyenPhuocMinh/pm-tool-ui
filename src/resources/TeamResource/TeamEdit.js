@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+// redux
 import { useSelector, useDispatch } from 'react-redux';
-import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
-import { get } from 'lodash';
 import { getTeamByIdAction } from '@reduxStore/actions';
+// mui
+import { Card, CardHeader, CardContent, Box, Divider } from '@mui/material';
 import { TabsCommon, TabPanelCommon, TypoCommon } from '@utilities';
+// other
+import { get } from 'lodash';
 import { tabs } from './Utils';
 
 // tabs
@@ -34,6 +37,12 @@ const TeamEdit = () => {
   const handleChange = (event, newValue) => {
     setTabName(newValue);
   };
+
+  const { records } = useSelector((state) => {
+    return {
+      records: get(state, 'team.records', {})
+    };
+  });
 
   return (
     <Box sx={{ minWidth: 400 }}>
@@ -68,7 +77,7 @@ const TeamEdit = () => {
               <TabPanelCommon value={tabName} index={tab.label} key={tab.id}>
                 {tabName === tabs[0].label ? <DetailTab /> : null}
                 {tabName === tabs[1].label ? (
-                  <SetUsersToTeamTab teamId={id} />
+                  <SetUsersToTeamTab records={records} teamId={id} />
                 ) : null}
               </TabPanelCommon>
             );

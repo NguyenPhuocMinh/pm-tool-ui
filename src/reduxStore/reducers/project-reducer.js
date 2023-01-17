@@ -5,15 +5,21 @@ import {
   PROJECT_GET_ALL_SUCCESS,
   PROJECT_GET_ID_SUCCESS,
   PROJECT_CREATE_SUCCESS,
-  PROJECT_UPDATE_SUCCESS
+  PROJECT_UPDATE_SUCCESS,
+  PROJECT_GET_ALL_TEAM_IN_PROJECT_SUCCESS,
+  PROJECT_GET_ALL_TEAM_NOT_ON_PROJECT_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
   data: [],
   total: 0,
-  record: {},
+  records: {},
   loading: false,
-  error: null
+  error: null,
+  dataTeamInProject: [],
+  totalTeamInProject: 0,
+  dataTeamNotOnProject: [],
+  totalTeamNotOnProject: 0
 };
 
 const projectReducer = (state = initialState, action) => {
@@ -43,19 +49,33 @@ const projectReducer = (state = initialState, action) => {
     case PROJECT_GET_ID_SUCCESS:
       return {
         ...state,
-        record: payload,
+        records: payload,
         loading: false
       };
     case PROJECT_CREATE_SUCCESS:
       return {
         ...state,
-        record: payload,
+        records: payload,
         loading: false
       };
     case PROJECT_UPDATE_SUCCESS:
       return {
         ...state,
-        record: payload,
+        records: payload,
+        loading: false
+      };
+    case PROJECT_GET_ALL_TEAM_IN_PROJECT_SUCCESS:
+      return {
+        ...state,
+        dataTeamInProject: payload.data,
+        totalTeamInProject: payload.total,
+        loading: false
+      };
+    case PROJECT_GET_ALL_TEAM_NOT_ON_PROJECT_SUCCESS:
+      return {
+        ...state,
+        dataTeamNotOnProject: payload.data,
+        totalTeamNotOnProject: payload.total,
         loading: false
       };
     default:

@@ -11,6 +11,7 @@ import { tabs } from './Utils';
 import DetailTab from './UserTabs/DetailTab';
 import SetPasswordTab from './UserTabs/SetPasswordTab';
 import SetRolesToPerTab from './UserTabs/SetRolesToUserTab';
+import TeamTab from './UserTabs/TeamTab';
 
 const UserEdit = () => {
   const params = useParams();
@@ -74,6 +75,7 @@ const UserEdit = () => {
                 {tabName === tabs[0].label ? <DetailTab /> : null}
                 {tabName === tabs[1].label ? <SetPasswordTab /> : null}
                 {tabName === tabs[2].label ? <SetRolesToPerTab /> : null}
+                {tabName === tabs[3].label ? <TeamTab /> : null}
               </TabPanelCommon>
             );
           })}

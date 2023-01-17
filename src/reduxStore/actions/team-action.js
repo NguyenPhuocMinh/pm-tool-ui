@@ -8,7 +8,7 @@ import {
   getAllMemberInTeamService,
   getAllMemberNotOnTeamService,
   addMembersToTeamService,
-  removeMembersToTeamService
+  removeMembersFromTeamService
 } from '@services';
 import { showNotification } from '@reduxStore/actions';
 import constants from '@constants';
@@ -140,10 +140,13 @@ export const updateTeamByIdAction =
       if (!isEmpty(result)) {
         dispatch({
           type: TEAM_UPDATE_SUCCESS,
-          payload: result.response
+          payload: result.data
         });
         dispatch(
-          showNotification({ level: constants.NOTIFY_LEVEL.SUCCESS, message })
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
         );
       }
     } catch (err) {
@@ -261,13 +264,22 @@ export const addMembersToTeamAction =
         type: TEAM_REQUEST
       });
 
-      const { result } = await addMembersToTeamService(teamId, records);
+      const { result, message } = await addMembersToTeamService(
+        teamId,
+        records
+      );
 
       if (!isEmpty(result)) {
         const query = {
           _start: 0,
           _end: 5
         };
+        dispatch(
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
+        );
         dispatch(getAllMemberInTeamAction(teamId, query));
         dispatch(getAllMemberNotOnTeamAction(teamId, query));
       }
@@ -280,11 +292,11 @@ export const addMembersToTeamAction =
   };
 
 /**
- * @description REMOVE MEMBERS TO TEAM ACTION
+ * @description REMOVE MEMBERS FROM TEAM ACTION
  * @param {*} teamId
  * @param {*} records
  */
-export const removeMembersToTeamAction =
+export const removeMembersFromTeamAction =
   (teamId, records = {}) =>
   async (dispatch) => {
     try {
@@ -292,13 +304,22 @@ export const removeMembersToTeamAction =
         type: TEAM_REQUEST
       });
 
-      const { result } = await removeMembersToTeamService(teamId, records);
+      const { result, message } = await removeMembersFromTeamService(
+        teamId,
+        records
+      );
 
       if (!isEmpty(result)) {
         const query = {
           _start: 0,
           _end: 5
         };
+        dispatch(
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
+        );
         dispatch(getAllMemberInTeamAction(teamId, query));
         dispatch(getAllMemberNotOnTeamAction(teamId, query));
       }

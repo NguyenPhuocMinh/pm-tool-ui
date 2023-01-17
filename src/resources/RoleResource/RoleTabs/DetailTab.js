@@ -81,6 +81,7 @@ const DetailTab = () => {
                 label="resources.roles.fields.name"
                 id="name"
                 source="name"
+                required
                 className={classes.input}
                 {...formProps}
               />

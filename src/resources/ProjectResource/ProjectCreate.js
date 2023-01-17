@@ -22,7 +22,7 @@ import {
   ButtonSubmit,
   ButtonCancel
 } from '@utilities';
-import { validatorProjectCreate } from '@validators';
+import { validatorProjectCreateOrUpdate } from '@validators';
 
 const useStyles = makeStyles({
   input: {
@@ -64,7 +64,7 @@ const ProjectCreate = () => {
 
   const { handleSubmit, isValid, dirty, ...formProps } = useFormik({
     initialValues,
-    validationSchema: validatorProjectCreate(translate),
+    validationSchema: validatorProjectCreateOrUpdate(translate),
     onSubmit: (values) => handleCreate(values)
   });
 

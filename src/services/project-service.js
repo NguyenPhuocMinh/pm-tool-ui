@@ -41,7 +41,7 @@ export const createProjectService = async (records) => {
 export const getProjectByIdService = async (projectId) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      basePath + `/${projectId}`
+      `${basePath}/${projectId}`
     );
 
     return data;
@@ -53,6 +53,7 @@ export const getProjectByIdService = async (projectId) => {
 /**
  * @description UPDATE PROJECT BY ID SERVICE
  * @param {*} records
+ * @returns
  */
 export const updateByIdProjectService = async (projectId, records) => {
   try {
@@ -76,6 +77,89 @@ export const deleteProjectByIdService = async (projectId) => {
   try {
     const { data } = await httpClientRestProvider.delete(
       `${basePath}/${projectId}`
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description GET ALL TEAM IN PROJECT SERVICE
+ * @param {*} projectId
+ * @param {*} query
+ * @returns
+ */
+export const getAllTeamInProjectService = async (projectId, query = {}) => {
+  try {
+    const { data } = await httpClientRestProvider.get(
+      `${basePath}/${projectId}/teams-in-projects`,
+      {
+        params: query
+      }
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description GET ALL TEAM NOT ON PROJECT SERVICE
+ * @param {*} projectId
+ * @param {*} query
+ * @returns
+ */
+export const getAllTeamNotOnProjectService = async (projectId, query = {}) => {
+  try {
+    const { data } = await httpClientRestProvider.get(
+      `${basePath}/${projectId}/teams-not-on-projects`,
+      {
+        params: query
+      }
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description ADD TEAMS TO PROJECT SERVICE
+ * @param {*} projectId
+ * @param {*} records
+ * @returns
+ */
+export const addTeamsToProjectService = async (projectId, records = {}) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(
+      `${basePath}/${projectId}/add-teams-to-projects`,
+      records
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description REMOVE TEAM FROM PROJECT SERVICE
+ * @param {*} projectId
+ * @param {*} records
+ * @returns
+ */
+export const removeTeamsFromProjectService = async (
+  projectId,
+  records = {}
+) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(
+      `${basePath}/${projectId}/remove-teams-from-projects`,
+      records
     );
 
     return data;

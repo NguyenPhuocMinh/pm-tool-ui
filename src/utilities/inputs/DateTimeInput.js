@@ -9,27 +9,40 @@ const DateTimeInput = ({
   label,
   source,
   values,
-  handleChange,
+  setFieldValue,
   handleBlur,
+  errors,
+  touched,
+  variant,
   disabled,
   readOnly,
   className
 }) => {
   const { translate } = useTranslate();
 
-  const value = moment(values[source]).utc();
+  const onChange = (value) => {
+    setFieldValue(source, value, true);
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <DateTimePicker
         label={translate(label)}
-        value={value}
-        onChange={handleChange}
+        value={moment(values[source]).utc()}
+        onChange={onChange}
         onBlur={handleBlur}
         disabled={disabled}
         readOnly={readOnly}
         className={className}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => (
+          <TextField
+            name={source}
+            error={errors[source] && touched[source]}
+            helperText={errors[source] && touched[source] && errors[source]}
+            variant={variant}
+            {...params}
+          />
+        )}
       />
     </LocalizationProvider>
   );
