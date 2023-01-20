@@ -8,7 +8,7 @@ import {
 } from '@reduxStore/actions';
 import { get, isEmpty } from 'lodash';
 import { useFormik } from 'formik';
-import { useTranslate, useAuth } from '@hooks';
+import { useTranslate, useAuth, useLocale } from '@hooks';
 import {
   PopupCommon,
   SearchInput,
@@ -60,6 +60,7 @@ const OrganizationList = () => {
   const { translate, i18n } = useTranslate();
   const navigate = useNavigate();
   const { whoami } = useAuth();
+  const { locale } = useLocale();
 
   const handleOnPageChange = (newPage) => {
     setPage(newPage);
@@ -170,7 +171,7 @@ const OrganizationList = () => {
         resizable: false,
         filterable: false,
         hideMenu: false,
-        valueGetter: ({ value }) => value && dateTimeFormat(value)
+        valueGetter: ({ value }) => value && dateTimeFormat(value, locale)
       },
       {
         field: 'updatedAt',

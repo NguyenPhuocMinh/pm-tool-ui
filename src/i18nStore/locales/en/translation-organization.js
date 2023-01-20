@@ -16,10 +16,17 @@ const translationOrganization = {
   },
   tabs: {
     details: 'Details',
-    projectsInOrganization: 'Projects In Organization'
+    setProjectsToOrganization: 'Set Projects To Organization'
   },
   labels: {
-    createProject: 'Create Project'
+    createProject: 'Create Project',
+    addProject: 'Add Project',
+    removeProject: 'Remove Project',
+    activate: 'Please activated organization for set projects'
+  },
+  dialog: {
+    title: 'Add Project',
+    content: 'Add Projects To Organization'
   },
   search: 'Search by organization...',
   popup: {
@@ -33,7 +40,7 @@ const translationOrganization = {
       e001: 'Data Invalid',
       e002: 'Organization Has Duplicate',
       e003: 'ID Not Found',
-      e004: 'Please Remove All Member In Team'
+      e004: 'Please Remove All Project In Organization'
     },
     success: {
       s001: 'Get List Organization Success',
@@ -41,7 +48,10 @@ const translationOrganization = {
       s003: 'Get Organization By Id Success',
       s004: 'Update Organization Success',
       s005: 'Delete Organization Success',
-      s006: 'Get All Project In Organization Success'
+      s006: 'Get All Project In Organization Success',
+      s007: 'Get All Project Not On Organization Success',
+      s008: 'Add Projects To Organization Success',
+      s009: 'Remove Projects From Organization Success'
     }
   }
 };

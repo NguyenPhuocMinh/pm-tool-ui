@@ -6,7 +6,8 @@ import {
   ORGANIZATION_GET_ID_SUCCESS,
   ORGANIZATION_CREATE_SUCCESS,
   ORGANIZATION_UPDATE_SUCCESS,
-  ORGANIZATION_GET_ALL_PROJECT_SUCCESS
+  ORGANIZATION_GET_ALL_PROJECT_IN_ORGANIZATION_SUCCESS,
+  ORGANIZATION_GET_ALL_PROJECT_NOT_ON_ORGANIZATION_SUCCESS
 } from '@reduxStore/types';
 
 const initialState = {
@@ -15,8 +16,10 @@ const initialState = {
   records: {},
   loading: false,
   error: null,
-  dataProjectsInOrganization: [],
-  totalProjectsInOrganization: 0
+  dataProjectInOrganization: [],
+  totalProjectInOrganization: 0,
+  dataProjectNotOnOrganization: [],
+  totalProjectNotOnOrganization: 0
 };
 
 const organizationReducer = (state = initialState, action) => {
@@ -61,11 +64,18 @@ const organizationReducer = (state = initialState, action) => {
         records: payload,
         loading: false
       };
-    case ORGANIZATION_GET_ALL_PROJECT_SUCCESS:
+    case ORGANIZATION_GET_ALL_PROJECT_IN_ORGANIZATION_SUCCESS:
       return {
         ...state,
-        dataProjectsInOrganization: payload.data,
-        totalProjectsInOrganization: payload.total,
+        dataProjectInOrganization: payload.data,
+        totalProjectInOrganization: payload.total,
+        loading: false
+      };
+    case ORGANIZATION_GET_ALL_PROJECT_NOT_ON_ORGANIZATION_SUCCESS:
+      return {
+        ...state,
+        dataProjectNotOnOrganization: payload.data,
+        totalProjectNotOnOrganization: payload.total,
         loading: false
       };
     default:

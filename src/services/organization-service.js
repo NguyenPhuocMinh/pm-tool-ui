@@ -42,7 +42,7 @@ export const createOrganizationService = async (records) => {
 export const getOrganizationService = async (organizationID) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      basePath + `/${organizationID}`
+      `${basePath}/${organizationID}`
     );
 
     return data;
@@ -87,19 +87,88 @@ export const deleteOrganizationByIdService = async (organizationID) => {
 
 /**
  * @description GET ALL PROJECT IN ORGANIZATION SERVICE
- * @param {*} organizationID
+ * @param {*} organizationId
  * @param {*} query
+ * @returns
  */
 export const getAllProjectInOrganizationService = async (
-  organizationID,
-  query
+  organizationId,
+  query = {}
 ) => {
   try {
     const { data } = await httpClientRestProvider.get(
-      basePath + `/${organizationID}/projects`,
+      `${basePath}/${organizationId}/projects-in-organizations`,
       {
         params: query
       }
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description GET ALL PROJECT NOT ON ORGANIZATION SERVICE
+ * @param {*} organizationId
+ * @param {*} query
+ * @returns
+ */
+export const getAllProjectNotOnOrganizationService = async (
+  organizationId,
+  query = {}
+) => {
+  try {
+    const { data } = await httpClientRestProvider.get(
+      `${basePath}/${organizationId}/projects-not-on-organizations`,
+      {
+        params: query
+      }
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description ADD PROJECT TO ORGANIZATION SERVICE
+ * @param {*} organizationId
+ * @param {*} records
+ * @returns
+ */
+export const addProjectsToOrganizationService = async (
+  organizationId,
+  records = {}
+) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(
+      `${basePath}/${organizationId}/add-projects-to-organizations`,
+      records
+    );
+
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+/**
+ * @description REMOVE PROJECT FROM ORGANIZATION SERVICE
+ * @param {*} organizationId
+ * @param {*} records
+ * @returns
+ */
+export const removeProjectsFromOrganizationService = async (
+  organizationId,
+  records = {}
+) => {
+  try {
+    const { data } = await httpClientRestProvider.patch(
+      `${basePath}/${organizationId}/remove-projects-from-organizations`,
+      records
     );
 
     return data;

@@ -8,7 +8,7 @@ import { get } from 'lodash';
 import { tabs } from './Utils';
 // tabs
 import DetailTab from './OrganizationTabs/DetailTab';
-import ProjectsInOrganizationTab from './OrganizationTabs/ProjectsInOrganizationTab';
+import SetProjectsToOrganizationTab from './OrganizationTabs/SetProjectsToOrganizationTab';
 
 const OrganizationEdit = () => {
   const params = useParams();
@@ -32,6 +32,12 @@ const OrganizationEdit = () => {
   useEffect(() => {
     dispatch(getOrganizationAction(id));
   }, [dispatch, id, refresh]);
+
+  const { records } = useSelector((state) => {
+    return {
+      records: get(state, 'organization.records', {})
+    };
+  });
 
   return (
     <Box sx={{ minWidth: 400 }}>
@@ -66,7 +72,10 @@ const OrganizationEdit = () => {
               <TabPanelCommon value={tabName} index={tab.label} key={tab.id}>
                 {tabName === tabs[0].label ? <DetailTab /> : null}
                 {tabName === tabs[1].label ? (
-                  <ProjectsInOrganizationTab />
+                  <SetProjectsToOrganizationTab
+                    organizationId={id}
+                    records={records}
+                  />
                 ) : null}
               </TabPanelCommon>
             );

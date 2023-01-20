@@ -6,8 +6,13 @@ import { get } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Card, CardContent, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { dateTimeFormat } from '@utils';
-import { TextInput, SwitchInput, ButtonSubmit, ButtonCancel } from '@utilities';
+import {
+  TextInput,
+  SwitchInput,
+  ButtonSubmit,
+  ButtonCancel,
+  DateTimeInput
+} from '@utilities';
 import { updateOrganizationAction } from '@reduxStore/actions';
 import { validatorOrganizationUpdate } from '@validators';
 
@@ -35,7 +40,7 @@ const DetailTab = () => {
   const initialValues = useMemo(() => {
     return {
       name: records?.name ?? '-',
-      createdAt: dateTimeFormat(records?.createdAt),
+      createdAt: records?.createdAt,
       activated: records?.activated ?? false
     };
   }, [records]);
@@ -82,7 +87,7 @@ const DetailTab = () => {
               />
             </Box>
             <Box sx={{ marginRight: '2em', marginBottom: '2em' }}>
-              <TextInput
+              <DateTimeInput
                 label="resources.organizations.fields.createdAt"
                 disabled
                 id="createdAt"

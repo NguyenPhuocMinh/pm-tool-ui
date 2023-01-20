@@ -15,7 +15,17 @@ const translationOrganization = {
   },
   tabs: {
     details: 'Thông tin chi tiết',
-    projectsInOrganization: 'Dự án Trong tổ chức'
+    setProjectsToOrganization: 'Set Projects To Organization'
+  },
+  labels: {
+    createProject: 'Create Project',
+    addProject: 'Add Project',
+    removeProject: 'Remove Project',
+    activate: 'Please activated organization for set projects'
+  },
+  dialog: {
+    title: 'Add Project',
+    content: 'Add Projects To Organization'
   },
   search: 'Tìm kiếm theo tổ chức',
   popup: {
@@ -27,14 +37,19 @@ const translationOrganization = {
     errors: {
       e001: 'Dữ Liệu Không Hợp Lệ',
       e002: 'Tổ Chức Bị Trùng Lặp',
-      e003: 'Không Tìm Thấy ID'
+      e003: 'Không Tìm Thấy ID',
+      e004: 'Please Remove All Project In Organization'
     },
     success: {
       s001: 'Lấy Danh Sách Tổ Chức Thành Công',
       s002: 'Tạo Tổ Chức Thành Công',
       s003: 'Lấy Tổ Chức Thành Công',
       s004: 'Cập Tổ Chức Thành Công',
-      s005: 'Xoá Tổ Chức Thành Công'
+      s005: 'Xoá Tổ Chức Thành Công',
+      s006: 'Get All Project In Organization Success',
+      s007: 'Get All Project Not On Organization Success',
+      s008: 'Add Projects To Organization Success',
+      s009: 'Remove Projects From Organization Success'
     }
   }
 };

@@ -50,9 +50,6 @@ export const getAllProjectAction =
             total: result.total
           }
         });
-        dispatch({
-          type: PROJECT_FAILURE
-        });
       }
     } catch (err) {
       dispatch({

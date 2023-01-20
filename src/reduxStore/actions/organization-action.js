@@ -5,7 +5,10 @@ import {
   getOrganizationService,
   updateOrganizationService,
   deleteOrganizationByIdService,
-  getAllProjectInOrganizationService
+  getAllProjectInOrganizationService,
+  getAllProjectNotOnOrganizationService,
+  addProjectsToOrganizationService,
+  removeProjectsFromOrganizationService
 } from '@services';
 import { showNotification } from '@reduxStore/actions';
 import constants from '@constants';
@@ -17,7 +20,8 @@ import {
   ORGANIZATION_GET_ID_SUCCESS,
   ORGANIZATION_CREATE_SUCCESS,
   ORGANIZATION_UPDATE_SUCCESS,
-  ORGANIZATION_GET_ALL_PROJECT_SUCCESS
+  ORGANIZATION_GET_ALL_PROJECT_IN_ORGANIZATION_SUCCESS,
+  ORGANIZATION_GET_ALL_PROJECT_NOT_ON_ORGANIZATION_SUCCESS
 } from '@reduxStore/types';
 
 export const resetRecordsOrganization = () => ({
@@ -185,30 +189,146 @@ export const deleteOrganizationByIdAction =
   };
 
 /**
- * @description GET ALL PROJECT ORGANIZATION ACTION
- * @param {*} organizationID
+ * @description GET ALL PROJECT IN ORGANIZATION ACTION
+ * @param {*} organizationId
  * @param {*} query
  */
 export const getAllProjectInOrganizationAction =
-  (organizationID, query) => async (dispatch) => {
+  (organizationId, query = {}) =>
+  async (dispatch) => {
     try {
       dispatch({
         type: ORGANIZATION_REQUEST
       });
 
       const { result } = await getAllProjectInOrganizationService(
-        organizationID,
+        organizationId,
         query
       );
 
       if (!isEmpty(result)) {
         dispatch({
-          type: ORGANIZATION_GET_ALL_PROJECT_SUCCESS,
+          type: ORGANIZATION_GET_ALL_PROJECT_IN_ORGANIZATION_SUCCESS,
           payload: {
             data: result.data,
             total: result.total
           }
         });
+      }
+    } catch (err) {
+      dispatch({
+        type: ORGANIZATION_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description GET ALL MEMBER NOT ON TEAM ACTION
+ * @param {*} organizationId
+ * @param {*} query
+ */
+export const getAllProjectNotOnOrganizationAction =
+  (organizationId, query = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ORGANIZATION_REQUEST
+      });
+
+      const { result } = await getAllProjectNotOnOrganizationService(
+        organizationId,
+        query
+      );
+
+      if (!isEmpty(result)) {
+        dispatch({
+          type: ORGANIZATION_GET_ALL_PROJECT_NOT_ON_ORGANIZATION_SUCCESS,
+          payload: {
+            data: result.data,
+            total: result.total
+          }
+        });
+      }
+    } catch (err) {
+      dispatch({
+        type: ORGANIZATION_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description ADD PROJECTS TO ORGANIZATION ACTION
+ * @param {*} organizationId
+ * @param {*} records
+ */
+export const addProjectsToOrganizationAction =
+  (organizationId, records = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ORGANIZATION_REQUEST
+      });
+
+      const { result, message } = await addProjectsToOrganizationService(
+        organizationId,
+        records
+      );
+
+      if (!isEmpty(result)) {
+        const query = {
+          _start: 0,
+          _end: 5
+        };
+        dispatch(
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
+        );
+        dispatch(getAllProjectInOrganizationAction(organizationId, query));
+        dispatch(getAllProjectNotOnOrganizationAction(organizationId, query));
+      }
+    } catch (err) {
+      dispatch({
+        type: ORGANIZATION_FAILURE,
+        payload: err
+      });
+    }
+  };
+
+/**
+ * @description REMOVE PROJECTS FROM ORGANIZATION ACTION
+ * @param {*} organizationId
+ * @param {*} records
+ */
+export const removeProjectsFromOrganizationAction =
+  (organizationId, records = {}) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ORGANIZATION_REQUEST
+      });
+
+      const { result, message } = await removeProjectsFromOrganizationService(
+        organizationId,
+        records
+      );
+
+      if (!isEmpty(result)) {
+        const query = {
+          _start: 0,
+          _end: 5
+        };
+        dispatch(
+          showNotification({
+            level: constants.NOTIFY_LEVEL.SUCCESS,
+            message
+          })
+        );
+        dispatch(getAllProjectInOrganizationAction(organizationId, query));
+        dispatch(getAllProjectNotOnOrganizationAction(organizationId, query));
       }
     } catch (err) {
       dispatch({

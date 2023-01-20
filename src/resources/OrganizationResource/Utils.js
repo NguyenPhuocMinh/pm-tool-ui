@@ -5,7 +5,7 @@ const tabs = [
   },
   {
     id: 'fff2c764-ed91-4e42-9b23-0a0c975e964c',
-    label: 'projectsInOrganization'
+    label: 'setProjectsToOrganization'
   }
 ];
 
